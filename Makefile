@@ -1,0 +1,2 @@
+sync:
+	go work sync
