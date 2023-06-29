@@ -15,12 +15,12 @@
 </script>
 
 <div class="select-container">
-  {selected?.title}
   <select on:change={handleChange} value={value}>
     {#each options as option}
       <option value={option.value}>{option.title}</option>
     {/each}
   </select>
+  <span class="title">{selected?.title}</span>
 </div>
 
 <style lang="scss">
@@ -35,20 +35,52 @@
     position: absolute;
     top: 0;
     right: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .select-container {
     position: relative;
     display: flex;
     align-items: center;
+    padding: 2px 15px 3px 14px;
+    border-radius: 5px;
+
+    &::after,
+    &::before {
+      display: block;
+      content: '';
+      width: 16px;
+      height: 16px;
+      background: url(../../assets/images/select-arrows.png);
+      background-size: contain;
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      pointer-events: none;
+    }
+
+    &::before {
+      background: #414141;
+      position: absolute;
+      border-radius: 3px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+
+
+    &:hover {
+      background-color: #606060;
+    }
+
+    &:hover::before {
+      background-color: transparent;
+      box-shadow: none;
+    }
   }
 
-  .select-container::after {
-    display: block;
-    content: '';
-    width: 12px;
-    height: 12px;
-    background: url(../../assets/images/select-arrows@2x.png);
-    background-size: contain;
+  .title {
+    margin-right: 7px;
+    user-select: none;
+    cursor: default;
   }
 </style>
