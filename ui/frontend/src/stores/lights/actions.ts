@@ -24,11 +24,11 @@ export async function setBacklight() {
 }
 
 export async function setHalo() {
-  return setLight(state.backlight, SetHalo)
+  return setLight(state.halo, SetHalo)
 }
 
 export async function setSidelight() {
-  return setLight(state.backlight, SetSidelight)
+  return setLight(state.sidelight, SetSidelight)
 }
 
 export async function loadModes () {
