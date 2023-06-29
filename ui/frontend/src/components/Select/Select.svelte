@@ -4,6 +4,7 @@
 
   export let value: string
   export let options: SelectOption[]
+  export let disabled = false
 
   const dispatch = createEventDispatcher()
 
@@ -14,8 +15,8 @@
   $: selected = options.find(o => o.value === value)
 </script>
 
-<div class="select-container">
-  <select on:change={handleChange} value={value}>
+<div class="select-container" class:disabled>
+  <select on:change={handleChange} {value}>
     {#each options as option}
       <option value={option.value}>{option.title}</option>
     {/each}
@@ -45,6 +46,11 @@
     align-items: center;
     padding: 2px 15px 3px 13px;
     border-radius: 5px;
+
+    &.disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
 
     &::after,
     &::before {

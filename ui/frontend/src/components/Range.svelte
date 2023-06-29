@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
 
   export let type: 'brightness' | 'speed'
-
+  export let disabled = false
   export let value: number = 0
 
   const dispatch = createEventDispatcher()
@@ -12,7 +12,7 @@
   }
 </script>
 
-<div class={`range-container ${type}`}>
+<div class={`range-container ${type}`} class:disabled>
   <div class="range">
     <input {value} on:change={handleChange} type="range" min="0" step="1" max="4" />
     <!-- Using these instead of a list property for full customization -->
@@ -31,6 +31,11 @@
     margin: 0 calc(28px + 3px + 3px);
     position: relative;
     left: 5px;
+
+    &.disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
   }
 
   .range {
