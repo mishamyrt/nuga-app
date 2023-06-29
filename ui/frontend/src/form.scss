@@ -5,6 +5,12 @@
 }
 
 .form {
+  padding-bottom: 20px;
+
+  &-group {
+    margin-top: 30px;
+  }
+
   &-row {
     border: 1px solid var(--color-form-frame);
     background: rgba(255, 255, 255, 0.02);
@@ -39,5 +45,6 @@
     padding: 0 var(--form-padding);
     font-size: 13px;
     text-align: left;
+    margin: 0 0 10px;
   }
 }
