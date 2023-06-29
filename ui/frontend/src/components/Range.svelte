@@ -57,7 +57,7 @@
       }
 
       &::-webkit-slider-thumb:active {
-        background-color: #AEAEAE;
+        background-color: #D6D6D6;
       }
     }
   }
