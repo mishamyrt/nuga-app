@@ -18,7 +18,8 @@ body, html {
 
 * {
   box-sizing: border-box;
-  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
 }
 
 @font-face {
