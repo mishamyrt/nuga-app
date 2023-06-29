@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
 
+  export let type: 'brightness' | 'speed'
+
   export let value: number = 0
 
   const dispatch = createEventDispatcher()
@@ -10,4 +12,117 @@
   }
 </script>
 
-<input {value} on:change={handleChange} type="range" min="0" step="1" max="4" />
+<div class={`range-container ${type}`}>
+  <div class="range">
+    <input {value} on:change={handleChange} type="range" min="0" step="1" max="4" />
+    <!-- Using these instead of a list property for full customization -->
+    <div class="mark"></div>
+    <div class="mark"></div>
+    <div class="mark"></div>
+    <div class="mark"></div>
+    <div class="mark"></div>
+  </div>
+  <div class="icon min"></div>
+  <div class="icon max"></div>
+</div>
+
+<style lang="scss">
+  .range-container {
+    margin: 0 calc(28px + 3px + 3px);
+    position: relative;
+    left: 5px;
+  }
+
+  .range {
+    position: relative;
+    input {
+      -webkit-appearance: none;
+      background: transparent;
+
+      &::-webkit-slider-runnable-track {
+        background: rgba(211, 211, 211, 0.20);
+        height: 4px;
+      }
+
+      &::-webkit-slider-thumb {
+        z-index: 1;
+        appearance: none;
+        background-color: #A6A6A6;
+        width: 8px;
+        border-radius: 15px;
+        height: 20px;
+        position: relative;
+        top: -8px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+      }
+
+      &::-webkit-slider-thumb:active {
+        background-color: #AEAEAE;
+      }
+    }
+  }
+
+  .mark {
+    z-index: 0;
+    width: 2px;
+    height: 8px;
+    background-color: #626262;
+    position: absolute;
+    border-radius: 4px;
+    top: 7px;
+    left: 2px;
+
+    &:nth-child(2) {
+      left: calc(25% + 2px);
+    }
+
+    &:nth-child(3) {
+      left: calc(50% - 1px);
+    }
+
+    &:nth-child(4) {
+      left: calc(75% - 4px);
+    }
+
+    &:nth-child(5) {
+      left: calc(100% - 4px);
+    }
+  }
+
+  .icon {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background-size: contain;
+    top: -3px;
+
+    &.min {
+      left: -34px;
+    }
+
+    &.max {
+      right: -34px;
+    }
+  }
+
+  .brightness {
+    .min {
+      background-image: url(../assets/images/sun.min.fill.png);
+    }
+    .max {
+      background-image: url(../assets/images/sun.max.fill.png);
+    }
+  }
+
+  .speed {
+    .min {
+      background-image: url(../assets/images/tortoise.fill.png);
+    }
+    .max {
+      background-image: url(../assets/images/hare.fill.png);
+    }
+  }
+</style>
+
+
+

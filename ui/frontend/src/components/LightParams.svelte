@@ -69,11 +69,17 @@
     </div>
     <div class="form-row">
       <span>Brightness</span>
-      <Range on:change={handleBrightness} value={$state.brightness} />
+      <Range
+        type="brightness"
+        value={$state.brightness}
+        on:change={handleBrightness} />
     </div>
     <div class="form-row">
       <span>Speed</span>
-      <Range on:change={handleSpeed} value={$state.speed} />
+      <Range
+        type="speed"
+        value={$state.speed}
+        on:change={handleSpeed} />
     </div>
   </div>
 </div>
