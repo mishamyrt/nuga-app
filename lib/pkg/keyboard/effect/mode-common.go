@@ -1,7 +1,5 @@
 package effect
 
-import "log"
-
 type Mode struct {
 	Name     string
 	Code     byte
@@ -16,6 +14,5 @@ func (m Modes) Find(code byte) *Mode {
 			return &m[i]
 		}
 	}
-	log.Panicf("Unknown effect code: %v", code)
 	return nil
 }
