@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { LightMode, LightState } from "../stores/lights"
+  import type { LightMode, LightState } from "@stores/lights"
   import Switch from "./Switch.svelte";
   import type { MapStore, ReadableAtom } from "nanostores"
   import ColorSelector from "./ColorSelector.svelte";

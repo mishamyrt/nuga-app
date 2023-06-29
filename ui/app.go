@@ -6,6 +6,12 @@ import (
 	"nuga/pkg/keyboard/effect"
 )
 
+type Modes struct {
+	Backlight *effect.Modes
+	Sidelight *effect.Modes
+	Halo      *effect.Modes
+}
+
 // App struct
 type App struct {
 	ctx    context.Context
@@ -40,18 +46,12 @@ func (a *App) Connect() string {
 }
 
 // Connect returns a keyboard name
-func (a *App) GetBacklightModes() effect.Modes {
-	return effect.Backlight
-}
-
-// Connect returns a keyboard name
-func (a *App) GetSidelightModes() effect.Modes {
-	return effect.Sidelight
-}
-
-// Connect returns a keyboard name
-func (a *App) GetHaloModes() effect.Modes {
-	return effect.Halo
+func (a *App) GetModes() *Modes {
+	return &Modes{
+		Backlight: &effect.Backlight,
+		Sidelight: &effect.Sidelight,
+		Halo:      &effect.Halo,
+	}
 }
 
 // Connect returns a keyboard name
@@ -64,7 +64,7 @@ func (a *App) GetLightState() *keyboard.Effects {
 }
 
 // Connect returns a keyboard name
-func (a *App) GetBacklightState() *keyboard.EffectParams {
+func (a *App) GetBacklightParams() *keyboard.EffectParams {
 	state, err := a.lights.GetEffects()
 	if err != nil {
 		return nil

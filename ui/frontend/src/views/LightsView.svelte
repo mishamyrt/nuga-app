@@ -1,7 +1,7 @@
 <script lang="ts">
   import Switch from "../components/Switch.svelte";
 import LightsPreview from "../components/LightsPreview.svelte";
-  import { backlight, backlightModes, halo, haloModes, setBacklightEffect, setHaloEffect, setSidelightEffect, sidelight, sidelightModes } from "../stores/lights";
+  import { state, modes, setBacklight, setHalo, setSidelight } from "@stores/lights";
   import LightParams from "../components/LightParams.svelte";
 </script>
 
@@ -15,20 +15,20 @@ import LightsPreview from "../components/LightsPreview.svelte";
   <div class="scroll-wrapper">
     <div class="form">
       <LightParams
-        state={backlight}
-        write={setBacklightEffect}
-        modes={backlightModes}
+        state={state.backlight}
+        write={setBacklight}
+        modes={modes.backlight}
         title="Backlight" />
       <LightParams
-        write={setHaloEffect}
-        state={halo}
-        modes={haloModes}
+        write={setHalo}
+        state={state.halo}
+        modes={modes.halo}
         title="Halo"
       />
       <LightParams
-        write={setSidelightEffect}
-        state={sidelight}
-        modes={sidelightModes}
+        write={setSidelight}
+        state={state.sidelight}
+        modes={modes.sidelight}
         title="Sidelight"
       />
     </div>

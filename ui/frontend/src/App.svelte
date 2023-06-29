@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import LoadingView from './views/LoadingView.svelte';
-  import { connect } from './stores/device';
+  import { connect } from '@stores/device';
   import { sleep } from './utils/timing';
   import SidebarItem from './components/SidebarItem.svelte';
   import { view, connected, type SettingsView } from './stores/app';

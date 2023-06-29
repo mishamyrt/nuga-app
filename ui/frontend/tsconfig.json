@@ -6,15 +6,15 @@
     "module": "ESNext",
     "resolveJsonModule": true,
     "baseUrl": ".",
-    /**
-     * Typecheck JS in `.svelte` and `.js` files by default.
-     * Disable checkJs if you'd like to use dynamic types in JS.
-     * Note that setting allowJs false does not prevent the use
-     * of JS in `.svelte` files.
-     */
     "allowJs": true,
     "checkJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@stores/*": ["src/stores/*"],
+      "@wailsjs/app": ["wailsjs/go/main/*"]
+    }
   },
   "include": [
     "src/**/*.d.ts",
