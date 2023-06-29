@@ -43,7 +43,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 2px 15px 3px 14px;
+    padding: 2px 15px 3px 13px;
     border-radius: 5px;
 
     &::after,
