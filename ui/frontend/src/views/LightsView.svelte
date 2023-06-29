@@ -1,6 +1,6 @@
 <script lang="ts">
   import Switch from "../components/Switch.svelte";
-import LightsPreview from "../components/LightsPreview.svelte";
+  import LightsPreview from "../components/LightsPreview.svelte";
   import { state, modes, setBacklight, setHalo, setSidelight } from "@stores/lights";
   import LightParams from "../components/LightParams.svelte";
 </script>
@@ -46,7 +46,7 @@ import LightsPreview from "../components/LightsPreview.svelte";
   }
 
   .scroll-wrapper {
-    overflow-y: auto;
-    max-height: calc(100vh - 172px);
+    overflow-y: scroll;
+    height: calc(100vh - 172px);
   }
 </style>
