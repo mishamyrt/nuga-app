@@ -1,5 +1,21 @@
 <script lang="ts">
+  import type { Color } from "@stores/lights";
 
+  export let halo: Color = undefined
+  export let backlight: Color = undefined
+  export let sidelight: Color = undefined
+
+  const fallbackColor = 'rgb(85, 85, 85)'
+
+  $: haloRgb = Boolean(halo)
+    ? `rgb(${halo.R},${halo.G},${halo.B})`
+    : fallbackColor
+  $: backlightRgb = Boolean(backlight)
+    ? `rgb(${backlight.R},${backlight.G},${backlight.B})`
+    : fallbackColor
+  $: sidelightRgb = Boolean(sidelight)
+    ? `rgb(${sidelight.R},${sidelight.G},${sidelight.B})`
+    : fallbackColor
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="262" height="100" fill="none" viewBox="0 0 262 100">
@@ -92,7 +108,7 @@
   </mask>
   <g mask="url(#a)">
     <g filter="url(#b)">
-      <rect width="258" height="92" x="2" y="6" fill="url(#c)" fill-opacity=".8" rx="3" />
+      <rect width="258" height="92" x="2" y="6" fill="{backlightRgb}" fill-opacity=".8" rx="3" />
     </g>
     <rect width="259" height="93" x="1.5" y="5.5" stroke="#6A6A6A" stroke-opacity=".9" rx="3.5" />
   </g>
@@ -182,10 +198,10 @@
     <rect width="14" height="13" x="228" y="83" fill="url(#aI)" rx="2" />
     <rect width="14" height="13" x="244" y="83" fill="url(#aJ)" rx="2" />
   </g>
-  <rect width="260" height="94" x="1" y="5" stroke="#0029FF" stroke-opacity=".8" stroke-width="2"
+  <rect width="260" height="94" x="1" y="5" stroke="{haloRgb}" stroke-opacity=".8" stroke-width="2"
     rx="4" />
   <rect width="260" height="94" x="1" y="5" stroke="url(#aK)" stroke-width="2" rx="4" />
-  <path stroke="#fff" stroke-linecap="round" stroke-opacity=".29" stroke-width="2" d="M4 1h14" />
+  <path stroke="{sidelightRgb}" stroke-linecap="round" stroke-opacity="1" stroke-width="2" d="M4 1h14" />
   <defs>
     <linearGradient id="c" x1="2" x2="260" y1="52" y2="52" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FF6861" />

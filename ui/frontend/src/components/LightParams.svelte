@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { LightMode, LightState } from "@stores/lights"
+  import type { Color, LightMode, LightState } from "@stores/lights"
   import Switch from "./Switch.svelte";
   import type { MapStore, ReadableAtom } from "nanostores"
   import ColorSelector from "./ColorSelector.svelte";
@@ -10,6 +10,7 @@
   export let state: MapStore<LightState>
   export let modes: ReadableAtom<LightMode[]>
   export let write: () => Promise<void>
+  export let colors: readonly Color[] = undefined
 
   function handleEnabled (event: CustomEvent<boolean>) {
     state.setKey('enabled', event.detail)
@@ -56,28 +57,38 @@
   {/if}
   <div class="form-rows">
     <div class="form-row">
-      <span>Enabled</span>
+      <span>Enable</span>
       <Switch on:click={handleEnabled} checked={$state.enabled} />
     </div>
     <div class="form-row">
       <span>Mode</span>
-      <Select on:change={handleMode} options={modeOptions} value={$state.mode.toString()} />
+      <Select
+        on:change={handleMode}
+        disabled={!$state.enabled}
+        options={modeOptions}
+        value={$state.mode.toString()} />
     </div>
-    <div class="form-row" class:disabled={!supports.color}>
+    <div class="form-row" class:hidden={!$state.enabled} class:disabled={!supports.color}>
       <span>Color</span>
-      <ColorSelector random={supports.random} selected={$state.color} on:change={handleColor} />
+      <ColorSelector
+        {colors}
+        random={supports.random}
+        selected={$state.color}
+        on:change={handleColor} />
     </div>
-    <div class="form-row">
+    <div class="form-row" class:hidden={!$state.enabled}>
       <span>Brightness</span>
       <Range
         type="brightness"
+        disabled={!$state.enabled}
         value={$state.brightness}
         on:change={handleBrightness} />
     </div>
-    <div class="form-row">
+    <div class="form-row" class:hidden={!$state.enabled}>
       <span>Speed</span>
       <Range
         type="speed"
+        disabled={!$state.enabled || !supports.speed}
         value={$state.speed}
         on:change={handleSpeed} />
     </div>

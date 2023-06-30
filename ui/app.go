@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"nuga/pkg/color"
 	"nuga/pkg/keyboard"
 	"nuga/pkg/keyboard/effect"
 )
@@ -70,6 +71,14 @@ func (a *App) GetBacklightParams() *keyboard.EffectParams {
 		return nil
 	}
 	return state.Backlight.CurrentParams()
+}
+
+func (a *App) GetMacColors() [][7]color.RGB {
+	colors, err := a.lights.GetColors()
+	if err != nil {
+		return nil
+	}
+	return colors[24:]
 }
 
 func (a *App) SetHalo(mode, color, brightness, speed uint8) error {

@@ -24,3 +24,9 @@ export type LightSetter = (
   brightness: number,
   speed: number
 ) => Promise<void>
+
+export interface Color {
+  R: number
+  G: number
+  B: number
+}

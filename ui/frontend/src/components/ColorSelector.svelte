@@ -1,17 +1,10 @@
 <script lang="ts">
+  import { defaultColors, type Color } from "@stores/lights";
   import { createEventDispatcher } from "svelte";
 
   export let random = false
   export let selected = 0
-  const colors = [
-    '#FF0000',
-    '#00FF00',
-    '#0000FF',
-    '#FFFF00',
-    '#FF00FF',
-    '#00FFFF',
-    '#FFFFFF',
-  ]
+  export let colors: readonly Color[] = defaultColors
 
   const dispatch = createEventDispatcher()
 
@@ -28,12 +21,12 @@
       class="color random">
     </div>
   {/if}
-  {#each colors as color, i}
+  {#each colors as c, i}
     <div
       on:click={() => handleClick(i)}
       class="color"
       class:selected={i === selected}
-      style={`--color: ${color}`}>
+      style={`--color: rgb(${c.R}, ${c.G}, ${c.B})`}>
     </div>
   {/each}
 </div>
@@ -41,6 +34,7 @@
 <style lang="scss">
   .color-selector {
     display: flex;
+    position: relative;
     gap: 10px;
   }
   .color {

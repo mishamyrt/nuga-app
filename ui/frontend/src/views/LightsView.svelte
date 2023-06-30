@@ -1,20 +1,37 @@
 <script lang="ts">
   import Switch from "../components/Switch.svelte";
   import LightsPreview from "../components/LightsPreview.svelte";
-  import { state, modes, setBacklight, setHalo, setSidelight } from "@stores/lights";
+  import {
+    state,
+    modes,
+    color,
+    setBacklight, setHalo,setSidelight, backlightColors
+  } from "@stores/lights";
   import LightParams from "../components/LightParams.svelte";
+
+  const backlightColor = color.backlight
+  const sidelightColor = color.sidelight
+  const haloColor = color.halo
+
+  const backlightState = state.backlight
+  $: colors = $backlightColors[$backlightState.mode]
 </script>
 
 <div class="lights">
   <div class="heading">
     <h3>Lights</h3>
     <div class="preview">
-      <LightsPreview />
+      <LightsPreview
+        sidelight={$sidelightColor}
+        halo={$haloColor}
+        backlight={$backlightColor}
+      />
     </div>
   </div>
   <div class="scroll-wrapper">
     <div class="form">
       <LightParams
+        {colors}
         state={state.backlight}
         write={setBacklight}
         modes={modes.backlight}

@@ -1,7 +1,7 @@
 import type { MapStore } from 'nanostores'
-import { GetLightState, GetModes, SetHalo, SetBacklight, SetSidelight, GetBacklightParams } from '../../../wailsjs/go/main/App'
+import { GetLightState, GetModes, SetHalo, SetBacklight, SetSidelight, GetBacklightParams, GetMacColors } from '../../../wailsjs/go/main/App'
 import type { EffectParams, LightMode, LightSetter, LightState } from './types'
-import { modes, state } from './stores'
+import { backlightColors, modes, state } from './stores'
 
 const mapModes = (m: any[]) => m.map(i => ({
   name: i.Name,
@@ -38,16 +38,27 @@ export async function loadModes () {
   modes.sidelight.set(mapModes(appModes.Sidelight))
 }
 
-export const loadState = async () => {
+export async function loadState () {
   const current = await GetLightState()
   const backlightParams: EffectParams = await GetBacklightParams()
-  state.backlight.set({
-    enabled: current.Backlight.Mode.Code !== 0,
-    color: backlightParams.Color,
-    speed: backlightParams.Speed,
-    brightness: backlightParams.Brightness,
-    mode: current.Backlight.Mode.Code,
-  })
+  if (backlightParams) {
+    state.backlight.set({
+      enabled: current.Backlight.Mode.Code !== 0,
+      color: backlightParams.Color,
+      speed: backlightParams.Speed,
+      brightness: backlightParams.Brightness,
+      mode: current.Backlight.Mode.Code,
+    })
+  } else {
+    state.backlight.set({
+      enabled: false,
+      color: 4,
+      speed: 4,
+      brightness: 4,
+      mode: 1,
+    })
+  }
+
   state.halo.set({
     enabled: current.Halo.Mode.Code !== 0,
     color: current.Halo.Params.Color,
@@ -62,4 +73,9 @@ export const loadState = async () => {
     brightness: current.Sidelight.Params.Brightness,
     mode: current.Sidelight.Mode.Code,
   })
+}
+
+export async function loadColors() {
+  const colors = await GetMacColors()
+  backlightColors.set(colors)
 }
