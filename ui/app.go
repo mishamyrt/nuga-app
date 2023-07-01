@@ -2,9 +2,14 @@ package main
 
 import (
 	"context"
+	"encoding/json"
+	"io/ioutil"
+	"log"
 	"nuga/pkg/color"
 	"nuga/pkg/keyboard"
 	"nuga/pkg/keyboard/effect"
+
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 type Modes struct {
@@ -30,6 +35,30 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
+func (a *App) SimulateConnection() string {
+	path, err := runtime.OpenFileDialog(a.ctx, runtime.OpenDialogOptions{
+		Filters: []runtime.FileFilter{
+			{
+				DisplayName: "Nuga JSON dump",
+				Pattern:     "*.json",
+			},
+		},
+	})
+	if err != nil {
+		log.Panicf("Error while opening simulation template: %v", err)
+	}
+	content, err := ioutil.ReadFile(path)
+	if err != nil {
+		log.Panicf("Error while reading simulation template: %v", err)
+	}
+	var template keyboard.SimulationTemplate
+	err = json.Unmarshal(content, &template)
+	if err != nil {
+		log.Panicf("Error while parsing simulation template: %v", err)
+	}
+	a.lights = keyboard.OpenSimulation(template)
+	return template.Name
+}
 // Connect returns a keyboard name
 func (a *App) Connect() string {
 	if a.lights == nil {

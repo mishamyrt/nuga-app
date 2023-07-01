@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import cable from '../assets/images/cable.connector.svg'
+  import { startSimulation } from '@stores/device';
 
   export let hide = false
 
@@ -16,7 +17,7 @@
 <div class="loading" class:ready={hide} >
   <div class="help" class:show={showHelp}>
     <img alt="Wails logo" id="logo" src="{cable}">
-    <h1>Looking for compatible keyboard</h1>
+    <h1>Looking for compatible <span on:dblclick={startSimulation}>keyboard</span></h1>
     <p>Make sure your device is plugged in</p>
   </div>
   <div class="spinner-container">

@@ -1,5 +1,5 @@
-import { atom, computed, action } from 'nanostores'
-import { Connect } from '../../wailsjs/go/main/App.js'
+import { atom, action } from 'nanostores'
+import { Connect, SimulateConnection } from '../../wailsjs/go/main/App.js'
 import { sleep } from '../utils/timing'
 import { loadModes, loadState, loadColors } from './lights/actions'
 
@@ -27,8 +27,18 @@ export function setMD5(md5: string) {
   });
 }
 
+let simulation = false
+
+export async function startSimulation() {
+  await SimulateConnection()
+  simulation = true
+}
+
 export const connect = action(device, 'connect', async store => {
   while (true) {
+    if (simulation) {
+      return
+    }
     const name = await Connect()
     if (name.length > 0) {
       store.set({
