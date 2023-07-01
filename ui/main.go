@@ -20,7 +20,7 @@ func main() {
 	err := wails.Run(&options.App{
 		Title:  "gui",
 		Width:  650,
-		Height: 512,
+		Height: 650,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
