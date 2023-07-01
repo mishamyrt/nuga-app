@@ -21,7 +21,7 @@ type Modes struct {
 // App struct
 type App struct {
 	ctx    context.Context
-	lights *keyboard.Lights
+	lights keyboard.Lights
 }
 
 // NewApp creates a new App application struct
@@ -59,6 +59,7 @@ func (a *App) SimulateConnection() string {
 	a.lights = keyboard.OpenSimulation(template)
 	return template.Name
 }
+
 // Connect returns a keyboard name
 func (a *App) Connect() string {
 	if a.lights == nil {
@@ -66,9 +67,9 @@ func (a *App) Connect() string {
 		if err != nil {
 			return ""
 		}
-		a.lights = &lights
+		a.lights = lights
 	}
-	name, err := a.lights.Handle.Device.GetProductStr()
+	name, err := a.lights.GetName()
 	if err != nil {
 		return ""
 	}
@@ -148,4 +149,13 @@ func (a *App) SetBacklight(mode, color, brightness, speed uint8) error {
 	state.Backlight.SetBrightness(brightness)
 	state.Backlight.SetSpeed(speed)
 	return a.lights.SetEffects(state)
+}
+
+func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
+	colors, err := a.lights.GetColors()
+	if err != nil {
+		return
+	}
+	colors.SetMacBacklight(m, i, c)
+	a.lights.SetColors(colors)
 }

@@ -11,6 +11,7 @@
   export let modes: ReadableAtom<LightMode[]>
   export let write: () => Promise<void>
   export let colors: readonly Color[] = undefined
+  export let canChangeColor = false
 
   function handleEnabled (event: CustomEvent<boolean>) {
     state.setKey('enabled', event.detail)
@@ -74,6 +75,7 @@
         {colors}
         random={supports.random}
         selected={$state.color}
+        canChange={canChangeColor}
         on:change={handleColor} />
     </div>
     <div class="form-row" class:hidden={!$state.enabled}>

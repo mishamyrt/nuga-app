@@ -8,6 +8,9 @@ dependencies:
   nanostores:
     specifier: ^0.9.2
     version: 0.9.2
+  svelte-awesome-color-picker:
+    specifier: ^2.4.6
+    version: 2.4.6
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte':
@@ -183,6 +186,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /colord@2.9.3:
+    resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
+    dev: false
 
   /concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -775,6 +782,12 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /svelte-awesome-color-picker@2.4.6:
+    resolution: {integrity: sha512-8AEyNaq+E4m/OI6lU1mEgDDfCIye8mpYDHXOXpV04H53hizBtEbL3xfCFD9a7eK11bRysYCbhKB/ls4tGnk3GA==}
+    dependencies:
+      colord: 2.9.3
+    dev: false
 
   /svelte-check@2.8.0(svelte@3.49.0):
     resolution: {integrity: sha512-HRL66BxffMAZusqe5I5k26mRWQ+BobGd9Rxm3onh7ZVu0nTk8YTKJ9vu3LVPjUGLU9IX7zS+jmwPVhJYdXJ8vg==}

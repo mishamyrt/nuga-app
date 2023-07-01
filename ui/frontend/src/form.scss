@@ -1,5 +1,6 @@
 :root {
   --form-padding: 30px;
+  --form-border-radius: 5px;
   --form-border-padding: calc(var(--form-padding) - 10px);
   --color-form-frame: rgba(255, 255, 255, 0.12);
 }
@@ -29,14 +30,14 @@
 
     &:first-child {
       border-top: 1px solid var(--color-form-frame);
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
+      border-top-left-radius: var(--form-border-radius);
+      border-top-right-radius: var(--form-border-radius);
     }
 
     &:last-child {
       border-bottom: 1px solid var(--color-form-frame);
-      border-bottom-left-radius: 3px;
-      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: var(--form-border-radius);
+      border-bottom-right-radius: var(--form-border-radius);
     }
   }
 

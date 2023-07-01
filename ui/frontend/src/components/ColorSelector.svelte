@@ -1,15 +1,23 @@
 <script lang="ts">
-  import { defaultColors, type Color } from "@stores/lights";
+  import { defaultColors, type Color, changingColor } from "@stores/lights";
   import { createEventDispatcher } from "svelte";
 
   export let random = false
   export let selected = 0
   export let colors: readonly Color[] = defaultColors
+  export let canChange = false
 
   const dispatch = createEventDispatcher()
 
   function handleClick(i: number) {
     dispatch('change', i)
+  }
+
+  function handleEditColor(e: MouseEvent, i: number) {
+    e.preventDefault()
+    if (canChange) {
+      changingColor.set(i)
+    }
   }
 </script>
 
@@ -24,6 +32,7 @@
   {#each colors as c, i}
     <div
       on:click={() => handleClick(i)}
+      on:contextmenu={(e) => handleEditColor(e, i)}
       class="color"
       class:selected={i === selected}
       style={`--color: rgb(${c.R}, ${c.G}, ${c.B})`}>

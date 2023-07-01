@@ -41,3 +41,5 @@ export const color = {
     return sidelightColors[sidelight.color]
   })
 }
+
+export const changingColor = atom<number | undefined>()

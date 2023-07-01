@@ -5,9 +5,11 @@
     state,
     modes,
     color,
-    setBacklight, setHalo,setSidelight, backlightColors
+    setBacklight, setHalo,setSidelight, backlightColors, changingColor
+
   } from "@stores/lights";
   import LightParams from "../components/LightParams.svelte";
+  import ColorPickerModal from "@components/ColorPickerModal.svelte";
 
   const backlightColor = color.backlight
   const sidelightColor = color.sidelight
@@ -35,6 +37,7 @@
         state={state.backlight}
         write={setBacklight}
         modes={modes.backlight}
+        canChangeColor
         title="Backlight" />
       <LightParams
         write={setHalo}
@@ -50,6 +53,9 @@
       />
     </div>
   </div>
+  {#if $changingColor !== undefined}
+  <ColorPickerModal />
+  {/if}
 </div>
 
 <style lang="scss">
