@@ -10,20 +10,21 @@ type Lights struct {
 	Debug  bool
 }
 
-func (b *Lights) GetRawParams() ([]byte, error) {
+func (b *Lights) GetRawEffects() ([]byte, error) {
 	var params []byte
 	response, err := b.Handle.Request(CmdGetParams, 270)
 	if err != nil {
 		return params, err
 	}
-	startOffset := 15
-	return response[startOffset : startOffset+ParamsLength], nil
+	return response, nil
 }
 
 func (b *Lights) GetEffects() (Effects, error) {
-	raw, err := b.GetRawParams()
+	raw, err := b.GetRawEffects()
+	startOffset := 15
+	paramsSubset := raw[startOffset : startOffset+ParamsLength]
 	return ParseParams(
-		raw,
+		paramsSubset,
 	), err
 }
 
@@ -33,7 +34,20 @@ func (b *Lights) GetRawColors() ([]byte, error) {
 	if err != nil {
 		return colors, err
 	}
-	return colors[7 : len(colors)-18], err
+	return colors, err
+}
+
+func (b *Lights) GetColors() (ColorState, error) {
+	raw, err := b.GetRawColors()
+	colorSubset := raw[7 : len(raw)-18]
+	return ParseColors(colorSubset), err
+}
+
+func (b *Lights) SetColors(c ColorState) error {
+	request := make([]byte, 0)
+	request = append(request, CmdSetColors...)
+	request = append(request, c.Bytes()...)
+	return b.Handle.Send(request)
 }
 
 func (b *Lights) ResetColors() error {
@@ -50,20 +64,8 @@ func (b *Lights) ResetColors() error {
 	return b.SetColors(state)
 }
 
-func (b *Lights) GetColors() (ColorState, error) {
-	raw, err := b.GetRawColors()
-	return ParseColors(raw), err
-}
-
-func (b *Lights) SetColors(c ColorState) error {
-	request := make([]byte, 0)
-	request = append(request, CmdSetColors...)
-	request = append(request, c.Bytes()...)
-	return b.Handle.Send(request)
-}
-
 func (b *Lights) SetEffects(p Effects) error {
-	currentParams, err := b.GetRawParams()
+	currentParams, err := b.GetRawEffects()
 	if err != nil {
 		return err
 	}
