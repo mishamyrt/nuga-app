@@ -47,7 +47,7 @@ var backlightCmd = &cobra.Command{
 				if err != nil {
 					return err
 				}
-				colors.SetBacklight(true, p.Backlight.Mode.Code, 5, rgb)
+				colors.SetMacBacklight(p.Backlight.Mode.Code, 5, rgb)
 				err = p.Backlight.SetColor(5)
 				if err != nil {
 					return err

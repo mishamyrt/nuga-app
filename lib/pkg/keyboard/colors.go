@@ -30,12 +30,16 @@ func (s *ColorState) Set(rawIndex int, index int, c color.RGB) {
 	s[rawIndex][index] = c
 }
 
-func (s *ColorState) SetBacklight(mac bool, mode uint8, index uint8, c color.RGB) {
-	offset := mode
-	if mac {
-		offset += 24
-	}
-	s[offset][index] = c
+func (s *ColorState) SetBacklight(m uint8, i uint8, c color.RGB) {
+	s[m][i] = c
+}
+
+func (s *ColorState) SetMacBacklight(m uint8, i uint8, c color.RGB) {
+	s.SetBacklight(m+24, i, c)
+}
+
+func (s *ColorState) SetWinBacklight(m uint8, i uint8, c color.RGB) {
+	s.SetBacklight(m, i, c)
 }
 
 func (s *ColorState) Get(effect uint8, index uint8) color.RGB {
