@@ -24,7 +24,7 @@ var rootCmd = &cobra.Command{
 	Short:   "NuPhy keyboard illumination control app",
 	Run: func(cmd *cobra.Command, args []string) {
 		lights := openKeyboard()
-		name, err := lights.Handle.Device.GetProductStr()
+		name, err := lights.GetName()
 		if err != nil {
 			log.Printf("Error while reading product name: %v", err)
 		}
@@ -34,8 +34,6 @@ var rootCmd = &cobra.Command{
 			log.Printf("Error while reading effects: %v", err)
 		}
 		describeEffects(&effects)
-		asd, _ := lights.Handle.Device.GetDeviceInfo()
-		fmt.Println(asd.Path)
 	},
 }
 
