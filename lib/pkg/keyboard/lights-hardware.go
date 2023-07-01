@@ -22,12 +22,19 @@ func (h *HardwareLights) GetRawEffects() ([]byte, error) {
 	return response, nil
 }
 
-func (h *HardwareLights) GetEffects() (Effects, error) {
+func (h *HardwareLights) GetEffectsBuffer() ([]byte, error) {
 	raw, err := h.GetRawEffects()
+	if err != nil {
+		return []byte{}, err
+	}
 	startOffset := 15
-	paramsSubset := raw[startOffset : startOffset+ParamsLength]
+	return raw[startOffset : startOffset+ParamsLength], nil
+}
+
+func (h *HardwareLights) GetEffects() (Effects, error) {
+	params, err := h.GetEffectsBuffer()
 	return ParseParams(
-		paramsSubset,
+		params,
 	), err
 }
 
@@ -68,7 +75,7 @@ func (h *HardwareLights) ResetColors() error {
 }
 
 func (h *HardwareLights) SetEffects(p Effects) error {
-	currentParams, err := h.GetRawEffects()
+	currentParams, err := h.GetEffectsBuffer()
 	if err != nil {
 		return err
 	}
