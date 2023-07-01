@@ -72,7 +72,7 @@ func (h *Handle) Close() error {
 
 // Waiting for data to be written. According to the documentation, it takes 10 ms to do this
 func (h *Handle) waitSync() {
-	time.Sleep(time.Millisecond * 10)
+	time.Sleep(time.Millisecond * 50)
 }
 
 func OpenHandle() (Handle, error) {
