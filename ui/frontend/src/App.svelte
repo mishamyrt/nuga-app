@@ -2,38 +2,38 @@
   import { onMount } from 'svelte';
   import LoadingView from './views/LoadingView.svelte';
   import { connect } from '@stores/device';
+  import { version, loadVersion } from '@stores/app';
   import { sleep } from './utils/timing';
   import SidebarItem from './components/SidebarItem.svelte';
   import { view, connected, type SettingsView } from './stores/app';
   import LightsView from './views/LightsView.svelte';
 
-  let isConnected: boolean
-  let activeView: SettingsView
+  $: activeView = $view
+  $: appVersion = $version
 
   onMount(async () => {
     await Promise.all([
+      loadVersion(),
       connect(),
       sleep(1000),
     ])
     connected.set(true)
   })
-
-  view.subscribe(val => {
-    activeView = val
-  })
-  connected.subscribe(c => {
-    isConnected = c
-  })
 </script>
 
 <main>
-  <div class="app" class:ready={isConnected}>
+  <div class="app" class:ready={$connected}>
     <div class="sidebar">
-      <h1>Nuga</h1>
-      <div class="menu">
-        <SidebarItem title="Lights" target="lights" />
-        <SidebarItem title="Keys" target="keys" />
-        <SidebarItem title="System" target="system" />
+      <div>
+        <h1>Nuga</h1>
+        <div class="menu">
+          <SidebarItem title="Lights" target="lights" />
+          <SidebarItem title="Keys" target="keys" />
+          <SidebarItem title="System" target="system" />
+        </div>
+      </div>
+      <div>
+        <span class="version">{appVersion}</span>
       </div>
     </div>
     <div class="content">
@@ -51,7 +51,7 @@
     </div>
   </div>
   <!-- TODO: Remove from DOM when connected -->
-  <LoadingView hide={isConnected} />
+  <LoadingView hide={$connected} />
 </main>
 <div class="drag"></div>
 
@@ -72,6 +72,19 @@
     padding: 8px;
     opacity: 0;
     transition: opacity .3s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  .version {
+    padding: 8px;
+    margin-bottom: 0px;
+    display: block;
+    font-weight: 500;
+    font-size: 13px;
+    opacity: 0.25;
   }
 
   .ready .sidebar {

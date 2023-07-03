@@ -35,6 +35,10 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
+func (a *App) GetVersion() string {
+	return AppVersion
+}
+
 func (a *App) SimulateConnection() string {
 	path, err := runtime.OpenFileDialog(a.ctx, runtime.OpenDialogOptions{
 		Filters: []runtime.FileFilter{
