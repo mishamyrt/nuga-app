@@ -80,6 +80,14 @@ func (a *App) Connect() string {
 	return name
 }
 
+func (a *App) GetPath() string {
+	name, err := a.lights.GetPath()
+	if err != nil {
+		return ""
+	}
+	return name
+}
+
 // Connect returns a keyboard name
 func (a *App) GetModes() *Modes {
 	return &Modes{
@@ -161,5 +169,6 @@ func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
 		return
 	}
 	colors.SetMacBacklight(m, i, c)
+	colors.SetWinBacklight(m, i, c)
 	a.lights.SetColors(colors)
 }
