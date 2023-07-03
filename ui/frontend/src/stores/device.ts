@@ -30,16 +30,18 @@ export function setMD5(md5: string) {
 let simulation = false
 
 export async function startSimulation() {
-  await SimulateConnection()
   simulation = true
 }
 
 export const connect = action(device, 'connect', async store => {
+  let name
   while (true) {
     if (simulation) {
-      return
+      name = await SimulateConnection()
+    } else {
+      name = await Connect()
     }
-    const name = await Connect()
+
     if (name.length > 0) {
       store.set({
         ...store.get(),

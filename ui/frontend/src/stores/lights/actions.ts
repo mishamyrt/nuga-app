@@ -2,12 +2,28 @@ import type { MapStore } from 'nanostores'
 import { GetLightState, GetModes, SetHalo, SetBacklight, SetSidelight, GetBacklightParams, GetMacColors, SetBacklightColor } from '../../../wailsjs/go/main/App'
 import type { Color, EffectParams, LightMode, LightSetter, LightState } from './types'
 import { backlightColors, changingColor, modes, state } from './stores'
+import { defaultState } from './defaults'
 
-const mapModes = (m: any[]) => m.map(i => ({
-  name: i.Name,
-  features: i.Features,
-  code: i.Code
-}))
+function mapModes (m: any[]) {
+  return m
+    .filter(i => i.Code !== 0)
+    .map(i => ({
+      name: i.Name,
+      features: i.Features,
+      code: i.Code
+    }))
+}
+
+function parseEffect (mode: number, params: EffectParams) {
+  const enabled = mode !== 0
+  return {
+    enabled,
+    mode: enabled ? mode : 1,
+    color: params.Color,
+    speed: params.Speed,
+    brightness: params.Brightness,
+  }
+}
 
 async function setLight(store: MapStore<LightState>, apply: LightSetter) {
   const state = store.get()
@@ -42,37 +58,20 @@ export async function loadState () {
   const current = await GetLightState()
   const backlightParams: EffectParams = await GetBacklightParams()
   if (backlightParams) {
-    state.backlight.set({
-      enabled: current.Backlight.Mode.Code !== 0,
-      color: backlightParams.Color,
-      speed: backlightParams.Speed,
-      brightness: backlightParams.Brightness,
-      mode: current.Backlight.Mode.Code,
-    })
+    state.backlight.set(
+      parseEffect(current.Backlight.Mode.Code, backlightParams)
+    )
   } else {
-    state.backlight.set({
-      enabled: false,
-      color: 4,
-      speed: 4,
-      brightness: 4,
-      mode: 1,
-    })
+    state.backlight.set(defaultState)
   }
 
-  state.halo.set({
-    enabled: current.Halo.Mode.Code !== 0,
-    color: current.Halo.Params.Color,
-    speed: current.Halo.Params.Speed,
-    brightness: current.Halo.Params.Brightness,
-    mode: current.Halo.Mode.Code,
-  })
-  state.sidelight.set({
-    enabled: current.Sidelight.Mode.Code !== 0,
-    color: current.Sidelight.Params.Color,
-    speed: current.Sidelight.Params.Speed,
-    brightness: current.Sidelight.Params.Brightness,
-    mode: current.Sidelight.Mode.Code,
-  })
+  state.halo.set(
+    parseEffect(current.Halo.Mode.Code, current.Halo.Params)
+  )
+
+  state.sidelight.set(
+    parseEffect(current.Sidelight.Mode.Code, current.Sidelight.Params)
+  )
 }
 
 export async function loadColors() {
@@ -86,3 +85,4 @@ export async function setBacklightColor(rgb: Color) {
   await SetBacklightColor(mode, colorIndex, rgb)
   await loadColors()
 }
+

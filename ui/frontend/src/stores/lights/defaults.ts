@@ -2,7 +2,7 @@ import type { Color, LightState } from "./types"
 
 export const defaultState: LightState = {
   enabled: false,
-  mode: 0,
+  mode: 1,
   color: 0,
   speed: 4,
   brightness: 4
