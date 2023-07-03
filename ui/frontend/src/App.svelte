@@ -62,6 +62,11 @@
     grid-template-columns: 211px 1fr;
   }
 
+  .sidebar > div {
+    width: 100%;
+    text-align: left;
+  }
+
   .content {
     background-color: #282828;
     border-left: 1px solid rgba(1, 1, 1, 0.4117647059);
