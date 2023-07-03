@@ -110,7 +110,7 @@
     <g filter="url(#b)">
       <rect class="keyboard-fill" width="258" height="92" x="2" y="6" fill="{backlightRgb}" fill-opacity=".6" rx="3" />
     </g>
-    <g style={`opacity: ${backlight ? 1 : 0}`} filter="url(#b)">
+    <g filter="url(#b)">
       <rect class="keyboard-fill" style={`opacity: ${backlight ? 1 : 0}`} width="258" height="92" x="2" y="6" fill="#fff" fill-opacity=".3" rx="3" />
     </g>
     <rect width="259" height="93" x="1.5" y="5.5" stroke="#6A6A6A" stroke-opacity=".9" rx="3.5" />
