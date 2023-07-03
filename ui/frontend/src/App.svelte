@@ -28,7 +28,7 @@
         <h1>Nuga</h1>
         <div class="menu">
           <SidebarItem title="Lights" target="lights" />
-          <SidebarItem title="Keys" target="keys" />
+          <SidebarItem disabled title="Keys" target="keys" />
           <SidebarItem title="System" target="system" />
         </div>
       </div>

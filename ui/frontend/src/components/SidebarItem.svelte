@@ -12,18 +12,14 @@ const icons: Record<SettingsView, string> = {
 
 export let title: string
 export let target: SettingsView
-let currentView: SettingsView
+export let disabled = false
 
 function handleClick() {
   view.set(target)
 }
-
-view.subscribe(v => {
-  currentView = v
-})
 </script>
 
-<button on:click={handleClick} class:selected={currentView === target}>
+<button {disabled} on:click={handleClick} class:selected={$view === target}>
   <img class="icon" src={icons[target]} alt="asd" />
   {title}
 </button>
@@ -42,6 +38,11 @@ view.subscribe(v => {
     font-size: 13px;
     color: white;
     background: transparent;
+
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.4;
+    }
 
     &.selected {
       background: #3665CB;
