@@ -588,6 +588,6 @@
   .keyboard-fill {
     transition-timing-function: ease-out;
     transition-property: fill, opacity, stroke;
-    transition-duration: .25s;
+    transition-duration: .2s;
   }
 </style>
