@@ -6,7 +6,7 @@ import keysIcon from '../assets/images/keys.sidebar@2x.png'
 
 const icons: Record<SettingsView, string> = {
   lights: lightIcon,
-  system: systemIcon,
+  device: systemIcon,
   keys: keysIcon
 }
 

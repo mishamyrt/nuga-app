@@ -6,4 +6,5 @@ type Lights interface {
 	GetColors() (ColorState, error)
 	SetColors(c ColorState) error
 	GetName() (string, error)
+	GetPath() (string, error)
 }

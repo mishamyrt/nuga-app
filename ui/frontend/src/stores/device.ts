@@ -1,31 +1,17 @@
 import { atom, action } from 'nanostores'
-import { Connect, SimulateConnection } from '../../wailsjs/go/main/App.js'
+import { Connect, GetPath, SimulateConnection } from '../../wailsjs/go/main/App.js'
 import { sleep } from '../utils/timing'
 import { loadModes, loadState, loadColors } from './lights/actions'
 
 interface ConnectedKeyboard {
   name: string
-  md5: string
+  path: string
 }
 
 export const device = atom<ConnectedKeyboard>({
   name: '',
-  md5: '',
+  path: '',
 })
-
-export function setName(name: string) {
-  device.set({
-    ...device.get(),
-    name
-  });
-}
-
-export function setMD5(md5: string) {
-  device.set({
-    ...device.get(),
-    md5
-  });
-}
 
 let simulation = false
 
@@ -41,11 +27,11 @@ export const connect = action(device, 'connect', async store => {
     } else {
       name = await Connect()
     }
-
     if (name.length > 0) {
+      const path = await GetPath()
       store.set({
-        ...store.get(),
-        name: name,
+        name,
+        path
       })
       await loadColors()
       await loadModes()

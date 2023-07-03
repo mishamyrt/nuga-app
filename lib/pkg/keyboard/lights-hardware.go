@@ -13,6 +13,14 @@ func (h *HardwareLights) GetName() (string, error) {
 	return h.Handle.Device.GetProductStr()
 }
 
+func (h *HardwareLights) GetPath() (string, error) {
+	info, err := h.Handle.Device.GetDeviceInfo()
+	if err != nil {
+		return "", err
+	}
+	return info.Path, nil
+}
+
 func (h *HardwareLights) GetRawEffects() ([]byte, error) {
 	var params []byte
 	response, err := h.Handle.Request(CmdGetParams, 270)

@@ -18,10 +18,19 @@ type Modes struct {
 	Halo      *effect.Modes
 }
 
+type OSMode uint8
+
+const (
+	Both OSMode = iota
+	Win         = iota
+	Mac         = iota
+)
+
 // App struct
 type App struct {
 	ctx    context.Context
 	lights keyboard.Lights
+	mode   OSMode
 }
 
 // NewApp creates a new App application struct
@@ -163,12 +172,23 @@ func (a *App) SetBacklight(mode, color, brightness, speed uint8) error {
 	return a.lights.SetEffects(state)
 }
 
+func (a *App) SetMode(m OSMode) {
+	a.mode = m
+}
+
 func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
 	colors, err := a.lights.GetColors()
 	if err != nil {
 		return
 	}
-	colors.SetMacBacklight(m, i, c)
-	colors.SetWinBacklight(m, i, c)
+	if a.mode == Win {
+		colors.SetWinBacklight(m, i, c)
+	} else if a.mode == Mac {
+		colors.SetMacBacklight(m, i, c)
+	} else {
+		colors.SetWinBacklight(m, i, c)
+		colors.SetMacBacklight(m, i, c)
+	}
+
 	a.lights.SetColors(colors)
 }

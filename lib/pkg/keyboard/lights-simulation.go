@@ -6,10 +6,6 @@ type SimulationTemplate struct {
 	Name   string
 }
 
-// GetColors() (ColorState, error)
-// SetColors(c ColorState) error
-// GetName() (string, error)
-
 type SimulatedLights struct {
 	template SimulationTemplate
 	effects  Effects
@@ -51,6 +47,10 @@ func (s *SimulatedLights) SetColors(c ColorState) error {
 
 func (s *SimulatedLights) GetName() (string, error) {
 	return s.template.Name, nil
+}
+
+func (h *SimulatedLights) GetPath() (string, error) {
+	return "/simulated/device/path", nil
 }
 
 func OpenSimulation(t SimulationTemplate) Lights {

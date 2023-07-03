@@ -7,6 +7,7 @@
   import SidebarItem from './components/SidebarItem.svelte';
   import { view, connected, type SettingsView } from './stores/app';
   import LightsView from './views/LightsView.svelte';
+  import DeviceView from './views/DeviceView.svelte';
 
   $: activeView = $view
   $: appVersion = $version
@@ -29,7 +30,7 @@
         <div class="menu">
           <SidebarItem title="Lights" target="lights" />
           <SidebarItem disabled title="Keys" target="keys" />
-          <SidebarItem title="System" target="system" />
+          <SidebarItem title="Device" target="device" />
         </div>
       </div>
       <div>
@@ -39,10 +40,8 @@
     <div class="content">
       {#if activeView === 'lights'}
         <LightsView />
-      {:else if activeView === 'system'}
-        <div>
-          <h1>System</h1>
-        </div>
+      {:else if activeView === 'device'}
+        <DeviceView />
       {:else if activeView === 'keys'}
         <div>
           <h1>Keys</h1>
