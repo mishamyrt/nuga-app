@@ -3,27 +3,13 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"nuga/pkg/color"
 	"nuga/pkg/keyboard"
 	"nuga/pkg/keyboard/effect"
+	"os"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
-)
-
-type Modes struct {
-	Backlight *effect.Modes
-	Sidelight *effect.Modes
-	Halo      *effect.Modes
-}
-
-type OSMode uint8
-
-const (
-	Both OSMode = iota
-	Win         = iota
-	Mac         = iota
 )
 
 // App struct
@@ -44,10 +30,12 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
+// GetVersion returns current executable version
 func (a *App) GetVersion() string {
 	return AppVersion
 }
 
+// SimulateConnection initiates simulation start
 func (a *App) SimulateConnection() string {
 	path, err := runtime.OpenFileDialog(a.ctx, runtime.OpenDialogOptions{
 		Filters: []runtime.FileFilter{
@@ -60,7 +48,7 @@ func (a *App) SimulateConnection() string {
 	if err != nil {
 		log.Panicf("Error while opening simulation template: %v", err)
 	}
-	content, err := ioutil.ReadFile(path)
+	content, err := os.ReadFile(path)
 	if err != nil {
 		log.Panicf("Error while reading simulation template: %v", err)
 	}
@@ -73,7 +61,7 @@ func (a *App) SimulateConnection() string {
 	return template.Name
 }
 
-// Connect returns a keyboard name
+// Connect initiates connection and returns a keyboard name
 func (a *App) Connect() string {
 	if a.lights == nil {
 		lights, err := keyboard.Open()
@@ -89,6 +77,7 @@ func (a *App) Connect() string {
 	return name
 }
 
+// GetPath returns current device path if connected
 func (a *App) GetPath() string {
 	name, err := a.lights.GetPath()
 	if err != nil {
@@ -97,7 +86,7 @@ func (a *App) GetPath() string {
 	return name
 }
 
-// Connect returns a keyboard name
+// GetModes returns keyboard modes
 func (a *App) GetModes() *Modes {
 	return &Modes{
 		Backlight: &effect.Backlight,
@@ -106,7 +95,7 @@ func (a *App) GetModes() *Modes {
 	}
 }
 
-// Connect returns a keyboard name
+// GetLightState returns current keyboard light state
 func (a *App) GetLightState() *keyboard.Effects {
 	state, err := a.lights.GetEffects()
 	if err != nil {
@@ -115,7 +104,7 @@ func (a *App) GetLightState() *keyboard.Effects {
 	return &state
 }
 
-// Connect returns a keyboard name
+// GetBacklightParams returns current keyboard backlight params
 func (a *App) GetBacklightParams() *keyboard.EffectParams {
 	state, err := a.lights.GetEffects()
 	if err != nil {
@@ -124,6 +113,7 @@ func (a *App) GetBacklightParams() *keyboard.EffectParams {
 	return state.Backlight.CurrentParams()
 }
 
+// GetMacColors returns colors for mac modes
 func (a *App) GetMacColors() [][7]color.RGB {
 	colors, err := a.lights.GetColors()
 	if err != nil {
@@ -132,6 +122,7 @@ func (a *App) GetMacColors() [][7]color.RGB {
 	return colors[24:]
 }
 
+// SetHalo sets halolight effect
 func (a *App) SetHalo(mode, color, brightness, speed uint8) error {
 	state, err := a.lights.GetEffects()
 	if err != nil {
@@ -146,6 +137,7 @@ func (a *App) SetHalo(mode, color, brightness, speed uint8) error {
 	return a.lights.SetEffects(state)
 }
 
+// SetSidelight sets sidelight effect
 func (a *App) SetSidelight(mode, color, brightness, speed uint8) error {
 	state, err := a.lights.GetEffects()
 	if err != nil {
@@ -160,22 +152,40 @@ func (a *App) SetSidelight(mode, color, brightness, speed uint8) error {
 	return a.lights.SetEffects(state)
 }
 
+// SetBacklight sets backlight effect
 func (a *App) SetBacklight(mode, color, brightness, speed uint8) error {
 	state, err := a.lights.GetEffects()
 	if err != nil {
 		return nil
 	}
 	state.Backlight.Mode = effect.Backlight.Find(mode)
-	state.Backlight.SetColor(color)
-	state.Backlight.SetBrightness(brightness)
-	state.Backlight.SetSpeed(speed)
+	fea := state.Backlight.Mode.Features
+	if fea.Supports(effect.Speed) {
+		err = state.Backlight.SetSpeed(speed)
+		if err != nil {
+			return err
+		}
+	}
+	if fea.Supports(effect.SpecificColor) {
+		err = state.Backlight.SetColor(color)
+		if err != nil {
+			return err
+		}
+	}
+	err = state.Backlight.SetBrightness(brightness)
+	if err != nil {
+		return err
+	}
+
 	return a.lights.SetEffects(state)
 }
 
+// SetMode sets keyboard OS mode
 func (a *App) SetMode(m OSMode) {
 	a.mode = m
 }
 
+// SetBacklightColor sets backlight color by mode and index
 func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
 	colors, err := a.lights.GetColors()
 	if err != nil {
@@ -190,5 +200,8 @@ func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
 		colors.SetMacBacklight(m, i, c)
 	}
 
-	a.lights.SetColors(colors)
+	err = a.lights.SetColors(colors)
+	if err != nil {
+		log.Printf("Error on writing colors: %v", err)
+	}
 }

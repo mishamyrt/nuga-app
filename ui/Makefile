@@ -32,3 +32,8 @@ clean:
 .PHONY: dev
 dev:
 	wails dev -loglevel Debug -v 2
+
+.PHONY: lint
+lint:
+	golangci-lint run
+	revive -config ../revive.toml  ./...

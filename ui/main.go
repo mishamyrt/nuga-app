@@ -1,3 +1,4 @@
+// Package main contains UI application
 package main
 
 import (
@@ -12,13 +13,11 @@ import (
 //go:embed all:frontend/dist
 var assets embed.FS
 
+// AppVersion represents current executable version
 var AppVersion = "dev"
 
 func main() {
-	// Create an instance of the app structure
 	app := NewApp()
-
-	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "gui",
 		Width:  650,
