@@ -32,7 +32,8 @@
   {#each colors as c, i}
     <div
       on:click={() => handleClick(i)}
-      on:contextmenu={(e) => handleEditColor(e, i)}
+      on:contextmenu={e => handleEditColor(e, i)}
+      on:dblclick={e => handleEditColor(e, i)}
       class="color"
       class:selected={i === selected}
       style={`--color: rgb(${c.R}, ${c.G}, ${c.B})`}>
