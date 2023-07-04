@@ -14,12 +14,12 @@ var (
 	HalolightRainbow = Mode{
 		"Rainbow",
 		2,
-		RandomColor | Speed,
+		Speed,
 	}
 	HalolightFixed = Mode{
 		"Fixed",
 		3,
-		SpecificColor | Speed,
+		SpecificColor,
 	}
 	HalolightRespire = Mode{
 		"Respire",
