@@ -6,7 +6,7 @@ import (
 )
 
 type HardwareLights struct {
-	Handle hid.Handle
+	Handle *hid.Handle
 }
 
 func (h *HardwareLights) GetName() (string, error) {

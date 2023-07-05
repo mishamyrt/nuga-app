@@ -2,6 +2,7 @@ package hid
 
 import (
 	"log"
+	"sync"
 	"time"
 
 	"github.com/sstallion/go-hid"
@@ -12,10 +13,13 @@ type Handle struct {
 	Device *hid.Device
 	// Debug flag. If true, then debugging data will be written to stdout when functions are executed.
 	Debug bool
+	mutex sync.Mutex
 }
 
 // Send packet to the device.
 func (h *Handle) Send(payload []byte) error {
+	h.mutex.Lock()
+	defer h.mutex.Unlock()
 	if h.Debug {
 		log.Printf("Send %v: %v", len(payload), payload)
 	}
@@ -35,6 +39,8 @@ func (h *Handle) Send(payload []byte) error {
 
 // Read packet from the device.
 func (h *Handle) Read(count int) ([]byte, error) {
+	h.mutex.Lock()
+	defer h.mutex.Unlock()
 	buf := make([]byte, count)
 	buf[0] = 0x06
 	length, err := h.Device.GetFeatureReport(buf)
@@ -75,7 +81,7 @@ func (h *Handle) waitSync() {
 	time.Sleep(time.Millisecond * 50)
 }
 
-func OpenHandle() (Handle, error) {
+func OpenHandle() (*Handle, error) {
 	var h Handle
 	var path string
 	hid.Enumerate(0x05AC, 0x024F, func(info *hid.DeviceInfo) error {
@@ -86,13 +92,13 @@ func OpenHandle() (Handle, error) {
 	})
 
 	if len(path) == 0 {
-		return h, ErrNotFound
+		return &h, ErrNotFound
 	}
 
 	device, err := hid.OpenPath(path)
 	if err != nil {
-		return h, err
+		return &h, err
 	}
 	h.Device = device
-	return h, nil
+	return &h, nil
 }
