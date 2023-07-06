@@ -74,6 +74,10 @@ func (a *App) SimulateConnection() string {
 	return template.Name
 }
 
+func (a *App) Disconnect() {
+	a.lights = nil
+}
+
 // Connect initiates connection and returns a keyboard name
 func (a *App) Connect() string {
 	if a.lights == nil {

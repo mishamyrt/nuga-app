@@ -1,7 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import cable from '../assets/images/cable.connector.svg'
-  import { startSimulation } from '@stores/device';
+  import { connect, startSimulation } from '@stores/device';
+  import { connected, loadVersion } from '@stores/app';
+  import { sleep } from '../utils/timing';
+  import { sync } from '@stores/lights/actions';
 
   export let hide = false
 
@@ -11,6 +14,13 @@
     setTimeout(() => {
       showHelp = true
     }, 1500)
+    await Promise.all([
+      loadVersion(),
+      connect(),
+      sleep(1000),
+    ]).catch(console.error)
+    connected.set(true)
+    sync.start()
   })
 </script>
 

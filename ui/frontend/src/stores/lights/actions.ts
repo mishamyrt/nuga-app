@@ -1,8 +1,19 @@
 import type { MapStore } from 'nanostores'
-import { GetLightState, GetModes, SetHalo, SetBacklight, SetSidelight, GetBacklightParams, GetMacColors, SetBacklightColor } from '../../../wailsjs/go/main/App'
-import type { Color, EffectParams, LightMode, LightSetter, LightState } from './types'
+import {
+  GetLightState,
+  GetModes,
+  SetHalo,
+  SetBacklight,
+  SetSidelight,
+  GetMacColors,
+  SetBacklightColor
+} from '../../../wailsjs/go/main/App'
+import type { Color, EffectParams, LightSetter, LightState } from './types'
 import { backlightColors, changingColor, modes, state } from './stores'
 import { defaultState } from './defaults'
+import { UpdateSynchronizer } from './synchronizer'
+
+export const sync = new UpdateSynchronizer(1000)
 
 function mapModes (m: any[]) {
   return m
@@ -27,12 +38,14 @@ function parseEffect (mode: number, params: EffectParams) {
 
 async function setLight(store: MapStore<LightState>, apply: LightSetter) {
   const state = store.get()
-  await apply(
-    state.enabled ? state.mode : 0,
-    state.color,
-    state.brightness,
-    state.speed
-  )
+  sync.addTask(async () => {
+    await apply(
+      state.enabled ? state.mode : 0,
+      state.color,
+      state.brightness,
+      state.speed
+    )
+  })
 }
 
 export async function setBacklight() {

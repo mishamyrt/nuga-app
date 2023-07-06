@@ -1,0 +1,65 @@
+import { connected } from "@stores/app"
+import { sleep } from "../../utils/timing"
+import { loadState } from "./actions"
+import { Disconnect } from "../../../wailsjs/go/main/App"
+
+type AsyncTask = () => Promise<void>
+
+export class UpdateSynchronizer {
+  private tasks: AsyncTask[] = []
+  private active = false
+
+  constructor (
+    private readonly interval: number
+  ){}
+
+  public addTask(t: AsyncTask) {
+    this.tasks.push(t)
+  }
+
+  public start() {
+    if (this.active) {
+      return
+    }
+    this.active = true
+    this.loop()
+      .then(() => {})
+  }
+
+  private async sleepTight() {
+    let attempts = this.interval / 10
+    while (attempts > 0) {
+      if (this.tasks.length > 0) {
+        return
+      }
+      await sleep(10)
+      attempts--
+    }
+  }
+
+  private async loop() {
+    while (this.active) {
+      if (this.tasks.length > 0) {
+        const task = this.tasks.shift()
+        await task()
+        continue
+      }
+      try {
+        await loadState()
+      } catch (e: any) {
+        const message = e as string
+        if (message.includes('disconnected')) {
+          await Disconnect()
+          connected.set(false)
+          this.active = false
+        } else {
+          // TODO: Show error to UI
+          console.error('Backend error: ' + e)
+        }
+        return
+      }
+
+      await this.sleepTight()
+    }
+  }
+}

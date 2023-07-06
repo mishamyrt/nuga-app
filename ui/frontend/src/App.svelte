@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import LoadingView from './views/LoadingView.svelte';
   import { connect } from '@stores/device';
   import { version, loadVersion } from '@stores/app';
@@ -8,17 +8,25 @@
   import { view, connected, type SettingsView } from './stores/app';
   import LightsView from './views/LightsView.svelte';
   import DeviceView from './views/DeviceView.svelte';
+  import { loadState, sync } from '@stores/lights/actions';
 
   $: activeView = $view
   $: appVersion = $version
 
-  onMount(async () => {
-    await Promise.all([
-      loadVersion(),
-      connect(),
-      sleep(1000),
-    ])
-    connected.set(true)
+  let unsubscribeConnected: () => void
+
+  let hideLoading = false
+
+  onMount(() => {
+    unsubscribeConnected = connected.subscribe(isConnected => {
+      if (isConnected) {
+        setTimeout(() => {
+          hideLoading = true
+        }, 1000)
+      } else {
+        hideLoading = false
+      }
+    })
   })
 </script>
 
@@ -39,7 +47,9 @@
     </div>
     <div class="content">
       {#if activeView === 'lights'}
+        {#if $connected}
         <LightsView />
+        {/if}
       {:else if activeView === 'device'}
         <DeviceView />
       {:else if activeView === 'keys'}
@@ -50,7 +60,9 @@
     </div>
   </div>
   <!-- TODO: Remove from DOM when connected -->
+  {#if !hideLoading}
   <LoadingView hide={$connected} />
+  {/if}
 </main>
 <div class="drag"></div>
 
