@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"nuga/pkg/color"
+	"nuga/pkg/hid"
 	"nuga/pkg/keyboard"
 	"nuga/pkg/keyboard/effect"
 	"os"
@@ -32,7 +33,14 @@ func NewApp() *App {
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
+	hid.Init()
 	a.ctx = ctx
+}
+
+// startup is called when the app starts. The context is saved
+// so we can call the runtime methods
+func (a *App) shutdown(ctx context.Context) {
+	hid.Exit()
 }
 
 // GetVersion returns current executable version
