@@ -38,11 +38,13 @@ func (h *HardwareLights) GetEffectsBuffer() ([]byte, error) {
 	return raw[startOffset : startOffset+ParamsLength], nil
 }
 
-func (h *HardwareLights) GetEffects() (Effects, error) {
+func (h *HardwareLights) GetEffects() (*Effects, error) {
 	params, err := h.GetEffectsBuffer()
-	return ParseParams(
-		params,
-	), err
+	if err != nil {
+		return nil, err
+	}
+	effects := ParseParams(params)
+	return &effects, err
 }
 
 func (h *HardwareLights) GetRawColors() ([]byte, error) {
@@ -54,13 +56,16 @@ func (h *HardwareLights) GetRawColors() ([]byte, error) {
 	return colors, err
 }
 
-func (h *HardwareLights) GetColors() (ColorState, error) {
+func (h *HardwareLights) GetColors() (*ColorState, error) {
 	raw, err := h.GetRawColors()
+	if err != nil {
+		return nil, err
+	}
 	colorSubset := raw[7 : len(raw)-18]
 	return ParseColors(colorSubset), err
 }
 
-func (h *HardwareLights) SetColors(c ColorState) error {
+func (h *HardwareLights) SetColors(c *ColorState) error {
 	request := make([]byte, 0)
 	request = append(request, CmdSetColors...)
 	request = append(request, c.Bytes()...)
@@ -78,10 +83,10 @@ func (h *HardwareLights) ResetColors() error {
 		state[i][5] = color.Cyan
 		state[i][6] = color.White
 	}
-	return h.SetColors(state)
+	return h.SetColors(&state)
 }
 
-func (h *HardwareLights) SetEffects(p Effects) error {
+func (h *HardwareLights) SetEffects(p *Effects) error {
 	currentParams, err := h.GetEffectsBuffer()
 	if err != nil {
 		return err

@@ -46,7 +46,7 @@ func (s *ColorState) Get(effect uint8, index uint8) color.RGB {
 	return s[effect][index]
 }
 
-func ParseColors(data []byte) ColorState {
+func ParseColors(data []byte) *ColorState {
 	var state ColorState
 	var offset int
 	for effect := 0; effect < 48; effect++ {
@@ -59,6 +59,5 @@ func ParseColors(data []byte) ColorState {
 			}
 		}
 	}
-	log.Printf("Tail (%v-%v): %v", offset, len(data)-1, data[offset:])
-	return state
+	return &state
 }

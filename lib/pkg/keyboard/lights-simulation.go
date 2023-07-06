@@ -8,16 +8,17 @@ type SimulationTemplate struct {
 
 type SimulatedLights struct {
 	template SimulationTemplate
-	effects  Effects
-	colors   ColorState
+	effects  *Effects
+	colors   *ColorState
 }
 
 func (s *SimulatedLights) setupEffects() {
 	startOffset := 15
 	paramsSubset := s.template.Params[startOffset : startOffset+ParamsLength]
-	s.effects = ParseParams(
+	effects := ParseParams(
 		intToBytes(paramsSubset),
 	)
+	s.effects = &effects
 }
 
 func (s *SimulatedLights) setupColors() {
@@ -27,20 +28,20 @@ func (s *SimulatedLights) setupColors() {
 	)
 }
 
-func (s *SimulatedLights) GetEffects() (Effects, error) {
+func (s *SimulatedLights) GetEffects() (*Effects, error) {
 	return s.effects, nil
 }
 
-func (s *SimulatedLights) SetEffects(p Effects) error {
+func (s *SimulatedLights) SetEffects(p *Effects) error {
 	s.effects = p
 	return nil
 }
 
-func (s *SimulatedLights) GetColors() (ColorState, error) {
+func (s *SimulatedLights) GetColors() (*ColorState, error) {
 	return s.colors, nil
 }
 
-func (s *SimulatedLights) SetColors(c ColorState) error {
+func (s *SimulatedLights) SetColors(c *ColorState) error {
 	s.colors = c
 	return nil
 }
