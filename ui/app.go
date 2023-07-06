@@ -12,6 +12,11 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
+type LightState struct {
+	keyboard.Effects
+	BacklightParams *keyboard.EffectParams
+}
+
 // App struct
 type App struct {
 	ctx    context.Context
@@ -96,21 +101,17 @@ func (a *App) GetModes() *Modes {
 }
 
 // GetLightState returns current keyboard light state
-func (a *App) GetLightState() *keyboard.Effects {
-	state, err := a.lights.GetEffects()
+func (a *App) GetLightState() (LightState, error) {
+	var state LightState
+	effects, err := a.lights.GetEffects()
 	if err != nil {
-		return nil
+		return state, err
 	}
-	return &state
-}
-
-// GetBacklightParams returns current keyboard backlight params
-func (a *App) GetBacklightParams() *keyboard.EffectParams {
-	state, err := a.lights.GetEffects()
-	if err != nil {
-		return nil
-	}
-	return state.Backlight.CurrentParams()
+	state.Backlight = effects.Backlight
+	state.Halo = effects.Halo
+	state.Sidelight = effects.Sidelight
+	state.BacklightParams = effects.Backlight.CurrentParams()
+	return state, nil
 }
 
 // GetMacColors returns colors for mac modes

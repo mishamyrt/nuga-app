@@ -56,10 +56,9 @@ export async function loadModes () {
 
 export async function loadState () {
   const current = await GetLightState()
-  const backlightParams: EffectParams = await GetBacklightParams()
-  if (backlightParams) {
+  if (current.BacklightParams) {
     state.backlight.set(
-      parseEffect(current.Backlight.Mode.Code, backlightParams)
+      parseEffect(current.Backlight.Mode.Code, current.BacklightParams)
     )
   } else {
     state.backlight.set(defaultState)
