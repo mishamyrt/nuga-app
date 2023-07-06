@@ -12,7 +12,7 @@ body {
 }
 
 body, html {
-  overflow-x: hidden;
+  overflow: hidden;
   color-scheme: dark;
 }
 
