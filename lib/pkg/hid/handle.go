@@ -8,12 +8,15 @@ import (
 	"github.com/sstallion/go-hid"
 )
 
+const RequestRetries = 5
+
 // Handle represents backlight device handle
 type Handle struct {
 	Device *hid.Device
 	// Debug flag. If true, then debugging data will be written to stdout when functions are executed.
-	Debug bool
-	mutex sync.Mutex
+	Debug   bool
+	Retries int
+	mutex   sync.Mutex
 }
 
 // Send packet to the device.
@@ -61,13 +64,26 @@ func (h *Handle) Read(count int) ([]byte, error) {
 	return packet, nil
 }
 
-// Send packet to the device.
-func (h *Handle) Request(payload []byte, count int) ([]byte, error) {
+func (h *Handle) tryRequest(payload []byte, count int) ([]byte, error) {
 	err := h.Send(payload)
 	if err != nil {
 		return nil, err
 	}
 	return h.Read(count)
+}
+
+// Send packet to the device.
+func (h *Handle) Request(payload []byte, count int) ([]byte, error) {
+	var resp []byte
+	var err error
+	for i := 0; i < h.Retries; i++ {
+		log.Println("Read attempt", i+1)
+		resp, err = h.tryRequest(payload, count)
+		if len(resp) > 0 && resp[1] != 0 {
+			return resp, nil
+		}
+	}
+	return resp, err
 }
 
 // Close device handle.
@@ -100,5 +116,6 @@ func OpenHandle() (*Handle, error) {
 		return &h, err
 	}
 	h.Device = device
+	h.Retries = RequestRetries
 	return &h, nil
 }
