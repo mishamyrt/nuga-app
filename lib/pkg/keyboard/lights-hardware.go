@@ -22,10 +22,9 @@ func (h *HardwareLights) GetPath() (string, error) {
 }
 
 func (h *HardwareLights) GetRawEffects() ([]byte, error) {
-	var params []byte
 	response, err := h.Handle.Request(CmdGetParams, 270)
 	if err != nil {
-		return params, err
+		return []byte{}, err
 	}
 	return response, nil
 }
