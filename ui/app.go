@@ -168,22 +168,24 @@ func (a *App) SetBacklight(mode, color, brightness, speed uint8) error {
 		return nil
 	}
 	state.Backlight.Mode = effect.Backlight.Find(mode)
-	fea := state.Backlight.Mode.Features
-	if fea.Supports(effect.Speed) {
-		err = state.Backlight.SetSpeed(speed)
+	if mode != 0 {
+		fea := state.Backlight.Mode.Features
+		if fea.Supports(effect.Speed) {
+			err = state.Backlight.SetSpeed(speed)
+			if err != nil {
+				return err
+			}
+		}
+		if fea.Supports(effect.SpecificColor) {
+			err = state.Backlight.SetColor(color)
+			if err != nil {
+				return err
+			}
+		}
+		err = state.Backlight.SetBrightness(brightness)
 		if err != nil {
 			return err
 		}
-	}
-	if fea.Supports(effect.SpecificColor) {
-		err = state.Backlight.SetColor(color)
-		if err != nil {
-			return err
-		}
-	}
-	err = state.Backlight.SetBrightness(brightness)
-	if err != nil {
-		return err
 	}
 
 	return a.lights.SetEffects(state)
