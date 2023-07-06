@@ -48,7 +48,7 @@ func (h *Handle) Read(count int) ([]byte, error) {
 	buf[0] = 0x06
 	length, err := h.Device.GetFeatureReport(buf)
 	if err != nil {
-		return buf, err
+		return nil, err
 	}
 	packet := buf[1:]
 	if h.Debug {
@@ -79,11 +79,14 @@ func (h *Handle) Request(payload []byte, count int) ([]byte, error) {
 	for i := 0; i < h.Retries; i++ {
 		log.Println("Read attempt", i+1)
 		resp, err = h.tryRequest(payload, count)
-		if len(resp) > 0 && resp[1] != 0 {
+		if len(resp) > 0 && resp[0] != 0 {
 			return resp, nil
 		}
 	}
-	return resp, err
+	if err != nil {
+		return resp, err
+	}
+	return resp, ErrNotFound
 }
 
 // Close device handle.
