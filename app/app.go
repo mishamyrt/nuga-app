@@ -33,14 +33,20 @@ func NewApp() *App {
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
-	hid.Init()
+	err := hid.Init()
+	if err != nil {
+		log.Panicf("Error while initializing HID: %v", err)
+	}
 	a.ctx = ctx
 }
 
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
 func (a *App) shutdown(ctx context.Context) {
-	hid.Exit()
+	err := hid.Exit()
+	if err != nil {
+		log.Panicf("Error while closing HID: %v", err)
+	}
 }
 
 // GetVersion returns current executable version
