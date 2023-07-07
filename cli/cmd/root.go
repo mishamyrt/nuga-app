@@ -33,7 +33,7 @@ var rootCmd = &cobra.Command{
 		if err != nil {
 			log.Printf("Error while reading effects: %v", err)
 		}
-		describeEffects(&effects)
+		describeEffects(effects)
 	},
 }
 
