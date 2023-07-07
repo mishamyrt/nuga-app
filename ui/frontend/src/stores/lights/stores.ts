@@ -1,5 +1,5 @@
-import { atom, computed, map, type MapStore } from "nanostores"
-import type { Color, LightMode, LightState } from "./types"
+import { atom, computed, map, type MapStore, type ReadableAtom } from "nanostores"
+import type { Color, LightMode, LightState, PreviewColor } from "./types"
 import { defaultColors, defaultState } from "./defaults"
 
 export const state = {
@@ -20,23 +20,38 @@ export const backlightColors = atom<Color[][]>([])
 export const haloColors: Color[] = [...defaultColors]
 export const sidelightColors: Color[] = [...defaultColors]
 
+function supportColors (code: number, modeStore: ReadableAtom<LightMode[]>) {
+  const all = modeStore.get()
+  const mode = all.find(m => m.code === code)
+  return (mode?.features & 1) !== 0
+}
+
 export const color = {
-  backlight: computed<Color | undefined, MapStore<LightState>>(state.backlight, backlight => {
+  backlight: computed<PreviewColor, MapStore<LightState>>(state.backlight, backlight => {
     const all = backlightColors.get()
     if (all.length === 0 || !backlight.enabled) {
       return
     }
+    if (backlight.color === 7 || !supportColors(backlight.mode, modes.backlight)) {
+      return 'random'
+    }
     return all[backlight.mode][backlight.color]
   }),
-  halo: computed<Color | undefined, MapStore<LightState>>(state.halo, halo => {
+  halo: computed<PreviewColor, MapStore<LightState>>(state.halo, halo => {
     if (!halo.enabled) {
       return
     }
+    if (halo.color === 7 || !supportColors(halo.mode, modes.halo)) {
+      return 'random'
+    }
     return haloColors[halo.color]
   }),
-  sidelight: computed<Color | undefined, MapStore<LightState>>(state.sidelight, sidelight => {
+  sidelight: computed<PreviewColor, MapStore<LightState>>(state.sidelight, sidelight => {
     if (!sidelight.enabled) {
       return
+    }
+    if (sidelight.color === 7 || !supportColors(sidelight.mode, modes.sidelight)) {
+      return 'random'
     }
     return sidelightColors[sidelight.color]
   })

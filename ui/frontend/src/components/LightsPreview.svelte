@@ -1,21 +1,25 @@
 <script lang="ts">
   import type { Color } from "@stores/lights";
 
-  export let halo: Color = undefined
-  export let backlight: Color = undefined
-  export let sidelight: Color = undefined
+  export let halo: PreviewColor = undefined
+  export let backlight: PreviewColor = undefined
+  export let sidelight: PreviewColor = undefined
 
   const fallbackColor = 'rgb(85, 85, 85)'
 
-  $: haloRgb = Boolean(halo)
-    ? `rgb(${halo.R},${halo.G},${halo.B})`
-    : fallbackColor
-  $: backlightRgb = Boolean(backlight)
-    ? `rgb(${backlight.R},${backlight.G},${backlight.B})`
-    : fallbackColor
-  $: sidelightRgb = Boolean(sidelight)
-    ? `rgb(${sidelight.R},${sidelight.G},${sidelight.B})`
-    : fallbackColor
+  function getColor (c: PreviewColor, randomId: string): string {
+    if (!Boolean(c)) {
+      return fallbackColor
+    } else if (c === 'random') {
+      return `url(#${randomId})`
+    } else {
+      return `rgb(${c.R},${c.G},${c.B})`
+    }
+  }
+
+  $: haloRgb = getColor(halo, 'random-halo')
+  $: backlightRgb = getColor(backlight, 'random-backlight')
+  $: sidelightRgb = getColor(sidelight, 'random-sidelight')
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="262" height="100" fill="none" viewBox="0 0 262 100">
@@ -208,7 +212,7 @@
   <rect width="260" height="94" x="1" y="5" stroke="url(#aK)" stroke-width="2" rx="4" />
   <path class="keyboard-fill" stroke="{sidelightRgb}" stroke-linecap="round" stroke-opacity="1" stroke-width="2" d="M4 1h14" />
   <defs>
-    <linearGradient id="c" x1="2" x2="260" y1="52" y2="52" gradientUnits="userSpaceOnUse">
+    <linearGradient id="random-backlight" x1="2" x2="260" y1="52" y2="52" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FF6861" />
       <stop offset=".161" stop-color="#FEB445" />
       <stop offset=".323" stop-color="#FED046" />
@@ -216,6 +220,19 @@
       <stop offset=".651" stop-color="#77FF61" />
       <stop offset=".823" stop-color="#1CFFF1" />
       <stop offset="1" stop-color="#336CFF" />
+    </linearGradient>
+    <linearGradient id="random-halo" x1="2" x2="260" y1="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6861" />
+      <stop offset=".100" stop-color="#FEB445" />
+      <stop offset=".200" stop-color="#FED046" />
+      <stop offset=".300" stop-color="#FFF848" />
+      <stop offset=".400" stop-color="#77FF61" />
+      <stop offset=".500" stop-color="#1CFFF1" />
+      <stop offset="1" stop-color="#336CFF" />
+    </linearGradient>
+    <linearGradient id="random-sidelight" x1="2" x2="260" y1="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF848" />
+      <stop offset=".1" stop-color="#27C4FF" />
     </linearGradient>
     <linearGradient id="e" x1="11" x2="11" y1="8" y2="21" gradientUnits="userSpaceOnUse">
       <stop stop-color="#CFCFCF" stop-opacity=".12" />

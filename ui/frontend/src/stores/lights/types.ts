@@ -30,3 +30,7 @@ export interface Color {
   G: number
   B: number
 }
+
+type RandomColor = 'random'
+
+export type PreviewColor = Color | RandomColor | undefined
