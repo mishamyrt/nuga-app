@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from 'svelte'
   import type { SelectOption } from './types'
 
   export let value: string
@@ -8,7 +8,7 @@
 
   const dispatch = createEventDispatcher()
 
-  function handleChange(event: { currentTarget: HTMLSelectElement }) {
+  function handleChange (event: { currentTarget: HTMLSelectElement }): void {
     dispatch('change', event.currentTarget.value)
   }
 
@@ -72,7 +72,6 @@
       border-radius: 3px;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     }
-
 
     &:hover {
       background-color: #606060;

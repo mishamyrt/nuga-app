@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from 'svelte'
 
   export let type: 'brightness' | 'speed'
   export let disabled = false
@@ -7,7 +7,7 @@
 
   const dispatch = createEventDispatcher()
 
-  function handleChange(e: { currentTarget: HTMLInputElement }) {
+  function handleChange (e: { currentTarget: HTMLInputElement }): void {
     dispatch('change', parseInt(e.currentTarget.value, 10))
   }
 </script>
@@ -128,6 +128,3 @@
     }
   }
 </style>
-
-
-

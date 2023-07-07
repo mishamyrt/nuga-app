@@ -1,11 +1,11 @@
-import { atom, computed, map, type MapStore, type ReadableAtom } from "nanostores"
-import type { Color, LightMode, LightState, PreviewColor } from "./types"
-import { defaultColors, defaultState } from "./defaults"
+import { atom, computed, map, type MapStore, type ReadableAtom } from 'nanostores'
+import type { Color, LightMode, LightState, PreviewColor } from './types'
+import { defaultColors, defaultState } from './defaults'
 
 export const state = {
-  backlight: map<LightState>({...defaultState}),
-  sidelight: map<LightState>({...defaultState}),
-  halo: map<LightState>({...defaultState})
+  backlight: map<LightState>({ ...defaultState }),
+  sidelight: map<LightState>({ ...defaultState }),
+  halo: map<LightState>({ ...defaultState })
 }
 
 export const modes = {
@@ -20,10 +20,13 @@ export const backlightColors = atom<Color[][]>([])
 export const haloColors: Color[] = [...defaultColors]
 export const sidelightColors: Color[] = [...defaultColors]
 
-function supportColors (code: number, modeStore: ReadableAtom<LightMode[]>) {
+function supportColors (code: number, modeStore: ReadableAtom<LightMode[]>): boolean {
   const all = modeStore.get()
   const mode = all.find(m => m.code === code)
-  return (mode?.features & 1) !== 0
+  if (!mode) {
+    return false
+  }
+  return (mode.features & 1) !== 0
 }
 
 export const color = {

@@ -10,7 +10,7 @@ export default defineConfig({
       '@components': resolve(__dirname, './src/components'),
       '@stores': resolve(__dirname, './src/stores'),
       '@wailsjs/app': resolve(__dirname, './wailsjs/go/main/App.js')
-    },
+    }
   },
   plugins: [svelte()]
 })

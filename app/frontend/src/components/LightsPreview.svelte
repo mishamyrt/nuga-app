@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { Color } from "@stores/lights";
+  import type { PreviewColor } from '@stores/lights/types'
 
-  export let halo: PreviewColor = undefined
-  export let backlight: PreviewColor = undefined
-  export let sidelight: PreviewColor = undefined
+  export let halo: PreviewColor
+  export let backlight: PreviewColor
+  export let sidelight: PreviewColor
 
   const fallbackColor = 'rgb(85, 85, 85)'
 
   function getColor (c: PreviewColor, randomId: string): string {
-    if (!Boolean(c)) {
+    if (!c) {
       return fallbackColor
     } else if (c === 'random') {
       return `url(#${randomId})`

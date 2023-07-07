@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from "svelte";
+  import { createEventDispatcher } from 'svelte'
 
   export let checked: boolean
 
   const dispatch = createEventDispatcher()
 
-  function handleClick() {
+  function handleClick (): void {
     checked = !checked
     dispatch('click', checked)
   }
@@ -14,7 +14,6 @@
 <label class:checked={checked}>
   <input type="checkbox" {checked} on:click={handleClick} />
 </label>
-
 
 <style lang="scss">
   input {

@@ -10,7 +10,7 @@ export const osMode = atom<OSMode>('mac')
 export const version = atom<string>('dev')
 export const individualSettings = atom<boolean>(false)
 
-export async function setMode() {
+export async function setMode (): Promise<void> {
   if (individualSettings.get()) {
     await SetMode(0)
     return
@@ -19,7 +19,7 @@ export async function setMode() {
   await SetMode(mode)
 }
 
-export async function loadVersion() {
+export async function loadVersion (): Promise<void> {
   const appVersion = await GetVersion()
   version.set(appVersion)
 }

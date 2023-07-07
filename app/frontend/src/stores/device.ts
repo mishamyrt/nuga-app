@@ -10,12 +10,12 @@ interface ConnectedKeyboard {
 
 export const device = atom<ConnectedKeyboard>({
   name: '',
-  path: '',
+  path: ''
 })
 
 let simulation = false
 
-export async function startSimulation() {
+export async function startSimulation (): Promise<void> {
   simulation = true
 }
 

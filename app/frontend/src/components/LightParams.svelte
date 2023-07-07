@@ -1,39 +1,39 @@
 <script lang="ts">
-  import type { Color, LightMode, LightState } from "@stores/lights"
-  import Switch from "./Switch.svelte";
-  import type { MapStore, ReadableAtom } from "nanostores"
-  import ColorSelector from "./ColorSelector.svelte";
-  import Range from "./Range.svelte";
-  import { Select, type SelectOption } from "./Select";
+  import type { Color, LightMode, LightState } from '@stores/lights'
+  import Switch from './Switch.svelte'
+  import type { MapStore, ReadableAtom } from 'nanostores'
+  import ColorSelector from './ColorSelector.svelte'
+  import Range from './Range.svelte'
+  import { Select, type SelectOption } from './Select'
 
   export let title: string = ''
   export let state: MapStore<LightState>
   export let modes: ReadableAtom<LightMode[]>
-  export let write: () => Promise<void>
-  export let colors: readonly Color[] = undefined
+  export let write: () => void
+  export let colors: readonly Color[] | undefined = undefined
   export let canChangeColor = false
 
-  function handleEnabled (event: CustomEvent<boolean>) {
+  function handleEnabled (event: CustomEvent<boolean>): void {
     state.setKey('enabled', event.detail)
     write()
   }
 
-  function handleMode (event: CustomEvent<string>) {
+  function handleMode (event: CustomEvent<string>): void {
     state.setKey('mode', parseInt(event.detail, 10))
     write()
   }
 
-  function handleColor (event: CustomEvent<number>) {
+  function handleColor (event: CustomEvent<number>): void {
     state.setKey('color', event.detail)
     write()
   }
 
-  function handleBrightness (event: CustomEvent<number>) {
+  function handleBrightness (event: CustomEvent<number>): void {
     state.setKey('brightness', event.detail)
     write()
   }
 
-  function handleSpeed (event: CustomEvent<number>) {
+  function handleSpeed (event: CustomEvent<number>): void {
     state.setKey('speed', event.detail)
     write()
   }
@@ -46,7 +46,7 @@
   }
   $: modeOptions = $modes.map<SelectOption>(m => ({
     value: m.code.toString(),
-    title: m.name,
+    title: m.name
   }))
 </script>
 

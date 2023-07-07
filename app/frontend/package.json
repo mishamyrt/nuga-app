@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "lint:scripts": "pnpm eslint 'src/**/*.svelte' 'src/**/*.ts'"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
@@ -16,6 +17,10 @@
     "@typescript-eslint/parser": "^5.60.1",
     "eslint": "^8.44.0",
     "eslint-config-standard": "^17.1.0",
+    "eslint-config-standard-with-typescript": "^36.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-svelte": "^2.32.2",
     "svelte-check": "^3.4.5",
     "svelte-preprocess": "^5.0.4",
@@ -25,7 +30,7 @@
   },
   "dependencies": {
     "nanostores": "^0.9.2",
-    "svelte-awesome-color-picker": "^2.4.6",
-    "svelte": "^4.0.5"
+    "svelte": "^4.0.5",
+    "svelte-awesome-color-picker": "^2.4.6"
   }
 }

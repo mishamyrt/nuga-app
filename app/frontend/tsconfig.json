@@ -8,13 +8,15 @@
     "baseUrl": ".",
     "allowJs": true,
     "checkJs": true,
+    "strictNullChecks": true,
     "isolatedModules": true,
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@stores/*": ["src/stores/*"],
       "@wailsjs/app": ["wailsjs/go/main/*"]
-    }
+    },
+    "outDir": "dist"
   },
   "include": [
     "src/**/*.d.ts",

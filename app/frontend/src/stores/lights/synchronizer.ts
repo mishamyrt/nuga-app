@@ -1,23 +1,23 @@
-import { connected } from "@stores/app"
-import { sleep } from "../../utils/timing"
-import { loadState } from "./actions"
-import { Disconnect } from "../../../wailsjs/go/main/App"
+import { connected } from '@stores/app'
+import { sleep } from '../../utils/timing'
+import { loadState } from './actions'
+import { Disconnect } from '../../../wailsjs/go/main/App'
 
 type AsyncTask = () => Promise<void>
 
 export class UpdateSynchronizer {
-  private tasks: AsyncTask[] = []
+  private readonly tasks: AsyncTask[] = []
   private active = false
 
   constructor (
     private readonly interval: number
-  ){}
+  ) {}
 
-  public addTask(t: AsyncTask) {
+  public addTask (t: AsyncTask): void {
     this.tasks.push(t)
   }
 
-  public start() {
+  public start (): void {
     if (this.active) {
       return
     }
@@ -26,7 +26,7 @@ export class UpdateSynchronizer {
       .then(() => {})
   }
 
-  private async sleepTight() {
+  private async sleepTight (): Promise<void> {
     let attempts = this.interval / 10
     while (attempts > 0) {
       if (this.tasks.length > 0) {
@@ -37,11 +37,13 @@ export class UpdateSynchronizer {
     }
   }
 
-  private async loop() {
+  private async loop (): Promise<void> {
     while (this.active) {
       if (this.tasks.length > 0) {
         const task = this.tasks.shift()
-        await task()
+        if (task) {
+          await task()
+        }
         continue
       }
       try {
@@ -54,7 +56,7 @@ export class UpdateSynchronizer {
           this.active = false
         } else {
           // TODO: Show error to UI
-          console.error('Backend error: ' + e)
+          console.error('Backend error', e)
         }
         return
       }

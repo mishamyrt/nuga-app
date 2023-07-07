@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { defaultColors, type Color, changingColor } from "@stores/lights";
-  import { createEventDispatcher } from "svelte";
+  import { defaultColors, type Color, changingColor } from '@stores/lights'
+  import { createEventDispatcher } from 'svelte'
 
   export let disabled = false
   export let random = false
@@ -10,11 +10,11 @@
 
   const dispatch = createEventDispatcher()
 
-  function handleClick(i: number) {
+  function handleClick (i: number): void {
     dispatch('change', i)
   }
 
-  function handleEditColor(e: MouseEvent, i: number) {
+  function handleEditColor (e: MouseEvent, i: number): void {
     e.preventDefault()
     if (canChange) {
       changingColor.set(i)

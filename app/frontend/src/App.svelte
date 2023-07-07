@@ -1,14 +1,11 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
-  import LoadingView from './views/LoadingView.svelte';
-  import { connect } from '@stores/device';
-  import { version, loadVersion } from '@stores/app';
-  import { sleep } from './utils/timing';
-  import SidebarItem from './components/SidebarItem.svelte';
-  import { view, connected, type SettingsView } from './stores/app';
-  import LightsView from './views/LightsView.svelte';
-  import DeviceView from './views/DeviceView.svelte';
-  import { loadState, sync } from '@stores/lights/actions';
+  import { onDestroy, onMount } from 'svelte'
+  import LoadingView from './views/LoadingView.svelte'
+  import { version } from '@stores/app'
+  import SidebarItem from './components/SidebarItem.svelte'
+  import { view, connected } from './stores/app'
+  import LightsView from './views/LightsView.svelte'
+  import DeviceView from './views/DeviceView.svelte'
 
   $: activeView = $view
   $: appVersion = $version
@@ -27,6 +24,10 @@
         hideLoading = false
       }
     })
+  })
+
+  onDestroy(() => {
+    unsubscribeConnected()
   })
 </script>
 

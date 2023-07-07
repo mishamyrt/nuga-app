@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-  import type { SelectOption } from "./Select";
+  import { createEventDispatcher } from 'svelte'
+  import type { SelectOption } from './Select'
 
   export let value: string = ''
   export let options: SelectOption[] = []
   export let disabled: boolean = false
   const dispatch = createEventDispatcher()
 
-  function handleChange (e: { currentTarget: HTMLInputElement }) {
+  function handleChange (e: { currentTarget: HTMLInputElement }): void {
     dispatch('change', e.currentTarget.value)
   }
 

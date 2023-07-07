@@ -1,21 +1,21 @@
 <script lang="ts">
-import RadioButtons from "@components/RadioButtons.svelte";
-import type { SelectOption } from "@components/Select";
-import Switch from "@components/Switch.svelte";
-import { individualSettings, osMode, setMode, type OSMode } from "@stores/app";
-import { device } from "@stores/device";
+import RadioButtons from '@components/RadioButtons.svelte'
+import type { SelectOption } from '@components/Select'
+import Switch from '@components/Switch.svelte'
+import { individualSettings, osMode, setMode, type OSMode } from '@stores/app'
+import { device } from '@stores/device'
 
 const osOptions: SelectOption[] = [
   { title: 'mac', value: 'mac' },
-  { title: 'win', value: 'win' },
+  { title: 'win', value: 'win' }
 ]
 
-function handleModeChange(e: CustomEvent<string>) {
+function handleModeChange (e: CustomEvent<string>): void {
   osMode.set(e.detail as OSMode)
   setMode()
 }
 
-function handleSettingsModeChange(e: CustomEvent<boolean>) {
+function handleSettingsModeChange (e: CustomEvent<boolean>): void {
   individualSettings.set(e.detail)
   setMode()
 }

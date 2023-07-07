@@ -14,7 +14,7 @@ export let title: string
 export let target: SettingsView
 export let disabled = false
 
-function handleClick() {
+function handleClick (): void {
   view.set(target)
 }
 </script>
