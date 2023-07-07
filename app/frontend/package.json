@@ -11,7 +11,8 @@
     "lint-fix:scripts": "pnpm eslint --fix 'src/**/*.{svelte,ts}'",
     "lint-fix:styles": "pnpm stylelint --fix 'src/**/*.{svelte,ts}'",
     "lint:scripts": "pnpm eslint 'src/**/*.{svelte,ts}'",
-    "lint:styles": "pnpm stylelint 'src/**/*.{svelte,css,scss}'"
+    "lint:styles": "pnpm stylelint 'src/**/*.{svelte,css,scss}'",
+    "lint": "pnpm run '/^lint:.*/'"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
