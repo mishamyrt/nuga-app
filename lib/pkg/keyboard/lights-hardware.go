@@ -69,7 +69,7 @@ func (h *HardwareLights) SetColors(c *ColorState) error {
 	request := make([]byte, 0)
 	request = append(request, CmdSetColors...)
 	request = append(request, c.Bytes()...)
-	return h.Handle.Send(request)
+	return h.Handle.SendWithRetries(request)
 }
 
 func (h *HardwareLights) ResetColors() error {
@@ -97,7 +97,7 @@ func (h *HardwareLights) SetEffects(p *Effects) error {
 	paramsRequest = append(paramsRequest, currentParams...)
 	paramsRequest = append(paramsRequest, make([]byte, 770)...)
 	// return nil
-	return h.Handle.Send(paramsRequest)
+	return h.Handle.SendWithRetries(paramsRequest)
 }
 
 func OpenHardware() (HardwareLights, error) {

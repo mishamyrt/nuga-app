@@ -19,6 +19,23 @@ type Handle struct {
 	mutex   sync.Mutex
 }
 
+func (h *Handle) SendWithRetries(payload []byte) error {
+	var err error
+	for i := 0; i < h.Retries; i++ {
+		if h.Debug {
+			log.Println("Send attempt", i+1)
+		}
+		err = h.Send(payload)
+		if err == nil {
+			return nil
+		}
+	}
+	if err != nil {
+		return err
+	}
+	return ErrNotFound
+}
+
 // Send packet to the device.
 func (h *Handle) Send(payload []byte) error {
 	h.mutex.Lock()
