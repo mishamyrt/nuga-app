@@ -19,9 +19,10 @@ var AppVersion = "dev"
 func main() {
 	app := NewApp()
 	err := wails.Run(&options.App{
-		Title:  "gui",
-		Width:  650,
-		Height: 650,
+		Title:    "gui",
+		Width:    700,
+		MinWidth: 650,
+		Height:   700,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
@@ -31,7 +32,7 @@ func main() {
 			Appearance:           mac.NSAppearanceNameDarkAqua,
 			TitleBar:             mac.TitleBarHiddenInset(),
 		},
-		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
+		BackgroundColour: &options.RGBA{R: 0, G: 0, B: 0, A: 0},
 		OnStartup:        app.startup,
 		OnShutdown:       app.shutdown,
 		Bind: []interface{}{
