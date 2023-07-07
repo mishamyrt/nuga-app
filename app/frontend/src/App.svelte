@@ -81,7 +81,7 @@
 
   .content {
     background-color: #282828;
-    border-left: 1px solid rgba(1, 1, 1, 0.4117647059);
+    border-left: 1px solid rgb(1 1 1 / 41.2%);
   }
 
   .sidebar {
@@ -97,7 +97,7 @@
 
   .version {
     padding: 8px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     display: block;
     font-weight: 500;
     font-size: 13px;
@@ -110,6 +110,7 @@
 
   .drag {
     --wails-draggable:drag;
+
     height: 40px;
     position: fixed;
     top: 0;
@@ -119,7 +120,7 @@
 
   h1 {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: bold;
     opacity: 0.2;
     text-align: left;
     padding: 0 8px;
