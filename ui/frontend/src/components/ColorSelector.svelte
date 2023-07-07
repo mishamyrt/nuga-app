@@ -2,6 +2,7 @@
   import { defaultColors, type Color, changingColor } from "@stores/lights";
   import { createEventDispatcher } from "svelte";
 
+  export let disabled = false
   export let random = false
   export let selected = 0
   export let colors: readonly Color[] = defaultColors
@@ -21,7 +22,7 @@
   }
 </script>
 
-<div class="color-selector">
+<div class="color-selector" class:disabled>
   {#if random}
     <div
       on:click={() => handleClick(7)}
@@ -42,11 +43,6 @@
 </div>
 
 <style lang="scss">
-  .color-selector {
-    display: flex;
-    position: relative;
-    gap: 10px;
-  }
   .color {
     width: 16px;
     height: 16px;
@@ -85,6 +81,20 @@
       left: 5px;
       top: 5px;
       background: white;
+    }
+  }
+
+  .color-selector {
+    display: flex;
+    position: relative;
+    gap: 10px;
+
+    &.disabled {
+      .color {
+        background-color: #707070;
+        opacity: 0.5;
+        pointer-events: none;
+      }
     }
   }
 </style>

@@ -69,16 +69,17 @@
         options={modeOptions}
         value={$state.mode.toString()} />
     </div>
-    <div class="form-row" class:hidden={!$state.enabled} class:disabled={!supports.color}>
+    <div class="form-row">
       <span>Color</span>
       <ColorSelector
         {colors}
+        disabled={!$state.enabled || !supports.color}
         random={supports.random}
         selected={$state.color}
         canChange={canChangeColor}
         on:change={handleColor} />
     </div>
-    <div class="form-row" class:hidden={!$state.enabled}>
+    <div class="form-row">
       <span>Brightness</span>
       <Range
         type="brightness"
@@ -86,7 +87,7 @@
         value={$state.brightness}
         on:change={handleBrightness} />
     </div>
-    <div class="form-row" class:hidden={!$state.enabled}>
+    <div class="form-row">
       <span>Speed</span>
       <Range
         type="speed"
