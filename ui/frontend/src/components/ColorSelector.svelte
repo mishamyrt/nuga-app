@@ -55,7 +55,7 @@
     background-color: var(--color);
 
     &.random {
-      background: conic-gradient(from 125deg at 50% 50%, #FF6861 0deg, #FEB445 63.74999821186066deg, #FFF848 127.49999642372131deg, #3BFF1C 174.375deg, #1CFFF1 228.75000715255737deg, #1C5BFF 273.7500071525574deg, #FF3AE0 313.1250071525574deg);
+      background: conic-gradient(from 125deg at 50% 50%, #E9393E 0deg, #FF9E0C 56.25deg, #ADE403 110.62499642372131deg, #27C4FF 163.125deg, #5055DE 213.75deg, #913ED3 258.75deg, #E54895 305.6249928474426deg, #E73A46 360deg);
 
       &::before {
         display: none;
