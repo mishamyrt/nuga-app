@@ -26,6 +26,7 @@
     "vite.config.ts",
     "svelte.config.js",
     ".eslintrc.cjs",
+    ".stylelintrc.cjs"
   ],
   "references": [
     {
