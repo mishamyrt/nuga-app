@@ -20,7 +20,10 @@
     "src/**/*.d.ts",
     "src/**/*.ts",
     "src/**/*.js",
-    "src/**/*.svelte"
+    "src/**/*.svelte",
+    "vite.config.ts",
+    "svelte.config.js",
+    ".eslintrc.cjs",
   ],
   "references": [
     {
