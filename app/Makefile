@@ -9,7 +9,7 @@ LD_FLAGS = -X 'main.AppVersion=v$(VERSION)' -s -w
 .PHONY: build
 build:
 	make clean
-	wails build -platform "$(PLATFORMS)" -trimpath -ldflags "$(LD_FLAGS)"
+	wails build -clean -platform "$(PLATFORMS)" -trimpath -ldflags "$(LD_FLAGS)"
 
 .PHONY: release
 release:
@@ -32,8 +32,3 @@ clean:
 .PHONY: dev
 dev:
 	wails dev -loglevel Debug -v 2
-
-.PHONY: lint
-lint:
-	golangci-lint run
-	revive -config ../revive.toml  ./...
