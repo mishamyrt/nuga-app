@@ -94,7 +94,9 @@ func (h *Handle) Request(payload []byte, count int) ([]byte, error) {
 	var resp []byte
 	var err error
 	for i := 0; i < h.Retries; i++ {
-		log.Println("Read attempt", i+1)
+		if h.Debug {
+			log.Println("Read attempt", i+1)
+		}
 		resp, err = h.tryRequest(payload, count)
 		if len(resp) > 0 && resp[0] != 0 {
 			return resp, nil
