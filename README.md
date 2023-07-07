@@ -4,9 +4,8 @@ This mono repository contains packages for managing NuPhy® keyboards.
 
 ## Packages
 
-* [lib](./lib/) – Golang library. Everything else is based on it.
-* [cli](./cli/) – Command line tool, to control the status of the keyboard.
-* [ui](./ui/) – Graphic interface for managing the status of the keyboard.
+* [lib](./lib/) – Golang library.
+* [app](./app/) – Graphic interface for managing the state of the keyboard.
 
 ## Protocol
 
