@@ -6,7 +6,6 @@
     modes,
     color,
     setBacklight, setHalo,setSidelight, backlightColors, changingColor
-
   } from "@stores/lights";
   import LightParams from "../components/LightParams.svelte";
   import ColorPickerModal from "@components/ColorPickerModal.svelte";
