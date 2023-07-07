@@ -36,8 +36,9 @@
       height: 15px;
       display: block;
       border-radius: 30px;
-      border: 0.5px solid rgba(255, 255, 255, 0.17);
+      border: 0.5px solid rgb(255 255 255 / 17%);
     }
+
     &::after {
       top: 1px;
       left: 1px;

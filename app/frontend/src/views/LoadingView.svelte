@@ -40,6 +40,19 @@
 </div>
 
 <style lang="scss">
+  .help {
+    opacity: 0;
+    transition: opacity .2s ease-out;
+
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  .spinner-container {
+    transition: opacity .2s ease-out;
+  }
+
   .loading {
     z-index: 99999;
     min-height: 100vh;
@@ -63,7 +76,7 @@
 
     &.ready {
       transform: translateX(211px);
-      border-left-color: rgba(1, 1, 1, 0.4117647059);
+      border-left-color: rgb(1 1 1 / 41.2%);
       opacity: 0;
       pointer-events: none;
 
@@ -72,15 +85,6 @@
       .spinner-container {
         opacity: 0;
       }
-    }
-  }
-
-  .help {
-    opacity: 0;
-    transition: opacity .2s ease-out;
-
-    &.show {
-      opacity: 1;
     }
   }
 
@@ -93,10 +97,6 @@
     opacity: 0.5;
     font-size: 13px;
   }
-
-.spinner-container {
-  transition: opacity .2s ease-out;
-}
 
 .spinner {
   opacity: 0.7;

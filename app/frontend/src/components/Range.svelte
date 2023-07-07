@@ -40,12 +40,13 @@
 
   .range {
     position: relative;
+
     input {
-      -webkit-appearance: none;
+      appearance: none;
       background: transparent;
 
       &::-webkit-slider-runnable-track {
-        background: rgba(211, 211, 211, 0.20);
+        background: rgb(211 211 211 / 20%);
         height: 4px;
       }
 
@@ -58,7 +59,7 @@
         height: 20px;
         position: relative;
         top: -8px;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 1px rgb(0 0 0 / 30%);
       }
 
       &::-webkit-slider-thumb:active {
@@ -112,19 +113,21 @@
 
   .brightness {
     .min {
-      background-image: url(../assets/images/sun.min.fill.png);
+      background-image: url("../assets/images/sun.min.fill.png");
     }
+
     .max {
-      background-image: url(../assets/images/sun.max.fill.png);
+      background-image: url("../assets/images/sun.max.fill.png");
     }
   }
 
   .speed {
     .min {
-      background-image: url(../assets/images/tortoise.fill.png);
+      background-image: url("../assets/images/tortoise.fill.png");
     }
+
     .max {
-      background-image: url(../assets/images/hare.fill.png);
+      background-image: url("../assets/images/hare.fill.png");
     }
   }
 </style>

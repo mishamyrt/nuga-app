@@ -51,7 +51,17 @@
     background-color: var(--color);
 
     &.random {
-      background: conic-gradient(from 125deg at 50% 50%, #E9393E 0deg, #FF9E0C 56.25deg, #ADE403 110.62499642372131deg, #27C4FF 163.125deg, #5055DE 213.75deg, #913ED3 258.75deg, #E54895 305.6249928474426deg, #E73A46 360deg);
+      background: conic-gradient(
+        from 125deg at 50% 50%,
+        #E9393E 0deg,
+        #FF9E0C 56.25deg,
+        #ADE403 110.6250deg,
+        #27C4FF 163.125deg,
+        #5055DE 213.75deg,
+        #913ED3 258.75deg,
+        #E54895 305.6250deg,
+        #E73A46 360deg
+      );
 
       &::before {
         display: none;
@@ -68,7 +78,7 @@
       width: 100%;
       border-radius: 50%;
       height: 100%;
-      background: linear-gradient(180deg, rgba(156, 156, 156, 0.39) 0%, rgba(99, 99, 99, 0.37) 100%);
+      background: linear-gradient(180deg, rgb(156 156 156 / 39%) 0%, rgb(99 99 99 / 37%) 100%);
     }
 
     &::before {

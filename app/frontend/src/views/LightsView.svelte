@@ -58,7 +58,7 @@
 
 <style lang="scss">
   .heading {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgb(255 255 255 / 8%);
     background: linear-gradient(180deg, #282828 0%, #323232 100%);
   }
 

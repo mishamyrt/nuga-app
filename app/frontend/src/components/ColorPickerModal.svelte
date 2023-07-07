@@ -78,7 +78,7 @@ async function applyColor (): Promise<void> {
 
 <style lang="scss">
   .modal-wrapper {
-    background-color: rgba(36, 36, 36, 0.85);
+    background-color: rgb(36 36 36 / 85%);
     position: fixed;
     top: 0;
     left: 0;
@@ -127,7 +127,7 @@ async function applyColor (): Promise<void> {
     margin-top: 12px;
     padding: 13px 18px;
     gap: 8px;
-    border-top: 1px solid rgba(41, 41, 41, 1);
+    border-top: 1px solid rgb(41 41 41 / 100%);
   }
 
   button {
@@ -137,7 +137,7 @@ async function applyColor (): Promise<void> {
     border-radius: 5px;
     background: #565656;
     width: 64px;
-    border-top: 0.5px solid rgba(255, 255, 255, 0.22);
+    border-top: 0.5px solid rgb(255 255 255 / 22%);
 
     &:active {
       background: #767676;
@@ -162,6 +162,7 @@ async function applyColor (): Promise<void> {
     padding: 3px;
   }
 
+  /* stylelint-disable-next-line */
   :global(.wrapper.isOpen) {
     --picker-width: 210px;
     --picker-height: 210px;
