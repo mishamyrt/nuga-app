@@ -1,4 +1,8 @@
+// Package hid contains utils to USB HID keyboard.
 package hid
 
-const ReportIdRead = 5
-const ReportIdWrite = 6
+// ReportIDRead is HID report ID for writing data.
+const ReportIDRead = 5
+
+// ReportIDWrite is HID report ID for reading data.
+const ReportIDWrite = 6

@@ -8,9 +8,10 @@ import (
 	"github.com/sstallion/go-hid"
 )
 
+// RequestRetries is the number of attempts that will be made on a request.
 const RequestRetries = 5
 
-// Handle represents backlight device handle
+// Handle represents backlight device handle.
 type Handle struct {
 	Device *hid.Device
 	// Debug flag. If true, then debugging data will be written to stdout when functions are executed.
@@ -19,6 +20,7 @@ type Handle struct {
 	mutex   sync.Mutex
 }
 
+// SendWithRetries sends the request and resends it if the request fails.
 func (h *Handle) SendWithRetries(payload []byte) error {
 	var err error
 	for i := 0; i < h.Retries; i++ {
@@ -81,15 +83,7 @@ func (h *Handle) Read(count int) ([]byte, error) {
 	return packet, nil
 }
 
-func (h *Handle) tryRequest(payload []byte, count int) ([]byte, error) {
-	err := h.Send(payload)
-	if err != nil {
-		return nil, err
-	}
-	return h.Read(count)
-}
-
-// Send packet to the device.
+// Request sends a request to the device.
 func (h *Handle) Request(payload []byte, count int) ([]byte, error) {
 	var resp []byte
 	var err error
@@ -114,21 +108,31 @@ func (h *Handle) Close() error {
 	return h.Device.Close()
 }
 
-// Waiting for data to be written. According to the documentation, it takes 10 ms to do this
+func (h *Handle) tryRequest(payload []byte, count int) ([]byte, error) {
+	err := h.Send(payload)
+	if err != nil {
+		return nil, err
+	}
+	return h.Read(count)
+}
+
 func (h *Handle) waitSync() {
 	time.Sleep(time.Millisecond * 50)
 }
 
+// OpenHandle opens a connection to the device
 func OpenHandle() (*Handle, error) {
 	var h Handle
 	var path string
-	hid.Enumerate(0x05AC, 0x024F, func(info *hid.DeviceInfo) error {
+	err := hid.Enumerate(0x05AC, 0x024F, func(info *hid.DeviceInfo) error {
 		if info.Usage == 1 && info.UsagePage == 0xFF00 {
 			path = info.Path
 		}
 		return nil
 	})
-
+	if err != nil {
+		return nil, err
+	}
 	if len(path) == 0 {
 		return &h, ErrNotFound
 	}
