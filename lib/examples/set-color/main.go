@@ -1,3 +1,4 @@
+// Package contains an example of how to use the nuga library
 package main
 
 import (
@@ -7,7 +8,9 @@ import (
 )
 
 func main() {
-	targetColor := color.New(0, 255, 255)
+	targetColor := color.RGB{
+		R: 0, G: 255, B: 255,
+	}
 	k, _ := keyboard.Open()
 	c, _ := k.GetColors()
 	var input string
