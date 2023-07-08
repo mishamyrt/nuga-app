@@ -1,9 +1,11 @@
+// Package color contains utils to work with colors
 package color
 
 import (
 	"fmt"
 )
 
+// ParseHex converts a string with HEX colour into an RGB structure
 func ParseHex(s string) (c RGB, err error) {
 	switch len(s) {
 	case 7:
