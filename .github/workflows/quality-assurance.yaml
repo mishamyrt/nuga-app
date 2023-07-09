@@ -1,0 +1,22 @@
+name: Quality assurance
+
+on: [push, workflow_dispatch]
+
+jobs:
+  lint-lib:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.20
+      - uses: actions/checkout@v3
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          working-directory: ./lib
+      - name: revive
+        uses: docker://morphy/revive-action:v2
+        with:
+          config: revive.toml
+          path: "./lib/..."
