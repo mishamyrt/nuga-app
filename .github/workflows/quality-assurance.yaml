@@ -3,7 +3,7 @@ name: Quality assurance
 on: [push, workflow_dispatch]
 
 jobs:
-  lint-lib:
+  lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
@@ -15,14 +15,35 @@ jobs:
           go-version: '1.20'
       - name: Install C/C++ deps
         run: sudo apt install libhidapi-dev libudev-dev -y
+      - name: Install frontend deps
+        run: |
+          cd app/frontend
+          pnpm install --frozen-lockfile
       - name: Sync workspace
         run: go work sync
-      - name: golangci-lint
+      - name: golangci-lint lib
         uses: golangci/golangci-lint-action@v3
         with:
           working-directory: ./lib
-      - name: revive
+      - name: revive lib
         uses: docker://morphy/revive-action:v2
         with:
           config: revive.toml
           path: "./lib/..."
+      - name: golangci-lint app
+        uses: golangci/golangci-lint-action@v3
+        with:
+          working-directory: ./app
+      - name: revive app
+        uses: docker://morphy/revive-action:v2
+        with:
+          config: revive.toml
+          path: "./app/..."
+      - name: ESLint
+        run: |
+          cd app/frontend
+          pnpm run lint:scripts
+      - name: stylelint
+        run: |
+          cd app/frontend
+          pnpm run lint:styles
