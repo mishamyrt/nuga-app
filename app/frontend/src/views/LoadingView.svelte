@@ -54,7 +54,7 @@
   }
 
   .loading {
-    z-index: 99999;
+    z-index: 999;
     min-height: 100vh;
     display: flex;
     align-items: center;
