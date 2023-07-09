@@ -13,8 +13,8 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.20'
-      - name: Install libhid
-        run: sudo apt install libhidapi-dev -y
+      - name: Install C/C++ deps
+        run: sudo apt install libhidapi-dev libudev-dev -y
       - name: Sync workspace
         run: go work sync
       - name: golangci-lint
