@@ -35,6 +35,10 @@ jobs:
         with:
           config: revive.toml
           path: "./lib/..."
+      - name: Build frontend
+        run: |
+          cd app/frontend
+          pnpm run build
       - name: golangci-lint app
         uses: golangci/golangci-lint-action@v3
         with:
