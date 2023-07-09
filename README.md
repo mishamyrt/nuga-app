@@ -1,4 +1,4 @@
-# Nuga
+# Nuga [![Quality assurance](https://github.com/mishamyrt/Nuga/actions/workflows/quality-assurance.yaml/badge.svg)](https://github.com/mishamyrt/Nuga/actions/workflows/quality-assurance.yaml)
 
 This mono repository contains packages for managing NuPhy® keyboards.
 
