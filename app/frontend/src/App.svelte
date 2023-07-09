@@ -60,7 +60,6 @@
       {/if}
     </div>
   </div>
-  <!-- TODO: Remove from DOM when connected -->
   {#if !hideLoading}
   <LoadingView hide={$connected} />
   {/if}
