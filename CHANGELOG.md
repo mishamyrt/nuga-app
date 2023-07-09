@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ## Fixed
 
 * Window drag on loading state
+* Add missing window border
 
 ## [1.0.0-beta1]
 

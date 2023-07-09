@@ -65,6 +65,7 @@
   {/if}
 </main>
 <div class="drag"></div>
+<div class="border"></div>
 
 <style>
   .app {
@@ -81,6 +82,18 @@
   .content {
     background-color: var(--color-background-main);
     border-left: 1px solid rgb(1 1 1 / 41.2%);
+  }
+
+  .border {
+    position: fixed;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 20%);
+    border-radius: 11px;
   }
 
   .sidebar {
