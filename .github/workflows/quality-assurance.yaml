@@ -22,6 +22,7 @@ jobs:
         run: |
           cd app/frontend
           pnpm install --frozen-lockfile
+          cd ../..
       - name: Sync workspace
         run: go work sync
       - name: golangci-lint lib
