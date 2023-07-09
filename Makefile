@@ -14,7 +14,7 @@ define pack_release
 	mkdir -p "$(DIST_PATH)/$(1)"
 	mv "$(BUILD_PATH)/Nuga-$(1).app" "$(DIST_PATH)/$(1)/Nuga.app"
 	cd "$(DIST_PATH)/$(1)"; zip -9 -y -r -q Nuga.zip Nuga.app
-	mv "$(DIST_PATH)/$(1)/Nuga.zip" "$(DIST_PATH)/Nuga-$(1).zip"
+	mv "$(DIST_PATH)/$(1)/Nuga.zip" "$(DIST_PATH)/Nuga-$(VERSION)-$(1).zip"
 	rm -rf "$(DIST_PATH)/$(1)"
 endef
 
