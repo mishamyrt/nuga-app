@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning][].
 
 * Window drag on loading state
 * Add missing window border
+* Unfocused window state
 
 ## [1.0.0-beta1]
 

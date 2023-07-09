@@ -9,6 +9,10 @@ export const view = atom<SettingsView>('lights')
 export const osMode = atom<OSMode>('mac')
 export const version = atom<string>('dev')
 export const individualSettings = atom<boolean>(false)
+export const focused = atom<boolean>(true)
+
+window.addEventListener('blur', () => focused.set(false))
+window.addEventListener('focus', () => focused.set(true))
 
 export async function setMode (): Promise<void> {
   if (individualSettings.get()) {

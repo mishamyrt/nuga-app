@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
-  import { version } from '@stores/app'
+  import { focused, version } from '@stores/app'
   import SidebarItem from './components/SidebarItem.svelte'
   import { view, connected } from './stores/app'
   import LightsView from './views/LightsView.svelte'
@@ -32,7 +32,7 @@
 </script>
 
 <main>
-  <div class="app" class:ready={$connected}>
+  <div class="app" class:blurred={!$focused} class:ready={$connected}>
     <div class="sidebar">
       <div>
         <h1>Nuga</h1>
@@ -72,6 +72,10 @@
     display: grid;
     height: 100vh;
     grid-template-columns: 211px 1fr;
+
+    &.blurred {
+      background-color: var(--color-background-main);
+    }
   }
 
   .sidebar > div {
@@ -100,11 +104,14 @@
     width: 211px;
     padding: 8px;
     opacity: 0;
-    transition: opacity .3s ease-out;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
+  }
+
+  .app.blurred .sidebar {
+    opacity: 0.4;
   }
 
   .version {
