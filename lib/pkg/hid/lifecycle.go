@@ -1,6 +1,3 @@
-//go:build !darwin
-// +build !darwin
-
 package hid
 
 import "github.com/sstallion/go-hid"
@@ -12,7 +9,6 @@ func Init() error {
 	if err != nil {
 		return err
 	}
-	hid.SetOpenExclusive(false)
 	return nil
 }
 
