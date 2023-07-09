@@ -29,6 +29,7 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           working-directory: ./lib
+          skip-cache: true
       - name: revive lib
         uses: docker://morphy/revive-action:v2
         with:
@@ -38,6 +39,7 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           working-directory: ./app
+          skip-cache: true
       - name: revive app
         uses: docker://morphy/revive-action:v2
         with:
