@@ -79,7 +79,7 @@
   }
 
   .content {
-    background-color: #282828;
+    background-color: var(--color-background-main);
     border-left: 1px solid rgb(1 1 1 / 41.2%);
   }
 
@@ -109,6 +109,7 @@
 
   .drag {
     --wails-draggable:drag;
+    z-index: 99999999;
 
     height: 40px;
     position: fixed;

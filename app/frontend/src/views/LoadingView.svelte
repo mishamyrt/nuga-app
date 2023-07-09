@@ -61,7 +61,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 16px;
-    background-color: #282828;
+    background-color: var(--color-background-main);
     border-left: 1px solid transparent;
     transition:
       transform .2s ease-out,
