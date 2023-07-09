@@ -45,8 +45,12 @@ function handleClick (): void {
     }
 
     &.selected {
-      background: #3665CB;
+      background: #296CD8;
     }
+  }
+
+  :global(.blurred) button.selected {
+    background-color: rgba(255, 255, 255, 0.3);
   }
 
   .icon {
