@@ -13,6 +13,7 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
+// LightState represents keyboard light state.
 type LightState struct {
 	keyboard.Effects
 	BacklightParams *keyboard.EffectParams
@@ -42,7 +43,7 @@ func (a *App) startup(ctx context.Context) {
 
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
-func (a *App) shutdown(ctx context.Context) {
+func (a *App) shutdown(_ context.Context) {
 	err := hid.Exit()
 	if err != nil {
 		log.Panicf("Error while closing HID: %v", err)
@@ -80,6 +81,7 @@ func (a *App) SimulateConnection() string {
 	return template.Name
 }
 
+// Disconnect keyboard.
 func (a *App) Disconnect() {
 	a.lights = nil
 }
