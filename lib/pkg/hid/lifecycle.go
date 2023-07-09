@@ -9,7 +9,6 @@ func Init() error {
 	if err != nil {
 		return err
 	}
-	hid.SetOpenExclusive(false)
 	return nil
 }
 

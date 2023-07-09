@@ -1,0 +1,61 @@
+name: Quality assurance
+
+on: [push, workflow_dispatch]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+      - name: Setup wails
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.2
+      - name: Install C/C++ deps
+        run: sudo apt install libhidapi-dev libudev-dev libwebkit2gtk-4.0-dev -y
+      - name: Install frontend deps
+        run: |
+          cd app/frontend
+          pnpm install --frozen-lockfile
+          cd ../..
+      - name: Sync workspace
+        run: go work sync
+      - name: golangci-lint lib
+        uses: golangci/golangci-lint-action@v3
+        with:
+          working-directory: ./lib
+          skip-cache: true
+      - name: revive lib
+        uses: docker://morphy/revive-action:v2
+        with:
+          config: revive.toml
+          path: "./lib/..."
+      - name: Build frontend
+        run: |
+          cd app
+          wails build
+      - name: golangci-lint app
+        uses: golangci/golangci-lint-action@v3
+        with:
+          working-directory: ./app
+          skip-cache: true
+      - name: revive app
+        uses: docker://morphy/revive-action:v2
+        with:
+          config: revive.toml
+          path: "./app/..."
+      - name: ESLint
+        run: |
+          cd app/frontend
+          pnpm run lint:scripts
+      - name: stylelint
+        run: |
+          cd app/frontend
+          pnpm run lint:styles
