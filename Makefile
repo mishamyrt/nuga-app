@@ -24,7 +24,7 @@ sync:
 .PHONY: lint
 lint:
 	make lint-lib
-	make lib-app
+	make lint-app
 
 .PHONY: lint-lib
 lint-lib:
