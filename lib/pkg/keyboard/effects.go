@@ -5,6 +5,7 @@ import (
 	"nuga/pkg/keyboard/effect"
 )
 
+// EffectParams represents keyboard effect parameters.
 type EffectParams struct {
 	// Color represents effect color. Number from 0 to 7
 	Color uint8
@@ -14,12 +15,14 @@ type EffectParams struct {
 	Brightness uint8
 }
 
+// Effects represents keyboard effects state.
 type Effects struct {
 	Backlight BacklightEffect
 	Sidelight MiscEffect
 	Halo      MiscEffect
 }
 
+// Bytes returns effects as a raw byte slice.
 func (b *Effects) Bytes() []byte {
 	var buf []byte
 	buf = append(buf, ParamsHeader...)
@@ -48,6 +51,7 @@ func (b *Effects) Bytes() []byte {
 	return buf
 }
 
+// ParseParams parses raw bytes to effects struct.
 func ParseParams(data []byte) Effects {
 	var result Effects
 	var offset int

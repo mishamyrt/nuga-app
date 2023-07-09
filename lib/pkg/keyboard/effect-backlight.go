@@ -2,11 +2,13 @@ package keyboard
 
 import "nuga/pkg/keyboard/effect"
 
+// BacklightEffect represents keyboard backlight effect state.
 type BacklightEffect struct {
 	Mode   *effect.Mode
 	Params []EffectParams
 }
 
+// CurrentParams returns current effect params.
 func (p *BacklightEffect) CurrentParams() *EffectParams {
 	code := p.Mode.Code
 	if code == 0 {
@@ -15,6 +17,7 @@ func (p *BacklightEffect) CurrentParams() *EffectParams {
 	return &p.Params[code-1]
 }
 
+// SetBrightness sets current effect brightness.
 func (p *BacklightEffect) SetBrightness(brightness uint8) error {
 	if p.Mode.Code == 0 {
 		return ErrLightsOff
@@ -26,6 +29,7 @@ func (p *BacklightEffect) SetBrightness(brightness uint8) error {
 	return nil
 }
 
+// SetSpeed sets current effect speed.
 func (p *BacklightEffect) SetSpeed(speed uint8) error {
 	if p.Mode.Code == 0 {
 		return ErrLightsOff
@@ -40,6 +44,7 @@ func (p *BacklightEffect) SetSpeed(speed uint8) error {
 	return nil
 }
 
+// SetColor sets current effect color.
 func (p *BacklightEffect) SetColor(color uint8) error {
 	if p.Mode.Code == 0 {
 		return ErrLightsOff

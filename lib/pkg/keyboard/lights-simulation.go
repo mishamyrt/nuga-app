@@ -1,11 +1,13 @@
 package keyboard
 
+// SimulationTemplate represents simulation data.
 type SimulationTemplate struct {
 	Colors []int
 	Params []int
 	Name   string
 }
 
+// SimulatedLights represents simulated lights.
 type SimulatedLights struct {
 	template SimulationTemplate
 	effects  *Effects
@@ -28,32 +30,39 @@ func (s *SimulatedLights) setupColors() {
 	)
 }
 
+// GetEffects returns current simulated effects.
 func (s *SimulatedLights) GetEffects() (*Effects, error) {
 	return s.effects, nil
 }
 
+// SetEffects sets current simulated effects.
 func (s *SimulatedLights) SetEffects(p *Effects) error {
 	s.effects = p
 	return nil
 }
 
+// GetColors returns current simulated colors.
 func (s *SimulatedLights) GetColors() (*ColorState, error) {
 	return s.colors, nil
 }
 
+// SetColors sets current simulated colors.
 func (s *SimulatedLights) SetColors(c *ColorState) error {
 	s.colors = c
 	return nil
 }
 
+// GetName returns simulated keyboard name.
 func (s *SimulatedLights) GetName() (string, error) {
 	return s.template.Name, nil
 }
 
-func (h *SimulatedLights) GetPath() (string, error) {
+// GetPath returns simulated keyboard path.
+func (s *SimulatedLights) GetPath() (string, error) {
 	return "/simulated/device/path", nil
 }
 
+// OpenSimulation returns simulated light from template.
 func OpenSimulation(t SimulationTemplate) Lights {
 	var lights Lights
 	var s SimulatedLights

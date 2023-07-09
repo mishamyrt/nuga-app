@@ -2,11 +2,13 @@ package keyboard
 
 import "nuga/pkg/keyboard/effect"
 
+// MiscEffect represents a non-main light, e.g. Halolight.
 type MiscEffect struct {
 	Mode   *effect.Mode
 	Params EffectParams
 }
 
+// SetBrightness of misc effect.
 func (p *MiscEffect) SetBrightness(brightness uint8) error {
 	if p.Mode.Code == 0 {
 		return ErrLightsOff
@@ -18,6 +20,7 @@ func (p *MiscEffect) SetBrightness(brightness uint8) error {
 	return nil
 }
 
+// SetSpeed of misc effect.
 func (p *MiscEffect) SetSpeed(speed uint8) error {
 	if p.Mode.Code == 0 {
 		return ErrLightsOff
@@ -32,6 +35,7 @@ func (p *MiscEffect) SetSpeed(speed uint8) error {
 	return nil
 }
 
+// SetColor of misc effect.
 func (p *MiscEffect) SetColor(color uint8) error {
 	if !p.Mode.Features.Supports(effect.SpecificColor) {
 		return ErrNotSupported

@@ -5,14 +5,17 @@ import (
 	"nuga/pkg/hid"
 )
 
+// HardwareLights represents real keyboard lights.
 type HardwareLights struct {
 	Handle *hid.Handle
 }
 
+// GetName returns keyboard name.
 func (h *HardwareLights) GetName() (string, error) {
 	return h.Handle.Device.GetProductStr()
 }
 
+// GetPath returns keyboard path.
 func (h *HardwareLights) GetPath() (string, error) {
 	info, err := h.Handle.Device.GetDeviceInfo()
 	if err != nil {
@@ -21,6 +24,7 @@ func (h *HardwareLights) GetPath() (string, error) {
 	return info.Path, nil
 }
 
+// GetRawEffects returns raw effects data.
 func (h *HardwareLights) GetRawEffects() ([]byte, error) {
 	response, err := h.Handle.Request(CmdGetParams, 270)
 	if err != nil {
@@ -29,6 +33,7 @@ func (h *HardwareLights) GetRawEffects() ([]byte, error) {
 	return response, nil
 }
 
+// GetEffectsBuffer returns trimmed effects buffer.
 func (h *HardwareLights) GetEffectsBuffer() ([]byte, error) {
 	raw, err := h.GetRawEffects()
 	if err != nil {
@@ -38,6 +43,7 @@ func (h *HardwareLights) GetEffectsBuffer() ([]byte, error) {
 	return raw[startOffset : startOffset+ParamsLength], nil
 }
 
+// GetEffects returns keyboard effects.
 func (h *HardwareLights) GetEffects() (*Effects, error) {
 	params, err := h.GetEffectsBuffer()
 	if err != nil {
@@ -47,6 +53,7 @@ func (h *HardwareLights) GetEffects() (*Effects, error) {
 	return &effects, err
 }
 
+// GetRawColors returns raw keyboard colors.
 func (h *HardwareLights) GetRawColors() ([]byte, error) {
 	var colors []byte
 	colors, err := h.Handle.Request(CmdGetColors, 1050)
@@ -56,6 +63,7 @@ func (h *HardwareLights) GetRawColors() ([]byte, error) {
 	return colors, err
 }
 
+// GetColors returns keyboard colors state.
 func (h *HardwareLights) GetColors() (*ColorState, error) {
 	raw, err := h.GetRawColors()
 	if err != nil {
@@ -65,6 +73,7 @@ func (h *HardwareLights) GetColors() (*ColorState, error) {
 	return ParseColors(colorSubset), err
 }
 
+// SetColors sets keyboard color state.
 func (h *HardwareLights) SetColors(c *ColorState) error {
 	request := make([]byte, 0)
 	request = append(request, CmdSetColors...)
@@ -72,6 +81,7 @@ func (h *HardwareLights) SetColors(c *ColorState) error {
 	return h.Handle.SendWithRetries(request)
 }
 
+// ResetColors resets colors to defaults.
 func (h *HardwareLights) ResetColors() error {
 	var state ColorState
 	for i := range state {
@@ -86,6 +96,7 @@ func (h *HardwareLights) ResetColors() error {
 	return h.SetColors(&state)
 }
 
+// SetEffects sets keyboard effects.
 func (h *HardwareLights) SetEffects(p *Effects) error {
 	currentParams, err := h.GetEffectsBuffer()
 	if err != nil {
@@ -100,6 +111,7 @@ func (h *HardwareLights) SetEffects(p *Effects) error {
 	return h.Handle.SendWithRetries(paramsRequest)
 }
 
+// OpenHardware opens real keyboard lights.
 func OpenHardware() (HardwareLights, error) {
 	var h HardwareLights
 	handle, err := hid.OpenHandle()
@@ -110,6 +122,7 @@ func OpenHardware() (HardwareLights, error) {
 	return h, nil
 }
 
+// Open hardware keyboard lights as Lights.
 func Open() (Lights, error) {
 	var lights Lights
 	h, err := OpenHardware()
