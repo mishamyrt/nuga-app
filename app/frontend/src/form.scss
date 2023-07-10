@@ -23,6 +23,19 @@
     font-size: 13px;
     transition: opacity .25s ease-out;
 
+    &-inner {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-actions {
+      text-align: right;
+    }
+
+    &.column {
+      flex-direction: column;
+    }
+
     &.disabled > * {
       pointer-events: none;
       opacity: 0.5;

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning][].
 
 ## 1.0.0-beta2
 
+## Added
+
+* Color edit button. Right click on a color still works.
+
 ## Fixed
 
 * Window drag on loading state

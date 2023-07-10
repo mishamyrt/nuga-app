@@ -2,6 +2,7 @@
 import { backlightColors, changingColor, state, setBacklightColor } from '@stores/lights'
 import { onMount } from 'svelte'
 import ColorPicker from 'svelte-awesome-color-picker'
+import Button from './Button.svelte'
 
 let visible = false
 
@@ -70,8 +71,8 @@ async function applyColor (): Promise<void> {
     </div>
     </div>
     <div class="actions">
-      <button on:click={hideModal}>Cancel</button>
-      <button on:click={applyColor} class="action-main">Done</button>
+      <Button label="Cancel" on:click={hideModal} />
+      <Button label="Done" primary on:click={applyColor} />
     </div>
   </div>
 </div>
@@ -128,28 +129,6 @@ async function applyColor (): Promise<void> {
     padding: 13px 18px;
     gap: 8px;
     border-top: 1px solid rgb(41 41 41 / 100%);
-  }
-
-  button {
-    font-size: 13px;
-    border: none;
-    appearance: none;
-    border-radius: 5px;
-    background: #565656;
-    width: 64px;
-    border-top: 0.5px solid rgb(255 255 255 / 22%);
-
-    &:active {
-      background: #767676;
-    }
-
-    &.action-main {
-      background: linear-gradient(180deg, #3978DE 0%, #336CC5 100%);
-
-      &:active {
-        background: #457AEB;
-      }
-    }
   }
 
   input {

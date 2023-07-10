@@ -1,10 +1,11 @@
 <script lang="ts">
-  import type { Color, LightMode, LightState } from '@stores/lights'
+  import { changingColor, type Color, type LightMode, type LightState } from '@stores/lights'
   import Switch from './Switch.svelte'
   import type { MapStore, ReadableAtom } from 'nanostores'
   import ColorSelector from './ColorSelector.svelte'
   import Range from './Range.svelte'
   import { Select, type SelectOption } from './Select'
+  import Button from './Button.svelte'
 
   export let title: string = ''
   export let state: MapStore<LightState>
@@ -38,6 +39,10 @@
     write()
   }
 
+  function handleColorChange (): void {
+    changingColor.set($state.color)
+  }
+
   $: mode = $modes.filter(i => i.code === $state.mode)[0]
   $: supports = {
     color: (mode?.features & 1) !== 0,
@@ -69,15 +74,25 @@
         options={modeOptions}
         value={$state.mode.toString()} />
     </div>
-    <div class="form-row">
-      <span>Color</span>
-      <ColorSelector
-        {colors}
-        disabled={!$state.enabled || !supports.color}
-        random={supports.random}
-        selected={$state.color}
-        canChange={canChangeColor}
-        on:change={handleColor} />
+    <div class="form-row column">
+      <div class="form-row-inner">
+        <span>Color</span>
+        <ColorSelector
+          {colors}
+          disabled={!$state.enabled || !supports.color}
+          random={supports.random}
+          selected={$state.color}
+          canChange={canChangeColor}
+          on:change={handleColor} />
+      </div>
+      {#if canChangeColor}
+      <div class="form-row-actions">
+        <Button
+          disabled={!$state.enabled || !supports.color || $state.color === 7}
+          on:click={handleColorChange}
+          label='Edit' />
+      </div>
+      {/if}
     </div>
     <div class="form-row">
       <span>Brightness</span>
@@ -97,3 +112,9 @@
     </div>
   </div>
 </div>
+
+<style lang="scss">
+  .form-row-actions {
+    margin-top: 10px;
+  }
+</style>
