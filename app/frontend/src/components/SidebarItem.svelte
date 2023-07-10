@@ -50,7 +50,7 @@ function handleClick (): void {
   }
 
   :global(.blurred) button.selected {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgb(255 255 255 / 30%);
   }
 
   .icon {

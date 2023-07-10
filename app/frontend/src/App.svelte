@@ -110,6 +110,10 @@
     align-items: start;
   }
 
+  .ready .sidebar {
+    opacity: 1;
+  }
+
   .app.blurred .sidebar {
     opacity: 0.4;
   }
@@ -123,14 +127,10 @@
     opacity: 0.25;
   }
 
-  .ready .sidebar {
-    opacity: 1;
-  }
-
   .drag {
     --wails-draggable:drag;
-    z-index: 99999999;
 
+    z-index: 99999999;
     height: 40px;
     position: fixed;
     top: 0;
