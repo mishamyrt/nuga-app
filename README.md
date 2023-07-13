@@ -2,6 +2,13 @@
 
 This mono repository contains packages for managing NuPhy® keyboards.
 
+### Features
+
+* Lights control.
+* ~~Key mapping control~~ Not ready yet. 
+
+**Supported devices**: Halo75
+
 ## Packages
 
 * [lib](./lib/) – Golang library.
