@@ -93,6 +93,10 @@ func (a *App) Connect() string {
 		if err != nil {
 			return ""
 		}
+		name, err := lights.GetName()
+		if err != nil || name != "NuPhy Halo75" {
+			return ""
+		}
 		a.lights = lights
 	}
 	name, err := a.lights.GetName()
