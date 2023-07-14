@@ -1,6 +1,6 @@
 import { atom, action } from 'nanostores'
+import { sleep } from '@utils/timing'
 import { Connect, GetPath, SimulateConnection } from '../../wailsjs/go/main/App.js'
-import { sleep } from '../utils/timing'
 import { loadModes, loadState, loadColors } from './lights/actions'
 
 interface ConnectedKeyboard {
@@ -42,6 +42,6 @@ export const connect = action(device, 'connect', async store => {
       await loadState()
       return
     }
-    await sleep(2000)
+    await sleep(1000)
   }
 })
