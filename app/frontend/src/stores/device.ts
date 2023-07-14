@@ -15,7 +15,7 @@ export const device = atom<ConnectedKeyboard>({
 
 let simulation = false
 
-export async function startSimulation (): Promise<void> {
+export function startSimulation (): void {
   simulation = true
 }
 

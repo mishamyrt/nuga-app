@@ -3,13 +3,15 @@
   import cable from '../assets/images/cable.connector.svg'
   import { connect, startSimulation } from '@stores/device'
   import { connected, loadVersion } from '@stores/app'
-  import { sleep } from '../utils/timing'
+  import { sleep } from '@utils/timing'
+  import { onHotkey } from '@utils/hotkey'
   import { sync } from '@stores/lights/actions'
 
   export let hide = false
 
   let showHelp = false
 
+  onHotkey({ code: 'KeyS', shift: true, alt: true }, startSimulation)
   onMount(async () => {
     setTimeout(() => {
       showHelp = true
@@ -27,7 +29,7 @@
 <div class="loading" class:ready={hide} >
   <div class="help" class:show={showHelp}>
     <img alt="Wails logo" id="logo" src="{cable}">
-    <h1>Looking for compatible <span on:dblclick={startSimulation}>keyboard</span></h1>
+    <h1>Looking for compatible keyboard</h1>
     <p>Make sure your device is plugged in</p>
   </div>
   <div class="spinner-container">
