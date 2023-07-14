@@ -14,6 +14,7 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@stores/*": ["src/stores/*"],
+      "@utils/*": ["src/utils/*"],
       "@wailsjs/app": ["wailsjs/go/main/*"]
     },
     "outDir": "dist"

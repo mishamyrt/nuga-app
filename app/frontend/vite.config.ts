@@ -9,6 +9,7 @@ export default defineConfig({
       '@assets': resolve(__dirname, './src/assets'),
       '@components': resolve(__dirname, './src/components'),
       '@stores': resolve(__dirname, './src/stores'),
+      '@utils': resolve(__dirname, './src/utils'),
       '@wailsjs/app': resolve(__dirname, './wailsjs/go/main/App.js')
     }
   },
