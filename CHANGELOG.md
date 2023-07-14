@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ## Changed
 
 * Now the simulation runs on <kbd>Option</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>
+* Fine-tuning fonts and borders
 
 ## Fixed
 

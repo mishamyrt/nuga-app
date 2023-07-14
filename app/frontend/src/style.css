@@ -34,10 +34,11 @@ body, html {
 
 h3 {
   font-size: 15px;
+  font-weight: 550;
   padding: 0 var(--form-padding);
   text-align: left;
 }
 
 .blurred h3 {
-  opacity: 0.3;
+  opacity: 0.35;
 }
