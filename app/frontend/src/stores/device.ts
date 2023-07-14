@@ -24,6 +24,10 @@ export const connect = action(device, 'connect', async store => {
   while (true) {
     if (simulation) {
       name = await SimulateConnection()
+      if (name === '') {
+        simulation = false
+        continue
+      }
     } else {
       name = await Connect()
     }
