@@ -4,6 +4,8 @@ BUILD_PATH = app/build/bin
 
 PLATFORMS = darwin/arm64,darwin/amd64
 LD_FLAGS = -X 'main.AppVersion=v$(VERSION)' -s -w
+UNAME := $(shell uname)
+ARCH := $(shell arch)
 
 define go_lint
 	golangci-lint run ./$(1)/...
@@ -54,3 +56,17 @@ release:
 .PHONY: dev
 dev:
 	cd app; wails dev -loglevel Debug -v 2
+
+.PHONY: install_Darwin_arm64
+install_Darwin_arm64:
+	rm -rf /Applications/Nuga.app
+	cp -r app/build/bin/Nuga-arm64.app /Applications/Nuga.app
+
+.PHONY: install_Darwin_amd64
+install_Darwin_amd64:
+	rm -rf /Applications/Nuga.app
+	cp -r app/build/bin/Nuga-amd64.app /Applications/Nuga.app
+
+.PHONY: install
+install:
+	make install_$(UNAME)_$(ARCH)
