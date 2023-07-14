@@ -19,10 +19,11 @@ var AppVersion = "dev"
 func main() {
 	app := NewApp()
 	err := wails.Run(&options.App{
-		Title:    "gui",
-		Width:    700,
-		MinWidth: 650,
-		Height:   700,
+		Title:     "gui",
+		Width:     700,
+		MinWidth:  650,
+		Height:    700,
+		MinHeight: 410,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},

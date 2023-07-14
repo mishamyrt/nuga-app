@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
+## 1.0.0-beta3
+
+## Fixed
+
+* Set minimal window height to 410 pixels
+
 ## [1.0.0-beta2]
 
 ## Added
