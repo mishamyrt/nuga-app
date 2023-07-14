@@ -37,7 +37,7 @@
       on:dblclick={e => handleEditColor(e, i)}
       class="color"
       class:selected={i === selected}
-      style={`--color: rgb(${c.R}, ${c.G}, ${c.B})`}>
+      style={`--color: ${c.R} ${c.G} ${c.B}`}>
     </div>
   {/each}
 </div>
@@ -48,7 +48,8 @@
     height: 16px;
     position: relative;
     border-radius: 50%;
-    background-color: var(--color);
+    background-color: rgb(var(--color) / 80%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 15%);
 
     &.random {
       background: conic-gradient(
@@ -91,6 +92,7 @@
       left: 5px;
       top: 5px;
       background: white;
+      box-shadow: 0 1px 1px rgb(0 0 0 / 20%);
     }
   }
 
