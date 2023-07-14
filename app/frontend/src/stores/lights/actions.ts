@@ -12,6 +12,7 @@ import type { Color, EffectParams, LightMode, LightSetter, LightState } from './
 import { backlightColors, changingColor, modes, state } from './stores'
 import { defaultState } from './defaults'
 import { UpdateSynchronizer } from './synchronizer'
+import { capitalize } from '@utils/strings'
 
 export const sync = new UpdateSynchronizer(1000)
 
@@ -19,7 +20,7 @@ function mapModes (m: any[]): LightMode[] {
   return m
     .filter(i => i.Code !== 0)
     .map(i => ({
-      name: i.Name,
+      name: capitalize(i.Name),
       features: i.Features,
       code: i.Code
     }))
