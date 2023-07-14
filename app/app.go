@@ -66,16 +66,19 @@ func (a *App) SimulateConnection() string {
 		},
 	})
 	if err != nil {
-		log.Panicf("Error while opening simulation template: %v", err)
+		log.Printf("Error while opening simulation template: %v", err)
+	}
+	if path == "" {
+		return ""
 	}
 	content, err := os.ReadFile(path)
 	if err != nil {
-		log.Panicf("Error while reading simulation template: %v", err)
+		log.Printf("Error while reading simulation template: %v", err)
 	}
 	var template keyboard.SimulationTemplate
 	err = json.Unmarshal(content, &template)
 	if err != nil {
-		log.Panicf("Error while parsing simulation template: %v", err)
+		log.Printf("Error while parsing simulation template: %v", err)
 	}
 	a.lights = keyboard.OpenSimulation(template)
 	return template.Name

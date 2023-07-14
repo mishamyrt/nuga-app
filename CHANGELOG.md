@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning][].
 
 ## Fixed
 
-* Set minimal window height to 410 pixels
+* Minimal window height (set to 410 pixels)
+* Panic on simulation decline
 
 ## [1.0.0-beta2]
 
