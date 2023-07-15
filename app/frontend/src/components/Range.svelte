@@ -1,9 +1,29 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
-  export let type: 'brightness' | 'speed'
+  type RangeType = 'brightness' | 'speed'
+
+  interface Labels {
+    min: string
+    max: string
+  }
+
+  const labels: Record<RangeType, Labels> = {
+    brightness: {
+      min: 'Dark',
+      max: 'Bright'
+    },
+    speed: {
+      min: 'Slow',
+      max: 'Fast'
+    }
+  }
+
+  export let type: RangeType
   export let disabled = false
   export let value: number = 0
+  export let min = 0
+  export let max = 4
 
   const dispatch = createEventDispatcher()
 
@@ -14,23 +34,28 @@
 
 <div class={`range-container ${type}`} class:disabled>
   <div class="range">
-    <input {value} on:change={handleChange} type="range" min="0" step="1" max="4" />
+    <input {value} on:change={handleChange} type="range" {min} step="1" {max} />
     <!-- Using these instead of a list property for full customization -->
-    <div class="mark"></div>
-    <div class="mark"></div>
-    <div class="mark"></div>
-    <div class="mark"></div>
-    <div class="mark"></div>
+    <div class="marks">
+      {#each Array((max - min) + 1) as _, index (index)}
+        <div class="mark"></div>
+      {/each}
+    </div>
   </div>
-  <div class="icon min"></div>
-  <div class="icon max"></div>
+  <div class="label min">
+    {labels[type].min}
+  </div>
+  <div class="label max">
+    {labels[type].max}
+  </div>
 </div>
 
 <style lang="scss">
   .range-container {
-    margin: 0 calc(28px + 3px + 3px);
     position: relative;
+    padding-bottom: 13px;
     left: 5px;
+    top: -2px;
 
     &.disabled {
       opacity: 0.35;
@@ -44,6 +69,7 @@
     input {
       appearance: none;
       background: transparent;
+      width: 174px;
 
       &::-webkit-slider-runnable-track {
         background: rgb(211 211 211 / 20%);
@@ -68,66 +94,34 @@
     }
   }
 
+  .marks {
+    position: relative;
+    top: -8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2px;
+  }
+
   .mark {
     z-index: 0;
     width: 2px;
     height: 8px;
     background-color: #626262;
-    position: absolute;
     border-radius: 4px;
-    top: 7px;
-    left: 2px;
-
-    &:nth-child(2) {
-      left: calc(25% + 2px);
-    }
-
-    &:nth-child(3) {
-      left: calc(50% - 1px);
-    }
-
-    &:nth-child(4) {
-      left: calc(75% - 4px);
-    }
-
-    &:nth-child(5) {
-      left: calc(100% - 4px);
-    }
   }
 
-  .icon {
+  .label {
+    font-size: 10px;
     position: absolute;
-    width: 28px;
-    height: 28px;
-    background-size: contain;
-    top: -3px;
+    bottom: 1px;
+    opacity: 0.9;
 
     &.min {
-      left: -34px;
+      left: 2px;
     }
 
     &.max {
-      right: -34px;
-    }
-  }
-
-  .brightness {
-    .min {
-      background-image: url("../assets/images/sun.min.fill.png");
-    }
-
-    .max {
-      background-image: url("../assets/images/sun.max.fill.png");
-    }
-  }
-
-  .speed {
-    .min {
-      background-image: url("../assets/images/tortoise.fill.png");
-    }
-
-    .max {
-      background-image: url("../assets/images/hare.fill.png");
+      right: 3px;
     }
   }
 </style>
