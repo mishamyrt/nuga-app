@@ -62,11 +62,11 @@
     </h4>
   {/if}
   <div class="form-rows">
-    <div class="form-row">
+    <div class="form-row centered">
       <span>Enable</span>
       <Switch on:click={handleEnabled} checked={$state.enabled} />
     </div>
-    <div class="form-row">
+    <div class="form-row centered">
       <span>Mode</span>
       <Select
         on:change={handleMode}
@@ -98,6 +98,7 @@
       <span>Brightness</span>
       <Range
         type="brightness"
+        min={1}
         disabled={!$state.enabled}
         value={$state.brightness}
         on:change={handleBrightness} />

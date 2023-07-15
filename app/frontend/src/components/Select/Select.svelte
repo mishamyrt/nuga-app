@@ -62,7 +62,7 @@
       background-size: contain;
       position: absolute;
       right: 2px;
-      top: 2px;
+      top: 1px;
       pointer-events: none;
     }
 

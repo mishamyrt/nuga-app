@@ -28,21 +28,21 @@ $: deviceInfo = $device
   <div class="form">
     <div class="form-group">
       <div class="form-rows">
-        <div class="form-row">
+        <div class="form-row centered">
           <span>Name</span>
           <span>{deviceInfo.name}</span>
         </div>
-        <div class="form-row">
+        <div class="form-row centered">
           <span>Path</span>
           <span>{deviceInfo.path}</span>
         </div>
-        <div class="form-row">
+        <div class="form-row centered">
           <span>Individual mode settings</span>
           <Switch
             on:click={handleSettingsModeChange}
             checked={$individualSettings} />
         </div>
-        <div class="form-row">
+        <div class="form-row centered">
           <span>System mode</span>
           <RadioButtons
             disabled={!$individualSettings}
