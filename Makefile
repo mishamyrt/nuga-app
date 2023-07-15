@@ -1,4 +1,4 @@
-VERSION = 1.0.0-beta2
+VERSION = 1.0.0-beta3
 DIST_PATH = dist
 BUILD_PATH = app/build/bin
 
