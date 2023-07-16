@@ -16,8 +16,6 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8.6.2
-      - name: Install C/C++ deps
-        run: sudo apt install libhidapi-dev libudev-dev libwebkit2gtk-4.0-dev -y
       - name: Install frontend deps
         run: |
           cd app/frontend
