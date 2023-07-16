@@ -48,11 +48,11 @@ jobs:
         with:
           config: revive.toml
           path: "./app/..."
-      - name: ESLint
+      - name: Lint frontend scripts
         run: |
           cd app/frontend
           pnpm run lint:scripts
-      - name: stylelint
+      - name: Lint frontend styles
         run: |
           cd app/frontend
           pnpm run lint:styles
