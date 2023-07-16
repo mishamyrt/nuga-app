@@ -4,7 +4,6 @@ linters:
     - asciicheck
     - bidichk
     - bodyclose
-    - containedctx
     - contextcheck
     - cyclop
     - decorder
