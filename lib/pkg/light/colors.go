@@ -1,5 +1,5 @@
-// Package keyboard contains set of utils to work with keyboard.
-package keyboard
+// package light contains set of utils to work with keyboard.
+package light
 
 import (
 	"log"

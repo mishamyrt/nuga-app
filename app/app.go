@@ -6,8 +6,8 @@ import (
 	"log"
 	"nuga/pkg/color"
 	"nuga/pkg/hid"
-	"nuga/pkg/keyboard"
-	"nuga/pkg/keyboard/effect"
+	"nuga/pkg/light"
+	"nuga/pkg/light/effect"
 	"os"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
@@ -15,14 +15,14 @@ import (
 
 // LightState represents keyboard light state.
 type LightState struct {
-	keyboard.Effects
-	BacklightParams *keyboard.EffectParams
+	light.Effects
+	BacklightParams *light.EffectParams
 }
 
 // App struct
 type App struct {
 	ctx    context.Context
-	lights keyboard.Lights
+	lights light.Device
 	mode   OSMode
 }
 
@@ -75,16 +75,16 @@ func (a *App) SimulateConnection() string {
 	if err != nil {
 		log.Printf("Error while reading simulation template: %v", err)
 	}
-	var template keyboard.SimulationTemplate
+	var template light.SimulationTemplate
 	err = json.Unmarshal(content, &template)
 	if err != nil {
 		log.Printf("Error while parsing simulation template: %v", err)
 	}
-	a.lights = keyboard.OpenSimulation(template)
+	a.lights = light.OpenSimulation(template)
 	return template.Name
 }
 
-// Disconnect keyboard.
+// Disconnect light.
 func (a *App) Disconnect() {
 	a.lights = nil
 }
@@ -92,7 +92,7 @@ func (a *App) Disconnect() {
 // Connect initiates connection and returns a keyboard name
 func (a *App) Connect() string {
 	if a.lights == nil {
-		lights, err := keyboard.Open()
+		lights, err := light.Open()
 		if err != nil {
 			return ""
 		}
@@ -157,7 +157,7 @@ func (a *App) SetHalo(mode, color, brightness, speed uint8) error {
 		return nil
 	}
 	state.Halo.Mode = effect.Halo.Find(mode)
-	state.Halo.Params = keyboard.EffectParams{
+	state.Halo.Params = light.EffectParams{
 		Color:      color,
 		Brightness: brightness,
 		Speed:      speed,
@@ -172,7 +172,7 @@ func (a *App) SetSidelight(mode, color, brightness, speed uint8) error {
 		return nil
 	}
 	state.Sidelight.Mode = effect.Sidelight.Find(mode)
-	state.Sidelight.Params = keyboard.EffectParams{
+	state.Sidelight.Params = light.EffectParams{
 		Color:      color,
 		Brightness: brightness,
 		Speed:      speed,

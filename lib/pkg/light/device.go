@@ -1,7 +1,7 @@
-package keyboard
+package light
 
-// Lights is the basic interface that all light sources must implement
-type Lights interface {
+// Device is the basic interface that all light sources must implement
+type Device interface {
 	GetEffects() (*Effects, error)
 	SetEffects(p *Effects) error
 	GetColors() (*ColorState, error)

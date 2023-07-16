@@ -1,4 +1,4 @@
-package keyboard
+package light
 
 import "errors"
 

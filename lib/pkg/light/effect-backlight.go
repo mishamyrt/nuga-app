@@ -1,6 +1,6 @@
-package keyboard
+package light
 
-import "nuga/pkg/keyboard/effect"
+import "nuga/pkg/light/effect"
 
 // BacklightEffect represents keyboard backlight effect state.
 type BacklightEffect struct {

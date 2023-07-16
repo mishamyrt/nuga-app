@@ -1,8 +1,8 @@
-package keyboard
+package light
 
 import (
 	"math"
-	"nuga/pkg/keyboard/effect"
+	"nuga/pkg/light/effect"
 )
 
 // EffectParams represents keyboard effect parameters.

@@ -1,6 +1,6 @@
-package keyboard
+package light
 
-import "nuga/pkg/keyboard/effect"
+import "nuga/pkg/light/effect"
 
 // MiscEffect represents a non-main light, e.g. Halolight.
 type MiscEffect struct {

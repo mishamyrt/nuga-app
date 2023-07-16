@@ -1,6 +1,6 @@
 package main
 
-import "nuga/pkg/keyboard/effect"
+import "nuga/pkg/light/effect"
 
 // Modes represent keyboard mode slices
 type Modes struct {

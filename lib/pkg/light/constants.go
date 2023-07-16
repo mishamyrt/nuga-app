@@ -1,4 +1,4 @@
-package keyboard
+package light
 
 // ParamsLength represents Halo75 params count.
 const ParamsLength = 123
