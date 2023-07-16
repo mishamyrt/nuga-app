@@ -19,7 +19,7 @@ func ParseHex(s string) (RGB, error) {
 		c.G *= 0x11
 		c.B *= 0x11
 	default:
-		err = fmt.Errorf("invalid length, must be 7 or 4")
+		err = ErrInvalidLength
 	}
 	return c, err
 }
