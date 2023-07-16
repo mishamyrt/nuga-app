@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning][].
 
 ## 1.0.0-beta3
 
+## Added
+
+* Color changing modal transition
+
 ## Changed
 
 * Now the simulation runs on <kbd>Option</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>

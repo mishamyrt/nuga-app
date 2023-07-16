@@ -25,7 +25,10 @@ onMount(() => {
 })
 
 function hideModal (): void {
-  changingColor.set(undefined)
+  visible = false
+  setTimeout(() => {
+    changingColor.set(undefined)
+  }, 350)
 }
 
 async function applyColor (): Promise<void> {
@@ -34,7 +37,7 @@ async function applyColor (): Promise<void> {
     G: rgb.g,
     B: rgb.b
   })
-  changingColor.set(undefined)
+  hideModal()
 }
 </script>
 
@@ -79,7 +82,7 @@ async function applyColor (): Promise<void> {
 
 <style lang="scss">
   .modal-wrapper {
-    background-color: rgb(36 36 36 / 85%);
+    background-color: rgb(23 23 23 / 51%);
     position: fixed;
     top: 0;
     left: 0;
@@ -91,6 +94,7 @@ async function applyColor (): Promise<void> {
     justify-content: center;
     opacity: 0;
     pointer-events: none;
+    transition: opacity .3s ease-out;
 
     &.visible {
       opacity: 1;
@@ -103,6 +107,13 @@ async function applyColor (): Promise<void> {
     width: 270px;
     border-radius: 10px;
     border: 1px solid #4B4B4B;
+    box-shadow: 0 14px 25px rgb(0 0 0 / 50%);
+    transition: transform .3s ease-out;
+    transform: translateY(-30px);
+  }
+
+  .visible .modal {
+    transform: translateY(0);
   }
 
   .color-wrapper {
