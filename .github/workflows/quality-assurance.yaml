@@ -16,6 +16,8 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8.6.2
+      - name: Install C/C++ deps
+        run: sudo apt install libudev-dev -y
       - name: Install frontend deps
         run: |
           cd app/frontend
