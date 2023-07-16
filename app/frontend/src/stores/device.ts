@@ -1,6 +1,6 @@
 import { atom, action } from 'nanostores'
 import { sleep } from '@utils/timing'
-import { Connect, GetPath, SimulateConnection } from '../../wailsjs/go/main/App.js'
+import { Connect, GetPath, SimulateConnection } from '../../wailsjs/go/nuga/App.js'
 import { loadModes, loadState, loadColors } from './lights/actions'
 
 interface ConnectedKeyboard {

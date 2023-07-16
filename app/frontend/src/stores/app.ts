@@ -1,4 +1,4 @@
-import { GetVersion, SetMode } from '../../wailsjs/go/main/App'
+import { GetVersion, SetMode } from '../../wailsjs/go/nuga/App'
 import { atom } from 'nanostores'
 
 export type SettingsView = 'lights' | 'device' | 'keys'

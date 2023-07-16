@@ -1,7 +1,7 @@
 import { connected } from '@stores/app'
 import { sleep } from '../../utils/timing'
 import { loadState } from './actions'
-import { Disconnect } from '../../../wailsjs/go/main/App'
+import { Disconnect } from '../../../wailsjs/go/nuga/App'
 
 type AsyncTask = () => Promise<void>
 

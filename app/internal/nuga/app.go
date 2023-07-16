@@ -1,4 +1,5 @@
-package main
+// Package nuga contains application backend
+package nuga
 
 import (
 	"context"
@@ -13,12 +14,6 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
-// LightState represents keyboard light state.
-type LightState struct {
-	light.Effects
-	BacklightParams *light.EffectParams
-}
-
 // App struct
 type App struct {
 	ctx    context.Context
@@ -26,14 +21,9 @@ type App struct {
 	mode   OSMode
 }
 
-// NewApp creates a new App application struct
-func NewApp() *App {
-	return &App{}
-}
-
-// startup is called when the app starts. The context is saved
+// OnStartup is called when the app starts. The context is saved
 // so we can call the runtime methods
-func (a *App) startup(ctx context.Context) {
+func (a *App) OnStartup(ctx context.Context) {
 	err := hid.Init()
 	if err != nil {
 		log.Panicf("Error while initializing HID: %v", err)
@@ -41,9 +31,8 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-// startup is called when the app starts. The context is saved
-// so we can call the runtime methods
-func (a *App) shutdown(_ context.Context) {
+// OnShutdown is called when the app closes
+func (a *App) OnShutdown(_ context.Context) {
 	err := hid.Exit()
 	if err != nil {
 		log.Panicf("Error while closing HID: %v", err)
@@ -234,4 +223,9 @@ func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
 	if err != nil {
 		log.Printf("Error on writing colors: %v", err)
 	}
+}
+
+// NewApp creates a new application struct
+func NewApp() *App {
+	return &App{}
 }
