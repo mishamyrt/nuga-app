@@ -143,7 +143,7 @@ func (a *App) GetMacColors() [][7]color.RGB {
 func (a *App) SetHalo(mode, color, brightness, speed uint8) error {
 	state, err := a.lights.GetEffects()
 	if err != nil {
-		return nil
+		return err
 	}
 	state.Halo.Mode = effect.Halo.Find(mode)
 	state.Halo.Params = light.EffectParams{
@@ -158,7 +158,7 @@ func (a *App) SetHalo(mode, color, brightness, speed uint8) error {
 func (a *App) SetSidelight(mode, color, brightness, speed uint8) error {
 	state, err := a.lights.GetEffects()
 	if err != nil {
-		return nil
+		return err
 	}
 	state.Sidelight.Mode = effect.Sidelight.Find(mode)
 	state.Sidelight.Params = light.EffectParams{
@@ -173,7 +173,7 @@ func (a *App) SetSidelight(mode, color, brightness, speed uint8) error {
 func (a *App) SetBacklight(mode, color, brightness, speed uint8) error {
 	state, err := a.lights.GetEffects()
 	if err != nil {
-		return nil
+		return err
 	}
 	state.Backlight.Mode = effect.Backlight.Find(mode)
 	if mode != 0 {
