@@ -26,6 +26,7 @@ jobs:
       - name: golangci-lint lib
         uses: golangci/golangci-lint-action@v3
         with:
+          args: --config=../.golangci.yaml
           working-directory: ./lib
           skip-cache: true
       - name: revive lib
@@ -36,6 +37,7 @@ jobs:
       - name: golangci-lint app
         uses: golangci/golangci-lint-action@v3
         with:
+          args: --config=../.golangci.yaml
           working-directory: ./app
           skip-cache: true
       - name: revive app
