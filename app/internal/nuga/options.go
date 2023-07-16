@@ -11,7 +11,7 @@ import (
 // GetOptions returns application options
 func (a *App) GetOptions(assets fs.FS) *options.App {
 	return &options.App{
-		Title:     "gui",
+		Title:     "Nuga",
 		Width:     700,
 		MinWidth:  650,
 		Height:    700,

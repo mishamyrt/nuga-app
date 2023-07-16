@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning][].
 * Minimal window height (set to 410 pixels)
 * Panic on simulation rejection
 * Cyclic pop-up window on simulation rejection
+* Application title
 
 ## [1.0.0-beta2]
 
