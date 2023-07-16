@@ -24,7 +24,7 @@ type Effects struct {
 
 // Bytes returns effects as a raw byte slice.
 func (b *Effects) Bytes() []byte {
-	var buf []byte
+	buf := make([]byte, 0)
 	buf = append(buf, ParamsHeader...)
 	buf = append(buf, b.Backlight.Mode.Code)
 	buf = append(buf, ParamsMiscHeader...)
