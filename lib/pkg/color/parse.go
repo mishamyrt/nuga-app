@@ -6,7 +6,9 @@ import (
 )
 
 // ParseHex converts a string with HEX colour into an RGB structure
-func ParseHex(s string) (c RGB, err error) {
+func ParseHex(s string) (RGB, error) {
+	c := RGB{}
+	var err error
 	switch len(s) {
 	case 7:
 		_, err = fmt.Sscanf(s, "#%02x%02x%02x", &c.R, &c.G, &c.B)
@@ -19,5 +21,5 @@ func ParseHex(s string) (c RGB, err error) {
 	default:
 		err = fmt.Errorf("invalid length, must be 7 or 4")
 	}
-	return
+	return c, err
 }
