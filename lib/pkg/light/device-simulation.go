@@ -20,7 +20,7 @@ func (d *DeviceSimulation) setupEffects() {
 	effects := ParseParams(
 		intToBytes(paramsSubset),
 	)
-	d.effects = &effects
+	d.effects = effects
 }
 
 func (d *DeviceSimulation) setupColors() {

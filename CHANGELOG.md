@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning][].
 * Panic on simulation rejection
 * Cyclic pop-up window on simulation rejection
 * Application title
+* Improve memory usage
 
 ## [1.0.0-beta2]
 

@@ -50,7 +50,7 @@ func (d *DeviceHardware) GetEffects() (*Effects, error) {
 		return nil, err
 	}
 	effects := ParseParams(params)
-	return &effects, err
+	return effects, err
 }
 
 // GetRawColors returns raw keyboard colors.
@@ -112,14 +112,14 @@ func (d *DeviceHardware) SetEffects(p *Effects) error {
 }
 
 // OpenHardware opens real keyboard lights.
-func OpenHardware() (DeviceHardware, error) {
+func OpenHardware() (*DeviceHardware, error) {
 	var d DeviceHardware
 	handle, err := hid.OpenHandle()
 	if err != nil {
-		return d, err
+		return nil, err
 	}
 	d.Handle = handle
-	return d, nil
+	return &d, nil
 }
 
 // Open hardware keyboard lights as Lights.
@@ -127,8 +127,8 @@ func Open() (Device, error) {
 	var lights Device
 	h, err := OpenHardware()
 	if err != nil {
-		return lights, err
+		return nil, err
 	}
-	lights = &h
+	lights = h
 	return lights, nil
 }

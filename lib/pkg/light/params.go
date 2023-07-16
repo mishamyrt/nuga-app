@@ -52,8 +52,8 @@ func (b *Effects) Bytes() []byte {
 }
 
 // ParseParams parses raw bytes to effects struct.
-func ParseParams(data []byte) Effects {
-	var result Effects
+func ParseParams(data []byte) *Effects {
+	result := &Effects{}
 	var offset int
 	var value uint8
 	result.Halo = MiscEffect{
