@@ -1,4 +1,4 @@
-// package light contains set of utils to work with keyboard.
+// Package light contains set of utils to work with keyboard.
 package light
 
 import (
