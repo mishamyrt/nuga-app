@@ -210,11 +210,12 @@ func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
 	if err != nil {
 		return
 	}
-	if a.mode == Win {
+	switch a.mode {
+	case Win:
 		colors.SetWinBacklight(m, i, c)
-	} else if a.mode == Mac {
+	case Mac:
 		colors.SetMacBacklight(m, i, c)
-	} else {
+	case Both:
 		colors.SetWinBacklight(m, i, c)
 		colors.SetMacBacklight(m, i, c)
 	}
