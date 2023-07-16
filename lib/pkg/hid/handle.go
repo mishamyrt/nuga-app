@@ -76,10 +76,8 @@ func (h *Handle) Read(count int) ([]byte, error) {
 		} else {
 			log.Println("Read 0")
 		}
-
 	}
 	h.waitSync()
-	// Cut report id
 	return packet, nil
 }
 
