@@ -1,13 +1,13 @@
 <script lang="ts">
-  import LightsPreview from '../components/LightsPreview.svelte'
+  import LightsPreview from '@components/LightsPreview.svelte'
+  import LightParams from '@components/LightParams.svelte'
+  import ColorPickerModal from '@components/ColorPickerModal.svelte'
   import {
     state,
     modes,
     color,
     setBacklight, setHalo, setSidelight, backlightColors, changingColor
   } from '@stores/lights'
-  import LightParams from '../components/LightParams.svelte'
-  import ColorPickerModal from '@components/ColorPickerModal.svelte'
 
   const backlightColor = color.backlight
   const sidelightColor = color.sidelight
