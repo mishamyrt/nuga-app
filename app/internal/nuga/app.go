@@ -86,7 +86,7 @@ func (a *App) Connect() string {
 			return ""
 		}
 		name, err := lights.GetName()
-		if err != nil || name != "NuPhy Halo75" {
+		if err != nil || (name != "NuPhy Halo75" && name != "NuPhy Halo65") {
 			return ""
 		}
 		a.lights = lights
