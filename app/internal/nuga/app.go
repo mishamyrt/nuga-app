@@ -78,6 +78,20 @@ func (a *App) Disconnect() {
 	a.lights = nil
 }
 
+var SupportedModels = []string{
+	"NuPhy Halo75",
+	"NuPhy Halo65",
+}
+
+func isSupported(name string) bool {
+	for _, v := range SupportedModels {
+		if v == name {
+			return true
+		}
+	}
+	return false
+}
+
 // Connect initiates connection and returns a keyboard name
 func (a *App) Connect() string {
 	if a.lights == nil {
@@ -86,9 +100,10 @@ func (a *App) Connect() string {
 			return ""
 		}
 		name, err := lights.GetName()
-		if err != nil || (name != "NuPhy Halo75" && name != "NuPhy Halo65") {
+		if err != nil || !isSupported(name) {
 			return ""
 		}
+
 		a.lights = lights
 	}
 	name, err := a.lights.GetName()
