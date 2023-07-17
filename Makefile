@@ -1,9 +1,9 @@
-VERSION = 1.0.0-beta4
+VERSION = 1.0.0-beta5
 DIST_PATH = dist
 BUILD_PATH = app/build/bin
 
 PLATFORMS = darwin/arm64,darwin/amd64
-LD_FLAGS = -X 'main.AppVersion=v$(VERSION)' -s -w
+LD_FLAGS = -X 'nuga_ui/internal/nuga.AppVersion=v$(VERSION)' -s -w
 UNAME := $(shell uname)
 ARCH := $(shell arch)
 
