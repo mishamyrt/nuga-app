@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"nuga/pkg/keyboard"
+	"nuga/pkg/light"
 	"os"
 )
 
@@ -40,7 +40,7 @@ func main() {
 		os.Exit(1)
 	}
 	outFile := os.Args[1]
-	k, err := keyboard.OpenHardware()
+	k, err := light.OpenHardware()
 	if err != nil {
 		log.Panicf("Couldn't open keyboard: %v", err)
 	}
