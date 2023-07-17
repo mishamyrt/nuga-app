@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
+## [1.0.0-beta4]
+
+## Added
+
+* Initial dirty support for Halo65
+
 ## [1.0.0-beta3]
 
 ## Added
@@ -46,3 +52,5 @@ Initial beta release
 [1.0.0-beta1]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta1
 [1.0.0-beta2]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta2
 [1.0.0-beta3]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta3
+[1.0.0-beta4]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta4
+
