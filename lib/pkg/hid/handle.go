@@ -15,15 +15,19 @@ const RequestRetries = 5
 type Handle struct {
 	Device *hid.Device
 	// Debug flag. If true, then debugging data will be written to stdout when functions are executed.
-	Debug   bool
-	Retries int
-	mutex   sync.Mutex
+	Debug bool
+	mutex sync.Mutex
+}
+
+// GetName returns handle device name.
+func (h *Handle) GetName() (string, error) {
+	return h.Device.GetProductStr()
 }
 
 // SendWithRetries sends the request and resends it if the request fails.
 func (h *Handle) SendWithRetries(payload []byte) error {
 	var err error
-	for i := 0; i < h.Retries; i++ {
+	for i := 0; i < RequestRetries; i++ {
 		if h.Debug {
 			log.Println("Send attempt", i+1)
 		}
@@ -85,7 +89,7 @@ func (h *Handle) Read(count int) ([]byte, error) {
 func (h *Handle) Request(payload []byte, count int) ([]byte, error) {
 	var resp []byte
 	var err error
-	for i := 0; i < h.Retries; i++ {
+	for i := 0; i < RequestRetries; i++ {
 		if h.Debug {
 			log.Println("Read attempt", i+1)
 		}
@@ -140,6 +144,5 @@ func OpenHandle() (*Handle, error) {
 		return &h, err
 	}
 	h.Device = device
-	h.Retries = RequestRetries
 	return &h, nil
 }
