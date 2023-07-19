@@ -25,7 +25,9 @@ jobs:
           pnpm install --frozen-lockfile
           cd ../..
       - name: Create dummy dist dir
-        run: mkdir -p app/frontend/dist
+        run: |
+          mkdir -p app/frontend/dist
+          echo "." > app/frontend/dist/.gitkeep
       - name: Sync workspace
         run: go work sync
       - name: golangci-lint lib
