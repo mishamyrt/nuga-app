@@ -1,7 +1,7 @@
 import type { MapStore } from 'nanostores'
 import {
   GetLightState,
-  GetModes,
+  GetLightDomains,
   SetHalo,
   SetBacklight,
   SetSidelight,
@@ -9,7 +9,7 @@ import {
   SetBacklightColor
 } from '../../../wailsjs/go/nuga/App'
 import type { Color, EffectParams, LightMode, LightSetter, LightState } from './types'
-import { backlightColors, changingColor, modes, state } from './stores'
+import { backlightColors, changingColor, domains, state } from './stores'
 import { defaultState } from './defaults'
 import { UpdateSynchronizer } from './synchronizer'
 import { capitalize } from '@utils/strings'
@@ -61,11 +61,24 @@ export function setSidelight (): void {
   return setLight(state.sidelight, SetSidelight)
 }
 
-export async function loadModes (): Promise<void> {
-  const appModes = await GetModes()
-  modes.backlight.set(mapModes(appModes.Backlight))
-  modes.halo.set(mapModes(appModes.Halo))
-  modes.sidelight.set(mapModes(appModes.Sidelight))
+export async function loadDomains (): Promise<void> {
+  const items = await GetLightDomains()
+  const domainsMap = items.reduce<Record<string, any>>((acc, domain) => {
+    return {
+      ...acc,
+      [domain.Name]: mapModes(domain.Modes)
+    }
+  }, {})
+  console.log(domainsMap)
+  if (domainsMap?.Backlight.length > 0) {
+    domains.backlight.set(domainsMap.Backlight)
+  }
+  if (domainsMap?.Halo.length > 0) {
+    domains.halo.set(domainsMap.Halo)
+  }
+  if (domainsMap?.Sidelight.length > 0) {
+    domains.sidelight.set(domainsMap.Sidelight)
+  }
 }
 
 export async function loadState (): Promise<void> {

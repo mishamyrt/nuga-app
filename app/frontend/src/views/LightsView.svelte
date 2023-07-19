@@ -4,7 +4,7 @@
   import ColorPickerModal from '@components/ColorPickerModal.svelte'
   import {
     state,
-    modes,
+    domains,
     color,
     setBacklight, setHalo, setSidelight, backlightColors, changingColor
   } from '@stores/lights'
@@ -14,6 +14,10 @@
   const haloColor = color.halo
 
   const backlightState = state.backlight
+
+  const haloDomain = domains.halo
+  const sidelightDomain = domains.sidelight
+
   $: colors = $backlightColors[$backlightState.mode]
 </script>
 
@@ -22,8 +26,8 @@
     <h3>Lights</h3>
     <div class="preview">
       <LightsPreview
-        sidelight={$sidelightColor}
-        halo={$haloColor}
+        sidelight={$sidelightDomain.length === 0 ? false : $sidelightColor}
+        halo={$haloDomain.length === 0 ? false : $haloColor}
         backlight={$backlightColor}
       />
     </div>
@@ -34,21 +38,25 @@
         {colors}
         state={state.backlight}
         write={setBacklight}
-        modes={modes.backlight}
+        modes={domains.backlight}
         canChangeColor
         title="Backlight" />
-      <LightParams
-        write={setHalo}
-        state={state.halo}
-        modes={modes.halo}
-        title="Halo"
-      />
-      <LightParams
-        write={setSidelight}
-        state={state.sidelight}
-        modes={modes.sidelight}
-        title="Sidelight"
-      />
+      {#if $haloDomain.length > 0}
+        <LightParams
+          write={setHalo}
+          state={state.halo}
+          modes={haloDomain}
+          title="Halo"
+        />
+      {/if}
+      {#if $sidelightDomain.length > 0}
+        <LightParams
+          write={setSidelight}
+          state={state.sidelight}
+          modes={sidelightDomain}
+          title="Sidelight"
+        />
+      {/if}
     </div>
   </div>
   {#if $changingColor !== undefined}

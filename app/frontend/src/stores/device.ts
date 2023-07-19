@@ -1,7 +1,7 @@
 import { atom, action } from 'nanostores'
 import { sleep } from '@utils/timing'
 import { Connect, GetPath, SimulateConnection } from '../../wailsjs/go/nuga/App.js'
-import { loadModes, loadState, loadColors } from './lights/actions'
+import { loadDomains, loadState, loadColors } from './lights/actions'
 
 interface ConnectedKeyboard {
   name: string
@@ -38,7 +38,7 @@ export const connect = action(device, 'connect', async store => {
         path
       })
       await loadColors()
-      await loadModes()
+      await loadDomains()
       await loadState()
       return
     }

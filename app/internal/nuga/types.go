@@ -2,20 +2,12 @@ package nuga
 
 import (
 	"nuga/pkg/light"
-	"nuga/pkg/light/effect"
 )
 
 // LightState represents keyboard light state.
 type LightState struct {
 	light.Effects
 	BacklightParams *light.EffectParams
-}
-
-// Modes represent keyboard mode slices
-type Modes struct {
-	Backlight *effect.Modes
-	Sidelight *effect.Modes
-	Halo      *effect.Modes
 }
 
 // OSMode represent keyboard OS switch mode

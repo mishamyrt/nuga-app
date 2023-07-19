@@ -8,7 +8,7 @@ export const state = {
   halo: map<LightState>({ ...defaultState })
 }
 
-export const modes = {
+export const domains = {
   backlight: atom<LightMode[]>([]),
   sidelight: atom<LightMode[]>([]),
   halo: atom<LightMode[]>([])
@@ -35,7 +35,7 @@ export const color = {
     if (all.length === 0 || !backlight.enabled) {
       return
     }
-    if (backlight.color === 7 || !supportColors(backlight.mode, modes.backlight)) {
+    if (backlight.color === 7 || !supportColors(backlight.mode, domains.backlight)) {
       return 'random'
     }
     return all[backlight.mode][backlight.color]
@@ -44,7 +44,7 @@ export const color = {
     if (!halo.enabled) {
       return
     }
-    if (halo.color === 7 || !supportColors(halo.mode, modes.halo)) {
+    if (halo.color === 7 || !supportColors(halo.mode, domains.halo)) {
       return 'random'
     }
     return haloColors[halo.color]
@@ -53,7 +53,7 @@ export const color = {
     if (!sidelight.enabled) {
       return
     }
-    if (sidelight.color === 7 || !supportColors(sidelight.mode, modes.sidelight)) {
+    if (sidelight.color === 7 || !supportColors(sidelight.mode, domains.sidelight)) {
       return 'random'
     }
     return sidelightColors[sidelight.color]
