@@ -1,3 +1,4 @@
+// Package bit contains utils for bit masks
 package bit
 
 // Mask represents bit mask entity

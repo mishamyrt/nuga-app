@@ -99,7 +99,7 @@ func (a *App) GetPath() string {
 	return a.dev.Path
 }
 
-// GetModes returns keyboard modes
+// GetLightDomains returns keyboard light domains
 func (a *App) GetLightDomains() []effect.Domain {
 	return a.dev.LightDomains
 }

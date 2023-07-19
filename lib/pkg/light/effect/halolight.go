@@ -33,7 +33,7 @@ var (
 	}
 )
 
-// Backlight is a list of backlight effects.
+// Halo is a domain for halolight effects.
 var Halo = Domain{
 	Name: "Halo",
 	Modes: []Mode{

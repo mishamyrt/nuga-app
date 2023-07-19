@@ -18,7 +18,7 @@ func describe(d *device.Device) {
 }
 
 func openSimulation(tplPath string) (*device.Device, error) {
-	content, err := os.ReadFile(os.Args[1])
+	content, err := os.ReadFile(tplPath)
 	if err != nil {
 		panic(err)
 	}

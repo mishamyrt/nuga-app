@@ -1,6 +1,6 @@
 package effect
 
-// Modes is a list of keyboard mode
+// Domain is a type of keyboard lights with its mode
 type Domain struct {
 	Name  string
 	Modes []Mode

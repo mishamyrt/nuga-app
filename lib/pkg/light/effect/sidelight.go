@@ -39,6 +39,7 @@ var (
 	}
 )
 
+// Sidelight is a domain for sidelight effects.
 var Sidelight = Domain{
 	Name: "Sidelight",
 	Modes: []Mode{

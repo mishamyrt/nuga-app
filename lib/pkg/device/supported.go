@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// SupportedDevices contains nuga supported keyboard list with its features
 var SupportedDevices = []Device{
 	{
 		Name:   "Halo75",

@@ -105,6 +105,7 @@ func (d *K916Controller) SetEffects(p *Effects) error {
 	return d.Handle.SendWithRetries(paramsRequest)
 }
 
+// OpenK916 opens BYK916 NuPhy keyboard lights.
 func OpenK916(handle *hid.Handle) Controller {
 	var lights Controller = &K916Controller{
 		Handle: handle,
