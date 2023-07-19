@@ -34,7 +34,7 @@ func (p *BacklightEffect) SetSpeed(speed uint8) error {
 	if p.Mode.Code == 0 {
 		return ErrLightsOff
 	}
-	if !p.Mode.Features.Supports(effect.Speed) {
+	if !p.Mode.Features.IsSet(effect.Speed) {
 		return ErrNotSupported
 	}
 	if speed > 4 {
@@ -49,10 +49,10 @@ func (p *BacklightEffect) SetColor(color uint8) error {
 	if p.Mode.Code == 0 {
 		return ErrLightsOff
 	}
-	if !p.Mode.Features.SupportsAny(effect.SpecificColor, effect.RandomColor) {
+	if !p.Mode.Features.IsSetAny(effect.SpecificColor, effect.RandomColor) {
 		return ErrNotSupported
 	}
-	if color == 7 && !p.Mode.Features.Supports(effect.RandomColor) {
+	if color == 7 && !p.Mode.Features.IsSet(effect.RandomColor) {
 		return ErrNotSupported
 	}
 	p.CurrentParams().Color = color

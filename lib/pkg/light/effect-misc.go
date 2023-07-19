@@ -25,7 +25,7 @@ func (p *MiscEffect) SetSpeed(speed uint8) error {
 	if p.Mode.Code == 0 {
 		return ErrLightsOff
 	}
-	if !p.Mode.Features.Supports(effect.Speed) {
+	if !p.Mode.Features.IsSet(effect.Speed) {
 		return ErrNotSupported
 	}
 	if speed > 4 {
@@ -37,7 +37,7 @@ func (p *MiscEffect) SetSpeed(speed uint8) error {
 
 // SetColor of misc effect.
 func (p *MiscEffect) SetColor(color uint8) error {
-	if !p.Mode.Features.Supports(effect.SpecificColor) {
+	if !p.Mode.Features.IsSet(effect.SpecificColor) {
 		return ErrNotSupported
 	}
 	// 6, not 7, because the extra lights do not support random colors

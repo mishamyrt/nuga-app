@@ -24,6 +24,15 @@ func (h *Handle) GetName() (string, error) {
 	return h.Device.GetProductStr()
 }
 
+// GetPath returns handle device path.
+func (h *Handle) GetPath() (string, error) {
+	info, err := h.Device.GetDeviceInfo()
+	if err != nil {
+		return "", err
+	}
+	return info.Path, nil
+}
+
 // SendWithRetries sends the request and resends it if the request fails.
 func (h *Handle) SendWithRetries(payload []byte) error {
 	var err error

@@ -110,29 +110,32 @@ var (
 		17,
 		Speed,
 	}
-	// BacklightGame represents keyboard backlight game mode.
-	BacklightGame = Mode{
-		"Game",
+	// BacklightCustom represents keyboard backlight game mode.
+	BacklightCustom = Mode{
+		"Custom",
 		18,
 		0,
 	}
 )
 
 // Backlight is a list of backlight effects.
-var Backlight = Modes{
-	BacklightOff,
-	BacklightFixed,
-	BacklightRespire,
-	BacklightRainbow,
-	BacklightFlashAway,
-	BacklightRainbowWheel,
-	BacklightRipplesShining,
-	BacklightStarsTwinkle,
-	BacklightNeonStream,
-	BacklightReaction,
-	BacklightSineWave,
-	BacklightRotatingWindmill,
-	BacklightColorfulWaterfall,
-	BacklightBlossoming,
-	BacklightGame,
+var Backlight = Domain{
+	Name: "Backlight",
+	Modes: []Mode{
+		BacklightOff,
+		BacklightFixed,
+		BacklightRespire,
+		BacklightRainbow,
+		BacklightFlashAway,
+		BacklightRainbowWheel,
+		BacklightRipplesShining,
+		BacklightStarsTwinkle,
+		BacklightNeonStream,
+		BacklightReaction,
+		BacklightSineWave,
+		BacklightRotatingWindmill,
+		BacklightColorfulWaterfall,
+		BacklightBlossoming,
+		BacklightCustom,
+	},
 }

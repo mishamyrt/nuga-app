@@ -5,18 +5,13 @@ import (
 	"nuga/pkg/hid"
 )
 
-// DeviceHardware represents real keyboard lights.
-type DeviceHardware struct {
+// K916Controller represents NuPhy BYK916 keyboard lights controller.
+type K916Controller struct {
 	Handle *hid.Handle
 }
 
-// GetName returns keyboard name.
-func (d *DeviceHardware) GetName() (string, error) {
-	return d.Handle.Device.GetProductStr()
-}
-
-// GetPath returns keyboard patd.
-func (d *DeviceHardware) GetPath() (string, error) {
+// GetPath returns keyboard path.
+func (d *K916Controller) GetPath() (string, error) {
 	info, err := d.Handle.Device.GetDeviceInfo()
 	if err != nil {
 		return "", err
@@ -25,7 +20,7 @@ func (d *DeviceHardware) GetPath() (string, error) {
 }
 
 // GetRawEffects returns raw effects data.
-func (d *DeviceHardware) GetRawEffects() ([]byte, error) {
+func (d *K916Controller) GetRawEffects() ([]byte, error) {
 	response, err := d.Handle.Request(CmdGetParams, 270)
 	if err != nil {
 		return []byte{}, err
@@ -34,7 +29,7 @@ func (d *DeviceHardware) GetRawEffects() ([]byte, error) {
 }
 
 // GetEffectsBuffer returns trimmed effects buffer.
-func (d *DeviceHardware) GetEffectsBuffer() ([]byte, error) {
+func (d *K916Controller) GetEffectsBuffer() ([]byte, error) {
 	raw, err := d.GetRawEffects()
 	if err != nil {
 		return []byte{}, err
@@ -44,7 +39,7 @@ func (d *DeviceHardware) GetEffectsBuffer() ([]byte, error) {
 }
 
 // GetEffects returns keyboard effects.
-func (d *DeviceHardware) GetEffects() (*Effects, error) {
+func (d *K916Controller) GetEffects() (*Effects, error) {
 	params, err := d.GetEffectsBuffer()
 	if err != nil {
 		return nil, err
@@ -54,7 +49,7 @@ func (d *DeviceHardware) GetEffects() (*Effects, error) {
 }
 
 // GetRawColors returns raw keyboard colors.
-func (d *DeviceHardware) GetRawColors() ([]byte, error) {
+func (d *K916Controller) GetRawColors() ([]byte, error) {
 	var colors []byte
 	colors, err := d.Handle.Request(CmdGetColors, 1050)
 	if err != nil {
@@ -64,7 +59,7 @@ func (d *DeviceHardware) GetRawColors() ([]byte, error) {
 }
 
 // GetColors returns keyboard colors state.
-func (d *DeviceHardware) GetColors() (*ColorState, error) {
+func (d *K916Controller) GetColors() (*ColorState, error) {
 	raw, err := d.GetRawColors()
 	if err != nil {
 		return nil, err
@@ -74,7 +69,7 @@ func (d *DeviceHardware) GetColors() (*ColorState, error) {
 }
 
 // SetColors sets keyboard color state.
-func (d *DeviceHardware) SetColors(c *ColorState) error {
+func (d *K916Controller) SetColors(c *ColorState) error {
 	request := make([]byte, 0)
 	request = append(request, CmdSetColors...)
 	request = append(request, c.Bytes()...)
@@ -82,7 +77,7 @@ func (d *DeviceHardware) SetColors(c *ColorState) error {
 }
 
 // ResetColors resets colors to defaults.
-func (d *DeviceHardware) ResetColors() error {
+func (d *K916Controller) ResetColors() error {
 	var state ColorState
 	for i := range state {
 		state[i][0] = color.Red
@@ -97,7 +92,7 @@ func (d *DeviceHardware) ResetColors() error {
 }
 
 // SetEffects sets keyboard effects.
-func (d *DeviceHardware) SetEffects(p *Effects) error {
+func (d *K916Controller) SetEffects(p *Effects) error {
 	currentParams, err := d.GetEffectsBuffer()
 	if err != nil {
 		return err
@@ -107,28 +102,34 @@ func (d *DeviceHardware) SetEffects(p *Effects) error {
 	paramsRequest = append(paramsRequest, p.Bytes()...)
 	paramsRequest = append(paramsRequest, currentParams...)
 	paramsRequest = append(paramsRequest, make([]byte, 770)...)
-	// return nil
 	return d.Handle.SendWithRetries(paramsRequest)
 }
 
-// OpenHardware opens real keyboard lights.
-func OpenHardware() (*DeviceHardware, error) {
-	var d DeviceHardware
-	handle, err := hid.OpenHandle()
-	if err != nil {
-		return nil, err
+func OpenK916(handle *hid.Handle) Controller {
+	var lights Controller = &K916Controller{
+		Handle: handle,
 	}
-	d.Handle = handle
-	return &d, nil
+	return lights
 }
 
-// Open hardware keyboard lights as Lights.
-func Open() (Device, error) {
-	var lights Device
-	h, err := OpenHardware()
-	if err != nil {
-		return nil, err
-	}
-	lights = h
-	return lights, nil
-}
+// // OpenHardware opens real keyboard lights.
+// func OpenHardware() (*HardwareController, error) {
+// 	var d HardwareController
+// 	handle, err := hid.OpenHandle()
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	d.Handle = handle
+// 	return &d, nil
+// }
+
+// // Open hardware keyboard lights as Lights.
+// func Open() (Controller, error) {
+// 	var lights Controller
+// 	h, err := OpenHardware()
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	lights = h
+// 	return lights, nil
+// }

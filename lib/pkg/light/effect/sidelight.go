@@ -39,12 +39,14 @@ var (
 	}
 )
 
-// Sidelight is a list of sidelight effects.
-var Sidelight = Modes{
-	SidelightOff,
-	SidelightRainbowStream,
-	SidelightRainbow,
-	SidelightFixed,
-	SidelightRespire,
-	SidelightNeonStream,
+var Sidelight = Domain{
+	Name: "Sidelight",
+	Modes: []Mode{
+		SidelightOff,
+		SidelightRainbowStream,
+		SidelightRainbow,
+		SidelightFixed,
+		SidelightRespire,
+		SidelightNeonStream,
+	},
 }

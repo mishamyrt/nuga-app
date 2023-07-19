@@ -33,11 +33,14 @@ var (
 	}
 )
 
-// Halo is a list of halolight effects.
-var Halo = Modes{
-	HalolightOff,
-	HalolightRainbowWheel,
-	HalolightRainbow,
-	HalolightFixed,
-	HalolightRespire,
+// Backlight is a list of backlight effects.
+var Halo = Domain{
+	Name: "Halo",
+	Modes: []Mode{
+		HalolightOff,
+		HalolightRainbowWheel,
+		HalolightRainbow,
+		HalolightFixed,
+		HalolightRespire,
+	},
 }
