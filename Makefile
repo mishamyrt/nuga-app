@@ -46,6 +46,10 @@ build:
 		-trimpath \
 		-ldflags "$(LD_FLAGS)"
 
+.PHONY: build-dumper
+build-dumper:
+	go build -o dist/k916-dumper utils/k916-dumper/main.go
+
 .PHONY: release
 release:
 	make build

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"nuga/pkg/hid"
 	"nuga/pkg/light"
 	"os"
 )
@@ -40,9 +41,12 @@ func main() {
 		os.Exit(1)
 	}
 	outFile := os.Args[1]
-	k, err := light.OpenHardware()
+	handle, err := hid.OpenHandle()
 	if err != nil {
-		log.Panicf("Couldn't open keyboard: %v", err)
+		log.Panicf("Couldn't open HID handle: %v", err)
+	}
+	k := light.K916Controller{
+		Handle: handle,
 	}
 	params, err := k.GetRawEffects()
 	if err != nil {
