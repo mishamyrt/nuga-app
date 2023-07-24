@@ -1,16 +1,18 @@
 import { atom, action } from 'nanostores'
 import { sleep } from '@utils/timing'
-import { Connect, GetPath, SimulateConnection } from '../../wailsjs/go/nuga/App.js'
+import { Connect, GetFirmware, GetPath, SimulateConnection } from '../../wailsjs/go/nuga/App.js'
 import { loadDomains, loadState, loadColors } from './lights/actions'
 
 interface ConnectedKeyboard {
   name: string
   path: string
+  firmware: string
 }
 
 export const device = atom<ConnectedKeyboard>({
   name: '',
-  path: ''
+  path: '',
+  firmware: ''
 })
 
 let simulation = false
@@ -33,9 +35,11 @@ export const connect = action(device, 'connect', async store => {
     }
     if (name.length > 0) {
       const path = await GetPath()
+      const firmware = await GetFirmware()
       store.set({
         name,
-        path
+        path,
+        firmware
       })
       await loadColors()
       await loadDomains()

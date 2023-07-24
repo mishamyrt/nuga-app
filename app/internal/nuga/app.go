@@ -94,9 +94,14 @@ func (a *App) Connect() string {
 	return a.dev.Name
 }
 
-// GetPath returns current device path if connected
+// GetPath returns current device path
 func (a *App) GetPath() string {
 	return a.dev.Path
+}
+
+// GetFirmware returns current device firmware version
+func (a *App) GetFirmware() string {
+	return a.dev.Firmware
 }
 
 // GetLightDomains returns keyboard light domains

@@ -19,18 +19,21 @@ type Handle struct {
 	mutex sync.Mutex
 }
 
-// GetName returns handle device name.
-func (h *Handle) GetName() (string, error) {
-	return h.Device.GetProductStr()
-}
-
-// GetPath returns handle device path.
-func (h *Handle) GetPath() (string, error) {
+// GetInfo returns handle device information.
+func (h *Handle) GetInfo() (*DeviceInfo, error) {
+	name, err := h.Device.GetProductStr()
+	if err != nil {
+		return nil, err
+	}
 	info, err := h.Device.GetDeviceInfo()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	return info.Path, nil
+	return &DeviceInfo{
+		Name:     name,
+		Path:     info.Path,
+		Firmware: formatVersion(info.ReleaseNbr),
+	}, nil
 }
 
 // SendWithRetries sends the request and resends it if the request fails.

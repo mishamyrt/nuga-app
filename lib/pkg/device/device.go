@@ -12,6 +12,7 @@ type Device struct {
 	Name         string
 	Layout       int
 	Path         string
+	Firmware     string
 	Light        light.Controller
 	LightDomains []effect.Domain
 }
@@ -42,15 +43,16 @@ func Open() (*Device, error) {
 	if err != nil {
 		return nil, err
 	}
-	name, err := handle.GetName()
+	info, err := handle.GetInfo()
 	if err != nil {
 		return nil, err
 	}
-	d, err := getDevice(name)
+	d, err := getDevice(info.Name)
 	if err != nil {
 		return nil, err
 	}
-	d.Path, err = handle.GetPath()
+	d.Path = info.Path
+	d.Firmware = info.Firmware
 	d.Light = light.OpenK916(handle)
 	if err != nil {
 		return nil, err

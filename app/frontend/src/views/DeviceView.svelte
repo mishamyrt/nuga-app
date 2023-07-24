@@ -37,6 +37,10 @@ $: deviceInfo = $device
           <span>{deviceInfo.path}</span>
         </div>
         <div class="form-row centered">
+          <span>Firmware version</span>
+          <span>{deviceInfo.firmware}</span>
+        </div>
+        <div class="form-row centered">
           <span>Individual mode settings</span>
           <Switch
             on:click={handleSettingsModeChange}

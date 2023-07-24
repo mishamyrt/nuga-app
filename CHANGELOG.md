@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning][].
 
 ## 1.0.0-beta6
 
+## Added
+
+* Displaying the firmware version on the Device view
+
 ## Fixed
 
 * Disabled custom mode selection. I'll bring it back when the support is complete
