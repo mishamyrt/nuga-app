@@ -51,7 +51,8 @@
   }
   $: modeOptions = $modes.map<SelectOption>(m => ({
     value: m.code.toString(),
-    title: m.name
+    title: m.name,
+    disabled: m.code === 18
   }))
 </script>
 

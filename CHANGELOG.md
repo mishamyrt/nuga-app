@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
+## 1.0.0-beta6
+
+## Fixed
+
+* Disabled custom mode selection. I'll bring it back when the support is complete
+
 ## [1.0.0-beta5]
 
 ## Added

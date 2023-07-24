@@ -18,7 +18,7 @@
 <div class="select-container" class:disabled>
   <select on:change={handleChange} {value}>
     {#each options as option}
-      <option value={option.value}>{option.title}</option>
+      <option disabled={option.disabled} value={option.value}>{option.title}</option>
     {/each}
   </select>
   <span class="title">{selected?.title}</span>
