@@ -72,6 +72,15 @@
     }
   }
 
+  .form-heading {
+    padding: 0 var(--form-padding);
+    display: flex;
+    justify-content: space-between;
+    h4 {
+      padding: 0;
+    }
+  }
+
 
   h4 {
     padding: 0 var(--form-padding);

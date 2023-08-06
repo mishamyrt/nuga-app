@@ -6,6 +6,7 @@
   import Range from './Range.svelte'
   import { Select, type SelectOption } from './Select'
   import Button from './Button.svelte'
+  import Help from './Help.svelte'
 
   export let title: string = ''
   export let state: MapStore<LightState>
@@ -13,6 +14,7 @@
   export let write: () => void
   export let colors: readonly Color[] | undefined = undefined
   export let canChangeColor = false
+  export let help: string = ''
 
   function handleEnabled (event: CustomEvent<boolean>): void {
     state.setKey('enabled', event.detail)
@@ -58,9 +60,16 @@
 
 <div class="form-group">
   {#if title.length > 0}
-    <h4>
-      {title}
-    </h4>
+    <div class="form-heading">
+      <h4>
+        {title}
+      </h4>
+      <div>
+        {#if help}
+        <Help message={help} />
+        {/if}
+      </div>
+    </div>
   {/if}
   <div class="form-rows">
     <div class="form-row centered">
@@ -118,5 +127,10 @@
 <style lang="scss">
   .form-row-actions {
     margin-top: 10px;
+  }
+
+  .heading {
+    display: flex;
+    align-items: center;
   }
 </style>

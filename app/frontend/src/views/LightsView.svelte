@@ -52,6 +52,7 @@
       {/if}
       {#if $sidelightDomain.length > 0}
         <LightParams
+          help="The result of the Sidelight settings will only be visible if the keyboard is fully charged."
           write={setSidelight}
           state={state.sidelight}
           modes={sidelightDomain}
