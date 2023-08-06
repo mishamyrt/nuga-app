@@ -9,6 +9,7 @@
     "allowJs": true,
     "checkJs": true,
     "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "paths": {
       "@assets/*": ["src/assets/*"],

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import LightsPreview from '@components/LightsPreview.svelte'
   import LightParams from '@components/LightParams.svelte'
   import ColorPickerModal from '@components/ColorPickerModal.svelte'
   import {
@@ -8,6 +7,8 @@
     color,
     setBacklight, setHalo, setSidelight, backlightColors, changingColor
   } from '@stores/lights'
+  import { device } from '@stores/device'
+  import Keyboard from '@components/Keyboard/KeyboardLights.svelte'
 
   const backlightColor = color.backlight
   const sidelightColor = color.sidelight
@@ -25,11 +26,11 @@
   <div class="heading">
     <h3>Lights</h3>
     <div class="preview">
-      <LightsPreview
-        sidelight={$sidelightDomain.length === 0 ? false : $sidelightColor}
-        halo={$haloDomain.length === 0 ? false : $haloColor}
+      <Keyboard
+        sidelight={$sidelightColor}
+        halo={$haloColor}
         backlight={$backlightColor}
-      />
+        layout={$device.name} />
     </div>
   </div>
   <div class="scroll-wrapper">
@@ -68,14 +69,11 @@
   .heading {
     border-bottom: 1px solid rgb(255 255 255 / 8%);
     background: linear-gradient(180deg, #282828 0%, #323232 100%);
-  }
-
-  .preview {
-    margin: 14px 0 20px;
+    min-height: 186px;
   }
 
   .scroll-wrapper {
     overflow-y: scroll;
-    height: calc(100vh - 172px);
+    height: calc(100vh - 204px);
   }
 </style>

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ## Added
 
 * Displaying the firmware version on the Device view
+* Dynamic keyboard preview. Halo75 and Halo65 support with correct layout.
 
 ## Fixed
 

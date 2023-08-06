@@ -22,6 +22,7 @@ var SupportedDevices = []Device{
 		LightDomains: []effect.Domain{
 			effect.Backlight,
 			effect.Halo,
+			effect.Sidelight,
 		},
 	},
 }
