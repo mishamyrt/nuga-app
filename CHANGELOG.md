@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ## Add
 
 * Mechanism for searching for application updates
+* `About` menu
 
 ## [1.0.0-beta6]
 

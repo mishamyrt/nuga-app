@@ -9,7 +9,7 @@ import (
 )
 
 // GetOptions returns application options
-func (a *App) GetOptions(assets fs.FS) *options.App {
+func (a *App) GetOptions(assets fs.FS, icon []byte) *options.App {
 	return &options.App{
 		Title:     "Nuga",
 		Width:     700,
@@ -24,6 +24,11 @@ func (a *App) GetOptions(assets fs.FS) *options.App {
 			WindowIsTranslucent:  true,
 			Appearance:           mac.NSAppearanceNameDarkAqua,
 			TitleBar:             mac.TitleBarHiddenInset(),
+			About: &mac.AboutInfo{
+				Title:   "Nuga",
+				Message: "© 2023 Mikhael Khrustik",
+				Icon:    icon,
+			},
 		},
 		BackgroundColour: &options.RGBA{R: 0, G: 0, B: 0, A: 0},
 		OnStartup:        a.OnStartup,
