@@ -3,7 +3,7 @@
 import { argv, exit } from 'process'
 
 /**
- * @param {string} stream 
+ * @param {string} stream
  */
 function getHexPairs(stream) {
     const pairs = []
@@ -21,15 +21,15 @@ function main() {
     console.log(result)
 }
 
-if (argv.length < 3) {
+if (argv.length < 4) {
     console.error("Too few arguments")
-    console.log("Usage: format-hex-stream.mjs <hex_stream>")
+    console.log("Usage: update-version.mjs <path> <version>")
     exit(1)
 }
 
 if (argv[2].length % 2 !== 0) {
     console.error("Wrong HEX stream")
     exit(1)
-} 
+}
 
 main()

@@ -1,4 +1,4 @@
-VERSION = 1.0.0-beta6
+VERSION = 1.0.0-beta7
 DIST_PATH = dist
 BUILD_PATH = app/build/bin
 
@@ -38,8 +38,14 @@ lint-app:
 	$(call go_lint,app)
 	cd app/frontend; pnpm run lint
 
+.PHONY: generate
+generate:
+	./utils/update-version.mjs app/wails.json "$(VERSION)"
+	cd app; wails generate module
+
 .PHONY: build
 build:
+	make generate
 	cd app; wails build \
 		-clean \
 		-platform "$(PLATFORMS)" \

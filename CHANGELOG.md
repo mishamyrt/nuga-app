@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning][].
 * Mechanism for searching for application updates
 * `About` menu
 
+## Fixed
+
+* Improved metadata in Info.plist file
+
 ## [1.0.0-beta6]
 
 ## Changed
