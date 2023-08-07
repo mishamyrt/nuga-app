@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning][].
 
 ## Fixed
 
-* Improved metadata in Info.plist file
+* Improved metadata in Info.plist file (The permission would need to be reissued).
 
 ## [1.0.0-beta6]
 
