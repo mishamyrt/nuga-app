@@ -1,9 +1,11 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
+  import { BrowserOpenURL } from '../wailsjs/runtime'
   import { focused, version } from '@stores/app'
   import SidebarItem from './components/SidebarItem.svelte'
-  import { view, connected } from './stores/app'
+  import Button from './components/Button.svelte'
+  import { view, connected, updateUrl } from './stores/app'
   import LightsView from './views/LightsView.svelte'
   import DeviceView from './views/DeviceView.svelte'
 
@@ -13,6 +15,14 @@
   let unsubscribeConnected: () => void
 
   let hideLoading = false
+
+  function openUpdate (): void {
+    const url = $updateUrl
+    if (!url) {
+      return
+    }
+    BrowserOpenURL(url)
+  }
 
   onMount(() => {
     unsubscribeConnected = connected.subscribe(isConnected => {
@@ -43,6 +53,9 @@
         </div>
       </div>
       <div>
+        {#if $updateUrl}
+        <Button on:click={openUpdate} label="Update available" autosize variant="warning" />
+        {/if}
         <span class="version">{appVersion}</span>
       </div>
     </div>

@@ -10,6 +10,7 @@ import (
 	"nuga/pkg/hid"
 	"nuga/pkg/light"
 	"nuga/pkg/light/effect"
+	"nuga_ui/internal/updates"
 	"os"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
@@ -30,6 +31,20 @@ func (a *App) OnStartup(ctx context.Context) {
 		log.Panicf("Error while initializing HID: %v", err)
 	}
 	a.ctx = ctx
+}
+
+// CheckUpdates starts update check in background
+func (a *App) CheckUpdates() {
+	go func() {
+		updater := updates.GitHubUpdater{FullName: "mishamyrt/Nuga"}
+		latest, err := updater.Latest()
+		if err != nil || len(latest) == 0 {
+			return
+		}
+		if AppVersion != latest {
+			runtime.EventsEmit(a.ctx, "update", updater.ReleaseURL(latest))
+		}
+	}()
 }
 
 // OnShutdown is called when the app closes

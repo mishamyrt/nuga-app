@@ -75,7 +75,7 @@ async function applyColor (): Promise<void> {
     </div>
     <div class="actions">
       <Button label="Cancel" on:click={hideModal} />
-      <Button label="Done" primary on:click={applyColor} />
+      <Button label="Done" variant="primary" on:click={applyColor} />
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import cable from '../assets/images/cable.connector.svg'
   import { connect, startSimulation } from '@stores/device'
-  import { connected, loadVersion } from '@stores/app'
+  import { connected, loadApp } from '@stores/app'
   import { sleep } from '@utils/timing'
   import { onHotkey } from '@utils/hotkey'
   import { sync } from '@stores/lights/actions'
@@ -17,7 +17,7 @@
       showHelp = true
     }, 1500)
     await Promise.all([
-      loadVersion(),
+      loadApp(),
       connect(),
       sleep(1000)
     ]).catch(console.error)
@@ -30,7 +30,7 @@
   <div class="help" class:show={showHelp}>
     <img alt="Wails logo" id="logo" src="{cable}">
     <h1>Looking for compatible keyboard</h1>
-    <p>Make sure your device is plugged in</p>
+    <p>Make sure that the device is connected with a wire</p>
   </div>
   <div class="spinner-container">
     <div class="spinner">
