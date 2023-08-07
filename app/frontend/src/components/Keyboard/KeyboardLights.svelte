@@ -50,7 +50,7 @@
     position: relative;
 
     --lights-transition: .25s ease-out;
-    --light-color-background: rgba(255, 255, 255, 0.17);
+    --light-color-background: rgb(255 255 255 / 17%);
   }
 
   .keyboard-wrapper {
@@ -86,10 +86,10 @@
     border-radius: 9px;
     border: 3px solid transparent;
     background: conic-gradient(from 125deg at 50% 50%, #f75b60, #ff9e0c, #ade403, #27c4ff, #7f83ff, #913ed3, #e54895, #e73a46) border-box;
-    -webkit-mask:
+    mask:
       linear-gradient(#fff 0 0) padding-box,
       linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
+    mask-composite: xor;
     mask-composite: exclude;
     position: relative;
     left: -6px;

@@ -66,10 +66,10 @@
 
   .keys {
     --key-color-dark: #757575;
-    --key-color-light: rgb(196, 196, 196);
-    --key-color-mint: rgb(46, 218, 151);
-    --key-color-orange: rgba(226, 121, 80, 1);
-    --key-color-yellow: rgb(195, 164, 0);
+    --key-color-light: rgb(196 196 196);
+    --key-color-mint: rgb(46 218 151);
+    --key-color-orange: rgb(226 121 80 / 100%);
+    --key-color-yellow: rgb(195 164 0);
     --key-height: 23px;
     --key-column-width: 6.7px;
     --key-radius: 3px;
@@ -95,19 +95,11 @@
     position: relative;
   }
 
-  .key-light+.key-fill {
-    opacity: 0.6;
-  }
-
   .key-fill,
   .key-light {
     position: absolute;
     width: 100%;
     height: 100%;
-  }
-
-  .key-fill,
-  .key-light {
     transition: background-color .3s linear;
     transition-delay: var(--key-delay);
     background-color: var(--key-color);
@@ -119,6 +111,10 @@
     z-index: 2;
     background-color: var(--key-light-color);
     opacity: 0.3;
+  }
+
+  .key-light+.key-fill {
+    opacity: 0.6;
   }
 
   .spacer {

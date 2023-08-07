@@ -41,15 +41,15 @@
     top: 27px;
     width: 192px;
     font-size: 12px;
-    background-color: rgba(60, 60, 60, 0.75);
-    -webkit-backdrop-filter: blur(8px);
+    background-color: rgb(60 60 60 / 75%);
+    backdrop-filter: blur(8px);
     z-index: 100;
     border-radius: 5px;
     padding: 10px;
     line-height: 1.3;
     text-align: left;
     border: 1px solid #4B4B4B;
-    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.36);
+    box-shadow: 0 6px 12px -2px rgb(0 0 0 / 36%);
     opacity: 0;
     transform: scale(0.9);
     transition: .2s ease-out;
@@ -73,7 +73,7 @@
     background-size: contain;
     border: none;
     border-radius: 50%;
-    box-shadow: 0px 0.5px 0.5px 0px rgba(249, 243, 243, 0.30) inset, 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.5px 0.5px 0 rgb(249 243 243 / 30%) inset, 0 1px 1px 0 rgb(0 0 0 / 25%);
 
     &:active {
       background-color: #767676;
