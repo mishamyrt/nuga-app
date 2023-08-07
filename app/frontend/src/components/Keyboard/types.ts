@@ -3,7 +3,8 @@ import type { Color } from '@stores/lights'
 export interface Key {
   code: string | 'spacer'
   color: 'light' | 'dark' | 'orange' | 'yellow' | 'mint'
-  size: number
+  width: number
+  height: number
 }
 
 export type KeyDescription = Partial<Key>

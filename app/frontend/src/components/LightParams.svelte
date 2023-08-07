@@ -128,9 +128,4 @@
   .form-row-actions {
     margin-top: 10px;
   }
-
-  .heading {
-    display: flex;
-    align-items: center;
-  }
 </style>

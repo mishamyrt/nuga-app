@@ -7,7 +7,7 @@ This mono repository contains packages for managing NuPhy® keyboards.
 * Lights control.
 * ~~Key mapping control~~ Not ready yet. 
 
-**Supported devices**: Halo75, Halo65
+**Supported devices**: Halo75, Halo65, Halo96.
 
 ## Packages
 

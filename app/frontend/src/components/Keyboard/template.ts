@@ -2,7 +2,8 @@ import type { Key, KeyDescription, KeyboardLayout, KeyboardTemplate } from './ty
 
 function fillKey (k: KeyDescription): Key {
   return {
-    size: k.size ? k.size * 4 : 4,
+    width: k.width ? k.width * 4 : 4,
+    height: k.height ?? 1,
     color: k.color ?? 'light',
     code: k.code ?? 'spacer'
   }
@@ -14,19 +15,20 @@ function getColumns (k: Key[][]): number {
   for (const row of k) {
     columns = 0
     for (const key of row) {
-      columns += key.size
+      columns += key.width
     }
     if (previousColumns === 0) {
       previousColumns = columns
       continue
     }
-    if (columns !== previousColumns) {
-      throw new Error(
-        `Columns count mismatch: expected ${previousColumns}, got ${columns} `
-      )
-    }
+    // if (columns !== previousColumns) {
+    //   continue
+    //   // throw new Error(
+    //   //   `Columns count mismatch: expected ${previousColumns}, got ${columns} `
+    //   // )
+    // }
   }
-  return columns
+  return previousColumns
 }
 
 export function buildTemplate (description: KeyboardLayout): KeyboardTemplate {

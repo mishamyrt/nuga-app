@@ -36,6 +36,7 @@
 
   .help {
     position: absolute;
+    pointer-events: none;
     right: -10px;
     top: 27px;
     width: 192px;

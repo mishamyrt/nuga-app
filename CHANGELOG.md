@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ## Added
 
 * Displaying the firmware version on the Device view
-* Dynamic keyboard preview. Halo75 and Halo65 support with correct layout.
+* Dynamic keyboard preview. Halo75, Halo65 and Halo96 support with correct layout.
 * Help message for Sidelight. It may seem like the settings don't apply, but it's more likely that your keyboard isn't charged to the max
 
 ## Fixed

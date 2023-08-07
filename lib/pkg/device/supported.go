@@ -8,6 +8,15 @@ import (
 // SupportedDevices contains nuga supported keyboard list with its features
 var SupportedDevices = []Device{
 	{
+		Name:   "Halo96",
+		Layout: 96,
+		LightDomains: []effect.Domain{
+			effect.Backlight,
+			effect.Halo,
+			effect.Sidelight,
+		},
+	},
+	{
 		Name:   "Halo75",
 		Layout: 75,
 		LightDomains: []effect.Domain{

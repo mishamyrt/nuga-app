@@ -38,23 +38,22 @@
     style:--keyboard-columns="{template.columns}"
   >
     {#each template.keys as row, i }
-      <div class="row">
-        {#each row as key, j }
-          {#if key.code === 'spacer'}
-            <div class="spacer"
-              style:--key-width="{key.size}" />
-          {:else}
-            <div style:--key-delay="{(i * 20) + (j * 10)}ms" class="key"
-              style:--key-width="{key.size}">
-              {#if backlight}
-              <div class="key-light" style:--key-light-color="{lightsMap[i][j]}" />
-              {/if}
-              <div class="key-fill"
-                style:--key-color="var(--key-color-{key.color})" />
-            </div>
-          {/if}
-        {/each}
-      </div>
+      {#each row as key, j }
+        {#if key.code === 'spacer'}
+          <div class="spacer"
+            style:--key-width="{key.width}" />
+        {:else}
+          <div style:--key-delay="{(i * 20) + (j * 10)}ms" class="key"
+            style:--key-width="{key.width}"
+            style:--key-row-height="{key.height}">
+            {#if backlight}
+            <div class="key-light" style:--key-light-color="{lightsMap[i][j]}" />
+            {/if}
+            <div class="key-fill"
+              style:--key-color="var(--key-color-{key.color})" />
+          </div>
+        {/if}
+      {/each}
     {/each}
   </div>
 </div>
@@ -76,8 +75,10 @@
     --key-radius: 3px;
     --key-gap: 3px;
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    width: calc(var(--keyboard-columns) * var(--key-column-width));
+    grid-template-columns: repeat(var(--keyboard-columns), 1fr);
+    grid-auto-rows: var(--key-height);
     gap: var(--key-gap);
 
     &.colorless {
@@ -89,8 +90,8 @@
 
   .key {
     grid-column: span var(--key-width);
+    grid-row: span var(--key-row-height);
     border-radius: var(--key-radius);
-    height: var(--key-height);
     position: relative;
   }
 
@@ -123,12 +124,5 @@
   .spacer {
     grid-column: span var(--key-width);
     height: var(--key-height);
-  }
-
-  .row {
-    display: grid;
-    width: calc(var(--keyboard-columns) * var(--key-column-width));
-    grid-template-columns: repeat(var(--keyboard-columns), 1fr);
-    gap: var(--key-gap);
   }
 </style>

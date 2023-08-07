@@ -37,11 +37,11 @@ export const Halo75: Keyboard = {
       { code: '0' },
       { code: '-' },
       { code: '+' },
-      { code: 'backspace', color: 'dark', size: 2 },
+      { code: 'backspace', color: 'dark', width: 2 },
       { code: 'home', color: 'dark' }
     ],
     [
-      { code: 'tab', color: 'dark', size: 1.5 },
+      { code: 'tab', color: 'dark', width: 1.5 },
       { code: 'q' },
       { code: 'w' },
       { code: 'e' },
@@ -54,11 +54,11 @@ export const Halo75: Keyboard = {
       { code: 'p' },
       { code: '[' },
       { code: ']' },
-      { code: '\\', size: 1.5 },
+      { code: '\\', width: 1.5 },
       { code: 'end', color: 'dark' }
     ],
     [
-      { code: 'caps', color: 'dark', size: 1.75 },
+      { code: 'caps', color: 'dark', width: 1.75 },
       { code: 'a' },
       { code: 's' },
       { code: 'd' },
@@ -70,11 +70,11 @@ export const Halo75: Keyboard = {
       { code: 'l' },
       { code: ';' },
       { code: '\'' },
-      { code: 'enter', size: 2.25, color: 'orange' },
+      { code: 'enter', width: 2.25, color: 'orange' },
       { code: 'pgup', color: 'dark' }
     ],
     [
-      { code: 'lshift', color: 'dark', size: 2.25 },
+      { code: 'lshift', color: 'dark', width: 2.25 },
       { code: 'z' },
       { code: 'x' },
       { code: 'c' },
@@ -85,18 +85,18 @@ export const Halo75: Keyboard = {
       { code: '<' },
       { code: '>' },
       { code: '/' },
-      { code: 'rshift', color: 'dark', size: 1.75 },
+      { code: 'rshift', color: 'dark', width: 1.75 },
       { code: 'up', color: 'dark' },
       { code: 'pgdn', color: 'dark' }
     ],
     [
-      { code: 'lctrl', color: 'dark', size: 1.25 },
-      { code: 'option', color: 'dark', size: 1.25 },
-      { code: 'lcmd', color: 'dark', size: 1.25 },
-      { code: 'space', color: 'yellow', size: 6.25 },
-      { code: 'rcmd', color: 'dark', size: 1.25 },
-      { code: 'fn', color: 'dark', size: 1.25 },
-      { size: 0.5 },
+      { code: 'lctrl', color: 'dark', width: 1.25 },
+      { code: 'option', color: 'dark', width: 1.25 },
+      { code: 'lcmd', color: 'dark', width: 1.25 },
+      { code: 'space', color: 'yellow', width: 6.25 },
+      { code: 'rcmd', color: 'dark', width: 1.25 },
+      { code: 'fn', color: 'dark', width: 1.25 },
+      { width: 0.5 },
       { code: 'left', color: 'dark' },
       { code: 'down', color: 'dark' },
       { code: 'right', color: 'dark' }
