@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning][].
 
 ## 1.0.0-beta6
 
+## Changed
+
+* "Fixed On" mode renamed to "Static"
+
 ## Added
 
 * Displaying the firmware version on the Device view

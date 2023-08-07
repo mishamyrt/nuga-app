@@ -8,9 +8,9 @@ var (
 		0,
 		0,
 	}
-	// BacklightFixed represents keyboard backlight fixed mode.
-	BacklightFixed = Mode{
-		"Fixed on",
+	// BacklightStatic represents keyboard backlight fixed mode.
+	BacklightStatic = Mode{
+		"Static",
 		1,
 		SpecificColor | RandomColor,
 	}
@@ -123,7 +123,7 @@ var Backlight = Domain{
 	Name: "Backlight",
 	Modes: []Mode{
 		BacklightOff,
-		BacklightFixed,
+		BacklightStatic,
 		BacklightRespire,
 		BacklightRainbow,
 		BacklightFlashAway,
