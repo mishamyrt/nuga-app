@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
   import { BrowserOpenURL } from '../wailsjs/runtime'
-  import { focused, version } from '@stores/app'
+  import { focused, version, os } from '@stores/app'
   import SidebarItem from './components/SidebarItem.svelte'
   import Button from './components/Button.svelte'
   import { view, connected, updateUrl } from './stores/app'
@@ -42,7 +42,7 @@
 </script>
 
 <main>
-  <div class="app" class:blurred={!$focused} class:ready={$connected}>
+  <div class="app {$os}" class:blurred={!$focused} class:ready={$connected}>
     <div class="sidebar">
       <div>
         <h1>Nuga</h1>
@@ -56,7 +56,7 @@
         {#if $updateUrl}
         <Button on:click={openUpdate} label="Update available" autosize variant="warning" />
         {/if}
-        <span class="version">{appVersion}</span>
+        <span class="version">{appVersion}&nbsp;<span class="os">on {$os}</span></span>
       </div>
     </div>
     <div class="content">
@@ -138,6 +138,17 @@
     font-weight: 500;
     font-size: 13px;
     opacity: 0.25;
+  }
+
+  .os {
+    opacity: 0;
+    transition: opacity .3s ease-out;
+    transition-delay: 2s;
+  }
+
+  .version:hover .os {
+    transition-delay: 0s;
+    opacity: 1;
   }
 
   .drag {

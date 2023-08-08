@@ -13,6 +13,8 @@ import (
 	"nuga_ui/internal/updates"
 	"os"
 
+	go_runtime "runtime"
+
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
@@ -31,6 +33,15 @@ func (a *App) OnStartup(ctx context.Context) {
 		log.Panicf("Error while initializing HID: %v", err)
 	}
 	a.ctx = ctx
+}
+
+func (a *App) GetOS() string {
+	os := go_runtime.GOOS
+	if os == "darwin" {
+		return "mac"
+	} else {
+		return os
+	}
 }
 
 // CheckUpdates starts update check in background
