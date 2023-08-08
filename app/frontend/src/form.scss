@@ -13,6 +13,12 @@
   --color-form-background: #F2F2F2;
 }
 
+.linux.theme-light {
+  --color-form-frame-outer: #DDDDDD;
+  --color-form-frame-inner: #DDDDDD;
+  --color-form-background: white;
+}
+
 .form {
   padding-bottom: 20px;
   line-height: 1;

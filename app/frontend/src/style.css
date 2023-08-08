@@ -29,6 +29,15 @@
   --font-family: Ubuntu, sans-serif;
 }
 
+.linux.theme-light {
+  --color-accent: #E9531F;
+  --color-background-main: #FAFAFA;
+  --color-background-sidebar: white;
+  --color-text: rgba(0, 0, 0, 0.8);
+  --color-line: rgba(1,1,1,0.1);
+  --color-input-background: white;
+}
+
 main {
   font-family: var(--font-family);
 }
