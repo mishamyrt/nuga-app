@@ -35,13 +35,13 @@ func (a *App) OnStartup(ctx context.Context) {
 	a.ctx = ctx
 }
 
+// GetOS returns current client OS name
 func (a *App) GetOS() string {
 	os := go_runtime.GOOS
 	if os == "darwin" {
 		return "mac"
-	} else {
-		return os
 	}
+	return os
 }
 
 // CheckUpdates starts update check in background

@@ -46,6 +46,9 @@ function handleClick (): void {
       position: relative;
       top: -1px;
       margin-right: 3px;
+      width: 20px;
+      height: 20px;
+
       --sidebar-icon-color: #009AFF;
     }
 
@@ -61,10 +64,5 @@ function handleClick (): void {
 
   :global(.blurred) button.selected {
     background-color: rgb(255 255 255 / 30%);
-  }
-
-  .icon {
-    width: 20px;
-    height: 20px;
   }
 </style>

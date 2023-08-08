@@ -52,13 +52,13 @@
     }
 
     &.bubble {
-      background: rgba(255, 255, 255, 0.11);
+      background: rgb(255 255 255 / 11%);
       border: none;
       border-radius: 5px;
       padding: 8px 12px;
 
       &:active {
-        background: rgba(255, 255, 255, 0.07);
+        background: rgb(255 255 255 / 7%);
       }
     }
   }
