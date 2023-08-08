@@ -57,18 +57,11 @@
             <SidebarItem title="Device" target="device" />
           </div>
         </div>
-        <div>
+        <div class="version-container">
           {#if $updateUrl}
           <Button on:click={openUpdate} label="Update available" autosize variant="bubble" />
           {/if}
-          {#if appVersion === 'dev'}
-          <select value={$os} on:change={handleOSChange}>
-            <option value="mac">mac</option>
-            <option value="linux">linux</option>
-          </select>
-          {:else}
           <span class="version">{appVersion}&nbsp;<span class="os">on {$os}</span></span>
-          {/if}
         </div>
       </div>
       <div class="content">
@@ -110,6 +103,10 @@
   .sidebar > div {
     width: 100%;
     text-align: left;
+  }
+
+  .version-container {
+    padding: 15px;
   }
 
   .content {
