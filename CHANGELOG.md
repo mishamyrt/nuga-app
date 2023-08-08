@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning][].
 * Mechanism for searching for application updates
 * `About` menu
 * OS handling
+* Light theme support
 
 ## Fixed
 
