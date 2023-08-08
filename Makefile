@@ -94,3 +94,9 @@ install_Darwin_amd64:
 .PHONY: install
 install:
 	make install_$(UNAME)_$(ARCH)
+
+.PHONY: clean
+clean:
+	rm -rf app/frontend/node_modules
+	rm -rf app/frontend/dist
+	rm -rf app/build/bin
