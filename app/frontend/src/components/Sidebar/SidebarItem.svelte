@@ -1,14 +1,8 @@
 <script lang="ts">
-import { view, type SettingsView } from '../stores/app'
-import lightIcon from '../assets/images/lights.sidebar@2x.png'
-import systemIcon from '../assets/images/system.sidebar@2x.png'
-import keysIcon from '../assets/images/keys.sidebar@2x.png'
-
-const icons: Record<SettingsView, string> = {
-  lights: lightIcon,
-  device: systemIcon,
-  keys: keysIcon
-}
+import { view, type SettingsView } from '../../stores/app'
+import LightBulb from './Icons/LightBulb.svelte'
+import Keyboard from './Icons/Keyboard.svelte'
+import GearShape from './Icons/GearShape.svelte'
 
 export let title: string
 export let target: SettingsView
@@ -20,7 +14,15 @@ function handleClick (): void {
 </script>
 
 <button {disabled} on:click={handleClick} class:selected={$view === target}>
-  <img class="icon" src={icons[target]} alt="asd" />
+  <div class="icon">
+    {#if target === 'lights'}
+      <LightBulb />
+    {:else if target === 'device'}
+      <GearShape />
+    {:else if target === 'keys'}
+      <Keyboard />
+    {/if}
+  </div>
   {title}
 </button>
 
@@ -34,10 +36,18 @@ function handleClick (): void {
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 4px 8px;
-    font-size: 13px;
+    padding: 7px 8px 8px 5px;
+    font-size: 15px;
+    font-weight: 400;
     color: white;
     background: transparent;
+
+    .icon {
+      position: relative;
+      top: -1px;
+      margin-right: 3px;
+      --sidebar-icon-color: #009AFF;
+    }
 
     &:disabled {
       pointer-events: none;
@@ -45,7 +55,7 @@ function handleClick (): void {
     }
 
     &.selected {
-      background: #296CD8;
+      background: rgb(255 255 255 / 14%);
     }
   }
 

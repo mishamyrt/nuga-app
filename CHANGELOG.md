@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning][].
 
 ## 1.0.0-beta7
 
+## Changed
+
+* Sidebar design
+
 ## Add
 
 * Mechanism for searching for application updates

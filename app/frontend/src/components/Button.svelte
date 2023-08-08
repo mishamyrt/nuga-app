@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte'
 
   export let label: string = ''
-  export let variant: 'warning' | 'primary' | 'default' = 'default'
+  export let variant: 'bubble' | 'primary' | 'default' = 'default'
   export let disabled = false
   export let autosize = false
   const dispatch = createEventDispatcher()
@@ -16,7 +16,7 @@
   on:click={handleClick}
   class:autosize
   class:primary={variant === 'primary'}
-  class:warning={variant === 'warning'}
+  class:bubble={variant === 'bubble'}
 >{label}</button>
 
 <style lang="scss">
@@ -51,11 +51,14 @@
       }
     }
 
-    &.warning {
-      background: linear-gradient(180deg, #E26A4F 0%, #B84228 100%);
+    &.bubble {
+      background: rgba(255, 255, 255, 0.11);
+      border: none;
+      border-radius: 5px;
+      padding: 8px 12px;
 
       &:active {
-        background: #AB432C;
+        background: rgba(255, 255, 255, 0.07);
       }
     }
   }

@@ -3,7 +3,7 @@
   import LoadingView from './views/LoadingView.svelte'
   import { BrowserOpenURL } from '../wailsjs/runtime'
   import { focused, version, os } from '@stores/app'
-  import SidebarItem from './components/SidebarItem.svelte'
+  import SidebarItem from './components/Sidebar/SidebarItem.svelte'
   import Button from './components/Button.svelte'
   import { view, connected, updateUrl } from './stores/app'
   import LightsView from './views/LightsView.svelte'
@@ -54,7 +54,7 @@
       </div>
       <div>
         {#if $updateUrl}
-        <Button on:click={openUpdate} label="Update available" autosize variant="warning" />
+        <Button on:click={openUpdate} label="Update available" autosize variant="bubble" />
         {/if}
         <span class="version">{appVersion}&nbsp;<span class="os">on {$os}</span></span>
       </div>
@@ -80,7 +80,7 @@
 <div class="drag"></div>
 <div class="border"></div>
 
-<style>
+<style lang="scss">
   .app {
     display: grid;
     height: 100vh;
