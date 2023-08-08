@@ -22,7 +22,7 @@ export function startSimulation (): void {
 }
 
 export const connect = action(device, 'connect', async store => {
-  let name
+  let name = ''
   while (true) {
     if (simulation) {
       name = await SimulateConnection()
@@ -31,6 +31,8 @@ export const connect = action(device, 'connect', async store => {
         continue
       }
     } else {
+      // Infinite connection
+      // await sleep(1000)
       name = await Connect()
     }
     if (name.length > 0) {
