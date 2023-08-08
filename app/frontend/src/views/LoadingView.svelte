@@ -56,6 +56,7 @@
   }
 
   .loading {
+    text-align: center;
     z-index: 999;
     min-height: 100vh;
     display: flex;

@@ -41,8 +41,8 @@
   })
 </script>
 
-<main>
-  <div class="app {$os}" class:blurred={!$focused} class:ready={$connected}>
+<main class="{$os}">
+  <div class="app" class:blurred={!$focused} class:ready={$connected}>
     <div class="sidebar">
       <div>
         <h1>Nuga</h1>
@@ -85,6 +85,7 @@
     display: grid;
     height: 100vh;
     grid-template-columns: 211px 1fr;
+    color: var(--color-text);
 
     &.blurred {
       background-color: var(--color-background-main);

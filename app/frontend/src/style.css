@@ -1,20 +1,16 @@
-:root {
+.mac {
   --color-background-transparent: rgba(27, 38, 54, 0.1);
   --color-background-main: #282828;
   --color-text: rgba(255, 255, 255, 0.9);
   --font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-html {
-  background-color: var(--color-background-transparent);
-  text-align: center;
-  color: var(--color-text);
+main {
+  font-family: var(--font-family);
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, "Helvetica Neue",
-    sans-serif;
 }
 
 body, html {
