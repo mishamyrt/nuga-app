@@ -28,6 +28,8 @@ function handleClick (): void {
 
 <style lang="scss">
   button {
+    --sidebar-icon-color: #009AFF;
+
     width: 100%;
     appearance: none;
     border: none;
@@ -48,8 +50,6 @@ function handleClick (): void {
       margin-right: 3px;
       width: 20px;
       height: 20px;
-
-      --sidebar-icon-color: #009AFF;
     }
 
     &:disabled {
@@ -72,6 +72,8 @@ function handleClick (): void {
     background-color: rgba(0, 0, 0, 0.09)
   }
   :global(.linux) button {
+    --sidebar-icon-color: var(--color-text);
+
     padding: 11px 11px 13px 8px;
     transition: background-color .3s ease-out;
     &:hover {
@@ -85,9 +87,13 @@ function handleClick (): void {
       outline: none;
     }
     .icon {
-      --sidebar-icon-color: var(--color-text);
       margin-right: 6px;
       margin-left: 5px;
     }
+  }
+
+  :global(.linux.theme-light) button.selected {
+    color: white;
+    --sidebar-icon-color: white;
   }
 </style>
