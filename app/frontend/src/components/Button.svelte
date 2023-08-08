@@ -21,13 +21,17 @@
 
 <style lang="scss">
   button {
+    --button-color-background: var(--color-input-background);
+    --button-border-radius: 5px;
+
     font-size: 13px;
     border: none;
     appearance: none;
-    border-radius: 5px;
-    background: #565656;
+    border-radius: var(--button-border-radius);
+    background: var(--button-color-background);
     width: 64px;
-    border-top: 0.5px solid rgb(255 255 255 / 22%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    // border-top: 0.5px solid rgb(255 255 255 / 22%);
 
     &.autosize {
       width: unset;

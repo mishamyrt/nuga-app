@@ -69,12 +69,31 @@
 <style lang="scss">
   .heading {
     border-bottom: 1px solid rgb(255 255 255 / 8%);
-    background: linear-gradient(180deg, #282828 0%, #323232 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.05) 100%);
     min-height: 186px;
+    border-bottom: 1px solid var(--color-line);
   }
 
   .scroll-wrapper {
     overflow-y: scroll;
-    height: calc(100vh - 204px);
+    height: calc(100vh - 186px);
+  }
+
+  .preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  :global(.linux) {
+    .heading {
+      background: none;
+      border-bottom: 1px solid rgb(1 1 1 / 41.2%);
+    }
+
+    .preview {
+      height: 184px;
+    }
   }
 </style>

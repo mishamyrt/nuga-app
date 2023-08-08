@@ -25,10 +25,22 @@
 </div>
 
 <style lang="scss">
+  .select-container {
+    --select-font-size: 13px;
+    --select-padding: 2px 15px 3px 13px;
+    --select-border-radius: 5px;
+    --select-indicator-color: #414141;
+    --select-indicator-hover-color: #606060;
+  }
+
+  :global(.theme-light) .select-container {
+    --select-indicator-color: #E6E6E6;
+    --select-indicator-hover-color: white;
+  }
+
   select {
-    color: rgb(255 255 255 / 70%);
-    font-size: 13px;
-    font-family: sans-serif;
+    font-size: var(--select-font-size);
+    font-family: var(--font-family);
     background: transparent;
     appearance: none;
     border: none;
@@ -44,8 +56,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 2px 15px 3px 13px;
-    border-radius: 5px;
+    padding: var(--select-padding);
+    border-radius: var(--select-border-radius);
 
     &.disabled {
       opacity: 0.35;
@@ -58,7 +70,7 @@
       content: '';
       width: 16px;
       height: 16px;
-      background: url("../../assets/images/select-arrows.png");
+      background-image: url("../../assets/images/select-arrows.png");
       background-size: contain;
       position: absolute;
       right: 2px;
@@ -67,14 +79,15 @@
     }
 
     &::before {
-      background: #414141;
+      background: var(--select-indicator-color);
       position: absolute;
-      border-radius: 3px;
+      border-radius: calc(var(--select-border-radius) - 2px);
       box-shadow: 0 1px 1px rgb(0 0 0 / 20%);
     }
 
     &:hover {
-      background-color: #606060;
+      background-color: var(--select-indicator-hover-color);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
     }
 
     &:hover::before {
@@ -87,5 +100,9 @@
     margin-right: 7px;
     user-select: none;
     cursor: default;
+  }
+
+  :global(.theme-light) .select-container::after {
+    background-image: url("../../assets/images/select-arrows-light.png");
   }
 </style>

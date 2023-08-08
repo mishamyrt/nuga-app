@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
   import { BrowserOpenURL } from '../wailsjs/runtime'
-  import { focused, version, os } from '@stores/app'
+  import { focused, version, os, theme, type OS } from '@stores/app'
   import SidebarItem from './components/Sidebar/SidebarItem.svelte'
   import Button from './components/Button.svelte'
   import { view, connected, updateUrl } from './stores/app'
@@ -24,6 +24,10 @@
     BrowserOpenURL(url)
   }
 
+  function handleOSChange (event: { currentTarget: HTMLSelectElement }): void {
+    os.set(event.currentTarget.value as OS)
+  }
+
   onMount(() => {
     unsubscribeConnected = connected.subscribe(isConnected => {
       if (isConnected) {
@@ -41,44 +45,55 @@
   })
 </script>
 
-<main class="{$os}">
-  <div class="app" class:blurred={!$focused} class:ready={$connected}>
-    <div class="sidebar">
-      <div>
-        <h1>Nuga</h1>
-        <div class="menu">
-          <SidebarItem title="Lights" target="lights" />
-          <SidebarItem disabled title="Keys" target="keys" />
-          <SidebarItem title="Device" target="device" />
-        </div>
-      </div>
-      <div>
-        {#if $updateUrl}
-        <Button on:click={openUpdate} label="Update available" autosize variant="bubble" />
-        {/if}
-        <span class="version">{appVersion}&nbsp;<span class="os">on {$os}</span></span>
-      </div>
-    </div>
-    <div class="content">
-      {#if activeView === 'lights'}
-        {#if $connected}
-        <LightsView />
-        {/if}
-      {:else if activeView === 'device'}
-        <DeviceView />
-      {:else if activeView === 'keys'}
+<div class="{$os} theme-{$theme}">
+  <main>
+    <div class="app" class:blurred={!$focused} class:ready={$connected}>
+      <div class="sidebar">
         <div>
-          <h1>Keys</h1>
+          <h1>Nuga</h1>
+          <div class="menu">
+            <SidebarItem title="Lights" target="lights" />
+            <SidebarItem disabled title="Keys" target="keys" />
+            <SidebarItem title="Device" target="device" />
+          </div>
         </div>
-      {/if}
+        <div>
+          {#if $updateUrl}
+          <Button on:click={openUpdate} label="Update available" autosize variant="bubble" />
+          {/if}
+          {#if appVersion === 'dev'}
+          <select value={$os} on:change={handleOSChange}>
+            <option value="mac">mac</option>
+            <option value="linux">linux</option>
+          </select>
+          {:else}
+          <span class="version">{appVersion}&nbsp;<span class="os">on {$os}</span></span>
+          {/if}
+        </div>
+      </div>
+      <div class="content">
+        {#if activeView === 'lights'}
+          {#if $connected}
+          <LightsView />
+          {/if}
+        {:else if activeView === 'device'}
+          <DeviceView />
+        {:else if activeView === 'keys'}
+          <div>
+            <h1>Keys</h1>
+          </div>
+        {/if}
+      </div>
     </div>
-  </div>
-  {#if !hideLoading}
-  <LoadingView hide={$connected} />
+    {#if !hideLoading}
+    <LoadingView hide={$connected} />
+    {/if}
+  </main>
+  {#if $os === 'mac'}
+  <div class="drag"></div>
   {/if}
-</main>
-<div class="drag"></div>
-<div class="border"></div>
+  <div class="border"></div>
+</div>
 
 <style lang="scss">
   .app {
@@ -99,7 +114,8 @@
 
   .content {
     background-color: var(--color-background-main);
-    border-left: 1px solid rgb(1 1 1 / 41.2%);
+    border-left: 1px solid var(--color-line);
+    box-shadow: -0.5px 0 2px -1px rgba(0, 0, 0, 0.07);
   }
 
   .border {
@@ -122,6 +138,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
+    background-color: var(--color-background-sidebar);
   }
 
   .ready .sidebar {
@@ -170,5 +187,20 @@
     text-align: left;
     padding: 0 8px;
     margin-top: 33px;
+  }
+
+  :global(.linux) {
+    h1 {
+      display: none;
+    }
+    .sidebar {
+      padding: 0px;
+    }
+    .app.blurred .sidebar {
+      opacity: 1;
+    }
+    .border {
+      display: none;
+    }
   }
 </style>

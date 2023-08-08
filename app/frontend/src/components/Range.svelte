@@ -94,6 +94,16 @@
     }
   }
 
+  :global(.theme-light) .range input {
+    &::-webkit-slider-runnable-track {
+      background-color: #E5E5E5;
+    }
+
+    &::-webkit-slider-thumb {
+      background-color: white;
+    }
+  }
+
   .marks {
     position: relative;
     top: -8px;
@@ -108,6 +118,10 @@
     height: 8px;
     background-color: #626262;
     border-radius: 4px;
+  }
+
+  :global(.theme-light) .mark {
+    background-color: #CECECE;
   }
 
   .label {

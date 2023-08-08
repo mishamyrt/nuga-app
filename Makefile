@@ -52,6 +52,14 @@ build:
 		-trimpath \
 		-ldflags "$(LD_FLAGS)"
 
+.PHONY: build/linux
+build/linux:
+	cd app; wails build \
+		-clean \
+		-platform "linux/arm64,linux/amd64" \
+		-trimpath \
+		-ldflags "$(LD_FLAGS)"
+
 .PHONY: build-dumper
 build-dumper:
 	go build -o dist/k916-dumper utils/k916-dumper/main.go

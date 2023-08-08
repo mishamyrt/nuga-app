@@ -12,17 +12,17 @@ import (
 func (a *App) GetOptions(assets fs.FS, icon []byte) *options.App {
 	return &options.App{
 		Title:     "Nuga",
-		Width:     700,
-		MinWidth:  650,
+		Width:     800,
+		MinWidth:  730,
 		Height:    700,
-		MinHeight: 410,
+		MinHeight: 450,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
 		Mac: &mac.Options{
 			WebviewIsTransparent: true,
 			WindowIsTranslucent:  true,
-			Appearance:           mac.NSAppearanceNameDarkAqua,
+			Appearance:           mac.DefaultAppearance,
 			TitleBar:             mac.TitleBarHiddenInset(),
 			About: &mac.AboutInfo{
 				Title:   "Nuga",

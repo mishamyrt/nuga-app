@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import cable from '../assets/images/cable.connector.svg'
   import { connect, startSimulation } from '@stores/device'
   import { connected, loadApp } from '@stores/app'
   import { sleep } from '@utils/timing'
   import { onHotkey } from '@utils/hotkey'
   import { sync } from '@stores/lights/actions'
+  import CableIcon from '@components/CableIcon.svelte';
 
   export let hide = false
 
@@ -28,7 +28,7 @@
 
 <div class="loading" class:ready={hide} >
   <div class="help" class:show={showHelp}>
-    <img alt="Wails logo" id="logo" src="{cable}">
+    <CableIcon />
     <h1>Looking for compatible keyboard</h1>
     <p>Make sure that the device is connected with a wire</p>
   </div>
@@ -136,7 +136,7 @@
 
 @keyframes spinner-fade {
   0% {
-    background-color: white;
+    background-color: var(--color-text);
   }
 
   100% {
