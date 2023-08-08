@@ -36,6 +36,7 @@ function handleClick (): void {
     align-items: center;
     gap: 5px;
     padding: 7px 8px 8px 5px;
+    margin: 0;
     font-size: 15px;
     font-weight: 400;
     color: var(--color-text);
