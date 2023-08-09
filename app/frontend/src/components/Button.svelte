@@ -59,12 +59,25 @@
     &.bubble {
       background: rgb(255 255 255 / 11%);
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       padding: 8px 12px;
 
       &:active {
         background: rgb(255 255 255 / 7%);
       }
+    }
+  }
+
+  :global(.linux) button {
+    font-size: 15px;
+    border: 1px solid var(--color-line);
+    transition: background-color .2s ease-out;
+    box-shadow: none;
+    padding: 5px 20px;
+    width: unset;
+
+    &:hover {
+      background-color: var(--color-line);
     }
   }
 

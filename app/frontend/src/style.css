@@ -21,11 +21,6 @@
 }
 
 .linux {
-  --color-accent: #E9531F;
-  --color-background-transparent: #272727;
-  --color-background-sidebar: #272727;
-  --color-background-main: #2C2C2C;
-  --color-text: rgba(255, 255, 255, 0.9);
   --font-family: Ubuntu, sans-serif;
 }
 
@@ -36,6 +31,16 @@
   --color-text: rgba(0, 0, 0, 0.8);
   --color-line: rgba(1,1,1,0.1);
   --color-input-background: white;
+}
+
+.linux.theme-dark {
+  --color-accent: #E9531F;
+  --color-background-transparent: #272727;
+  --color-background-sidebar: #272727;
+  --color-background-main: #2C2C2C;
+  --color-text: rgba(255, 255, 255, 0.9);
+  --color-line: #1E1E1E;
+  --color-input-background: #373737;
 }
 
 main {
