@@ -68,8 +68,7 @@
 
 <style lang="scss">
   .heading {
-    border-bottom: 1px solid rgb(255 255 255 / 8%);
-    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.05) 100%);
+    background: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 5%) 100%);
     min-height: 186px;
     border-bottom: 1px solid var(--color-line);
   }

@@ -59,6 +59,7 @@
       &::after {
         background-color: white;
       }
+
       &::before {
         background-color: #cfcfcf;
       }

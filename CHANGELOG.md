@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
-## 1.0.0-beta7
+## [1.0.0-beta7]
 
 ## Changed
 
@@ -99,4 +99,4 @@ Initial beta release
 [1.0.0-beta4]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta4
 [1.0.0-beta5]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta5
 [1.0.0-beta6]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta6
-
+[1.0.0-beta7]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta7

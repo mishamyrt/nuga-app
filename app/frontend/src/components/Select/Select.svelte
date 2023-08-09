@@ -25,19 +25,6 @@
 </div>
 
 <style lang="scss">
-  .select-container {
-    --select-font-size: 13px;
-    --select-padding: 2px 15px 3px 13px;
-    --select-border-radius: 5px;
-    --select-indicator-color: #414141;
-    --select-indicator-hover-color: #606060;
-  }
-
-  :global(.theme-light) .select-container {
-    --select-indicator-color: #E6E6E6;
-    --select-indicator-hover-color: white;
-  }
-
   select {
     font-size: var(--select-font-size);
     font-family: var(--font-family);
@@ -53,6 +40,12 @@
   }
 
   .select-container {
+    --select-font-size: 13px;
+    --select-padding: 2px 15px 3px 13px;
+    --select-border-radius: 5px;
+    --select-indicator-color: #414141;
+    --select-indicator-hover-color: #606060;
+
     position: relative;
     display: flex;
     align-items: center;
@@ -87,7 +80,7 @@
 
     &:hover {
       background-color: var(--select-indicator-hover-color);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 15%);
     }
 
     &:hover::before {
@@ -102,7 +95,12 @@
     cursor: default;
   }
 
-  :global(.theme-light) .select-container::after {
-    background-image: url("../../assets/images/select-arrows-light.png");
+  :global(.theme-light) .select-container {
+    --select-indicator-color: #E6E6E6;
+    --select-indicator-hover-color: white;
+
+    &::after {
+      background-image: url("../../assets/images/select-arrows-light.png");
+    }
   }
 </style>

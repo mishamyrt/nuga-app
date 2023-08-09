@@ -112,7 +112,7 @@
   .content {
     background-color: var(--color-background-main);
     border-left: 1px solid var(--color-line);
-    box-shadow: -0.5px 0 2px -1px rgba(0, 0, 0, 0.07);
+    box-shadow: -0.5px 0 2px -1px rgb(0 0 0 / 7%);
   }
 
   .border {
@@ -140,6 +140,10 @@
 
   .ready .sidebar {
     opacity: 1;
+  }
+
+  :global(.linux) .sidebar {
+    padding: 0;
   }
 
   .app.blurred .sidebar {
@@ -190,12 +194,11 @@
     h1 {
       display: none;
     }
-    .sidebar {
-      padding: 0px;
-    }
+
     .app.blurred .sidebar {
       opacity: 1;
     }
+
     .border {
       display: none;
     }

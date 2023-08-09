@@ -1,5 +1,5 @@
 import { GetVersion, SetMode, CheckUpdates, GetOS } from '../../wailsjs/go/nuga/App'
-import { EventsOn, WindowSetLightTheme, WindowSetDarkTheme } from '../../wailsjs/runtime'
+import { EventsOn } from '../../wailsjs/runtime'
 import { atom } from 'nanostores'
 
 export type SettingsView = 'lights' | 'device' | 'keys'

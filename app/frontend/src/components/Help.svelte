@@ -1,5 +1,4 @@
 <script lang="ts">
-  import questionIcon from '../assets/images/questionmark_icon@2x.png'
   export let message: string
 
   let showHelp = false
