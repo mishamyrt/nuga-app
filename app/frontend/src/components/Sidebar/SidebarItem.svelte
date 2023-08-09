@@ -23,7 +23,9 @@ function handleClick (): void {
       <Keyboard />
     {/if}
   </div>
-  {title}
+  <span class="title">
+    {title}
+  </span>
 </button>
 
 <style lang="scss">
@@ -54,7 +56,10 @@ function handleClick (): void {
 
     &:disabled {
       pointer-events: none;
-      opacity: 0.4;
+
+      .title {
+        opacity: 0.4;
+      }
     }
 
     &.selected {
