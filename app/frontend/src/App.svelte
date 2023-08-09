@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
   import { BrowserOpenURL } from '../wailsjs/runtime'
-  import { focused, version, os, theme, type OS } from '@stores/app'
+  import { focused, version, os, theme } from '@stores/app'
   import SidebarItem from './components/Sidebar/SidebarItem.svelte'
   import Button from './components/Button.svelte'
   import { view, connected, updateUrl } from './stores/app'
@@ -22,10 +22,6 @@
       return
     }
     BrowserOpenURL(url)
-  }
-
-  function handleOSChange (event: { currentTarget: HTMLSelectElement }): void {
-    os.set(event.currentTarget.value as OS)
   }
 
   onMount(() => {
@@ -105,8 +101,12 @@
     text-align: left;
   }
 
-  .version-container {
+  :global(.linux) .version-container {
     padding: 15px;
+  }
+
+  :global(.mac) .version-container {
+    padding: 8px;
   }
 
   .content {
@@ -147,8 +147,8 @@
   }
 
   .version {
-    padding: 8px;
     margin-bottom: 0;
+    margin-top: 5px;
     display: block;
     font-weight: 500;
     font-size: 13px;
