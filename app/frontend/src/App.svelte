@@ -79,9 +79,12 @@
     {/if}
   </main>
   {#if $os === 'mac'}
-  <div class="drag"></div>
+  <div class="drag" />
   {/if}
-  <div class="border"></div>
+  {#if $os === 'mac' && $theme === 'dark'}
+  <div class="border" />
+  {/if}
+
 </div>
 
 <style lang="scss">
