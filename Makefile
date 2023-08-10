@@ -76,8 +76,8 @@ release:
 dev:
 	cd app; wails dev -loglevel Debug -v 2
 
-.PHONY: dev-simulation
-dev-simulation:
+.PHONY: dev-universal
+dev-universal:
 	cd app; wails dev -ldflags "-X 'nuga_ui/internal/nuga.Universal=true'" -loglevel Debug -v 2
 
 .PHONY: dev-memtest

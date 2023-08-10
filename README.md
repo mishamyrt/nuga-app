@@ -40,10 +40,10 @@ To run a local application, the target `dev` is used:
 make dev
 ```
 
-If you want to run another OS interface on macOS, you should run the `dev-simulation` target:
+If you want to run another OS interface on macOS, you should run the `dev-universal` target:
 
 ```sh
-make dev-simulation
+make dev-universal
 ```
 
 
