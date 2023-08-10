@@ -4,12 +4,14 @@
   --form-border-padding: calc(var(--form-padding) - 10px);
   --color-form-frame-outer: rgba(255, 255, 255, 0.12);
   --color-form-frame-inner: rgba(255, 255, 255, 0.05);
+  --color-form-line: var(--color-form-frame-inner)
   --color-form-background: rgba(255, 255, 255, 0.01);
 }
 
 .theme-light {
   --color-form-frame-outer: #E5E5E5;
   --color-form-frame-inner: #EEEEEE;
+  --color-form-line: #E7E7E7;
   --color-form-background: #F2F2F2;
 }
 
@@ -54,7 +56,7 @@
       position: absolute;
       width: calc(100% - 18px);
       height: 1px;
-      background-color: var(--color-form-frame-inner);
+      background-color: var(--color-form-line);
       content: '';
       bottom: -1px;
       left: 9px;
