@@ -2,6 +2,7 @@ package nuga
 
 import (
 	"io/fs"
+	"log"
 
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
@@ -10,6 +11,11 @@ import (
 
 // GetOptions returns application options
 func (a *App) GetOptions(assets fs.FS, icon []byte) *options.App {
+	titlebar := mac.TitleBarHiddenInset()
+	log.Println("Universal", Universal)
+	if Universal == "true" {
+		titlebar = mac.TitleBarDefault()
+	}
 	return &options.App{
 		Title:     "Nuga",
 		Width:     800,
@@ -23,7 +29,7 @@ func (a *App) GetOptions(assets fs.FS, icon []byte) *options.App {
 			WebviewIsTransparent: true,
 			WindowIsTranslucent:  true,
 			Appearance:           mac.DefaultAppearance,
-			TitleBar:             mac.TitleBarHiddenInset(),
+			TitleBar:             titlebar,
 			About: &mac.AboutInfo{
 				Title:   "Nuga",
 				Message: "© 2023 Mikhael Khrustik",
