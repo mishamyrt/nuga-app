@@ -46,6 +46,22 @@ If you want to run another OS interface on macOS, you should run the `dev-univer
 make dev-universal
 ```
 
+### Build
+
+Cross-compiling the application is not possible at this time. Therefore, full build is only possible on macOS. Native macOS build is built natively, Linux via x86 Docker container.
+
+For native builds, there are targets in the Makefile:
+
+* `build/Darwin` – To build macOS app (arm64, amd64)
+* `build/Linux` – To build Linux app binary (arm64, amd64)
+
+The `build` command is a common alias for these commands and performs a build on the OS that is currently in use.
+
+```sh
+make build
+```
+
+The result of the build will be archives with the application in the `dist` folder.
 
 ## Protocol
 

@@ -1,8 +1,10 @@
-VERSION = 1.0.0-beta7
+VERSION = 1.0.0-rc
 DIST_PATH = dist
 BUILD_PATH = app/build/bin
 
-PLATFORMS = darwin/arm64,darwin/amd64
+PLATFORMS_DARWIN = darwin/arm64,darwin/amd64
+PLATFORMS_LINUX = linux/arm64,linux/amd64
+
 LD_FLAGS = -X 'nuga_ui/internal/nuga.AppVersion=v$(VERSION)' -s -w
 UNAME := $(shell uname)
 ARCH := $(shell arch)
@@ -12,12 +14,20 @@ define go_lint
 	revive -config ./revive.toml  ./$(1)/...
 endef
 
-define pack_release
+define build_platforms
+	cd app; wails build \
+		-clean \
+		-platform "$(1)" \
+		-trimpath \
+		-ldflags "$(LD_FLAGS)"
+endef
+
+define pack_darwin_release
 	mkdir -p "$(DIST_PATH)/$(1)"
 	mv "$(BUILD_PATH)/Nuga-$(1).app" "$(DIST_PATH)/$(1)/Nuga.app"
 	cd "$(DIST_PATH)/$(1)"; codesign -fs 'Nuga Developer' --deep Nuga.app
 	cd "$(DIST_PATH)/$(1)"; zip -9 -y -r -q Nuga.zip Nuga.app
-	mv "$(DIST_PATH)/$(1)/Nuga.zip" "$(DIST_PATH)/Nuga-$(VERSION)-$(1).zip"
+	mv "$(DIST_PATH)/$(1)/Nuga.zip" "$(DIST_PATH)/Nuga-$(VERSION)-mac-$(1).zip"
 	rm -rf "$(DIST_PATH)/$(1)"
 endef
 
@@ -43,22 +53,20 @@ generate:
 	./utils/update-version.mjs app/wails.json "$(VERSION)"
 	cd app; wails generate module
 
+.PHONY: build/Darwin
+build/Darwin:
+	$(call build_platforms,"$(PLATFORMS_DARWIN)")
+	mkdir -p "$(DIST_PATH)"
+	$(call pack_darwin_release,arm64)
+	$(call pack_darwin_release,amd64)
+
+.PHONY: build/Linux
+build/Linux:
+	$(call build_platforms,"$(PLATFORMS_LINUX)")
+
 .PHONY: build
 build:
-	make generate
-	cd app; wails build \
-		-clean \
-		-platform "$(PLATFORMS)" \
-		-trimpath \
-		-ldflags "$(LD_FLAGS)"
-
-.PHONY: build/linux
-build/linux:
-	cd app; wails build \
-		-clean \
-		-platform "linux/arm64,linux/amd64" \
-		-trimpath \
-		-ldflags "$(LD_FLAGS)"
+	make build/$(UNAME)
 
 .PHONY: build-dumper
 build-dumper:
@@ -66,7 +74,8 @@ build-dumper:
 
 .PHONY: release
 release:
-	make build
+	make generate
+	make build/mac
 	rm -rf "$(DIST_PATH)"
 	mkdir -p "$(DIST_PATH)"
 	$(call pack_release,arm64)
@@ -111,4 +120,5 @@ install:
 clean:
 	rm -rf app/frontend/node_modules
 	rm -rf app/frontend/dist
-	rm -rf app/build/bin
+	rm -rf "$(BUILD_PATH)"
+	rm -rf "$(DIST_PATH)"
