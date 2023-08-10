@@ -29,7 +29,7 @@ For local development, you need to set up environments. For this purpose you wil
 #### macOS
 
 ```sh
-brew install libhid
+brew install hidapi
 ```
 
 ### Starting
@@ -48,12 +48,12 @@ make dev-universal
 
 ### Build
 
-Cross-compiling the application is not possible at this time. Therefore, full build is only possible on macOS. Native macOS build is built natively, Linux via x86 Docker container.
+Cross-compiling the application is not possible at this time. Therefore, full build is only possible on macOS. A native build for macOS can be built on macs with Intel® and Apple Silicon™ processors , Linux version is built on either macOS (via Docker) or the amd64 version of Linux.
 
 For native builds, there are targets in the Makefile:
 
-* `build/Darwin` – To build macOS app (arm64, amd64)
-* `build/Linux` – To build Linux app binary (arm64, amd64)
+* `build/darwin` – To build macOS app (arm64, amd64)
+* `build/linux` – To build Linux app binary (arm64, amd64)
 
 The `build` command is a common alias for these commands and performs a build on the OS that is currently in use.
 
