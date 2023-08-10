@@ -1,6 +1,8 @@
 # Nuga [![Quality assurance](https://github.com/mishamyrt/Nuga/actions/workflows/quality-assurance.yaml/badge.svg)](https://github.com/mishamyrt/Nuga/actions/workflows/quality-assurance.yaml)
 
-This mono repository contains packages for managing NuPhy® keyboards.
+Application for controlling NuPhy® keyboards.
+
+<img src="https://nuga.myrt.co/window.png" width="800px" />
 
 ### Features
 
