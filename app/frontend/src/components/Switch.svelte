@@ -42,8 +42,8 @@
       top: 1px;
       left: var(--switch-start-position);
       background-color: #D9D9D9;
-      width: calc(var(--switch-width) / 2);
-      height: calc(var(--switch-width) / 2);
+      width: calc(var(--switch-height) - 2px);
+      height: calc(var(--switch-height) - 2px);
       box-shadow: 0 0 0 0 #000;
     }
   }
@@ -79,7 +79,7 @@
   :global(.linux) label {
     --switch-width: 38px;
     --switch-height: 22px;
-    --switch-offset: 15px;
-    --switch-start-position: 2px;
+    --switch-offset: 16px;
+    --switch-start-position: 1px;
   }
 </style>

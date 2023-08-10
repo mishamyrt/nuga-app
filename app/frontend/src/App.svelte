@@ -84,7 +84,11 @@
   {#if $os === 'mac' && $theme === 'dark'}
   <div class="border" />
   {/if}
-
+  {#if $os === 'linux'}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+  </style>
+  {/if}
 </div>
 
 <style lang="scss">
