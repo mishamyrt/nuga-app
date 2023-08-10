@@ -75,7 +75,6 @@
       background: var(--select-indicator-color);
       position: absolute;
       border-radius: calc(var(--select-border-radius) - 2px);
-      box-shadow: 0 1px 1px rgb(0 0 0 / 20%);
     }
 
     &:hover {

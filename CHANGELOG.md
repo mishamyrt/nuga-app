@@ -5,69 +5,77 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
+## 1.0.0-rc
+
+### Fixed
+
+* Remove duplicated line on light theme
+* Form line color on light mac
+* Remove shadow from select pick
+
 ## [1.0.0-beta7]
 
-## Changed
+### Changed
 
 * Sidebar design
 
-## Add
+### Add
 
 * Mechanism for searching for application updates
 * `About` menu
 * OS handling
 * Light theme support
 
-## Fixed
+### Fixed
 
 * Improved metadata in Info.plist file (The permission would need to be reissued).
 
 ## [1.0.0-beta6]
 
-## Changed
+### Changed
 
 * "Fixed On" mode renamed to "Static"
 
-## Added
+### Added
 
 * Displaying the firmware version on the Device view
 * Dynamic keyboard preview. Halo75, Halo65 and Halo96 support with correct layout.
 * Help message for Sidelight. It may seem like the settings don't apply, but it's more likely that your keyboard isn't charged to the max
 
-## Fixed
+### Fixed
 
 * Disabled custom mode selection. I'll bring it back when the support is complete
 
 ## [1.0.0-beta5]
 
-## Added
+### Added
 
 * Real Halo65 support (the preview still shows the keyboard at 75%)
 
-## Fixed
+### Fixed
 
 * Application signature
 * Version on UI
 
 ## [1.0.0-beta4]
 
-## Added
+### Added
 
 * Initial dirty support for Halo65
 
-## [1.0.0-beta3]
+### [1.0.0-beta3]
 
-## Added
+### Added
 
 * Color changing modal transition
 
-## Changed
+### Changed
 
 * Now the simulation runs on <kbd>Option</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>
 * Fine-tuning fonts, borders and margins
 * Simplified ranges
 
-## Fixed
+### Fixed
 
 * Minimal window height (set to 410 pixels)
 * Panic on simulation rejection
@@ -77,11 +85,11 @@ and this project adheres to [Semantic Versioning][].
 
 ## [1.0.0-beta2]
 
-## Added
+### Added
 
 * Color edit button. Right click on a color still works.
 
-## Fixed
+### Fixed
 
 * Window drag on loading state
 * Add missing window border
