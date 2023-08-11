@@ -14,7 +14,6 @@ endef
 define pack_darwin_release
 	mkdir -p "$(DIST_PATH)/$(1)"
 	mv "$(BUILD_PATH)/Nuga-$(1).app" "$(DIST_PATH)/$(1)/Nuga.app"
-	cd "$(DIST_PATH)/$(1)"; codesign -fs 'Nuga Developer' --deep Nuga.app
 	cd "$(DIST_PATH)/$(1)"; zip -9 -y -r -q Nuga.zip Nuga.app
 	mv "$(DIST_PATH)/$(1)/Nuga.zip" "$(DIST_PATH)/Nuga-mac-$(VERSION)-$(1).zip"
 	rm -rf "$(DIST_PATH)/$(1)"
@@ -48,8 +47,7 @@ build:
 build/release:
 	mkdir -p "$(DIST_PATH)"
 	make build/darwin
-	make linux-builder/binary
-	make linux-builder/appimage
+	make build/linux-in-docker
 
 .PHONY: build/dumper
 build/dumper:
