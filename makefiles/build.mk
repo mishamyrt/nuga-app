@@ -31,6 +31,7 @@ build/darwin:
 build/linux:
 	cd app; wails build \
 		-clean \
+		-o "Nuga-linux-$(ARCH)" \
 		-trimpath \
 		-ldflags "-X 'nuga_ui/internal/nuga.AppVersion=v$(VERSION)' -s -w"
 
