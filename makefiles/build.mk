@@ -16,7 +16,7 @@ define pack_darwin_release
 	mv "$(BUILD_PATH)/Nuga-$(1).app" "$(DIST_PATH)/$(1)/Nuga.app"
 	cd "$(DIST_PATH)/$(1)"; codesign -fs 'Nuga Developer' --deep Nuga.app
 	cd "$(DIST_PATH)/$(1)"; zip -9 -y -r -q Nuga.zip Nuga.app
-	mv "$(DIST_PATH)/$(1)/Nuga.zip" "$(DIST_PATH)/Nuga-$(VERSION)-mac-$(1).zip"
+	mv "$(DIST_PATH)/$(1)/Nuga.zip" "$(DIST_PATH)/Nuga-mac-$(VERSION)-$(1).zip"
 	rm -rf "$(DIST_PATH)/$(1)"
 endef
 
@@ -34,10 +34,21 @@ build/linux:
 		-trimpath \
 		-ldflags "-X 'nuga_ui/internal/nuga.AppVersion=v$(VERSION)' -s -w"
 
+.PHONY: build/linux-in-docker
+build/linux-in-docker:
+	make linux-builder/binary
+	make linux-builder/appimage
 
 .PHONY: build
 build:
 	make build/$(OS)
+
+.PHONY: build/release
+build/release:
+	mkdir -p "$(DIST_PATH)"
+	make build/darwin
+	make linux-builder/binary
+	make linux-builder/appimage
 
 .PHONY: build/dumper
 build/dumper:

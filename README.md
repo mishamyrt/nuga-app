@@ -61,7 +61,34 @@ The `build` command is a common alias for these commands and performs a build on
 make build
 ```
 
-The result of the build will be archives with the application in the `dist` folder.
+The result of the build will be archives with the application in the `dist` or `app/build/bin` folder.
+
+### Release
+
+The release build is currently only available on macOS. The `build/release` target is used for this purpose. It triggers the assembly of all project platforms, with signatures and in the correct format.
+
+```sh
+make build/release
+ls dist/
+# Nuga-1.0.0-amd64.AppImage* Nuga-mac-1.0.0-amd64.zip
+# Nuga-1.0.0-arm64.AppImage* Nuga-mac-1.0.0-arm64.zip
+```
+
+Building an amd64 Linux image on macOS requires a lot of resources, so be prepared to close unnecessary applications at build time.
+
+### Linux cross-compilation
+
+The Linux version can be built on macOS using Docker. To build an image with the toolkit, run the command:
+
+```sh
+make linux-builder/setup
+```
+
+To build a Linux AppImage using the resulting image, run the command:
+
+```sh
+make linux-builder/release
+```
 
 ## Protocol
 

@@ -1,0 +1,26 @@
+ARG GOLANG_VERSION=1.20
+ARG WAILS_VERSION=2.5.1
+
+FROM golang:${GOLANG_VERSION}
+
+# Setup Debian deps
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends \
+    git \
+    gnupg \
+    libudev-dev \
+    libgtk-3-dev \
+    libgtk-3-0 \
+    libwebkit2gtk-4.0-dev \
+    gcc \
+    build-essential
+
+# Setup Wails
+RUN go install github.com/wailsapp/wails/v2/cmd/wails@v2.5.1
+
+COPY build-nuga.sh /usr/bin/build-nuga
+
+# Set working directory (project root)
+WORKDIR /opt/nuga
+
+CMD [ "build-nuga" ]
