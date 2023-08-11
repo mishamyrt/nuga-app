@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Nuga
+Icon=/usr/share/icons/256x256/nuga
+Exec=/usr/local/bin/Nuga
+Terminal=false
+Hidden=false
+Categories=Utility

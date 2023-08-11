@@ -11,7 +11,7 @@
     "email": "misha@myrt.co"
   },
   "info": {
-    "productVersion": "1.0.0-beta7",
+    "productVersion": "1.0.0-rc",
     "comments": "NuPhy(R) keyboard configurator",
     "copyright": "Copyright 2023 The Nuga Project Authors (https://github.com/mishamyrt/Nuga/blob/master/AUTHORS)"
   }

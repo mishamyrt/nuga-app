@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning][].
 * Form line color on light mac
 * Remove shadow from select pick
 
+### Added
+
+* Linux AppImage build (Ubuntu, Fedora, etc GTK-based)
+
 ## [1.0.0-beta7]
 
 ### Changed

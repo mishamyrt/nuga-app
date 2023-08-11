@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 // @ts-check
+/*
+  Script for converting Hex Stream from WireShark to a format suitable for Golang arrays
+  Usage: ./scripts/format-hex-stream.mjs <input_stream>
+  `input_stream` format is hex pairs without spaces. Like: fffff000...
+  Output be like: 0xFF, 0xFF, 0xF0, 0x00...
+*/
+
 import { argv, exit } from 'process'
 
 /**
@@ -21,9 +28,9 @@ function main() {
     console.log(result)
 }
 
-if (argv.length < 4) {
+if (argv.length < 3) {
     console.error("Too few arguments")
-    console.log("Usage: update-version.mjs <path> <version>")
+    console.log("Usage: format-hex-stream.mjs <input_stream>")
     exit(1)
 }
 

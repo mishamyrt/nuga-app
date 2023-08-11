@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 // @ts-check
+/*
+  Script to update the version in the wails.json file. In the current build system,
+  the main version is specified in the Makefile, so it is necessary to update it in other places.
+  Usage: ./scripts/update-version.mjs <path> <version>
+  * `path` is the path to wails.json
+  * `version` is the version that should be included in the final file
+*/
 import { readFile, writeFile } from 'fs/promises'
 import { argv, exit } from 'process'
 

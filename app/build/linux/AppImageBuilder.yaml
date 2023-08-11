@@ -1,0 +1,12 @@
+version: 1
+AppDir:
+  app_info:
+    id: co.myrt.nuga
+    name: Nuga
+    icon: nuga
+    version: latest
+    exec: usr/local/bin/Nuga
+    exec_args: $@
+AppImage:
+  arch: $TARGET_ARCH
+  update-information: guess
