@@ -21,7 +21,8 @@
         checked={value === option.value}
         type="radio"
         name="drone"
-        value={option.value}>
+        value={option.value}
+        disabled={disabled}>
       <span class="title">
         {option.title}
       </span>
