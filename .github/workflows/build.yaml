@@ -31,10 +31,6 @@ jobs:
         run: go work sync
       - name: Build x86_64 binary
         run: make build/linux
-      - name: Copy binary
-        run: |
-          mkdir -p dist/
-          cp app/build/bin/Nuga-linux-x86_64 dist/
       - name: Upload binary
         uses: actions/upload-artifact@v3
         with:
