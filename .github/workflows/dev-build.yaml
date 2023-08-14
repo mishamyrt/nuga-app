@@ -1,0 +1,14 @@
+name: Build Nuga
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "!**"
+  workflow_dispatch:
+
+jobs:
+  dev:
+    uses: ./.github/workflows/build.yaml
+    secrets: inherit

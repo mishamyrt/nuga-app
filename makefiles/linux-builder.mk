@@ -68,12 +68,14 @@ linux-builder/push-image-amd64:
 # Binary actions
 
 .PHONY: linux-builder/binary-arm64
-linux-builder/binary-arm64:
+linux-builder/binary-arm64: $(DIST_PATH)
 	$(call build_binary,arm64)
+	mv app/build/bin/Nuga-linux-aarch64 dist/Nuga-linux-arm64
 
 .PHONY: linux-builder/binary-amd64
 linux-builder/binary-amd64:
 	$(call build_binary,amd64)
+	mv app/build/bin/Nuga-linux-x86_64 dist/Nuga-linux-amd64
 
 .PHONY: linux-builder/binary
 linux-builder/binary:
@@ -83,14 +85,13 @@ linux-builder/binary:
 # AppImage packing
 
 .PHONY: linux-builder/appimage
-linux-builder/appimage:
+linux-builder/appimage: $(DIST_PATH)
 	docker run \
 		--rm \
 		--platform "linux/amd64" \
 		--volume ".:/opt/nuga" \
 		"$(APPIMAGE_BUILDER_IMAGE):latest" \
 		pack-appimage
-	mkdir -p $(DIST_PATH)
 	$(call copy_appimage,aarch64,arm64)
 	$(call copy_appimage,x86_64,amd64)
 

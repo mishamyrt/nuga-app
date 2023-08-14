@@ -26,3 +26,16 @@ clean:
 	rm -rf app/frontend/dist
 	rm -rf "$(BUILD_PATH)"
 	rm -rf "$(DIST_PATH)"
+
+.PHONY: publish
+publish:
+# Update changelog
+	node ./scripts/add-release-link.mjs "$(VERSION)"
+	git add CHANGELOG.md
+	git commit -m "Release $(VERSION) 🔥"
+# Create tag
+	git tag "v$(VERSION)"
+	git push --tags
+
+$(DIST_PATH):
+	mkdir -p $(DIST_PATH)

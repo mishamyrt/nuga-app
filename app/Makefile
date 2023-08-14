@@ -8,18 +8,18 @@ endef
 
 define copy_binary
 	mkdir -p "$(OUT_APPDIR)/usr/local/bin"
-	cp "build/bin/Nuga-linux-$(1)" "$(OUT_APPDIR)/usr/local/bin/Nuga"
+	mv "../dist/Nuga-linux-$(1)" "$(OUT_APPDIR)/usr/local/bin/Nuga"
 endef
 
 .PHONY: AppDir/amd64
 AppDir/amd64: AppDir
 	$(call write_manifest,x86_64)
-	$(call copy_binary,x86_64)
+	$(call copy_binary,amd64)
 
 .PHONY: AppDir/arm64
 AppDir/arm64: AppDir
 	$(call write_manifest,aarch64)
-	$(call copy_binary,aarch64)
+	$(call copy_binary,arm64)
 
 .PHONY: AppDir
 AppDir:
