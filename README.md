@@ -11,6 +11,16 @@ Application for controlling NuPhy® keyboards.
 
 **Supported devices**: Halo75, Halo65, Halo96.
 
+## Installation
+
+### macOS
+
+1. Download the zip archive labeled `mac` from the [latest release](https://github.com/mishamyrt/Nuga/releases/latest).
+2. Unzip the archive, copy `Nuga.app` to Applications.
+3. Launch `Nuga.app`.
+4. The application requests permission to Input Monitoring. This is required to work with the USB HID device. Grant permission.
+5. Restart the app
+
 ## Packages
 
 * [lib](./lib/) – Golang library.
