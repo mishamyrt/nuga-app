@@ -40,3 +40,14 @@ export async function initWindow (): Promise<void> {
   listenFocused()
   listenTheme()
 }
+
+export function bindBackgroundColor (ref: HTMLElement, property: string): void {
+  theme.subscribe(() => {
+    setTimeout(() => {
+      const styles = getComputedStyle(ref)
+      backgroundColor.set(
+        styles.getPropertyValue(property)
+      )
+    }, 20)
+  })
+}

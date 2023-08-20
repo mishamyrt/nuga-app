@@ -14,5 +14,5 @@ export function initApp (): void {
 
 export { version, updateUrl } from './version'
 export { connected, osMode, individualSettings, setMode, type OSMode } from './keyboard'
-export { focused, os, theme, backgroundColor, type OS } from './window'
-export { view } from './view'
+export { focused, os, theme, backgroundColor, bindBackgroundColor, type OS } from './window'
+export { view, type AppView } from './view'
