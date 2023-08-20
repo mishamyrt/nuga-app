@@ -5,8 +5,9 @@ LD_FLAGS="-X 'nuga_ui/internal/nuga.AppVersion=v${VERSION}' -s -w"
 
 cd app || exit 1
 echo "Building Linux $ARCH app binary"
-wails build \
-  -s \
-  -o "Nuga-linux-$ARCH" \
+go build \
+  -buildvcs=false \
   -trimpath \
-  -ldflags "$LD_FLAGS"
+  -tags desktop,wv2runtime.download,production \
+  -ldflags "$LD_FLAGS" \
+  -o "build/bin/Nuga-linux-$ARCH"

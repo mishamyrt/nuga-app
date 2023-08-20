@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning][].
 ### Added
 
 * Linux AppImage build (Ubuntu, Fedora, etc GTK-based)
+* Signing and notarization application for macOS
 
 ## [1.0.0-beta7]
 

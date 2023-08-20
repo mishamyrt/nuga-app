@@ -11,6 +11,16 @@ Application for controlling NuPhy® keyboards.
 
 **Supported devices**: Halo75, Halo65, Halo96.
 
+## Installation
+
+### macOS
+
+1. Download the zip archive labeled `mac` from the [latest release](https://github.com/mishamyrt/Nuga/releases/latest).
+2. Unzip the archive, copy `Nuga.app` to Applications.
+3. Launch `Nuga.app`.
+4. The application requests permission to Input Monitoring. This is required to work with the USB HID device. Grant permission.
+5. Restart the app
+
 ## Packages
 
 * [lib](./lib/) – Golang library.
@@ -65,16 +75,9 @@ The result of the build will be archives with the application in the `dist` or `
 
 ### Release
 
-The release build is currently only available on macOS. The `build/release` target is used for this purpose. It triggers the assembly of all project platforms, with signatures and in the correct format.
+The release is automated through GitHub Actions. To publish a new release, just run a version tag. Automatic build, signing and notarization will be started. Once the build is complete, the files will be attached to the new GitHub Release.
 
-```sh
-make build/release
-ls dist/
-# Nuga-1.0.0-amd64.AppImage* Nuga-mac-1.0.0-amd64.zip
-# Nuga-1.0.0-arm64.AppImage* Nuga-mac-1.0.0-arm64.zip
-```
-
-Building an amd64 Linux image on macOS requires a lot of resources, so be prepared to close unnecessary applications at build time.
+The release description is compiled automatically from the [CHANGELOG.md](./CHANGELOG.md) file.
 
 ### Linux cross-compilation
 

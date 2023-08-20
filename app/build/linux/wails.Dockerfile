@@ -10,7 +10,6 @@ RUN apt-get update && \
     gnupg \
     libudev-dev \
     libgtk-3-dev \
-    libgtk-3-0 \
     libwebkit2gtk-4.0-dev \
     gcc \
     build-essential
@@ -19,6 +18,7 @@ RUN apt-get update && \
 RUN go install github.com/wailsapp/wails/v2/cmd/wails@v2.5.1
 
 COPY build-nuga.sh /usr/bin/build-nuga
+RUN chmod +x /usr/bin/build-nuga
 
 # Set working directory (project root)
 WORKDIR /opt/nuga
