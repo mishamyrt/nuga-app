@@ -8,6 +8,7 @@
   import { view, connected, updateUrl } from './stores/app'
   import LightsView from './views/LightsView.svelte'
   import DeviceView from './views/DeviceView.svelte'
+  import ApplicationView from './views/ApplicationView.svelte'
 
   $: activeView = $view
   $: appVersion = $version
@@ -62,6 +63,9 @@
             <SidebarItem title="Lights" target="lights" />
             <SidebarItem disabled title="Keys" target="keys" />
             <SidebarItem title="Device" target="device" />
+            {#if $version === 'dev'}
+            <SidebarItem title="Application" target="application" />
+            {/if}
           </div>
         </div>
         <div class="version-container">
@@ -82,6 +86,8 @@
           <div>
             <h1>Keys</h1>
           </div>
+        {:else if activeView === 'application'}
+          <ApplicationView />
         {/if}
       </div>
     </div>

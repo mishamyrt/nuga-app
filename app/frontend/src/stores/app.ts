@@ -2,7 +2,7 @@ import { GetVersion, SetMode, CheckUpdates, GetOS } from '../../wailsjs/go/nuga/
 import { EventsOn } from '../../wailsjs/runtime'
 import { atom } from 'nanostores'
 
-export type SettingsView = 'lights' | 'device' | 'keys'
+export type SettingsView = 'lights' | 'device' | 'keys' | 'application'
 export type OSMode = 'win' | 'mac'
 export type OS = 'linux' | 'mac' | 'windows'
 
