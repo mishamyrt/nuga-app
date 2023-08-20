@@ -15,6 +15,7 @@ export const focused = atom<boolean>(true)
 export const updateUrl = atom<string | undefined>()
 export const os = atom<OS>('mac')
 export const theme = atom<'light' | 'dark'>('dark')
+export const backgroundColor = atom<string>('#000000')
 
 export async function setMode (): Promise<void> {
   if (individualSettings.get()) {

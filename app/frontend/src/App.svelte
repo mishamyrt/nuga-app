@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
   import { BrowserOpenURL } from '../wailsjs/runtime'
-  import { focused, version, os, theme } from '@stores/app'
+  import { focused, version, os, theme, backgroundColor } from '@stores/app'
   import SidebarItem from './components/Sidebar/SidebarItem.svelte'
   import Button from './components/Button.svelte'
   import { view, connected, updateUrl } from './stores/app'
@@ -13,6 +13,8 @@
   $: appVersion = $version
 
   let unsubscribeConnected: () => void
+  let unsubscribeTheme: () => void
+  let rootRef: HTMLDivElement
 
   let hideLoading = false
 
@@ -34,14 +36,23 @@
         hideLoading = false
       }
     })
+    unsubscribeTheme = theme.subscribe(() => {
+      setTimeout(() => {
+        const styles = getComputedStyle(rootRef)
+        backgroundColor.set(
+          styles.getPropertyValue('--color-background-main')
+        )
+      }, 50)
+    })
   })
 
   onDestroy(() => {
     unsubscribeConnected()
+    unsubscribeTheme()
   })
 </script>
 
-<div class="{$os} theme-{$theme}">
+<div bind:this={rootRef} class="{$os} theme-{$theme}">
   <main>
     <div class="app" class:blurred={!$focused} class:ready={$connected}>
       <div class="sidebar">
