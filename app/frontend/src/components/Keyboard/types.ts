@@ -24,3 +24,5 @@ export interface KeyboardTemplate {
 }
 
 export type LightMap = Color[][]
+
+export type ColorMap = string[][]

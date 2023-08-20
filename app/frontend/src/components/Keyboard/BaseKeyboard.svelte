@@ -1,33 +1,31 @@
 <script lang="ts">
   import type { KeyboardTemplate, LightMap } from './types'
   import type { PreviewColor } from '@stores/lights/types'
-  import Color from 'colorjs.io'
+  import { fillColorMap, normalizeContrast } from './color'
+  import { createGradientMap } from './random'
+  import { backgroundColor } from '@stores/app'
+  import { toRGB } from './utils'
 
   export let colorless = false
   export let template: KeyboardTemplate
   export let lights: PreviewColor | LightMap
   export let backlight: boolean = false
 
-  const color = new Color('#0578FF')
-  const gradient = color.range('#FF014D', {
-    space: 'lch', // interpolation space
-    outputSpace: 'srgb'
-  })
-
+  $: randomLightsMap = createGradientMap(template)
   $: lightsMap = (() => {
-    return template.keys.map((row, i) => row.map((_, j) => {
-      if (lights === undefined) {
-        return 'transparent'
-      } else if (lights === 'random') {
-        return gradient((i / (template.keys.length - 1)) + (j * 0.02)).toString()
-      } else if (Array.isArray(lights)) {
-        const color = lights[i][j]
-        return `rgb(${color.R},${color.G},${color.B})`
-      } else {
-        const color = lights
-        return `rgb(${color.R},${color.G},${color.B})`
-      }
-    }))
+    // This line is required to trigger svelte rebuild
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const background = $backgroundColor
+    if (lights === 'random') {
+      return randomLightsMap
+    } else if (lights === undefined) {
+      return fillColorMap(template, 'transparent')
+    } else if (Array.isArray(lights)) {
+      return lights.map(row => row.map(key => toRGB(key)))
+    } else {
+      const color = toRGB(normalizeContrast(lights))
+      return fillColorMap(template, color)
+    }
   })()
 </script>
 
@@ -110,7 +108,7 @@
   .key-light {
     z-index: 2;
     background-color: var(--key-light-color);
-    opacity: 0.3;
+    opacity: 0.7;
   }
 
   .key-light+.key-fill {
