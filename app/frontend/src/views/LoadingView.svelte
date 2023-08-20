@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { connect, startSimulation } from '@stores/device'
-  import { connected, loadApp } from '@stores/app'
+  import { connected } from '@stores/app'
   import { sleep } from '@utils/timing'
   import { onHotkey } from '@utils/hotkey'
   import { sync } from '@stores/lights/actions'
@@ -17,7 +17,6 @@
       showHelp = true
     }, 1500)
     await Promise.all([
-      loadApp(),
       connect(),
       sleep(1000)
     ]).catch(console.error)

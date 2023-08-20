@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
   import { BrowserOpenURL } from '../wailsjs/runtime'
-  import { focused, version, os, theme, backgroundColor } from '@stores/app'
+  import { focused, version, os, theme, backgroundColor, initApp } from '@stores/app'
   import SidebarItem from './components/Sidebar/SidebarItem.svelte'
   import Button from './components/Button.svelte'
   import { view, connected, updateUrl } from './stores/app'
@@ -28,6 +28,7 @@
   }
 
   onMount(() => {
+    initApp()
     unsubscribeConnected = connected.subscribe(isConnected => {
       if (isConnected) {
         setTimeout(() => {
