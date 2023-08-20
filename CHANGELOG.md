@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ### Fixed
 
 * Remove duplicated line on light theme
+* Lights background on light theme
 * Form line color on light mac
 * Remove shadow from select pick
 

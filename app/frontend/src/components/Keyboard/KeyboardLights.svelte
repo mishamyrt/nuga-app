@@ -3,7 +3,8 @@
   import { layouts } from './layouts/index'
   import { buildTemplate } from './template'
   import BaseKeyboard from './BaseKeyboard.svelte'
-  import Color from 'colorjs.io'
+  import { toRGB } from './utils'
+  import { normalizeContrast } from './color'
 
   export let backlight: PreviewColor
   export let halo: PreviewColor
@@ -14,10 +15,7 @@
     if (color === undefined || color === 'random') {
       return 'transparent'
     }
-    const c = new Color(`rgb(${color.R},${color.G},${color.B})`)
-    c.lch.l = 55
-    c.lch.c = 50
-    return c.toString()
+    return toRGB(normalizeContrast(color))
   }
 
   $: haloRgb = lineColor(halo)
@@ -50,7 +48,7 @@
     position: relative;
 
     --lights-transition: .25s ease-out;
-    --light-color-background: rgb(255 255 255 / 17%);
+    --light-color-background: rgb(134 134 134 / 38%);
   }
 
   .keyboard-wrapper {
