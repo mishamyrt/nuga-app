@@ -65,16 +65,9 @@ The result of the build will be archives with the application in the `dist` or `
 
 ### Release
 
-The release build is currently only available on macOS. The `build/release` target is used for this purpose. It triggers the assembly of all project platforms, with signatures and in the correct format.
+The release is automated through GitHub Actions. To publish a new release, just run a version tag. Automatic build, signing and notarization will be started. Once the build is complete, the files will be attached to the new GitHub Release.
 
-```sh
-make build/release
-ls dist/
-# Nuga-1.0.0-amd64.AppImage* Nuga-mac-1.0.0-amd64.zip
-# Nuga-1.0.0-arm64.AppImage* Nuga-mac-1.0.0-arm64.zip
-```
-
-Building an amd64 Linux image on macOS requires a lot of resources, so be prepared to close unnecessary applications at build time.
+The release description is compiled automatically from the [CHANGELOG.md](./CHANGELOG.md) file.
 
 ### Linux cross-compilation
 
