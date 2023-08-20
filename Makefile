@@ -32,7 +32,7 @@ publish:
 # Update changelog
 	node ./scripts/add-release-link.mjs "$(VERSION)"
 	git add CHANGELOG.md
-	git commit -m "Release $(VERSION) 🔥"
+	git commit -m "docs: Release $(VERSION) 🔥"
 # Create tag
 	git tag "v$(VERSION)"
 	git push --tags
