@@ -50,7 +50,7 @@
     position: relative;
 
     --lights-transition: .25s ease-out;
-    --light-color-background: rgb(255 255 255 / 17%);
+    --light-color-background: rgb(134 134 134 / 38%);
   }
 
   .keyboard-wrapper {
