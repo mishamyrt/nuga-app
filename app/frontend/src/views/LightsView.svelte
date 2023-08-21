@@ -26,11 +26,13 @@
   <div class="heading">
     <h3>Lights</h3>
     <div class="preview">
+      {#if $device}
       <Keyboard
         sidelight={$sidelightColor}
         halo={$haloColor}
         backlight={$backlightColor}
         layout={$device.name} />
+      {/if}
     </div>
   </div>
   <div class="scroll-wrapper">

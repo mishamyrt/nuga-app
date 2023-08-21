@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { connect, startSimulation } from '@stores/device'
-  import { connected } from '@stores/app'
+  import { connect, startSimulation, connected } from '@stores/device'
   import { sleep } from '@utils/timing'
   import { onHotkey } from '@utils/hotkey'
   import { sync } from '@stores/lights/actions'
@@ -16,11 +15,14 @@
     setTimeout(() => {
       showHelp = true
     }, 1500)
-    await Promise.all([
-      connect(),
-      sleep(1000)
-    ]).catch(console.error)
-    connected.set(true)
+    try {
+      await Promise.all([
+        connect(),
+        sleep(1000)
+      ])
+    } catch (e) {
+      console.error(e)
+    }
     sync.start()
   })
 </script>
@@ -29,7 +31,7 @@
   <div class="help" class:show={showHelp}>
     <CableIcon />
     <h1>Looking for compatible keyboard</h1>
-    <p>Make sure that the device is connected with a wire</p>
+    <p>Make sure that the device is connected with a wire     {$connected ? 'true' : 'false'}</p>
   </div>
   <div class="spinner-container">
     <div class="spinner">

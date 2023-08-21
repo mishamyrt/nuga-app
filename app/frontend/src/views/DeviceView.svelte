@@ -2,8 +2,7 @@
 import RadioButtons from '@components/RadioButtons.svelte'
 import { type SelectOption } from '@components/Select'
 import Switch from '@components/Switch.svelte'
-import { individualSettings, osMode, setMode, type OSMode } from '@stores/app'
-import { device } from '@stores/device'
+import { individualSettings, osMode, type OSMode, device } from '@stores/device'
 
 const osModeOptions: SelectOption[] = [
   { title: 'mac', value: 'mac' },
@@ -12,12 +11,10 @@ const osModeOptions: SelectOption[] = [
 
 function handleModeChange (e: CustomEvent<string>): void {
   osMode.set(e.detail as OSMode)
-  setMode()
 }
 
 function handleSettingsModeChange (e: CustomEvent<boolean>): void {
   individualSettings.set(e.detail)
-  setMode()
 }
 
 $: deviceInfo = $device
@@ -28,6 +25,7 @@ $: deviceInfo = $device
   <div class="form">
     <div class="form-group">
       <div class="form-rows">
+        {#if deviceInfo}
         <div class="form-row centered">
           <span>Name</span>
           <span>{deviceInfo.name}</span>
@@ -40,6 +38,7 @@ $: deviceInfo = $device
           <span>Firmware version</span>
           <span>{deviceInfo.firmware}</span>
         </div>
+        {/if}
         <div class="form-row centered">
           <span>Individual mode settings</span>
           <Switch

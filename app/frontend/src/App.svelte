@@ -5,16 +5,17 @@
   import { focused, version, os, theme, initApp, bindBackgroundColor } from '@stores/app'
   import SidebarItem from './components/Sidebar/SidebarItem.svelte'
   import Button from './components/Button.svelte'
-  import { view, connected, updateUrl } from './stores/app'
+  import { view, updateUrl } from './stores/app'
   import LightsView from './views/LightsView.svelte'
   import DeviceView from './views/DeviceView.svelte'
   import ApplicationView from './views/ApplicationView.svelte'
+  import { connected } from '@stores/device'
+  import { initLogger } from '@stores/app/logger'
 
   $: activeView = $view
   $: appVersion = $version
 
   let unsubscribeConnected: () => void
-  let unsubscribeTheme: () => void
   let rootRef: HTMLDivElement
 
   let hideLoading = false
@@ -29,6 +30,7 @@
 
   onMount(() => {
     initApp()
+    initLogger()
     bindBackgroundColor(rootRef, '--color-background-main')
     unsubscribeConnected = connected.subscribe(isConnected => {
       if (isConnected) {
@@ -43,7 +45,6 @@
 
   onDestroy(() => {
     unsubscribeConnected()
-    unsubscribeTheme()
   })
 </script>
 
