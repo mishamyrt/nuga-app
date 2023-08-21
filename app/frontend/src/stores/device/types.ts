@@ -5,3 +5,8 @@ export interface ConnectionDescription {
   path: string
   firmware: string
 }
+
+export interface Mode {
+  os: OSMode
+  individual: boolean
+}

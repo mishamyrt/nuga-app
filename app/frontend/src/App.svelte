@@ -2,14 +2,15 @@
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
   import { BrowserOpenURL } from '../wailsjs/runtime'
-  import { focused, version, os, theme, initApp, bindBackgroundColor } from '@stores/app'
+  import { focused, os, view, theme, useBackgroundColor } from '@stores/app'
+  import { version, updateUrl, hasUpdate } from '@stores/version'
   import SidebarItem from './components/Sidebar/SidebarItem.svelte'
   import Button from './components/Button.svelte'
-  import { view, updateUrl } from './stores/app'
   import LightsView from './views/LightsView.svelte'
   import DeviceView from './views/DeviceView.svelte'
   import ApplicationView from './views/ApplicationView.svelte'
   import { connected } from '@stores/device'
+  import { initLogger } from '@stores/logger'
 
   $: activeView = $view
   $: appVersion = $version
@@ -28,8 +29,8 @@
   }
 
   onMount(() => {
-    initApp()
-    bindBackgroundColor(rootRef, '--color-background-main')
+    initLogger()
+    useBackgroundColor(rootRef, '--color-background-main')
     unsubscribeConnected = connected.subscribe(isConnected => {
       if (isConnected) {
         setTimeout(() => {
@@ -62,7 +63,7 @@
           </div>
         </div>
         <div class="version-container">
-          {#if $updateUrl}
+          {#if $hasUpdate}
           <Button on:click={openUpdate} label="Update available" autosize variant="bubble" />
           {/if}
           <span class="version">{appVersion}&nbsp;<span class="os">on {$os}</span></span>

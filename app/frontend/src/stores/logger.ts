@@ -1,11 +1,10 @@
 import type { AnyStore } from 'nanostores'
-import { connected, device, individualSettings, osMode } from '../device'
-import { backlightColors, changingColor, color, domains, state } from '../lights'
-import { view } from './view'
+import { connection, mode } from './device'
+import { backlightColors, changingColor, color, domains, state } from './lights'
 import { updateUrl, version } from './version'
-import { backgroundColor, focused, os, theme } from './window'
 import { logger } from '@nanostores/logger'
-import { settingsFile } from './file'
+import { backgroundColor, focused, os, theme, view } from './app'
+// import { settingsFile } from './app/file'
 
 function isStore (x: any): x is AnyStore {
   return 'set' in x && 'get' in x && 'listen' in x
@@ -30,10 +29,13 @@ function flattenStoreMap (obj: Record<string, any>, parentKey = ''): Record<stri
 export function initLogger (): void {
   const loggers = {
     app: {
-      view, version, updateUrl, focused, os, theme, backgroundColor, settingsFile
+      view, focused, os, theme, backgroundColor
     },
-    device: { device, connected, osMode, individualSettings },
+    version: { version, updateUrl },
+    device: { connection, mode },
     lights: { domains, state, color, backgroundColor, changingColor, backlightColors }
   }
-  logger(flattenStoreMap(loggers))
+  setTimeout(() => {
+    logger(flattenStoreMap(loggers))
+  }, 50)
 }
