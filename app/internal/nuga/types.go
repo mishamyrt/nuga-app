@@ -21,3 +21,21 @@ const (
 	// Mac represents mode in which the keyboard settings are set only for mac switch mode
 	Mac = iota
 )
+
+// Theme represent app theme
+type Theme uint8
+
+const (
+	// Auto window theme
+	Auto Theme = iota
+	// Dark window theme
+	Dark = iota
+	// Light window theme
+	Light = iota
+)
+
+// UIState represents window UI state.
+type UIState struct {
+	Universal bool
+	Theme     Theme
+}

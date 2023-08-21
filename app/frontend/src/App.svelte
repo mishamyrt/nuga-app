@@ -2,18 +2,19 @@
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
   import { BrowserOpenURL } from '../wailsjs/runtime'
-  import { focused, version, os, theme, backgroundColor } from '@stores/app'
+  import { focused, version, os, theme, initApp, bindBackgroundColor } from '@stores/app'
   import SidebarItem from './components/Sidebar/SidebarItem.svelte'
   import Button from './components/Button.svelte'
-  import { view, connected, updateUrl } from './stores/app'
+  import { view, updateUrl } from './stores/app'
   import LightsView from './views/LightsView.svelte'
   import DeviceView from './views/DeviceView.svelte'
+  import ApplicationView from './views/ApplicationView.svelte'
+  import { connected } from '@stores/device'
 
   $: activeView = $view
   $: appVersion = $version
 
   let unsubscribeConnected: () => void
-  let unsubscribeTheme: () => void
   let rootRef: HTMLDivElement
 
   let hideLoading = false
@@ -27,6 +28,8 @@
   }
 
   onMount(() => {
+    initApp()
+    bindBackgroundColor(rootRef, '--color-background-main')
     unsubscribeConnected = connected.subscribe(isConnected => {
       if (isConnected) {
         setTimeout(() => {
@@ -36,19 +39,10 @@
         hideLoading = false
       }
     })
-    unsubscribeTheme = theme.subscribe(() => {
-      setTimeout(() => {
-        const styles = getComputedStyle(rootRef)
-        backgroundColor.set(
-          styles.getPropertyValue('--color-background-main')
-        )
-      }, 50)
-    })
   })
 
   onDestroy(() => {
     unsubscribeConnected()
-    unsubscribeTheme()
   })
 </script>
 
@@ -62,6 +56,9 @@
             <SidebarItem title="Lights" target="lights" />
             <SidebarItem disabled title="Keys" target="keys" />
             <SidebarItem title="Device" target="device" />
+            {#if $version === 'dev'}
+            <SidebarItem title="Application" target="application" />
+            {/if}
           </div>
         </div>
         <div class="version-container">
@@ -82,6 +79,8 @@
           <div>
             <h1>Keys</h1>
           </div>
+        {:else if activeView === 'application'}
+          <ApplicationView />
         {/if}
       </div>
     </div>

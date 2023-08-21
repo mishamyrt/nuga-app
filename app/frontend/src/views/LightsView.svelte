@@ -9,6 +9,8 @@
   } from '@stores/lights'
   import { device } from '@stores/device'
   import Keyboard from '@components/Keyboard/KeyboardLights.svelte'
+  import { onDestroy, onMount } from 'svelte'
+  import { sync } from '@stores/lights/actions'
 
   const backlightColor = color.backlight
   const sidelightColor = color.sidelight
@@ -20,17 +22,26 @@
   const sidelightDomain = domains.sidelight
 
   $: colors = $backlightColors[$backlightState.mode]
+
+  onMount(() => {
+    sync.start()
+  })
+  onDestroy(() => {
+    sync.pause()
+  })
 </script>
 
 <div class="lights">
   <div class="heading">
     <h3>Lights</h3>
     <div class="preview">
+      {#if $device}
       <Keyboard
         sidelight={$sidelightColor}
         halo={$haloColor}
         backlight={$backlightColor}
         layout={$device.name} />
+      {/if}
     </div>
   </div>
   <div class="scroll-wrapper">

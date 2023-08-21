@@ -5,11 +5,10 @@ import (
 	"context"
 	"encoding/json"
 	"log"
-	"nuga/pkg/color"
 	"nuga/pkg/device"
 	"nuga/pkg/hid"
 	"nuga/pkg/light"
-	"nuga/pkg/light/effect"
+	"nuga_ui/internal/settings"
 	"nuga_ui/internal/updates"
 	"os"
 
@@ -20,9 +19,10 @@ import (
 
 // App struct
 type App struct {
-	ctx  context.Context
-	dev  *device.Device
-	mode OSMode
+	ctx            context.Context
+	dev            *device.Device
+	storedSettings *settings.File
+	mode           OSMode
 }
 
 // OnStartup is called when the app starts. The context is saved
@@ -39,7 +39,7 @@ func (a *App) OnStartup(ctx context.Context) {
 func (a *App) GetOS() string {
 	os := go_runtime.GOOS
 	if os == "darwin" {
-		return "mac"
+		return OSMac
 	}
 	return os
 }
@@ -130,125 +130,36 @@ func (a *App) GetFirmware() string {
 	return a.dev.Firmware
 }
 
-// GetLightDomains returns keyboard light domains
-func (a *App) GetLightDomains() []effect.Domain {
-	return a.dev.LightDomains
-}
-
-// GetLightState returns current keyboard light state
-func (a *App) GetLightState() (LightState, error) {
-	var state LightState
-	effects, err := a.dev.Light.GetEffects()
-	if err != nil {
-		return state, err
-	}
-	state.Backlight = effects.Backlight
-	state.Halo = effects.Halo
-	state.Sidelight = effects.Sidelight
-	state.BacklightParams = effects.Backlight.CurrentParams()
-	return state, nil
-}
-
-// GetMacColors returns colors for mac modes
-func (a *App) GetMacColors() [][7]color.RGB {
-	log.Println("dev", a.dev.Light)
-	colors, err := a.dev.Light.GetColors()
+// GetSettings returns stored settings
+func (a *App) GetSettings() *settings.Content {
+	content, err := a.storedSettings.Read()
 	if err != nil {
 		return nil
 	}
-	return colors[24:]
+	return content
 }
 
-// SetHalo sets halolight effect
-func (a *App) SetHalo(mode, color, brightness, speed uint8) error {
-	state, err := a.dev.Light.GetEffects()
-	if err != nil {
-		return err
-	}
-	state.Halo.Mode = effect.Halo.Find(mode)
-	state.Halo.Params = light.EffectParams{
-		Color:      color,
-		Brightness: brightness,
-		Speed:      speed,
-	}
-	return a.dev.Light.SetEffects(state)
-}
-
-// SetSidelight sets sidelight effect
-func (a *App) SetSidelight(mode, color, brightness, speed uint8) error {
-	state, err := a.dev.Light.GetEffects()
-	if err != nil {
-		return err
-	}
-	state.Sidelight.Mode = effect.Sidelight.Find(mode)
-	state.Sidelight.Params = light.EffectParams{
-		Color:      color,
-		Brightness: brightness,
-		Speed:      speed,
-	}
-	return a.dev.Light.SetEffects(state)
-}
-
-// SetBacklight sets backlight effect
-func (a *App) SetBacklight(mode, color, brightness, speed uint8) error {
-	state, err := a.dev.Light.GetEffects()
-	if err != nil {
-		return err
-	}
-	state.Backlight.Mode = effect.Backlight.Find(mode)
-	if mode == 0 {
-		return a.dev.Light.SetEffects(state)
-	}
-
-	fea := state.Backlight.Mode.Features
-	if fea.IsSet(effect.Speed) {
-		err = state.Backlight.SetSpeed(speed)
-		if err != nil {
-			return err
+// SetSettings writes settings to file
+func (a *App) SetSettings(s settings.Content) {
+	if s.IndividualSettings {
+		switch s.OSMode {
+		case OSMac:
+			a.mode = Mac
+		case "win":
+			a.mode = Win
 		}
+	} else {
+		a.mode = Both
 	}
-	if fea.IsSet(effect.SpecificColor) {
-		err = state.Backlight.SetColor(color)
-		if err != nil {
-			return err
-		}
-	}
-	err = state.Backlight.SetBrightness(brightness)
+	err := a.storedSettings.Write(&s)
 	if err != nil {
-		return err
-	}
-
-	return a.dev.Light.SetEffects(state)
-}
-
-// SetMode sets keyboard OS mode
-func (a *App) SetMode(m OSMode) {
-	a.mode = m
-}
-
-// SetBacklightColor sets backlight color by mode and index
-func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
-	colors, err := a.dev.Light.GetColors()
-	if err != nil {
-		return
-	}
-	switch a.mode {
-	case Win:
-		colors.SetWinBacklight(m, i, c)
-	case Mac:
-		colors.SetMacBacklight(m, i, c)
-	case Both:
-		colors.SetWinBacklight(m, i, c)
-		colors.SetMacBacklight(m, i, c)
-	}
-
-	err = a.dev.Light.SetColors(colors)
-	if err != nil {
-		log.Printf("Error on writing colors: %v", err)
+		log.Printf("Settings write error %s", err.Error())
 	}
 }
 
 // NewApp creates a new application struct
-func NewApp() *App {
-	return &App{}
+func NewApp(file *settings.File) *App {
+	return &App{
+		storedSettings: file,
+	}
 }

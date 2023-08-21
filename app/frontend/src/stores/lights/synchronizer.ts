@@ -1,8 +1,8 @@
-import { connected } from '@stores/app'
 import { sleep } from '../../utils/timing'
 import { loadState } from './actions'
 import { Disconnect } from '../../../wailsjs/go/nuga/App'
 import { domains } from '.'
+import { disconnect } from '@stores/device/connection'
 
 type AsyncTask = () => Promise<void>
 
@@ -16,6 +16,13 @@ export class UpdateSynchronizer {
 
   public addTask (t: AsyncTask): void {
     this.tasks.push(t)
+  }
+
+  public pause (): void {
+    if (!this.active) {
+      return
+    }
+    this.active = false
   }
 
   public start (): void {
@@ -53,7 +60,7 @@ export class UpdateSynchronizer {
         const message = e as string
         if (message.includes('disconnected')) {
           await Disconnect()
-          connected.set(false)
+          disconnect()
           domains.backlight.set([])
           domains.halo.set([])
           domains.sidelight.set([])

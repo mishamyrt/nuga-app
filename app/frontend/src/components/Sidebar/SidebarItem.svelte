@@ -1,11 +1,12 @@
 <script lang="ts">
-import { view, type SettingsView } from '../../stores/app'
+import { view, type AppView } from '../../stores/app'
 import LightBulb from './Icons/LightBulb.svelte'
 import Keyboard from './Icons/Keyboard.svelte'
 import GearShape from './Icons/GearShape.svelte'
+import TV from './Icons/TV.svelte'
 
 export let title: string
-export let target: SettingsView
+export let target: AppView
 export let disabled = false
 
 function handleClick (): void {
@@ -21,6 +22,8 @@ function handleClick (): void {
       <GearShape />
     {:else if target === 'keys'}
       <Keyboard />
+    {:else if target === 'application'}
+      <TV />
     {/if}
   </div>
   <span class="title">

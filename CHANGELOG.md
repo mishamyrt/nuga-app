@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning][].
 
 * Linux AppImage build (Ubuntu, Fedora, etc GTK-based)
 * Signing and notarization application for macOS
+* The OS value selection is now stored persistently and restored after loading
 
 ## [1.0.0-beta7]
 

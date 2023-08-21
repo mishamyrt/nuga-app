@@ -13,6 +13,7 @@ import { backlightColors, changingColor, domains, state } from './stores'
 import { defaultState } from './defaults'
 import { UpdateSynchronizer } from './synchronizer'
 import { capitalize } from '@utils/strings'
+import equal from 'deep-equal'
 
 export const sync = new UpdateSynchronizer(1000)
 
@@ -69,7 +70,6 @@ export async function loadDomains (): Promise<void> {
       [domain.Name]: mapModes(domain.Modes)
     }
   }, {})
-  console.log(domainsMap)
   if (domainsMap?.Backlight.length > 0) {
     domains.backlight.set(domainsMap.Backlight)
   }
@@ -83,21 +83,27 @@ export async function loadDomains (): Promise<void> {
 
 export async function loadState (): Promise<void> {
   const current = await GetLightState()
+  const lastBacklightState = state.backlight.get()
+  const lastHaloState = state.halo.get()
+  const lastSidelightState = state.sidelight.get()
   if (current.BacklightParams) {
-    state.backlight.set(
-      parseEffect(current.Backlight.Mode.Code, current.BacklightParams)
-    )
-  } else {
+    const currentBacklightState = parseEffect(current.Backlight.Mode.Code, current.BacklightParams)
+    if (!equal(currentBacklightState, lastBacklightState)) {
+      state.backlight.set(currentBacklightState)
+    }
+  } else if (equal(lastBacklightState, defaultState)) {
     state.backlight.set(defaultState)
   }
 
-  state.halo.set(
-    parseEffect(current.Halo.Mode.Code, current.Halo.Params)
-  )
+  const currentHaloState = parseEffect(current.Halo.Mode.Code, current.Halo.Params)
+  if (!equal(currentHaloState, lastHaloState)) {
+    state.halo.set(currentHaloState)
+  }
 
-  state.sidelight.set(
-    parseEffect(current.Sidelight.Mode.Code, current.Sidelight.Params)
-  )
+  const currentSidelightState = parseEffect(current.Sidelight.Mode.Code, current.Sidelight.Params)
+  if (!equal(currentSidelightState, lastSidelightState)) {
+    state.sidelight.set(currentSidelightState)
+  }
 }
 
 export async function loadColors (): Promise<void> {
