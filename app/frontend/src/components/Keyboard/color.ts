@@ -11,7 +11,6 @@ export function normalizeContrast (color: Color): Color {
   let score = 0
   for (let i = 0; i < 20; i++) {
     score = backgroundInstance.contrastAPCA(instance)
-    console.log({ score })
     if (score < 0) {
       if (score < -40) {
         instance.lch.l *= 0.98

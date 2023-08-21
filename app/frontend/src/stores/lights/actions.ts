@@ -69,7 +69,6 @@ export async function loadDomains (): Promise<void> {
       [domain.Name]: mapModes(domain.Modes)
     }
   }, {})
-  console.log(domainsMap)
   if (domainsMap?.Backlight.length > 0) {
     domains.backlight.set(domainsMap.Backlight)
   }

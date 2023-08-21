@@ -1,7 +1,8 @@
 
 import { task } from 'nanostores'
-import { initVersion } from './version'
+import { initVersion, version } from './version'
 import { initWindow } from './window'
+import { initLogger } from '@stores/app/logger'
 
 export function initApp (): void {
   task(async () => {
@@ -9,6 +10,9 @@ export function initApp (): void {
       initVersion(),
       initWindow()
     ])
+    if (version.get() === 'dev') {
+      initLogger()
+    }
   })
 }
 

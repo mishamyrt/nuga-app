@@ -5,12 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@nanostores/logger':
+    specifier: ^0.2.3
+    version: 0.2.3(nanostores@0.9.3)
   colorjs.io:
     specifier: ^0.4.5
     version: 0.4.5
   nanostores:
-    specifier: ^0.9.2
-    version: 0.9.2
+    specifier: ^0.9.3
+    version: 0.9.3
   svelte:
     specifier: ^4.0.5
     version: 4.0.5
@@ -443,6 +446,15 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
+
+  /@nanostores/logger@0.2.3(nanostores@0.9.3):
+    resolution: {integrity: sha512-imuhrgyONQ75kDkJxlhgYNK27rmTehyzV4bEty51fk42IO44hJtpoi4E/eteRfdS6Zl6Vc9cFEoiGHhZfzawhA==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      nanostores: '>=0.9.2'
+    dependencies:
+      nanostores: 0.9.3
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2237,8 +2249,8 @@ packages:
     hasBin: true
     dev: true
 
-  /nanostores@0.9.2:
-    resolution: {integrity: sha512-wfKlqLGtOYV9+qzGveqDOSWZUBgTeMr/g+JzfV/GofXQ//0wp0cgHF+QBVlmNH/JW9YA9QN+vR6N0vpniPpARA==}
+  /nanostores@0.9.3:
+    resolution: {integrity: sha512-KobZjcVyNndNrb5DAjfs0WG0lRcZu5Q1BOrfTOxokFLi25zFrWPjg+joXC6kuDqNfSt9fQwppyjUBkRPtsL+8w==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     dev: false
 
