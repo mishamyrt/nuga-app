@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-  import type { SelectOption } from './Select'
+  import type { SelectOption } from './types'
 
   export let value: string = ''
   export let options: SelectOption[] = []

@@ -1,6 +1,5 @@
 <script lang="ts">
-import RadioButtons from '@components/RadioButtons.svelte'
-import { type SelectOption } from '@components/Select'
+import { type SelectOption, RadioButtons } from '@components/Select'
 import Switch from '@components/Switch.svelte'
 import { individualSettings, osMode, type OSMode, device } from '@stores/device'
 
