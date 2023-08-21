@@ -10,7 +10,6 @@
   import DeviceView from './views/DeviceView.svelte'
   import ApplicationView from './views/ApplicationView.svelte'
   import { connected } from '@stores/device'
-  import { initLogger } from '@stores/app/logger'
 
   $: activeView = $view
   $: appVersion = $version
@@ -30,7 +29,6 @@
 
   onMount(() => {
     initApp()
-    initLogger()
     bindBackgroundColor(rootRef, '--color-background-main')
     unsubscribeConnected = connected.subscribe(isConnected => {
       if (isConnected) {
