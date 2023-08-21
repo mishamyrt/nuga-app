@@ -18,6 +18,13 @@ export class UpdateSynchronizer {
     this.tasks.push(t)
   }
 
+  public pause (): void {
+    if (!this.active) {
+      return
+    }
+    this.active = false
+  }
+
   public start (): void {
     if (this.active) {
       return

@@ -3,7 +3,6 @@
   import { connect, startSimulation, connected } from '@stores/device'
   import { sleep } from '@utils/timing'
   import { onHotkey } from '@utils/hotkey'
-  import { sync } from '@stores/lights/actions'
   import CableIcon from '@components/CableIcon.svelte'
 
   export let hide = false
@@ -23,7 +22,6 @@
     } catch (e) {
       console.error(e)
     }
-    sync.start()
   })
 </script>
 
