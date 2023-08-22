@@ -7,7 +7,7 @@ import {
   SetSidelight,
   GetMacColors,
   SetBacklightColor
-} from '../../../wailsjs/go/nuga/App'
+} from '@wailsjs/go/nuga/App'
 import type { Color, EffectParams, LightMode, LightSetter, LightState } from './types'
 import { backlightColors, changingColor, domains, state } from './stores'
 import { defaultState } from './defaults'

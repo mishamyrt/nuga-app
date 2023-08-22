@@ -16,7 +16,8 @@
       "@components/*": ["src/components/*"],
       "@stores/*": ["src/stores/*"],
       "@utils/*": ["src/utils/*"],
-      "@wailsjs/app": ["wailsjs/go/main/*"]
+      "@wailsjs/runtime": ["wailsjs/runtime/runtime"],
+      "@wailsjs/go/*": ["wailsjs/go/*"]
     },
     "outDir": "dist"
   },
@@ -28,7 +29,9 @@
     "vite.config.ts",
     "svelte.config.js",
     ".eslintrc.cjs",
-    ".stylelintrc.cjs"
+    ".stylelintrc.cjs",
+    "wailsjs/**/*.js",
+    "wailsjs/**/*.d.ts"
   ],
   "references": [
     {

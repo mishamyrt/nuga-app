@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte'
   import LoadingView from './views/LoadingView.svelte'
-  import { BrowserOpenURL } from '../wailsjs/runtime'
+  import { BrowserOpenURL } from '@wailsjs/runtime'
   import { focused, os, view, theme, useBackgroundColor } from '@stores/app'
   import { version, updateUrl, hasUpdate } from '@stores/version'
   import SidebarItem from './components/Sidebar/SidebarItem.svelte'

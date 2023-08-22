@@ -1,7 +1,7 @@
 import { action, onMount, task } from 'nanostores'
 import { appearance, backgroundColor, focused, view } from './atoms'
 import type { AppView, OS, Theme } from './types'
-import { GetOS } from '../../../wailsjs/go/nuga/App'
+import { GetOS } from '@wailsjs/go/nuga/App'
 
 export const setView = action(view, 'setView', (store, next: AppView) => {
   store.set(next)
