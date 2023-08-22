@@ -1,8 +1,9 @@
-import { sleep } from '../../utils/timing'
-import { loadState } from './actions'
-import { Disconnect } from '@wailsjs/go/nuga/App'
-import { domains } from '.'
 import { disconnect } from '@stores/device/actions'
+import { Disconnect } from '@wailsjs/go/nuga/App'
+
+import { sleep } from '../../utils/timing'
+import { domains } from '.'
+import { loadState } from './actions'
 
 type AsyncTask = () => Promise<void>
 

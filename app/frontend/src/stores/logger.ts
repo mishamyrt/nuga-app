@@ -1,10 +1,10 @@
+import { logger } from '@nanostores/logger'
 import type { AnyStore } from 'nanostores'
+
+import { backgroundColor, focused, os, theme, view } from './app'
 import { connection, mode } from './device'
 import { backlightColors, changingColor, color, domains, state } from './lights'
 import { updateUrl, version } from './version'
-import { logger } from '@nanostores/logger'
-import { backgroundColor, focused, os, theme, view } from './app'
-// import { settingsFile } from './app/file'
 
 function isStore (x: any): x is AnyStore {
   return 'set' in x && 'get' in x && 'listen' in x

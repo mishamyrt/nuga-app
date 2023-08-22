@@ -1,4 +1,5 @@
 import { atom, computed, map } from 'nanostores'
+
 import type { ConnectionDescription, Mode } from './types'
 
 export const connection = atom<ConnectionDescription | undefined>()

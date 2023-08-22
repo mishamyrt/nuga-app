@@ -1,1 +1,1 @@
-export { version, updateUrl, hasUpdate } from './atoms'
+export { hasUpdate, updateUrl, version } from './atoms'

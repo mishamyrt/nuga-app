@@ -1,4 +1,4 @@
-import type { Key, KeyDescription, KeyboardLayout, KeyboardTemplate } from './types'
+import type { Key, KeyboardLayout, KeyboardTemplate, KeyDescription } from './types'
 
 function fillKey (k: KeyDescription): Key {
   return {

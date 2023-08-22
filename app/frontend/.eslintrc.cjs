@@ -3,6 +3,9 @@ module.exports = {
     'standard-with-typescript',
     'plugin:svelte/recommended'
   ],
+  plugins: [
+    'eslint-plugin-simple-import-sort'
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
@@ -29,6 +32,8 @@ module.exports = {
     '@typescript-eslint/no-confusing-void-expression': 'off',
     '@typescript-eslint/promise-function-async': 'off',
     '@typescript-eslint/triple-slash-reference': 'off',
-    'no-undef-init': 'off'
+    'no-undef-init': 'off',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error'
   }
 }

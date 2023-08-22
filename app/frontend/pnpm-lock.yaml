@@ -58,6 +58,9 @@ devDependencies:
   eslint-plugin-promise:
     specifier: ^6.0.0
     version: 6.1.1(eslint@8.44.0)
+  eslint-plugin-simple-import-sort:
+    specifier: ^10.0.0
+    version: 10.0.0(eslint@8.44.0)
   eslint-plugin-svelte:
     specifier: ^2.32.2
     version: 2.32.2(eslint@8.44.0)(svelte@4.0.5)
@@ -1412,6 +1415,14 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
+    dependencies:
+      eslint: 8.44.0
+    dev: true
+
+  /eslint-plugin-simple-import-sort@10.0.0(eslint@8.44.0):
+    resolution: {integrity: sha512-AeTvO9UCMSNzIHRkg8S6c3RPy5YEwKWSQPx3DYghLedo2ZQxowPFLGDN1AZ2evfg6r6mjBSZSLxLFsWSu3acsw==}
+    peerDependencies:
+      eslint: '>=5.0.0'
     dependencies:
       eslint: 8.44.0
     dev: true

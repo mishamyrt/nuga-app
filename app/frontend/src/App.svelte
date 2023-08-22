@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte'
-  import LoadingView from './views/LoadingView.svelte'
-  import { BrowserOpenURL } from '@wailsjs/runtime'
-  import { focused, os, view, theme, useBackgroundColor } from '@stores/app'
-  import { version, updateUrl, hasUpdate } from '@stores/version'
-  import SidebarItem from './components/Sidebar/SidebarItem.svelte'
-  import Button from './components/Button.svelte'
-  import LightsView from './views/LightsView.svelte'
-  import DeviceView from './views/DeviceView.svelte'
-  import ApplicationView from './views/ApplicationView.svelte'
+  import { focused, os, theme, useBackgroundColor, view } from '@stores/app'
   import { connected } from '@stores/device'
   import { initLogger } from '@stores/logger'
+  import { hasUpdate, updateUrl, version } from '@stores/version'
+  import { BrowserOpenURL } from '@wailsjs/runtime'
+  import { onDestroy, onMount } from 'svelte'
+
+  import Button from './components/Button.svelte'
+  import SidebarItem from './components/Sidebar/SidebarItem.svelte'
+  import ApplicationView from './views/ApplicationView.svelte'
+  import DeviceView from './views/DeviceView.svelte'
+  import LightsView from './views/LightsView.svelte'
+  import LoadingView from './views/LoadingView.svelte'
 
   $: activeView = $view
   $: appVersion = $version

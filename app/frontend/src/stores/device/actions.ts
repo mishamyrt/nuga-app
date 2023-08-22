@@ -1,7 +1,8 @@
-import { action, onMount } from 'nanostores'
 import { sleep } from '@utils/timing'
 import { Connect, GetFirmware, GetPath, SimulateConnection } from '@wailsjs/go/nuga/App'
-import { loadDomains, loadState, loadColors } from '../lights/actions'
+import { action, onMount } from 'nanostores'
+
+import { loadColors, loadDomains, loadState } from '../lights/actions'
 import { connection, mode } from './atoms'
 import type { OSMode } from './types'
 

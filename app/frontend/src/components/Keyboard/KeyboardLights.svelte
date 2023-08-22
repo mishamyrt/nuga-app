@@ -1,10 +1,11 @@
 <script lang="ts">
   import type { PreviewColor } from '@stores/lights/types'
+
+  import BaseKeyboard from './BaseKeyboard.svelte'
+  import { normalizeContrast } from './color'
   import { layouts } from './layouts/index'
   import { buildTemplate } from './template'
-  import BaseKeyboard from './BaseKeyboard.svelte'
   import { toRGB } from './utils'
-  import { normalizeContrast } from './color'
 
   export let backlight: PreviewColor
   export let halo: PreviewColor

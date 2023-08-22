@@ -1,7 +1,8 @@
 <script lang="ts">
-import { backlightColors, changingColor, state, setBacklightColor } from '@stores/lights'
+import { backlightColors, changingColor, setBacklightColor, state } from '@stores/lights'
 import { onMount } from 'svelte'
 import ColorPicker from 'svelte-awesome-color-picker'
+
 import Button from './Button.svelte'
 
 let visible = false

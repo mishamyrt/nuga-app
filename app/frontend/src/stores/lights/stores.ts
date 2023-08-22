@@ -1,6 +1,7 @@
 import { atom, computed, map, type MapStore, type ReadableAtom } from 'nanostores'
-import type { Color, LightMode, LightState, PreviewColor } from './types'
+
 import { defaultColors, defaultState } from './defaults'
+import type { Color, LightMode, LightState, PreviewColor } from './types'
 
 export const state = {
   backlight: map<LightState>({ ...defaultState }),

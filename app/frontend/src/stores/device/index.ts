@@ -1,9 +1,9 @@
 export {
   connect,
   disconnect,
-  startSimulation,
+  setIndividual,
   setOS,
-  setIndividual
+  startSimulation
 } from './actions'
-export { osMode, individual, mode, connection, connected } from './atoms'
-export type { OSMode, ConnectionDescription } from './types'
+export { connected, connection, individual, mode, osMode } from './atoms'
+export type { ConnectionDescription, OSMode } from './types'

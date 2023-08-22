@@ -1,5 +1,5 @@
-import Select from './Select.svelte'
 import RadioButtons from './RadioButtons.svelte'
+import Select from './Select.svelte'
 
-export { Select, RadioButtons }
+export { RadioButtons, Select }
 export type { SelectOption } from './types'

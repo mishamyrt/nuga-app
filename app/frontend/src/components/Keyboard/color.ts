@@ -1,6 +1,7 @@
 import { backgroundColor } from '@stores/app'
 import type { Color } from '@stores/lights'
 import ColorJS from 'colorjs.io'
+
 import type { ColorMap, KeyboardTemplate } from './types'
 import { toColor, toRGB } from './utils'
 

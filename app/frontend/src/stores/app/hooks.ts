@@ -1,5 +1,5 @@
-import { appearance } from './atoms'
 import { setBackground } from './actions'
+import { appearance } from './atoms'
 
 export function useBackgroundColor (ref: HTMLElement, property: string): () => void {
   return appearance.subscribe(() => {

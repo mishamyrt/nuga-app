@@ -1,5 +1,6 @@
-import type { ColorMap, KeyboardTemplate } from './types'
 import ColorJS from 'colorjs.io'
+
+import type { ColorMap, KeyboardTemplate } from './types'
 
 const GRADIENT_TOP = '#0578FF'
 const GRADIENT_BOTTOM = '#FF014D'

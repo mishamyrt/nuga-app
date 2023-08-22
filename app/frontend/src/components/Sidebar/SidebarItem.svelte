@@ -1,8 +1,8 @@
 <script lang="ts">
-import { view, type AppView } from '../../stores/app'
-import LightBulb from './Icons/LightBulb.svelte'
-import Keyboard from './Icons/Keyboard.svelte'
+import { type AppView, view } from '../../stores/app'
 import GearShape from './Icons/GearShape.svelte'
+import Keyboard from './Icons/Keyboard.svelte'
+import LightBulb from './Icons/LightBulb.svelte'
 import TV from './Icons/TV.svelte'
 
 export let title: string

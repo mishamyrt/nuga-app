@@ -1,4 +1,4 @@
-export { view, os, theme, focused, backgroundColor } from './atoms'
+export { setBackground, setOS, setTheme, setView } from './actions'
+export { backgroundColor, focused, os, theme, view } from './atoms'
 export { useBackgroundColor } from './hooks'
-export { setView, setTheme, setOS, setBackground } from './actions'
 export type { OS } from './types'

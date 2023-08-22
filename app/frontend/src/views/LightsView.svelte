@@ -1,16 +1,16 @@
 <script lang="ts">
-import LightParams from '@components/LightParams.svelte'
 import ColorPickerModal from '@components/ColorPickerModal.svelte'
-import {
-  state,
-  domains,
-  color,
-  setBacklight, setHalo, setSidelight, backlightColors, changingColor
-} from '@stores/lights'
-import { connection } from '@stores/device'
 import Keyboard from '@components/Keyboard/KeyboardLights.svelte'
-import { onDestroy, onMount } from 'svelte'
+import LightParams from '@components/LightParams.svelte'
+import { connection } from '@stores/device'
+import {
+  backlightColors, changingColor,
+  color,
+  domains,
+  setBacklight, setHalo, setSidelight, state
+} from '@stores/lights'
 import { sync } from '@stores/lights/actions'
+import { onDestroy, onMount } from 'svelte'
 
 const backlightColor = color.backlight
 const sidelightColor = color.sidelight

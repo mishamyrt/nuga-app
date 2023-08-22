@@ -1,13 +1,13 @@
 <script lang="ts">
-import { type SelectOption, RadioButtons } from '@components/Select'
+import { RadioButtons, type SelectOption } from '@components/Select'
 import Switch from '@components/Switch.svelte'
 import {
-  type OSMode,
-  individual,
-  osMode,
   connection,
-  setOS,
-  setIndividual
+  individual,
+  type OSMode,
+  osMode,
+  setIndividual,
+  setOS
 } from '@stores/device'
 
 const osModeOptions: SelectOption[] = [

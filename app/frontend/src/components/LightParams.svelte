@@ -1,12 +1,13 @@
 <script lang="ts">
   import { changingColor, type Color, type LightMode, type LightState } from '@stores/lights'
-  import Switch from './Switch.svelte'
   import type { MapStore, ReadableAtom } from 'nanostores'
+
+  import Button from './Button.svelte'
   import ColorSelector from './ColorSelector.svelte'
+  import Help from './Help.svelte'
   import Range from './Range.svelte'
   import { Select, type SelectOption } from './Select'
-  import Button from './Button.svelte'
-  import Help from './Help.svelte'
+  import Switch from './Switch.svelte'
 
   export let title: string = ''
   export let state: MapStore<LightState>

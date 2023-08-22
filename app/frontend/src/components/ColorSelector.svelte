@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { defaultColors, type Color, changingColor } from '@stores/lights'
+  import { changingColor, type Color, defaultColors } from '@stores/lights'
   import { createEventDispatcher } from 'svelte'
 
   export let disabled = false

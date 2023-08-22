@@ -1,7 +1,8 @@
-import { action, onMount } from 'nanostores'
-import { updateUrl, version } from './atoms'
 import { GetVersion } from '@wailsjs/go/nuga/App'
 import { EventsOff, EventsOn } from '@wailsjs/runtime'
+import { action, onMount } from 'nanostores'
+
+import { updateUrl, version } from './atoms'
 
 export const loadVersion = action(version, 'loadVersion', async store => {
   const appVersion = await GetVersion()

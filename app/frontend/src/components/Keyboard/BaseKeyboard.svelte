@@ -1,9 +1,10 @@
 <script lang="ts">
-  import type { KeyboardTemplate, LightMap } from './types'
+  import { backgroundColor } from '@stores/app'
   import type { PreviewColor } from '@stores/lights/types'
+
   import { fillColorMap, normalizeContrast } from './color'
   import { createGradientMap } from './random'
-  import { backgroundColor } from '@stores/app'
+  import type { KeyboardTemplate, LightMap } from './types'
   import { toRGB } from './utils'
 
   export let colorless = false

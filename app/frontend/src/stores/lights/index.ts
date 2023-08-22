@@ -1,10 +1,10 @@
 export {
   loadDomains,
   setBacklight,
+  setBacklightColor,
   setHalo,
-  setSidelight,
-  setBacklightColor
+  setSidelight
 } from './actions'
-export { domains, state, color, backlightColors, changingColor } from './stores'
-export type { LightMode, LightState, Color } from './types'
 export { defaultColors, defaultState } from './defaults'
+export { backlightColors, changingColor, color, domains, state } from './stores'
+export type { Color, LightMode, LightState } from './types'

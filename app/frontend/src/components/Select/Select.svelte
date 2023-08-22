@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
+
   import type { SelectOption } from './types'
 
   export let value: string

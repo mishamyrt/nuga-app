@@ -1,19 +1,20 @@
-import type { MapStore } from 'nanostores'
-import {
-  GetLightState,
-  GetLightDomains,
-  SetHalo,
-  SetBacklight,
-  SetSidelight,
-  GetMacColors,
-  SetBacklightColor
-} from '@wailsjs/go/nuga/App'
-import type { Color, EffectParams, LightMode, LightSetter, LightState } from './types'
-import { backlightColors, changingColor, domains, state } from './stores'
-import { defaultState } from './defaults'
-import { UpdateSynchronizer } from './synchronizer'
 import { capitalize } from '@utils/strings'
+import {
+  GetLightDomains,
+  GetLightState,
+  GetMacColors,
+  SetBacklight,
+  SetBacklightColor,
+  SetHalo,
+  SetSidelight
+} from '@wailsjs/go/nuga/App'
 import equal from 'deep-equal'
+import type { MapStore } from 'nanostores'
+
+import { defaultState } from './defaults'
+import { backlightColors, changingColor, domains, state } from './stores'
+import { UpdateSynchronizer } from './synchronizer'
+import type { Color, EffectParams, LightMode, LightSetter, LightState } from './types'
 
 export const sync = new UpdateSynchronizer(1000)
 

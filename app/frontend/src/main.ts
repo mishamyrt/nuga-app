@@ -1,5 +1,6 @@
 import './style.css'
 import './form.scss'
+
 import App from './App.svelte'
 
 const target = document.getElementById('app')

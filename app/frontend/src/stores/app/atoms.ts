@@ -1,4 +1,5 @@
 import { atom, computed, map } from 'nanostores'
+
 import type { AppView, WindowAppearance } from './types'
 
 export const appearance = map<WindowAppearance>({

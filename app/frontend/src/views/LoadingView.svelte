@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  import { startSimulation, connected } from '@stores/device'
-  import { onHotkey } from '@utils/hotkey'
   import CableIcon from '@components/CableIcon.svelte'
+  import { connected, startSimulation } from '@stores/device'
+  import { onHotkey } from '@utils/hotkey'
+  import { onMount } from 'svelte'
 
   export let hide = false
 
