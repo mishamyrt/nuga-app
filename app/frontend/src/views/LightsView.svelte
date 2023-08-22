@@ -1,46 +1,52 @@
 <script lang="ts">
-  import LightParams from '@components/LightParams.svelte'
-  import ColorPickerModal from '@components/ColorPickerModal.svelte'
-  import {
-    state,
-    domains,
-    color,
-    setBacklight, setHalo, setSidelight, backlightColors, changingColor
-  } from '@stores/lights'
-  import { device } from '@stores/device'
-  import Keyboard from '@components/Keyboard/KeyboardLights.svelte'
-  import { onDestroy, onMount } from 'svelte'
-  import { sync } from '@stores/lights/actions'
+import LightParams from '@components/LightParams.svelte'
+import ColorPickerModal from '@components/ColorPickerModal.svelte'
+import {
+  state,
+  domains,
+  color,
+  setBacklight, setHalo, setSidelight, backlightColors, changingColor
+} from '@stores/lights'
+import { connection } from '@stores/device'
+import Keyboard from '@components/Keyboard/KeyboardLights.svelte'
+import { onDestroy, onMount } from 'svelte'
+import { sync } from '@stores/lights/actions'
 
-  const backlightColor = color.backlight
-  const sidelightColor = color.sidelight
-  const haloColor = color.halo
+const backlightColor = color.backlight
+const sidelightColor = color.sidelight
+const haloColor = color.halo
 
-  const backlightState = state.backlight
+const haloDomain = domains.halo
+const sidelightDomain = domains.sidelight
 
-  const haloDomain = domains.halo
-  const sidelightDomain = domains.sidelight
+const backlightState = state.backlight
 
-  $: colors = $backlightColors[$backlightState.mode]
+$: colors = (() => {
+  const mode = $backlightState?.mode
+  if (!mode) {
+    return []
+  }
+  return $backlightColors[mode]
+})()
 
-  onMount(() => {
-    sync.start()
-  })
-  onDestroy(() => {
-    sync.pause()
-  })
+onMount(() => {
+  sync.start()
+})
+onDestroy(() => {
+  sync.pause()
+})
 </script>
 
 <div class="lights">
   <div class="heading">
     <h3>Lights</h3>
     <div class="preview">
-      {#if $device}
+      {#if $connection}
       <Keyboard
         sidelight={$sidelightColor}
         halo={$haloColor}
         backlight={$backlightColor}
-        layout={$device.name} />
+        layout={$connection.name} />
       {/if}
     </div>
   </div>

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { Select, type SelectOption } from '@components/Select'
 import Switch from '@components/Switch.svelte'
-import { os, type OS, theme } from '@stores/app'
+import { os, type OS, theme, setOS, setTheme } from '@stores/app'
 
 const osOptions: SelectOption[] = [
   { title: 'macOS', value: 'mac' },
@@ -9,11 +9,11 @@ const osOptions: SelectOption[] = [
 ]
 
 function handleOSChange (e: CustomEvent<string>): void {
-  os.set(e.detail as OS)
+  setOS(e.detail as OS)
 }
 
 function handleThemeChange (e: CustomEvent<boolean>): void {
-  theme.set(e.detail ? 'dark' : 'light')
+  setTheme(e.detail ? 'dark' : 'light')
 }
 </script>
 

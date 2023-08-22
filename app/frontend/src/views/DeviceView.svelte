@@ -1,7 +1,14 @@
 <script lang="ts">
 import { type SelectOption, RadioButtons } from '@components/Select'
 import Switch from '@components/Switch.svelte'
-import { individualSettings, osMode, type OSMode, device } from '@stores/device'
+import {
+  type OSMode,
+  individual,
+  osMode,
+  connection,
+  setOS,
+  setIndividual
+} from '@stores/device'
 
 const osModeOptions: SelectOption[] = [
   { title: 'mac', value: 'mac' },
@@ -9,14 +16,14 @@ const osModeOptions: SelectOption[] = [
 ]
 
 function handleModeChange (e: CustomEvent<string>): void {
-  osMode.set(e.detail as OSMode)
+  setOS(e.detail as OSMode)
 }
 
 function handleSettingsModeChange (e: CustomEvent<boolean>): void {
-  individualSettings.set(e.detail)
+  setIndividual(e.detail)
 }
 
-$: deviceInfo = $device
+$: deviceInfo = $connection
 </script>
 
 <div class="device">
@@ -42,12 +49,12 @@ $: deviceInfo = $device
           <span>Individual mode settings</span>
           <Switch
             on:click={handleSettingsModeChange}
-            checked={$individualSettings} />
+            checked={$individual} />
         </div>
         <div class="form-row centered">
           <span>System mode</span>
           <RadioButtons
-            disabled={!$individualSettings}
+            disabled={!$individual}
             on:change={handleModeChange}
             value={$osMode}
             options={osModeOptions} />
