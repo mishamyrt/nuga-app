@@ -16,6 +16,7 @@
   $: appVersion = $version
 
   let unsubscribeConnected: () => void
+  let unsubscribeBackground: () => void
   let rootRef: HTMLDivElement
 
   let hideLoading = false
@@ -30,7 +31,7 @@
 
   onMount(() => {
     initLogger()
-    useBackgroundColor(rootRef, '--color-background-main')
+    unsubscribeBackground = useBackgroundColor(rootRef, '--color-background-main')
     unsubscribeConnected = connected.subscribe(isConnected => {
       if (isConnected) {
         setTimeout(() => {
@@ -44,6 +45,7 @@
 
   onDestroy(() => {
     unsubscribeConnected()
+    unsubscribeBackground()
   })
 </script>
 

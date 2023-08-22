@@ -1,4 +1,4 @@
-import { action } from 'nanostores'
+import { action, onMount } from 'nanostores'
 import { sleep } from '@utils/timing'
 import { Connect, GetFirmware, GetPath, SimulateConnection } from '@wailsjs/go/nuga/App'
 import { loadDomains, loadState, loadColors } from '../lights/actions'
@@ -60,4 +60,8 @@ export const setOS = action(mode, 'setOS', (store, os: OSMode) => {
 
 export const setIndividual = action(mode, 'setIndividual', (store, individual: boolean) => {
   store.setKey('individual', individual)
+})
+
+onMount(connection, () => {
+  connect()
 })

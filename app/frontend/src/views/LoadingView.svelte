@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { connect, startSimulation, connected } from '@stores/device'
-  import { sleep } from '@utils/timing'
+  import { startSimulation, connected } from '@stores/device'
   import { onHotkey } from '@utils/hotkey'
   import CableIcon from '@components/CableIcon.svelte'
 
@@ -14,14 +13,6 @@
     setTimeout(() => {
       showHelp = true
     }, 1500)
-    try {
-      await Promise.all([
-        connect(),
-        sleep(1000)
-      ])
-    } catch (e) {
-      console.error(e)
-    }
   })
 </script>
 
