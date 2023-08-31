@@ -49,7 +49,7 @@
 
   :global(.theme-light) .radio-buttons {
     --radio-background: #E6E6E6;
-    --radio-active-background: #FFFFFF;
+    --radio-active-background: #FFF;
     --radio-border: #DADADA;
   }
 
