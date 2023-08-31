@@ -32,6 +32,27 @@
 </div>
 
 <style lang="scss">
+  .radio-buttons {
+    --radio-background: #363636;
+    --radio-active-background: #686868;
+    --radio-border: #464646;
+
+    display: flex;
+    background-color: var(--radio-background);
+    border: 1px solid var(--radio-border);
+    border-radius: 6px;
+
+    &.disabled {
+      opacity: 0.4;
+    }
+  }
+
+  :global(.theme-light) .radio-buttons {
+    --radio-background: #E6E6E6;
+    --radio-active-background: #FFF;
+    --radio-border: #DADADA;
+  }
+
   input {
     appearance: none;
     background-color: transparent;
@@ -45,7 +66,7 @@
     border-radius: 4px;
 
     &:checked {
-      background-color: #686868;
+      background-color: var(--radio-active-background);
     }
   }
 
@@ -54,17 +75,6 @@
     display: block;
     margin: 1px;
     padding: 1px 13px;
-  }
-
-  .radio-buttons {
-    display: flex;
-    background-color: #363636;
-    border: 1px solid #454545;
-    border-radius: 6px;
-
-    &.disabled {
-      opacity: 0.4;
-    }
   }
 
   .title {
