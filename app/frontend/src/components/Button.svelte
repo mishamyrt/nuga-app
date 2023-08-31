@@ -50,6 +50,7 @@
 
     &.primary {
       background: linear-gradient(180deg, #3978DE 0%, #336CC5 100%);
+      color: #FFF;
 
       &:active {
         background: #457AEB;
