@@ -120,6 +120,8 @@ func applyMiscState(e *light.MiscEffect, s LightDomainRequest, d effect.Domain) 
 		e.Mode = &effect.SidelightOff
 	}
 	if e.Mode.Code == 0 {
+		s.Speed = 0
+		e.Color = 0
 		return nil
 	}
 	if e.Mode.Features.IsSet(effect.Speed) {

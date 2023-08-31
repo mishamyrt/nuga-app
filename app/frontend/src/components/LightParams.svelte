@@ -56,7 +56,9 @@ function handleColorEdit (): void {
 }
 
 $: activeMode = modes.find(m => m.code === state.mode)
-$: modeOptions = modes.map<SelectOption>(m => ({
+$: modeOptions = modes
+  .filter(m => m.code !== 0)
+  .map<SelectOption>(m => ({
   value: m.code.toString(),
   title: m.name,
   disabled: m.code === 18 // Disable custom mode
@@ -67,7 +69,11 @@ onMount(() => {
   modes = lightModes.get()[domain]
 
   subscriptions.push(
-    listenKeys(lightState, [domain], s => { state = s[domain] }),
+    listenKeys(lightState, [domain], s => {
+      if (s[domain].enabled) {
+        state = s[domain]
+      }
+    }),
     listenKeys(lightModes, [domain], s => { modes = s[domain] })
   )
 })

@@ -28,7 +28,6 @@ export function getColor (
 
 export function mapModes (m: any[]): LightMode[] {
   return m
-    .filter(i => i.code !== 0)
     .map(i => ({
       name: capitalize(i.name),
       supports: {

@@ -32,9 +32,16 @@ export function clearLightsData (): void {
 
 export function setLight (domain: LightDomain, state: LightState): void {
   lightState.setKey(domain, state)
+  const nextState = {
+    ...lightState.get(),
+    [domain]: state
+  }
+  if (!state.enabled) {
+    nextState[domain].mode = 0
+  }
   synchronizer.addTask(async () => {
     await SetLightState(
-      nuga.LightStateRequest.createFrom(lightState.get())
+      nuga.LightStateRequest.createFrom(nextState)
     )
   })
 }
