@@ -6,16 +6,22 @@ export interface LightState {
   enabled: boolean
 }
 
+export type LightDomain = 'backlight' | 'sidelight' | 'halo'
+
 export interface LightMode {
   code: number
-  features: number
+  supports: {
+    specificColor: boolean
+    randomColor: boolean
+    speed: boolean
+  }
   name: string
 }
 
 export interface EffectParams {
-  Color: number
-  Speed: number
-  Brightness: number
+  color: number
+  speed: number
+  brightness: number
 }
 
 export type LightSetter = (

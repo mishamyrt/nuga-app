@@ -1,7 +1,7 @@
 <script lang="ts">
   import { focused, os, theme, useBackgroundColor, view } from '@stores/app'
   import { connected } from '@stores/device'
-  import { initLogger } from '@stores/logger'
+  import { initLights } from '@stores/lights/actions'
   import { hasUpdate, updateUrl, version } from '@stores/version'
   import { BrowserOpenURL } from '@wailsjs/runtime'
   import { onDestroy, onMount } from 'svelte'
@@ -31,10 +31,10 @@
   }
 
   onMount(() => {
-    initLogger()
     unsubscribeBackground = useBackgroundColor(rootRef, '--color-background-main')
     unsubscribeConnected = connected.subscribe(isConnected => {
       if (isConnected) {
+        initLights()
         setTimeout(() => {
           hideLoading = true
         }, 1000)

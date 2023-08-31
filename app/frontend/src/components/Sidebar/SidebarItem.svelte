@@ -1,5 +1,6 @@
 <script lang="ts">
-import { type AppView, view } from '../../stores/app'
+import { type AppView, view } from '@stores/app'
+
 import GearShape from './Icons/GearShape.svelte'
 import Keyboard from './Icons/Keyboard.svelte'
 import LightBulb from './Icons/LightBulb.svelte'

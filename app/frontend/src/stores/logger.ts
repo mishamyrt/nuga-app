@@ -1,41 +1,16 @@
-import { logger } from '@nanostores/logger'
-import type { AnyStore } from 'nanostores'
+import type { ReadableAtom } from 'nanostores'
 
-import { backgroundColor, focused, os, theme, view } from './app'
-import { connection, mode } from './device'
-import { backlightColors, changingColor, color, domains, state } from './lights'
-import { updateUrl, version } from './version'
+const BOLD = 'font-weight: 700;'
+const REGULAR = 'font-weight: 400;'
 
-function isStore (x: any): x is AnyStore {
-  return 'set' in x && 'get' in x && 'listen' in x
-}
-
-function flattenStoreMap (obj: Record<string, any>, parentKey = ''): Record<string, any> {
-  let result: Record<string, any> = {}
-  for (const key in obj) {
-    if (Object.hasOwn(obj, key)) {
-      const newKey = parentKey ? `${parentKey}.${key}` : key
-      if (typeof obj[key] === 'object' && !isStore(obj[key])) {
-        const flattenedSubObject = flattenStoreMap(obj[key], newKey)
-        result = { ...result, ...flattenedSubObject }
-      } else {
-        result[newKey] = obj[key]
-      }
-    }
+export function logStore (storeMap: Record<string, ReadableAtom>): void {
+  for (const key in storeMap) {
+    storeMap[key].listen(value => {
+      // const space = `Store [2;41m${key}[0m has been changed`
+      // const world = '\x1B[34;102;9mWorld';
+      console.groupCollapsed(`%c✨ Store %c${key}%c has been changed`, REGULAR, BOLD, REGULAR)
+      console.log(value)
+      console.groupEnd()
+    })
   }
-  return result
-}
-
-export function initLogger (): void {
-  const loggers = {
-    app: {
-      view, focused, os, theme, backgroundColor
-    },
-    version: { version, updateUrl },
-    device: { connection, mode },
-    lights: { domains, state, color, backgroundColor, changingColor, backlightColors }
-  }
-  setTimeout(() => {
-    logger(flattenStoreMap(loggers))
-  }, 50)
 }

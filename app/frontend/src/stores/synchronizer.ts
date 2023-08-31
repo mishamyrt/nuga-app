@@ -1,13 +1,12 @@
 import { disconnect } from '@stores/device/actions'
 import { Disconnect } from '@wailsjs/go/nuga/App'
 
-import { sleep } from '../../utils/timing'
-import { domains } from '.'
-import { loadState } from './actions'
+import { sleep } from '../utils/timing'
+import { clearLightsData, loadState } from './lights/actions'
 
 type AsyncTask = () => Promise<void>
 
-export class UpdateSynchronizer {
+export class StateSynchronizer {
   private readonly tasks: AsyncTask[] = []
   private active = false
 
@@ -62,9 +61,7 @@ export class UpdateSynchronizer {
         if (message.includes('disconnected')) {
           await Disconnect()
           disconnect()
-          domains.backlight.set([])
-          domains.halo.set([])
-          domains.sidelight.set([])
+          clearLightsData()
           this.active = false
         } else {
           // TODO: Show error to UI

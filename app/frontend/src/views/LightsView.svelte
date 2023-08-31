@@ -3,37 +3,16 @@ import ColorPickerModal from '@components/ColorPickerModal.svelte'
 import Keyboard from '@components/Keyboard/KeyboardLights.svelte'
 import LightParams from '@components/LightParams.svelte'
 import { connection } from '@stores/device'
-import {
-  backlightColors, changingColor,
-  color,
-  domains,
-  setBacklight, setHalo, setSidelight, state
-} from '@stores/lights'
-import { sync } from '@stores/lights/actions'
+import { synchronizer } from '@stores/lights/actions'
+import { backlightModeColors, editableColor, haloModes, sidelightModes } from '@stores/lights/atoms'
 import { onDestroy, onMount } from 'svelte'
 
-const backlightColor = color.backlight
-const sidelightColor = color.sidelight
-const haloColor = color.halo
-
-const haloDomain = domains.halo
-const sidelightDomain = domains.sidelight
-
-const backlightState = state.backlight
-
-$: colors = (() => {
-  const mode = $backlightState?.mode
-  if (!mode) {
-    return []
-  }
-  return $backlightColors[mode]
-})()
-
 onMount(() => {
-  sync.start()
+  synchronizer.start()
 })
+
 onDestroy(() => {
-  sync.pause()
+  synchronizer.pause()
 })
 </script>
 
@@ -43,9 +22,6 @@ onDestroy(() => {
     <div class="preview">
       {#if $connection}
       <Keyboard
-        sidelight={$sidelightColor}
-        halo={$haloColor}
-        backlight={$backlightColor}
         layout={$connection.name} />
       {/if}
     </div>
@@ -53,32 +29,28 @@ onDestroy(() => {
   <div class="scroll-wrapper">
     <div class="form">
       <LightParams
-        {colors}
-        state={state.backlight}
-        write={setBacklight}
-        modes={domains.backlight}
+        colors={$backlightModeColors}
+        domain='backlight'
+        title="Backlight"
         canChangeColor
-        title="Backlight" />
-      {#if $haloDomain.length > 0}
+      />
+
+      {#if $haloModes.length > 0}
         <LightParams
-          write={setHalo}
-          state={state.halo}
-          modes={haloDomain}
+          domain='halo'
           title="Halo"
         />
       {/if}
-      {#if $sidelightDomain.length > 0}
+      {#if $sidelightModes.length > 0}
         <LightParams
           help="The result of the Sidelight settings will only be visible if the keyboard is fully charged."
-          write={setSidelight}
-          state={state.sidelight}
-          modes={sidelightDomain}
+          domain='sidelight'
           title="Sidelight"
         />
       {/if}
     </div>
   </div>
-  {#if $changingColor !== undefined}
+  {#if $editableColor !== undefined}
   <ColorPickerModal />
   {/if}
 </div>

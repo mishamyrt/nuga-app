@@ -2,8 +2,8 @@ package effect
 
 // Domain is a type of keyboard lights with its mode
 type Domain struct {
-	Name  string
-	Modes []Mode
+	Name  string `json:"name"`
+	Modes []Mode `json:"modes"`
 }
 
 // Find mode in list. Returns nil if not found

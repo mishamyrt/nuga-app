@@ -7,8 +7,8 @@ import (
 	"nuga/pkg/light/effect"
 )
 
-// GetLightDomains returns keyboard light domains
-func (a *App) GetLightDomains() []effect.Domain {
+// GetLightModes returns keyboard light modes by domains
+func (a *App) GetLightModes() []effect.Domain {
 	return a.dev.LightDomains
 }
 
@@ -26,76 +26,42 @@ func (a *App) GetLightState() (LightState, error) {
 	return state, nil
 }
 
-// GetMacColors returns colors for mac modes
-func (a *App) GetMacColors() [][7]color.RGB {
-	log.Println("dev", a.dev.Light)
+// SetLightState applies new state to keyboard
+func (a *App) SetLightState(request LightStateRequest) error {
+	state, err := a.dev.Light.GetEffects()
+	if err != nil {
+		return err
+	}
+	err = applyBacklightState(&state.Backlight, request.Backlight)
+	if err != nil {
+		return err
+	}
+	err = applyMiscState(&state.Sidelight, request.Sidelight, effect.Sidelight)
+	if err != nil {
+		return err
+	}
+	err = applyMiscState(&state.Halo, request.Halo, effect.Halo)
+	if err != nil {
+		return err
+	}
+	return a.dev.Light.SetEffects(state)
+}
+
+// GetBacklightColors returns backlight colors for current mode
+func (a *App) GetBacklightColors() [][7]color.RGB {
 	colors, err := a.dev.Light.GetColors()
 	if err != nil {
 		return nil
 	}
-	return colors[24:]
-}
-
-// SetHalo sets halolight effect
-func (a *App) SetHalo(mode, color, brightness, speed uint8) error {
-	state, err := a.dev.Light.GetEffects()
-	if err != nil {
-		return err
+	var startOffset int
+	switch a.mode {
+	case Win:
+		startOffset = 0
+	case Mac:
+	case Both:
+		startOffset = 24
 	}
-	state.Halo.Mode = effect.Halo.Find(mode)
-	state.Halo.Params = light.EffectParams{
-		Color:      color,
-		Brightness: brightness,
-		Speed:      speed,
-	}
-	return a.dev.Light.SetEffects(state)
-}
-
-// SetSidelight sets sidelight effect
-func (a *App) SetSidelight(mode, color, brightness, speed uint8) error {
-	state, err := a.dev.Light.GetEffects()
-	if err != nil {
-		return err
-	}
-	state.Sidelight.Mode = effect.Sidelight.Find(mode)
-	state.Sidelight.Params = light.EffectParams{
-		Color:      color,
-		Brightness: brightness,
-		Speed:      speed,
-	}
-	return a.dev.Light.SetEffects(state)
-}
-
-// SetBacklight sets backlight effect
-func (a *App) SetBacklight(mode, color, brightness, speed uint8) error {
-	state, err := a.dev.Light.GetEffects()
-	if err != nil {
-		return err
-	}
-	state.Backlight.Mode = effect.Backlight.Find(mode)
-	if mode == 0 {
-		return a.dev.Light.SetEffects(state)
-	}
-
-	fea := state.Backlight.Mode.Features
-	if fea.IsSet(effect.Speed) {
-		err = state.Backlight.SetSpeed(speed)
-		if err != nil {
-			return err
-		}
-	}
-	if fea.IsSet(effect.SpecificColor) {
-		err = state.Backlight.SetColor(color)
-		if err != nil {
-			return err
-		}
-	}
-	err = state.Backlight.SetBrightness(brightness)
-	if err != nil {
-		return err
-	}
-
-	return a.dev.Light.SetEffects(state)
+	return colors[startOffset : startOffset+24]
 }
 
 // SetBacklightColor sets backlight color by mode and index
@@ -118,4 +84,54 @@ func (a *App) SetBacklightColor(m, i uint8, c color.RGB) {
 	if err != nil {
 		log.Printf("Error on writing colors: %v", err)
 	}
+}
+
+func applyBacklightState(b *light.BacklightEffect, s LightDomainRequest) error {
+	b.Mode = effect.Backlight.Find(s.Mode)
+	if b.Mode == nil {
+		b.Mode = &effect.BacklightOff
+	}
+	if b.Mode.Code == 0 {
+		return nil
+	}
+	fea := b.Mode.Features
+	if fea.IsSet(effect.Speed) {
+		err := b.SetSpeed(s.Speed)
+		if err != nil {
+			return err
+		}
+	}
+	if fea.IsSet(effect.SpecificColor) {
+		err := b.SetColor(s.Color)
+		if err != nil {
+			return err
+		}
+	}
+	err := b.SetBrightness(s.Brightness)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func applyMiscState(e *light.MiscEffect, s LightDomainRequest, d effect.Domain) error {
+	e.Mode = d.Find(s.Mode)
+	if e.Mode == nil {
+		e.Mode = &effect.SidelightOff
+	}
+	if e.Mode.Code == 0 {
+		return nil
+	}
+	if e.Mode.Features.IsSet(effect.Speed) {
+		e.Speed = s.Speed
+	} else {
+		s.Speed = 0
+	}
+	if e.Mode.Features.IsSet(effect.SpecificColor) {
+		e.Color = s.Color
+	} else {
+		e.Color = 0
+	}
+	e.Brightness = s.Brightness
+	return nil
 }

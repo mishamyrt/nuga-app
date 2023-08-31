@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { backlightColor, haloColor, sidelightColor } from '@stores/lights'
   import type { PreviewColor } from '@stores/lights/types'
 
   import BaseKeyboard from './BaseKeyboard.svelte'
@@ -7,9 +8,6 @@
   import { buildTemplate } from './template'
   import { toRGB } from './utils'
 
-  export let backlight: PreviewColor
-  export let halo: PreviewColor
-  export let sidelight: PreviewColor
   export let layout: keyof typeof layouts | undefined
 
   function lineColor (color: PreviewColor): string {
@@ -19,9 +17,9 @@
     return toRGB(normalizeContrast(color))
   }
 
-  $: haloRgb = lineColor(halo)
-  $: backlightRgb = backlight
-  $: sidelightRgb = lineColor(sidelight)
+  $: haloRgb = lineColor($haloColor)
+  $: backlightRgb = $backlightColor
+  $: sidelightRgb = lineColor($sidelightColor)
 
   $: template = layout ? buildTemplate(layouts[layout].layout) : undefined
 </script>
@@ -31,11 +29,11 @@
   <div class="keyboard-wrapper">
     <div
       class="sidelight"
-      class:random={sidelight === 'random'}
+      class:random={$sidelightColor === 'random'}
       style:--light-color="{sidelightRgb}"/>
     <div
       class="halo"
-      class:random={halo === 'random'}
+      class:random={$haloColor === 'random'}
       style:--light-color="{haloRgb}" />
     <BaseKeyboard backlight lights={backlightRgb} colorless {template} />
   </div>

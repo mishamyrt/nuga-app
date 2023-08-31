@@ -1,23 +1,25 @@
 import { GetVersion } from '@wailsjs/go/nuga/App'
 import { EventsOff, EventsOn } from '@wailsjs/runtime'
-import { action, onMount } from 'nanostores'
+import { onMount, task } from 'nanostores'
 
 import { updateUrl, version } from './atoms'
 
-export const loadVersion = action(version, 'loadVersion', async store => {
+export async function loadVersion (): Promise<void> {
   const appVersion = await GetVersion()
   if (appVersion === 'dev') {
     return
   }
-  store.set(appVersion)
-})
+  version.set(appVersion)
+}
 
-export const setUpdateUrl = action(updateUrl, 'setUpdateUrl', (store, url: string) => {
-  store.set(url)
-})
+export function setUpdateUrl (url: string): void {
+  updateUrl.set(url)
+}
 
 onMount(version, () => {
-  loadVersion()
+  task(async () => {
+    await loadVersion()
+  })
 })
 
 onMount(updateUrl, () => {

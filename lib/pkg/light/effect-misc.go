@@ -4,8 +4,8 @@ import "nuga/pkg/light/effect"
 
 // MiscEffect represents a non-main light, e.g. Halolight.
 type MiscEffect struct {
-	Mode   *effect.Mode
-	Params EffectParams
+	Mode *effect.Mode `json:"mode"`
+	EffectParams
 }
 
 // SetBrightness of misc effect.
@@ -16,7 +16,7 @@ func (p *MiscEffect) SetBrightness(brightness uint8) error {
 	if brightness > 4 {
 		return ErrOutOfRange
 	}
-	p.Params.Brightness = brightness
+	p.Brightness = brightness
 	return nil
 }
 
@@ -31,7 +31,7 @@ func (p *MiscEffect) SetSpeed(speed uint8) error {
 	if speed > 4 {
 		return ErrOutOfRange
 	}
-	p.Params.Speed = speed
+	p.Speed = speed
 	return nil
 }
 
@@ -44,6 +44,6 @@ func (p *MiscEffect) SetColor(color uint8) error {
 	if color > 6 {
 		return ErrOutOfRange
 	}
-	p.Params.Color = color
+	p.Color = color
 	return nil
 }

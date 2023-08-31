@@ -1,30 +1,14 @@
 import { sleep } from '@utils/timing'
 import { Connect, GetFirmware, GetPath, SimulateConnection } from '@wailsjs/go/nuga/App'
-import { action, onMount } from 'nanostores'
+import { onMount, task } from 'nanostores'
 
-import { loadColors, loadDomains, loadState } from '../lights/actions'
 import { connection, mode } from './atoms'
 import type { OSMode } from './types'
 
 let simulation = false
 let connecting = false
 
-async function initDevice (name: string, store: typeof connection): Promise<void> {
-  const path = await GetPath()
-  const firmware = await GetFirmware()
-  store.set({
-    name,
-    path,
-    firmware
-  })
-  await Promise.all([
-    loadColors(),
-    loadDomains()
-  ])
-  await loadState()
-}
-
-export const connect = action(connection, 'connect', async (store) => {
+export async function connect (): Promise<void> {
   let name = ''
   connecting = true
   while (connecting) {
@@ -41,28 +25,36 @@ export const connect = action(connection, 'connect', async (store) => {
       await sleep(1000)
       continue
     }
-    await initDevice(name, store)
+    const path = await GetPath()
+    const firmware = await GetFirmware()
+    connection.set({
+      name,
+      path,
+      firmware
+    })
     connecting = false
   }
-})
+}
 
-export const disconnect = action(connection, 'disconnect', async store => {
+export async function disconnect (): Promise<void> {
   connecting = false
-  store.set(undefined)
-})
+  connection.set(undefined)
+}
 
-export const startSimulation = action(connection, 'startSimulation', () => {
+export function startSimulation (): void {
   simulation = true
-})
+}
 
-export const setOS = action(mode, 'setOS', (store, os: OSMode) => {
-  store.setKey('os', os)
-})
+export function setOS (os: OSMode): void {
+  mode.setKey('os', os)
+}
 
-export const setIndividual = action(mode, 'setIndividual', (store, individual: boolean) => {
-  store.setKey('individual', individual)
-})
+export function setIndividual (individual: boolean): void {
+  mode.setKey('individual', individual)
+}
 
 onMount(connection, () => {
-  connect()
+  task(async () => {
+    await connect()
+  })
 })

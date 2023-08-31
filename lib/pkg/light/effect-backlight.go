@@ -4,8 +4,8 @@ import "nuga/pkg/light/effect"
 
 // BacklightEffect represents keyboard backlight effect state.
 type BacklightEffect struct {
-	Mode   *effect.Mode
-	Params []EffectParams
+	Mode   *effect.Mode   `json:"mode"`
+	Params []EffectParams `json:"params"`
 }
 
 // CurrentParams returns current effect params.

@@ -1,28 +1,28 @@
 import { GetOS } from '@wailsjs/go/nuga/App'
-import { action, onMount, task } from 'nanostores'
+import { onMount, task } from 'nanostores'
 
 import { appearance, backgroundColor, focused, view } from './atoms'
 import type { AppView, OS, Theme } from './types'
 
-export const setView = action(view, 'setView', (store, next: AppView) => {
-  store.set(next)
-})
+export function setView (next: AppView): void {
+  view.set(next)
+}
 
-export const focusChange = action(focused, 'focusChange', (store, state: boolean) => {
-  store.set(state)
-})
+export function focusChange (state: boolean): void {
+  focused.set(state)
+}
 
-export const setTheme = action(appearance, 'themeChange', (store, state: Theme) => {
-  store.setKey('theme', state)
-})
+export function setTheme (state: Theme): void {
+  appearance.setKey('theme', state)
+}
 
-export const setOS = action(appearance, 'themeChange', (store, state: OS) => {
-  store.setKey('os', state)
-})
+export function setOS (state: OS): void {
+  appearance.setKey('os', state)
+}
 
-export const setBackground = action(backgroundColor, 'setBackground', (store, color: string) => {
-  store.set(color)
-})
+export function setBackground (color): void {
+  backgroundColor.set(color)
+}
 
 onMount(appearance, () => {
   const darkMedia = window.matchMedia('(prefers-color-scheme: dark)')

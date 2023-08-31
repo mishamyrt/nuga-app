@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { changingColor, type Color, defaultColors } from '@stores/lights'
+  import { type Color, defaultColors } from '@stores/lights'
   import { createEventDispatcher } from 'svelte'
 
   export let disabled = false
@@ -17,7 +17,7 @@
   function handleEditColor (e: MouseEvent, i: number): void {
     e.preventDefault()
     if (canChange) {
-      changingColor.set(i)
+      // changingColor.set(i)
     }
   }
 </script>

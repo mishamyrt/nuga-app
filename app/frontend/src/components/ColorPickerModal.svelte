@@ -1,5 +1,6 @@
 <script lang="ts">
-import { backlightColors, changingColor, setBacklightColor, state } from '@stores/lights'
+import { backlightColors, editableColor, lightState } from '@stores/lights'
+import { setBacklightColor } from '@stores/lights/actions'
 import { onMount } from 'svelte'
 import ColorPicker from 'svelte-awesome-color-picker'
 
@@ -9,11 +10,13 @@ let visible = false
 
 let hex: string = '#fff000'
 let rgb = { r: 0, g: 0, b: 0, a: 1 }
+let modeIndex = 7
+let colorIndex = 0
 
 onMount(() => {
-  const mode = state.backlight.get().mode
-  const targetIndex = $changingColor ?? 0
-  const color = $backlightColors[mode][targetIndex]
+  modeIndex = lightState.get().backlight.mode
+  colorIndex = $editableColor ?? 0
+  const color = $backlightColors[modeIndex][colorIndex]
   rgb = {
     r: color.R,
     g: color.G,
@@ -28,12 +31,12 @@ onMount(() => {
 function hideModal (): void {
   visible = false
   setTimeout(() => {
-    changingColor.set(undefined)
+    editableColor.set(undefined)
   }, 350)
 }
 
 async function applyColor (): Promise<void> {
-  await setBacklightColor({
+  await setBacklightColor(modeIndex, colorIndex, {
     R: rgb.r,
     G: rgb.g,
     B: rgb.b
