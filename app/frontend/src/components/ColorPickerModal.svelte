@@ -86,7 +86,11 @@ async function applyColor (): Promise<void> {
 
 <style lang="scss">
   .modal-wrapper {
-    background-color: rgb(23 23 23 / 51%);
+    --modal-backdrop: rgb(23 23 23 / 51%);
+    --modal-background: #1E1E1E;
+    --modal-picker-border: #353535;
+
+    background-color: var(--modal-backdrop);
     position: fixed;
     top: 0;
     left: 0;
@@ -106,11 +110,17 @@ async function applyColor (): Promise<void> {
     }
   }
 
+  :global(.theme-light) .modal-wrapper {
+    --modal-backdrop: rgb(242 242 242 / 51%);
+    --modal-background: #FFF;
+    --modal-picker-border: #E7E7E7;
+  }
+
   .modal {
-    background: #1E1E1E;
+    background: var(--modal-background);
     width: 270px;
     border-radius: 10px;
-    border: 1px solid #4B4B4B;
+    border: 1px solid var(--modal-picker-border);
     box-shadow: 0 14px 25px rgb(0 0 0 / 50%);
     transition: transform .3s ease-out;
     transform: translateY(-30px);
@@ -143,15 +153,15 @@ async function applyColor (): Promise<void> {
     margin-top: 12px;
     padding: 13px 18px;
     gap: 8px;
-    border-top: 1px solid rgb(41 41 41 / 100%);
+    border-top: 1px solid var(--modal-picker-border);
   }
 
   input {
     width: 100%;
     text-align: center;
     border-radius: 3px;
-    border: 1px solid #3D3D3D;
-    background: #292929;
+    border: 1px solid var(--color-line);
+    background: var(--color-input-background);
     font-size: 13px;
     padding: 3px;
   }
@@ -182,6 +192,6 @@ async function applyColor (): Promise<void> {
 
   :global(.picker) {
     border-radius: 4px;
-    border: 1px solid #3D3D3D;
+    border: 1px solid var(--modal-picker-border);
   }
 </style>
