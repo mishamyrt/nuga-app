@@ -27,7 +27,7 @@ build/linux: $(DIST_PATH)
 		-o "Nuga-linux-amd64" \
 		-platform "linux/amd64" \
 		-trimpath \
-		-ldflags "-X 'nuga_ui/internal/nuga.AppVersion=v$(VERSION)' -s -w"
+		-ldflags "$(LD_FLAGS)"
 	cp $(BUILD_PATH)/Nuga-linux-* dist/
 
 .PHONY: build/linux-in-docker

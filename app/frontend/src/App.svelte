@@ -14,7 +14,6 @@
   import LoadingView from './views/LoadingView.svelte'
 
   $: activeView = $view
-  $: appVersion = $version
 
   let unsubscribeConnected: () => void
   let unsubscribeBackground: () => void
@@ -69,7 +68,7 @@
           {#if $hasUpdate}
           <Button on:click={openUpdate} label="Update available" autosize variant="bubble" />
           {/if}
-          <span class="version">{appVersion}&nbsp;<span class="os">on {$os}</span></span>
+          <span class="version">{$version}&nbsp;<span class="os">on {$os}</span></span>
         </div>
       </div>
       <div class="content">
