@@ -21,8 +21,8 @@ func GetState(s *settings.Content) *UIState {
 	if currentOS == "darwin" {
 		currentOS = OSMac
 	}
-	state.Universal = currentOS != s.UI
-	switch s.Theme {
+	state.Universal = currentOS != s.App.UI
+	switch s.App.Theme {
 	case "dark":
 		state.Theme = Dark
 	case "light":

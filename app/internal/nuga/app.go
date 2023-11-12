@@ -130,33 +130,6 @@ func (a *App) GetFirmware() string {
 	return a.dev.Firmware
 }
 
-// GetSettings returns stored settings
-func (a *App) GetSettings() *settings.Content {
-	content, err := a.storedSettings.Read()
-	if err != nil {
-		return nil
-	}
-	return content
-}
-
-// SetSettings writes settings to file
-func (a *App) SetSettings(s settings.Content) {
-	if s.IndividualSettings {
-		switch s.OSMode {
-		case OSMac:
-			a.mode = Mac
-		case "win":
-			a.mode = Win
-		}
-	} else {
-		a.mode = Both
-	}
-	err := a.storedSettings.Write(&s)
-	if err != nil {
-		log.Printf("Settings write error %s", err.Error())
-	}
-}
-
 // NewApp creates a new application struct
 func NewApp(file *settings.File) *App {
 	return &App{

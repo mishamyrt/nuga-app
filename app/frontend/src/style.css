@@ -1,83 +1,11 @@
-.mac {
-  --font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.mac.theme-dark {
-  --color-accent: #3869DE;
-  --color-background-transparent: rgba(27, 38, 54, 0.1);
-  --color-background-main: #282828;
-  --color-text: rgba(255, 255, 255, 0.9);
-  --color-line: rgb(1 1 1 / 40%);
-  --color-input-background: #565656;
-
-}
-
-.mac.theme-light {
-  --color-accent: #1285FF;
-  --color-background-main: #F6F6F6;
-  --color-text: rgba(0, 0, 0, 0.8);
-  --color-line: rgba(1,1,1,0.1);
-  --color-input-background: white;
-}
-
-.linux {
-  --font-family: Ubuntu, sans-serif;
-}
-
-.linux.theme-light {
-  --color-accent: #E9531F;
-  --color-background-main: #FAFAFA;
-  --color-background-sidebar: white;
-  --color-text: rgba(0, 0, 0, 0.8);
-  --color-line: rgba(1,1,1,0.1);
-  --color-input-background: white;
-}
-
-.linux.theme-dark {
-  --color-accent: #E9531F;
-  --color-background-transparent: #272727;
-  --color-background-sidebar: #272727;
-  --color-background-main: #2C2C2C;
-  --color-text: rgba(255, 255, 255, 0.9);
-  --color-line: #1E1E1E;
-  --color-input-background: #373737;
-}
-
-main {
-  font-family: var(--font-family);
-}
-
 body {
   margin: 0;
-}
-
-body, html {
   overflow: hidden;
-  color-scheme: dark light;
 }
 
-* {
-  box-sizing: border-box;
-  -webkit-user-select: none;
-  cursor: default;
-}
-
-#app {
+#app .naco {
+  overflow: hidden;
   height: 100vh;
+  display: flex;
 }
 
-h3 {
-  font-size: 15px;
-  font-weight: 550;
-  padding: 11px var(--form-padding) 0;
-  text-align: left;
-  margin: 0;
-}
-
-.linux h3 {
-  display: none;
-}
-
-.blurred h3 {
-  opacity: 0.35;
-}

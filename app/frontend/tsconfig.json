@@ -12,12 +12,13 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@stores/*": ["src/stores/*"],
-      "@utils/*": ["src/utils/*"],
-      "@wailsjs/runtime": ["wailsjs/runtime/runtime"],
-      "@wailsjs/go/*": ["wailsjs/go/*"]
+      "$features/*": ["src/features/*"],
+      "$shared/*": ["src/shared/*"],
+      "$widgets/*": ["src/widgets/*"],
+      "$entities/*": ["src/entities/*"],
+      "$pages": ["src/pages"],
+      "$wailsjs/runtime": ["wailsjs/runtime/runtime"],
+      "$wailsjs/go/*": ["wailsjs/go/*"]
     },
     "outDir": "dist"
   },
