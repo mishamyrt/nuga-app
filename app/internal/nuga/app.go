@@ -104,8 +104,10 @@ func (a *App) SimulateConnection() string {
 }
 
 // Disconnect light.
-func (a *App) Disconnect() {
+func (a *App) Disconnect() error {
+	err := a.dev.Close()
 	a.dev = nil
+	return err
 }
 
 // Connect initiates connection and returns a keyboard name

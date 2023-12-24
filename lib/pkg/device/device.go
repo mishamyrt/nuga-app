@@ -15,6 +15,14 @@ type Device struct {
 	Firmware     string
 	Light        light.Controller
 	LightDomains []effect.Domain
+	handle       *hid.Handle
+}
+
+func (d *Device) Close() error {
+	if d.handle == nil {
+		return nil
+	}
+	return d.handle.Close()
 }
 
 // GetEffects returns keyboard effects.
@@ -57,5 +65,6 @@ func Open() (*Device, error) {
 	if err != nil {
 		return nil, err
 	}
+	d.handle = handle
 	return d, nil
 }

@@ -1,7 +1,8 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
+import { interval } from 'patronum'
 
 import { createSequence } from '$shared/lib'
-import { connected } from '$shared/model'
+import { connected, disconnected } from '$shared/model'
 
 import { getBacklightColors } from '../api/color'
 import { getModes } from '../api/mode'
@@ -63,5 +64,22 @@ backlightColorsStore.on(getBacklightColorsFx.doneData, (_, colors) => colors)
 
 sample({
   clock: connected,
-  target: [getStateFx, getModesFx, getBacklightColorsFx]
+  target: [getModesFx, getBacklightColorsFx]
+})
+
+const { tick } = interval({
+  timeout: 2000,
+  start: connected,
+  stop: disconnected,
+  leading: true
+})
+
+sample({
+  clock: tick,
+  target: getStateFx
+})
+
+getStateFx.fail.watch(() => {
+  console.log("got fail, disconnecting")
+  disconnected()
 })

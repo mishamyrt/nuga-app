@@ -1,6 +1,6 @@
-import { createStore } from 'effector'
+import { createStore, sample } from 'effector'
 
-import { connectionStore } from '$shared/model'
+import { connected, disconnected } from '$shared/model'
 
 import { defaultTemplate, supportedKeyboards } from './const'
 import type { KeyboardTemplate } from './types'
@@ -10,7 +10,13 @@ export const keyboardTemplateStore = createStore<KeyboardTemplate>(defaultTempla
   name: 'keyboardTemplateStore'
 })
 
-keyboardTemplateStore.on(connectionStore, (_, connection) => {
+keyboardTemplateStore.on(connected, (_, connection) => {
   const layout = supportedKeyboards[connection.name]
   return buildTemplate(layout)
+})
+
+sample({
+  clock: disconnected,
+  fn: () => defaultTemplate,
+  target: keyboardTemplateStore
 })

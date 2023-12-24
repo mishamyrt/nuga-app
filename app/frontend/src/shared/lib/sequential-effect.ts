@@ -53,8 +53,8 @@ export function createSequence ({
   ) {
     const handlerWrapper = async (params: Params): Promise<Done> => {
       await currentTask
-      return await new Promise<Done>((resolve) => {
-        taskQueue.push(() => handler(params).then(resolve))
+      return await new Promise<Done>((resolve, reject) => {
+        taskQueue.push(() => handler(params).then(resolve).catch(reject))
         processQueue()
       })
     }

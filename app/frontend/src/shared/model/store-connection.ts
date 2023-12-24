@@ -62,7 +62,9 @@ sample({
 })
 
 connectionStore.on([connected, simulateFx.doneData], (_, data) => data)
-connectionStore.on(disconnectFx.done, () => {
-  connecting()
-  return defaultConnection
+
+sample({
+  clock: disconnectFx.done,
+  fn: () => defaultConnection,
+  target: [connectionStore, connecting]
 })
