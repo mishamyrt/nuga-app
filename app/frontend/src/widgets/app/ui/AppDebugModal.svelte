@@ -3,15 +3,21 @@
   import { fsd } from 'feature-sliced-svelte'
 
   import { AppDarkThemeToggle, AppUISwitchSegment } from '$features/app'
+  import { disconnected } from '$shared/model'
 
   let show = false
 
   onHotkey('ctrl+shift+KeyD', () => {
-    show = true
+    show = !show
   })
 
   function handleClose () {
     show = false
+  }
+
+  function handleDisconnect () {
+    handleClose()
+    disconnected()
   }
 </script>
 
@@ -28,9 +34,14 @@
       <FormRow title="Dark theme">
         <AppDarkThemeToggle />
       </FormRow>
+      <FormRow
+        title="Reset connection"
+        subtitle="Reset the current connection, to test the ability to recover or change the simulation template.">
+        <Button on:click={handleDisconnect}>Disconnect</Button>
+      </FormRow>
     </FormGroup>
     <ModalActions>
-      <Button on:click={handleClose}>Скрыть</Button>
+      <Button on:click={handleClose}>Hide</Button>
     </ModalActions>
   </div>
 </Modal>

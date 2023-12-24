@@ -1,7 +1,7 @@
 import { combine, createEffect, createEvent, createStore, sample } from 'effector'
 import { interval } from 'patronum'
 
-import { connect, simulate } from '../api'
+import { connect, disconnect, simulate } from '../api'
 import type { ConnectionDescription } from './types'
 
 const defaultConnection: ConnectionDescription = {
@@ -20,7 +20,7 @@ export const connectionStore = createStore<ConnectionDescription>(defaultConnect
 export const isConnected = combine(connectionStore, c => c.name.length > 0)
 
 sample({
-  clock: [started, disconnected],
+  clock: [started],
   target: connecting
 })
 
@@ -31,7 +31,12 @@ const { tick } = interval({
   leading: true
 })
 
-export const connectFx = createEffect(connect)
+export const connectFx = createEffect('connectFx', {
+  handler: connect
+})
+export const disconnectFx = createEffect('disconnectFx', {
+  handler: disconnect
+})
 
 sample({
   clock: tick,
@@ -43,6 +48,11 @@ sample({
   target: connected
 })
 
+sample({
+  clock: disconnected,
+  target: disconnectFx
+})
+
 export const simulating = createEvent('simulating')
 export const simulateFx = createEffect(simulate)
 
@@ -52,4 +62,7 @@ sample({
 })
 
 connectionStore.on([connected, simulateFx.doneData], (_, data) => data)
-connectionStore.on(disconnected, () => defaultConnection)
+connectionStore.on(disconnectFx.done, () => {
+  connecting()
+  return defaultConnection
+})

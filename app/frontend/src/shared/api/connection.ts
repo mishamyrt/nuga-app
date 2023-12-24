@@ -1,4 +1,4 @@
-import { Connect, GetPath, SimulateConnection } from '$wailsjs/go/nuga/App'
+import { Connect, Disconnect, GetPath, SimulateConnection } from '$wailsjs/go/nuga/App'
 
 import type { ConnectionDescription } from '../model'
 
@@ -12,6 +12,10 @@ export async function connect (): Promise<ConnectionDescription> {
     name,
     path
   }
+}
+
+export async function disconnect (): Promise<void> {
+  await Disconnect()
 }
 
 export async function simulate (): Promise<ConnectionDescription> {
