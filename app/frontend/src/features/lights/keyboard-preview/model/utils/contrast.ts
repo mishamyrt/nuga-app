@@ -1,9 +1,9 @@
 import ColorJS from 'colorjs.io'
 
-import { toColor, toRGBProperty } from './convert'
+import { toCSSProperty, toRGBColor } from '$entities/lights'
 
 export function normalizeContrast (color: RGBColor, backgroundColor: RGBHexColor): RGBColor {
-  const rgbString = toRGBProperty(color)
+  const rgbString = toCSSProperty(color)
   const instance = new ColorJS(rgbString)
   const backgroundInstance = new ColorJS(backgroundColor)
   let score = 0
@@ -29,5 +29,5 @@ export function normalizeContrast (color: RGBColor, backgroundColor: RGBHexColor
       break
     }
   }
-  return toColor(instance)
+  return toRGBColor(instance)
 }

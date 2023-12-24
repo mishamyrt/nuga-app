@@ -20,6 +20,7 @@ export const stateSet = createEvent<LightState>('stateSet')
 const [createHIDEffect] = createSequence({
   minInterval: 200
 })
+// This effect is using for connection check
 const getStateFx = createHIDEffect('getState', getLightState)
 export const setStateFx = createHIDEffect('setState', setLightState)
 
@@ -79,7 +80,7 @@ sample({
   target: getStateFx
 })
 
-getStateFx.fail.watch(() => {
-  console.log("got fail, disconnecting")
-  disconnected()
+sample({
+  clock: getStateFx.fail,
+  target: disconnected
 })
