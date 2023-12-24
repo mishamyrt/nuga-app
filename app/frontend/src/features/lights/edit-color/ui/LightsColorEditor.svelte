@@ -1,0 +1,134 @@
+<script lang="ts">
+  import { Button, getTheme, Input, Modal, ModalActions, Stack, Typography } from '@naco-ui/svelte'
+  import { fsd } from 'feature-sliced-svelte'
+  import ColorPicker from 'svelte-awesome-color-picker'
+
+  import { backlightColorChanged, backlightColorsStore, hexToRGB, stateStore } from '$entities/lights'
+
+  let rgba = { r: 0, g: 0, b: 0, a: 1 }
+  let hex = '#000000'
+
+  let visible = false
+
+  const { os } = getTheme()
+
+  function handleClose (): void {
+    visible = false
+  }
+
+  function handleOpen (): void {
+    const { mode, color } = $stateStore.backlight
+    hex = $backlightColorsStore[mode][color]
+    const rgb = hexToRGB(hex)
+    rgba = {
+      r: rgb.R,
+      g: rgb.G,
+      b: rgb.B,
+      a: 1
+    }
+    visible = true
+  }
+
+  async function applyColor (): Promise<void> {
+    const { mode, color } = $stateStore.backlight
+    backlightColorChanged({
+      colorIndex: color,
+      mode,
+      color: {
+        R: rgba.r,
+        G: rgba.g,
+        B: rgba.b
+      }
+    })
+    visible = false
+  }
+</script>
+
+<div use:fsd={'features/LightsColorEditor'}>
+  <Button on:click={handleOpen}>
+    Edit
+  </Button>
+  <Modal open={visible} width={$os === 'mac' ? 264 : 370}>
+    <Stack>
+      <ColorPicker
+        isAlpha={false}
+        canChangeMode={false}
+        isInput={false}
+        isTextInput={false}
+        bind:rgb={rgba}
+        bind:hex
+      />
+      <div class="inputs">
+        <Stack gap="xs">
+            <Input fullWidth bind:value={hex} />
+            <Typography variant="caption-s" color="tertiary">HEX</Typography>
+        </Stack>
+        <Stack gap="xs">
+            <Input fullWidth value="{rgba?.r.toString()}" />
+            <Typography variant="caption-s" color="tertiary">R</Typography>
+        </Stack>
+        <Stack gap="xs">
+            <Input fullWidth value="{rgba?.g.toString()}" />
+            <Typography variant="caption-s" color="tertiary">G</Typography>
+        </Stack>
+        <Stack gap="xs">
+            <Input fullWidth value="{rgba?.b.toString()}" />
+            <Typography variant="caption-s" color="tertiary">B</Typography>
+        </Stack>
+      </div>
+    </Stack>
+    <ModalActions>
+      <Stack justify="end" direction="horizontal">
+        <Button on:click={handleClose}>
+          Cancel
+        </Button>
+        <Button primary on:click={applyColor}>
+          Apply
+        </Button>
+      </Stack>
+    </ModalActions>
+  </Modal>
+</div>
+
+<style lang="scss">
+  .inputs {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  /* stylelint-disable-next-line */
+  :global(.wrapper.isOpen) {
+    --picker-width: 210px;
+    --picker-height: 210px;
+
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    :global(.picker-wrapper) {
+      overflow: unset;
+    }
+
+    :global(.slider-wrapper) {
+      border-radius: 4px;
+    }
+
+    :global(.picker-indicator) {
+      background: none;
+      border: 2px solid white;
+    }
+  }
+
+  :global(.picker) {
+    border-radius: 4px;
+    border: 1px solid var(--modal-picker-border);
+  }
+
+  :global(.os-linux .wrapper.isOpen) {
+    --picker-width: 282px;
+    --picker-height: 282px;
+  }
+</style>

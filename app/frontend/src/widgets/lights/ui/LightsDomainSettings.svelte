@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { FormGroup, FormRow } from '@naco-ui/svelte'
+  import { FormGroup, FormRow, Stack } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
   import { type LightDomain } from '$entities/lights'
@@ -10,10 +10,12 @@
     LightsPowerToggle,
     LightsSpeedSlider
   } from '$features/lights'
+  import LightColorEditor from '$features/lights/edit-color/ui/LightsColorEditor.svelte'
   import { capitalize } from '$shared/lib'
 
   export let domain: LightDomain
 
+  $: isBacklight = domain === 'backlight'
 </script>
 <div use:fsd={'widgets/LightsDomainSettings'}>
   <FormGroup title={capitalize(domain)}>
@@ -23,8 +25,13 @@
     <FormRow title="Mode">
       <LightsModeSelect {domain} />
     </FormRow>
-    <FormRow title="Color">
-      <LightsColorSelector {domain} />
+    <FormRow title="Color" align={isBacklight ? 'top' : 'center'}>
+      <Stack align="end">
+        <LightsColorSelector {domain} />
+        {#if isBacklight}
+          <LightColorEditor />
+        {/if}
+      </Stack>
     </FormRow>
     <FormRow align="top" title="Brightness">
       <LightsBrightnessSlider {domain} />

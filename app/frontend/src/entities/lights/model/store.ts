@@ -4,11 +4,11 @@ import { interval } from 'patronum'
 import { createSequence } from '$shared/lib'
 import { connected, disconnected } from '$shared/model'
 
-import { getBacklightColors } from '../api/color'
+import { getBacklightColors, setBacklightColor } from '../api/color'
 import { getModes } from '../api/mode'
 import { getLightState, setLightState } from '../api/state'
 import { backlightDefaultColors, defaultDomainState, defaultModes } from './const'
-import type { LightBacklightColors, LightModes, LightState } from './types'
+import type { LightBacklightColors, LightModes, LightState, SetBacklightColorParams } from './types'
 
 export const stateStore = createStore<LightState>({
   backlight: defaultDomainState,
@@ -83,4 +83,17 @@ sample({
 sample({
   clock: getStateFx.fail,
   target: disconnected
+})
+
+export const backlightColorChanged = createEvent<SetBacklightColorParams>('backlightColorChanged')
+export const setBacklightColorFx = createHIDEffect('setBacklightColorFx', setBacklightColor)
+
+sample({
+  clock: backlightColorChanged,
+  target: setBacklightColorFx
+})
+
+sample({
+  clock: setBacklightColorFx.doneData,
+  target: [getBacklightColorsFx]
 })

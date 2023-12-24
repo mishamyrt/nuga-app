@@ -52,3 +52,9 @@ export interface KeyboardLightsColor {
   halolight: RGBHexColor
   backlight: KeyHighlightMatrix
 }
+
+export interface SetBacklightColorParams {
+  mode: number
+  colorIndex: number
+  color: RGBColor
+}

@@ -11,13 +11,13 @@ export const defaultDomainState: LightDomainState = {
 }
 
 export const defaultColors = [
-  '#F00',
-  '#0F0',
-  '#00F',
-  '#FF0',
-  '#F0F',
-  '#0FF',
-  '#FFF'
+  '#FF0000',
+  '#00FF00',
+  '#0000FF',
+  '#FFFF00',
+  '#FF00FF',
+  '#00FFFF',
+  '#FFFFFF'
 ]
 
 export const backlightDefaultColors: string[][] = Array(24).fill(defaultColors)
