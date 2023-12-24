@@ -1,4 +1,4 @@
-import type { Page } from '$entities/app'
+import type { Page } from '$shared/model'
 
 import DevicePage from './DevicePage.svelte'
 
@@ -7,7 +7,7 @@ export const device: Page = {
   title: 'Device',
   layoutProps: {
     macInset: {
-      show: true
+      enable: true
     }
   }
 } as const

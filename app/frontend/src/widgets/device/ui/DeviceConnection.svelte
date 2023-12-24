@@ -1,3 +1,4 @@
+<svelte:options immutable={true}/>
 <script lang="ts">
   import { onHotkey } from '@naco-ui/svelte'
 

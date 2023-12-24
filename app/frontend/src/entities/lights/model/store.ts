@@ -6,7 +6,7 @@ import { connected } from '$shared/model'
 import { getBacklightColors } from '../api/color'
 import { getModes } from '../api/mode'
 import { getLightState, setLightState } from '../api/state'
-import { backlightDefaultColors, defaultDomainState, defaultModes } from './constants'
+import { backlightDefaultColors, defaultDomainState, defaultModes } from './const'
 import type { LightBacklightColors, LightModes, LightState } from './types'
 
 export const stateStore = createStore<LightState>({
@@ -14,7 +14,6 @@ export const stateStore = createStore<LightState>({
   halo: defaultDomainState,
   sidelight: defaultDomainState
 }, { name: 'state' })
-const statedLoaded = createEvent<LightState>('statedLoaded')
 export const stateSet = createEvent<LightState>('stateSet')
 
 const [createHIDEffect] = createSequence({
@@ -24,17 +23,12 @@ const getStateFx = createHIDEffect('getState', getLightState)
 export const setStateFx = createHIDEffect('setState', setLightState)
 
 sample({
-  clock: getStateFx.doneData,
-  target: statedLoaded
-})
-
-sample({
   clock: stateSet,
   target: setStateFx
 })
 
 stateStore.on(stateSet, (_, state) => state)
-stateStore.on(statedLoaded, (current, loaded) => {
+stateStore.on(getStateFx.doneData, (current, loaded) => {
   const backlight = loaded.backlight.enabled
     ? loaded.backlight
     : {

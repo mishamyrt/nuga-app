@@ -1,4 +1,4 @@
-import type { Page } from '$entities/app'
+import type { Page } from '$shared/model'
 
 import KeysPage from './KeysPage.svelte'
 
@@ -7,7 +7,7 @@ export const keys: Page = {
   title: 'Keys',
   layoutProps: {
     macInset: {
-      show: true
+      enable: true
     }
   }
 } as const

@@ -14,7 +14,7 @@
     <svelte:component this={toolbar} />
   {:else if title}
     <div class="titlebar">
-      <Typography variant="heading-s">{title}</Typography>
+      <Typography variant="heading-m">{title}</Typography>
     </div>
   {/if}
 </div>

@@ -1,12 +1,18 @@
+<script lang="ts">
+  import { KeyboardLights } from '$features/lights'
+
+</script>
 <div class="lights-toolbar">
-  assad
+  <KeyboardLights />
 </div>
 
 <style lang="scss">
   .lights-toolbar {
     flex: 1;
-    background-color: aqua;
     height: 100%;
     width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
   }
 </style>

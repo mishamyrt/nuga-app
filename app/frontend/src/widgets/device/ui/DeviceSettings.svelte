@@ -1,3 +1,4 @@
+<svelte:options immutable={true}/>
 <script lang="ts">
   import { FormGroup, FormRow } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'

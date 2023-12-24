@@ -6,7 +6,7 @@
 </script>
 
 <div use:fsd={'entities/AppSidebarMenu'}>
-  <SidebarMenu on:change items={[
+  <SidebarMenu size="l" on:change items={[
     { title: 'Lights', value: 'lights', icon: AppIconBulb },
     { title: 'Keys', value: 'keys', icon: AppIconKeyboard, disabled: true },
     { title: 'Device', value: 'device', icon: AppIconGear }

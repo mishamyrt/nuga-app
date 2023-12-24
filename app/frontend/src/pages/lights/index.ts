@@ -8,10 +8,10 @@ export const lights: Page = {
   Toolbar: LightsToolbar,
   layoutProps: {
     toolbar: {
-      height: 300
+      height: 200
     },
     macInset: {
-      show: true
+      enable: true
     }
   }
 } as const

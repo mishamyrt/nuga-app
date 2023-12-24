@@ -1,3 +1,5 @@
+import type { KeyHighlightMatrix } from '$entities/keys'
+
 export type LightColorIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 export type LightStateValue = 0 | 1 | 2 | 3 | 4
@@ -38,3 +40,15 @@ export type LightModes = Record<LightDomain, LightDomainMode[]>
 export type LightDomainStateValue<T extends keyof LightDomainState> = {
   domain: LightDomain
 } & Pick<LightDomainState, T>
+
+export interface KeyboardLightSupports {
+  sidelight: boolean
+  halolight: boolean
+  backlight: boolean
+}
+
+export interface KeyboardLightsColor {
+  sidelight: RGBHexColor
+  halolight: RGBHexColor
+  backlight: KeyHighlightMatrix
+}

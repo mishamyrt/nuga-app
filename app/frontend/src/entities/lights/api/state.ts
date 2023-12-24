@@ -1,7 +1,7 @@
 import { nuga } from '$wailsjs/go/models'
 import { GetLightState, SetLightState } from '$wailsjs/go/nuga/App'
 
-import { defaultDomainState } from '../model/constants'
+import { defaultDomainState } from '../model/const'
 import type { LightState } from '../model/types'
 import { parseEffect } from '../utils'
 

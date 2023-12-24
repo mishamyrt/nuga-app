@@ -16,21 +16,20 @@
   const sidebarWidth = 200
 </script>
 
-<FeatureSlicedDebug>
-  <ThemeProvider
-    os={$appSettingsStore.ui}
-    scheme={$appSettingsStore.theme}>
-    <SidebarLayout {sidebarWidth} macInset={{
-      show: true
-    }} toolbar={{
-      transparent: true,
-      animate: true
-    }} transparent {...props}>
-      <Sidebar slot="sidebar" />
-      <Toolbar slot="toolbar" />
-      <Content />
-    </SidebarLayout>
-    <DeviceConnection {sidebarWidth} />
-    <AppDebugModal />
-  </ThemeProvider>
-</FeatureSlicedDebug>
+<FeatureSlicedDebug />
+<ThemeProvider
+  os={$appSettingsStore.ui}
+  scheme={$appSettingsStore.theme}>
+  <SidebarLayout {sidebarWidth} macInset={{
+    show: true
+  }} toolbar={{
+    transparent: true,
+    border: 'scroll'
+  }} transparent {...props}>
+    <Sidebar slot="sidebar" />
+    <Toolbar slot="toolbar" />
+    <Content />
+  </SidebarLayout>
+  <DeviceConnection {sidebarWidth} />
+  <AppDebugModal />
+</ThemeProvider>

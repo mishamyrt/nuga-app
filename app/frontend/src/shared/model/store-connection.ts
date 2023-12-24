@@ -14,10 +14,10 @@ export const started = createEvent('started')
 export const disconnected = createEvent('disconnected')
 export const connecting = createEvent('connecting')
 export const connected = createEvent<ConnectionDescription>('connected')
-export const connection = createStore<ConnectionDescription>(defaultConnection, {
-  name: 'connection'
+export const connectionStore = createStore<ConnectionDescription>(defaultConnection, {
+  name: 'connectionStore'
 })
-export const isConnected = combine(connection, c => c.name.length > 0)
+export const isConnected = combine(connectionStore, c => c.name.length > 0)
 
 sample({
   clock: [started, disconnected],
@@ -51,5 +51,5 @@ sample({
   target: simulateFx
 })
 
-connection.on([connected, simulateFx.doneData], (_, data) => data)
-connection.on(disconnected, () => defaultConnection)
+connectionStore.on([connected, simulateFx.doneData], (_, data) => data)
+connectionStore.on(disconnected, () => defaultConnection)
