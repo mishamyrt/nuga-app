@@ -2,7 +2,7 @@ import { combine, createEffect, createStore, sample } from 'effector'
 
 import { appSettingsChanged } from '$entities/app'
 import { keyboardTemplateStore, type KeyHighlightMatrix } from '$entities/keys'
-import { backlightColorsStore, defaultColors, stateStore } from '$entities/lights'
+import { backlightColorsStore, defaultColors, modesStore, stateStore } from '$entities/lights'
 
 import { defaultLightsColors } from './const'
 import { fillGradientMatrix, fillMatrix } from './utils/matrix'
@@ -21,9 +21,10 @@ sample({
 
 export const keyboardLightsColorStore = combine([
   stateStore,
+  modesStore,
   backlightColorsStore,
   keyboardTemplateStore
-], ([state, backlightColors, keyboardTemplate]) => {
+], ([state, modes, backlightColors, keyboardTemplate]) => {
   if (backlightColors.length === 0 || keyboardTemplate.columns === 0) {
     return defaultLightsColors
   }
@@ -38,9 +39,29 @@ export const keyboardLightsColorStore = combine([
     backlightMatrix.push(...fillMatrix(keyboardTemplate, color))
   }
 
+  const haloSupports = modes.halo[state.halo.mode].supports
+  let haloColor = 'transparent'
+  if (halo.enabled) {
+    if ((!haloSupports.specificColor && haloSupports.randomColor) || state.halo.color === 7) {
+      haloColor = 'random'
+    } else {
+      haloColor = defaultColors[halo.color]
+    }
+  }
+
+  const sidelightSupports = modes.sidelight[state.sidelight.mode].supports
+  let sidelightColor = 'transparent'
+  if (sidelight.enabled) {
+    if ((!sidelightSupports.specificColor && sidelightSupports.randomColor) || state.sidelight.color === 7) {
+      sidelightColor = 'random'
+    } else {
+      sidelightColor = defaultColors[sidelight.color]
+    }
+  }
+
   return {
     backlight: backlightMatrix,
-    sidelight: sidelight.enabled ? defaultColors[sidelight.color] : 'transparent',
-    halolight: halo.enabled ? defaultColors[halo.color] : 'transparent'
+    sidelight: sidelightColor,
+    halolight: haloColor
   }
 })

@@ -2,7 +2,6 @@
   import { fsd } from 'feature-sliced-svelte'
 
   import { KeyboardKeys, keyboardTemplateStore } from '$entities/keys'
-  import { stateStore } from '$entities/lights'
 
   import { keyboardLightsColorStore } from '../model'
 
@@ -12,8 +11,8 @@
   $: sidelightColor = $keyboardLightsColorStore.sidelight
   $: haloColor = $keyboardLightsColorStore.halolight
   $: template = $keyboardTemplateStore
-  $: isSidelightRandom = $stateStore.sidelight.color === 7
-  $: isHaloRandom = $stateStore.halo.color === 7 || $stateStore.halo
+  $: isSidelightRandom = sidelightColor === 'random'
+  $: isHaloRandom = haloColor === 'random'
 </script>
 
 <div class="lights-container" use:fsd={'features/KeyboardLights'}>

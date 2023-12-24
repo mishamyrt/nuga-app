@@ -11,13 +11,13 @@ var (
 	HalolightRainbowWheel = Mode{
 		"Rainbow wheel",
 		1,
-		Speed,
+		Speed | RandomColor,
 	}
 	// HalolightRainbow represents keyboard halolight rainbow mode.
 	HalolightRainbow = Mode{
 		"Rainbow",
 		2,
-		Speed,
+		Speed | RandomColor,
 	}
 	// HalolightFixed represents keyboard halolight fixed mode.
 	HalolightFixed = Mode{

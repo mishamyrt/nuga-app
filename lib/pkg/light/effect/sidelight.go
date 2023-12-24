@@ -11,13 +11,13 @@ var (
 	SidelightRainbowStream = Mode{
 		"Rainbow stream",
 		1,
-		Speed,
+		Speed | RandomColor,
 	}
 	// SidelightRainbow represents keyboard sidelight rainbow mode.
 	SidelightRainbow = Mode{
 		"Rainbow",
 		2,
-		Speed,
+		Speed | RandomColor,
 	}
 	// SidelightFixed represents keyboard sidelight fixed mode.
 	SidelightFixed = Mode{
@@ -35,7 +35,7 @@ var (
 	SidelightNeonStream = Mode{
 		"Neon stream",
 		5,
-		Speed,
+		Speed | RandomColor,
 	}
 )
 

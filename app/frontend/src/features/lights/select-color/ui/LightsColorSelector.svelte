@@ -14,7 +14,7 @@
     ? $backlightColorsStore[modeCode]
     : defaultColors
   $: supportsRandom = mode?.supports.randomColor ?? false
-  $: supportsColor = supportsRandom && mode?.supports.specificColor
+  $: supportsColor = mode?.supports.specificColor
 
   function handleChange (e: CustomEvent<any>) {
     let color: number
