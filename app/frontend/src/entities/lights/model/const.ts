@@ -32,7 +32,7 @@ const defaultMode: LightDomainMode = {
   name: ''
 }
 
-export const defaultModes = Array(24).fill(defaultMode)
+export const defaultModes = Array<LightDomainMode>(24).fill(defaultMode)
 
 export const lightTemplates: Record<SupportedKeyboards, KeyboardLightSupports> = {
   Halo75: {
