@@ -1,8 +1,9 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 
-import { connected } from '$shared/model'
+import { connected, started } from '$shared/model'
 
 import { getAppSettings, setAppSettings } from '../api/settings'
+import { checkUpdates, getVersion } from '../api/version'
 import { defaultAppSettings } from './constants'
 import type { AppSettings } from './types'
 
@@ -26,4 +27,20 @@ sample({
 sample({
   clock: connected,
   target: getAppSettingsFx
+})
+
+export const versionStore = createStore('dev', {
+  name: 'versionStore'
+})
+export const checkUpdatesFx = createEffect('checkUpdatesFx', {
+  handler: checkUpdates
+})
+export const getVersionFx = createEffect('getVersionFx', {
+  handler: getVersion
+})
+versionStore.on(getVersionFx.doneData, (_, version) => version)
+
+sample({
+  clock: started,
+  target: [getVersionFx, checkUpdatesFx]
 })

@@ -2,6 +2,7 @@
   import { fsd } from 'feature-sliced-svelte'
 
   import { AppLogo, AppSidebarMenu } from '$entities/app'
+  import AppVersion from '$features/app/app-updates/ui/AppUpdates.svelte'
   import { type AppPage, pageChanged } from '$shared/model'
 
   function handleNavigation (e: CustomEvent<AppPage>) {
@@ -15,17 +16,28 @@
   </div>
 
   <AppSidebarMenu on:change={handleNavigation} />
+
+  <div class="version">
+    <AppVersion />
+  </div>
 </div>
 
 <style lang="scss">
   .sidebar {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   .logo {
     padding: 0 var(--space-xs);
     margin-top: var(--space-s);
     margin-bottom: var(--space-l);
+  }
+
+  .version {
+    position: relative;
+    top: 2px;
+    margin: auto var(--space-m) 0;
   }
 </style>
