@@ -18,6 +18,7 @@ type Device struct {
 	handle       *hid.Handle
 }
 
+// Close connection with hid device
 func (d *Device) Close() error {
 	if d.handle == nil {
 		return nil

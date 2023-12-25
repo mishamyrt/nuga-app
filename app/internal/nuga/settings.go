@@ -28,10 +28,12 @@ func (a *App) SetModeSettings(s settings.Mode) {
 	}
 }
 
+// GetAppSettings reads app theme settings from file
 func (a *App) GetAppSettings() *settings.App {
 	return &a.storedSettings.Content.App
 }
 
+// SetAppSettings writes app theme settings from file
 func (a *App) SetAppSettings(s settings.App) {
 	err := a.storedSettings.WriteApp(s)
 	if err != nil {

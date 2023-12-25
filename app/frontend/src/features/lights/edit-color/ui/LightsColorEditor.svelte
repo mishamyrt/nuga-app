@@ -103,7 +103,7 @@
   }
 
   /* stylelint-disable-next-line */
-  :global(.wrapper.isOpen) {
+  :global(.wrapper.is-open) {
     --picker-width: 210px;
     --picker-height: 210px;
 
@@ -131,7 +131,7 @@
     border: 1px solid var(--modal-picker-border);
   }
 
-  :global(.os-linux .wrapper.isOpen) {
+  :global(.os-linux .wrapper.is-open) {
     --picker-width: 282px;
     --picker-height: 282px;
   }

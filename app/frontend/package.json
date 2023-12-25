@@ -8,8 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "lint-fix:scripts": "pnpm eslint --fix 'src/**/*.{svelte,ts}'",
-    "lint-fix:styles": "pnpm stylelint --fix 'src/**/*.{svelte,ts}'",
+    "format:scripts": "pnpm eslint --fix 'src/**/*.{svelte,ts}'",
+    "format:styles": "pnpm stylelint --fix 'src/**/*.{svelte,ts}'",
+    "format": "pnpm format:styles && pnpm format:scripts",
     "lint:scripts": "pnpm eslint 'src/**/*.{svelte,ts}'",
     "lint:styles": "pnpm stylelint 'src/**/*.{svelte,css,scss}'",
     "lint": "pnpm run '/^lint:.*/'"

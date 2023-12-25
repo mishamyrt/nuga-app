@@ -7,7 +7,7 @@
   export let showHelp: boolean
 
 </script>
-<div use:fsd={'entities/AppConnectionDialog'} class="connectionDialog">
+<div use:fsd={'entities/AppConnectionDialog'} class="connection-dialog">
   <div class="help" class:visible={showHelp}>
     <Stack align="center" gap="m">
       <AppIconCable />
@@ -23,7 +23,7 @@
 </div>
 
 <style lang="scss">
-  .connectionDialog {
+  .connection-dialog {
     background-color: var(--color-background-primary);
     height: 100%;
     display: flex;

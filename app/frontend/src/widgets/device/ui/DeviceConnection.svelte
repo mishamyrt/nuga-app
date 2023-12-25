@@ -50,7 +50,9 @@
 <style>
   .dialog {
     position: absolute;
+
     --wails-draggable: drag;
+
     width: 100%;
     height: 100%;
     z-index: 999;

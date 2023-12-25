@@ -22,11 +22,13 @@ func (f *File) Path() string {
 	return path.Join(f.DirPath, f.Name)
 }
 
+// WriteApp writes app ui settings to file
 func (f *File) WriteApp(c App) error {
 	f.Content.App = c
 	return f.Write(&f.Content)
 }
 
+// WriteMode writes keyboard mode settings to file
 func (f *File) WriteMode(c Mode) error {
 	f.Content.Mode = c
 	return f.Write(&f.Content)
