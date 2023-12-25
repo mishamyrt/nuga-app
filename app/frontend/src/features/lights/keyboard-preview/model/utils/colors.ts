@@ -1,5 +1,5 @@
 import type { KeyboardTemplate, KeyHighlightMatrix } from '$entities/keys'
-import { defaultColors, type LightBacklightColors, type LightDomainMode, type LightDomainState } from '$entities/lights'
+import { byModeCode, defaultColors, type LightBacklightColors, type LightDomainMode, type LightDomainState } from '$entities/lights'
 
 import { fillGradientMatrix, fillMatrix } from './matrix'
 
@@ -26,8 +26,12 @@ export function getAuxiliaryColor (
   state: LightDomainState,
   modes: LightDomainMode[]
 ): string {
-  const { enabled, color, mode } = state
-  const supports = modes[mode].supports
+  const { enabled, color, mode: code } = state
+  const mode = modes.find(byModeCode(code))
+  if (!mode) {
+    throw new Error('mode is not found')
+  }
+  const supports = mode.supports
 
   let cssColor = 'transparent'
   if (enabled) {

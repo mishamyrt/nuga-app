@@ -5,6 +5,8 @@
 
   import { backlightColorChanged, backlightColorsStore, hexToRGB, stateStore } from '$entities/lights'
 
+  import { canEditColorStore } from '../model/store'
+
   let rgba = { r: 0, g: 0, b: 0, a: 1 }
   let hex = '#000000'
 
@@ -29,7 +31,7 @@
     visible = true
   }
 
-  async function applyColor (): Promise<void> {
+  function applyColor (): void {
     const { mode, color } = $stateStore.backlight
     backlightColorChanged({
       colorIndex: color,
@@ -42,10 +44,12 @@
     })
     visible = false
   }
+
+  $: canEdit = $canEditColorStore
 </script>
 
 <div use:fsd={'features/LightsColorEditor'}>
-  <Button on:click={handleOpen}>
+  <Button disabled={!canEdit} on:click={handleOpen}>
     Edit
   </Button>
   <Modal open={visible} width={$os === 'mac' ? 264 : 370}>
