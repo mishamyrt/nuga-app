@@ -9,7 +9,7 @@
   $: version = $versionStore
   $: updateUrl = $updateUrlStore
 
-  function openUpdateUrl() {
+  function openUpdateUrl () {
     updateOpened(updateUrl)
   }
 </script>
