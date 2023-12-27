@@ -18,7 +18,7 @@
   $: isBacklight = domain === 'backlight'
 </script>
 <div use:fsd={'widgets/LightsDomainSettings'}>
-  <FormGroup title={capitalize(domain)}>
+  <FormGroup largeContent title={capitalize(domain)}>
     <FormRow title="Enable">
       <LightsPowerToggle {domain} />
     </FormRow>
