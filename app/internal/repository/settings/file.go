@@ -3,6 +3,7 @@ package settings
 
 import (
 	"encoding/json"
+	"nuga_ui/internal/dto"
 	"os"
 	"path"
 )
@@ -14,7 +15,7 @@ const FileExtension = ".json"
 type File struct {
 	DirPath string
 	Name    string
-	Content Content
+	Config  dto.Config
 }
 
 // Path returns path to settings file
@@ -22,21 +23,9 @@ func (f *File) Path() string {
 	return path.Join(f.DirPath, f.Name)
 }
 
-// WriteApp writes app ui settings to file
-func (f *File) WriteApp(c App) error {
-	f.Content.App = c
-	return f.Write(&f.Content)
-}
-
-// WriteMode writes keyboard mode settings to file
-func (f *File) WriteMode(c Mode) error {
-	f.Content.Mode = c
-	return f.Write(&f.Content)
-}
-
 // Write settings to file
-func (f *File) Write(c *Content) error {
-	data, err := json.Marshal(c)
+func (f *File) Write() error {
+	data, err := json.Marshal(f.Config)
 	if err != nil {
 		return err
 	}
@@ -54,20 +43,20 @@ func (f *File) Write(c *Content) error {
 }
 
 // Read settings from file
-func (f *File) Read() (*Content, error) {
+func (f *File) Read() (*dto.Config, error) {
 	data, err := os.ReadFile(f.Path())
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal(data, &f.Content)
+	err = json.Unmarshal(data, &f.Config)
 	if err != nil {
 		return nil, err
 	}
-	return &f.Content, nil
+	return &f.Config, nil
 }
 
-// ByPath returns File settings by directory
-func ByPath(directory string) *File {
+// FromPath returns File settings by directory
+func FromPath(directory string) *File {
 	file := File{
 		DirPath: directory,
 		Name:    "settings" + FileExtension,

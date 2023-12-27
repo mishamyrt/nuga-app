@@ -1,10 +1,10 @@
-import { GetBacklightColors, SetBacklightColor } from '$wailsjs/go/nuga/App'
+import { GetBacklightColors, SetBacklightColor } from '$wailsjs/go/usecase/LightsUsecase'
 
 import type { LightBacklightColors, SetBacklightColorParams } from '../model/types'
 import { rgbToHex } from '../utils/hex'
 
 export async function getBacklightColors (): Promise<LightBacklightColors> {
-  const colors = await GetBacklightColors()
+  const colors: RGBColor[][] = await GetBacklightColors()
   return colors.map(modeColors => modeColors.map(({ R, G, B }) => rgbToHex(R, G, B)))
 }
 

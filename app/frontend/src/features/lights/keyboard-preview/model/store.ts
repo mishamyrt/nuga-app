@@ -1,23 +1,10 @@
-import { combine, createEffect, createStore, sample } from 'effector'
+import { combine } from 'effector'
 
-import { appSettingsChanged } from '$entities/app'
 import { keyboardTemplateStore } from '$entities/keys'
 import { backlightColorsStore, modesStore, stateStore } from '$entities/lights'
 
 import { defaultLightsColors } from './const'
 import { getAuxiliaryColor, getBacklightColors } from './utils/colors'
-import { getToolbarBackground } from './utils/toolbar-background'
-
-export const toolbarBackgroundStore = createStore<string>('', {
-  name: 'toolbarBackgroundStore'
-})
-const getToolbarBackgroundFx = createEffect(getToolbarBackground)
-
-toolbarBackgroundStore.on(getToolbarBackgroundFx.doneData, (_, background) => background)
-sample({
-  clock: appSettingsChanged,
-  target: getToolbarBackgroundFx
-})
 
 export const keyboardLightsColorStore = combine([
   stateStore,

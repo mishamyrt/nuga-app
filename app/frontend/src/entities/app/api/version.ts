@@ -1,4 +1,4 @@
-import { CheckUpdates, GetVersion } from '$wailsjs/go/nuga/App'
+import { CheckUpdates, GetVersion } from '$wailsjs/go/usecase/EnvironmentUsecase'
 
 export async function getVersion () {
   const version = await GetVersion()
