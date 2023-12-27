@@ -18,9 +18,9 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
     env:
-      GO_VERSION: '1.20'
+      GO_VERSION: '1.21.4'
       PNPM_VERSION: '8.6.2'
-      WAILS_VERSION: '2.5.1'
+      WAILS_VERSION: '2.7.1'
       KEYCHAIN_NAME: macos-build
       KEYCHAIN_PROFILE: nuga-notary
     runs-on: ${{ matrix.os }}

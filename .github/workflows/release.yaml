@@ -1,9 +1,9 @@
 name: Release Nuga
 
 env:
-  WAILS_VERSION: 'v2.5.1'
+  WAILS_VERSION: 'v2.7.1'
   PNPM_VERSION: '8.6.2'
-  GO_VERSION: '1.20'
+  GO_VERSION: '1.21.4'
   LINUX_BUILDER_IMAGE: mishamyrt/nuga-linux-builder:latest-arm64
 
 on:
