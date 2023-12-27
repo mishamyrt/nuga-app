@@ -21,12 +21,12 @@ const [createHIDEffect] = createSequence({
 })
 // HID effects
 // This effect is using for connection check
-const getStateFx = createHIDEffect('getState', getLightState)
-const setStateFx = createHIDEffect('setState', setLightState)
-const setBacklightColorFx = createHIDEffect('setBacklightColorFx', setBacklightColor)
+export const getStateFx = createHIDEffect('getState', getLightState)
+export const setStateFx = createHIDEffect('setState', setLightState)
+export const setBacklightColorFx = createHIDEffect('setBacklightColorFx', setBacklightColor)
 // Simple effects
-const getModesFx = createEffect(getModes)
-const getBacklightColorsFx = createEffect('getBacklightColors', {
+export const getModesFx = createEffect(getModes)
+export const getBacklightColorsFx = createEffect('getBacklightColors', {
   handler: getBacklightColors
 })
 
