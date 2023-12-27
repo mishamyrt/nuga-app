@@ -90,7 +90,7 @@
   .key-light {
     z-index: 2;
     background-color: var(--key-light-color);
-    opacity: 0.7;
+    opacity: 0.4;
   }
 
   .key-light+.key-fill {
