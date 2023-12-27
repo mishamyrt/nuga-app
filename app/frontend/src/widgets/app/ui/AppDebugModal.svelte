@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { Button, FormGroup, FormRow, Modal, ModalActions, onHotkey, Stack, Typography } from '@naco-ui/svelte'
+  import { Button, FormGroup, FormRow, getTheme, Modal, ModalActions, onHotkey, Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
   import { AppDarkThemeToggle, AppUISwitchSegment, RestartButton } from '$features/app'
   import { disconnected } from '$shared/model'
+
+  const { os } = getTheme()
 
   let show = false
 
@@ -21,7 +23,7 @@
   }
 </script>
 
-<Modal width={500} open={show}>
+<Modal width={$os === 'mac' ? 500 : 600} open={show}>
   <div use:fsd={'widgets/AppDebugModal'}>
     <FormGroup>
       <FormRow><Typography align="center" variant="heading-l">Debugging</Typography></FormRow>

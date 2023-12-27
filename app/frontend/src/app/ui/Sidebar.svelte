@@ -40,4 +40,13 @@
     top: 2px;
     margin: auto var(--space-m) 0;
   }
+
+  :global(.os-linux) {
+    .version {
+      padding: 0 var(--space-xs) 16px;
+    }
+    .logo {
+      padding: var(--space-xs) calc(var(--space-m) + var(--space-xs)) 0;
+    }
+  }
 </style>
