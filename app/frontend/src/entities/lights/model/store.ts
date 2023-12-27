@@ -1,3 +1,4 @@
+import deepEqual from 'deep-equal'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { interval } from 'patronum'
 
@@ -6,7 +7,6 @@ import { connected, disconnected } from '$shared/model'
 
 import { getBacklightColors, setBacklightColor } from '../api/color'
 import { getModes } from '../api/mode'
-import deepEqual from 'deep-equal'
 import { getLightState, setLightState } from '../api/state'
 import { backlightDefaultColors, defaultLightModes, defaultLightState } from './const'
 import type { LightBacklightColors, LightModes, LightState, SetBacklightColorParams } from './types'
