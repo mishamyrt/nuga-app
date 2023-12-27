@@ -1,3 +1,4 @@
+// Package dto contains app models
 package dto
 
 // UITheme represents app UI theme

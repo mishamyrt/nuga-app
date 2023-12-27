@@ -28,12 +28,12 @@ func (r *Repository) SetMode(m entity.ModeConfig) error {
 	return r.storage.Write()
 }
 
-// GetUI writes mode settings to file
+// GetApp writes mode settings to file
 func (r *Repository) GetApp() *entity.AppConfig {
 	return &r.storage.Config.App
 }
 
-// SetUI writes mode settings to file
+// SetApp writes mode settings to file
 func (r *Repository) SetApp(ui entity.AppConfig) error {
 	r.storage.Config.App = ui
 	return r.storage.Write()

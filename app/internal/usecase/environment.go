@@ -4,7 +4,7 @@ import (
 	"context"
 	"nuga_ui/config"
 	"nuga_ui/internal/interfaces"
-	"nuga_ui/pkg/integrations/github"
+	"nuga_ui/pkg/github"
 	go_runtime "runtime"
 
 	"github.com/jpillora/overseer"
