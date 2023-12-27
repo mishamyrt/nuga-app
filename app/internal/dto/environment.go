@@ -1,45 +1,5 @@
 package dto
 
-// OS represents operation system
-type OS uint8
-
-const (
-	// MacOS operation system
-	MacOS OS = iota
-	// Windows operation system
-	Windows
-	// Linux operation system
-	Linux
-)
-
-// String returns OS string value
-func (o OS) String() string {
-	switch o {
-	case MacOS:
-		return "mac"
-	case Windows:
-		return "windows"
-	case Linux:
-		return "linux"
-	default:
-		return ""
-	}
-}
-
-// OSFromString creates OS instance from string
-func OSFromString(s string) OS {
-	switch s {
-	case "mac":
-	case "darwin":
-		return MacOS
-	case "windows":
-		return Windows
-	case "linux":
-		return Linux
-	}
-	return Linux
-}
-
 // UITheme represents app UI theme
 type UITheme uint8
 

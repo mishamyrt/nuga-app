@@ -44,17 +44,13 @@ func (a *Application) OnShutdown(_ context.Context) {
 // Start application in background
 func (a *Application) Start() {
 	overseer.Run(overseer.Config{
-		Program:       a.startSync,
+		Program:       a.startWindow,
 		RestartSignal: overseer.SIGTERM,
 	})
 }
 
-func (a *Application) startSync(overseer.State) {
-	err := a.repo.Settings.Read()
-	if err != nil {
-		log.Panicf("Error on reading config: %v", err)
-	}
-	err = wails.Run(a.GetOptions())
+func (a *Application) startWindow(overseer.State) {
+	err := wails.Run(a.GetOptions())
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}

@@ -9,10 +9,14 @@ import (
 )
 
 // New creates new repository instance
-func New(filePath string) *interfaces.Repository {
+func New(filePath string) (*interfaces.Repository, error) {
+	settings, err := settings.New(filePath)
+	if err != nil {
+		return nil, err
+	}
 	return &interfaces.Repository{
 		Device:      device.New(),
-		Settings:    settings.New(filePath),
+		Settings:    settings,
 		Environment: environment.New(),
-	}
+	}, nil
 }

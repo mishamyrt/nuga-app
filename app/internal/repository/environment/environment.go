@@ -3,7 +3,7 @@ package environment
 
 import (
 	"nuga_ui/config"
-	"nuga_ui/internal/dto"
+	"nuga_ui/internal/entity"
 	"runtime"
 )
 
@@ -16,9 +16,13 @@ func New() *Repository {
 }
 
 // GetOS retrieves the operating system information.
-// It returns a dto.OS object representing the current operating system.
-func (r *Repository) GetOS() dto.OS {
-	return dto.OSFromString(runtime.GOOS)
+// It returns a string representing the current operating system.
+func (r *Repository) GetOS() string {
+	os := runtime.GOOS
+	if os == "darwin" {
+		return string(entity.MacOS)
+	}
+	return os
 }
 
 // GetVersion retrieves the application version.

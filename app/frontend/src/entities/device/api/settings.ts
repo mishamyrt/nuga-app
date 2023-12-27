@@ -1,10 +1,9 @@
-
-import { GetMode, SetMode } from '$wailsjs/go/usecase/SettingsUsecase'
+import { GetModeSettings, SetModeSettings } from '$wailsjs/go/usecase/SettingsUsecase'
 
 import type { ModeSettings } from '../model/types'
 
 export async function getModeSettings (): Promise<ModeSettings> {
-  const settings = await GetMode()
+  const settings = await GetModeSettings()
   if (!settings) {
     throw new Error('Mode settings is not defined')
   }
@@ -12,5 +11,5 @@ export async function getModeSettings (): Promise<ModeSettings> {
 }
 
 export async function setModeSettings (settings: ModeSettings) {
-  await SetMode(settings)
+  await SetModeSettings(settings)
 }

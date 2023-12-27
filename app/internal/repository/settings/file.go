@@ -3,19 +3,16 @@ package settings
 
 import (
 	"encoding/json"
-	"nuga_ui/internal/dto"
+	"nuga_ui/internal/entity"
 	"os"
 	"path"
 )
-
-// FileExtension represents settings file extension
-const FileExtension = ".json"
 
 // File represents settings file
 type File struct {
 	DirPath string
 	Name    string
-	Config  dto.Config
+	Config  entity.Config
 }
 
 // Path returns path to settings file
@@ -43,23 +40,24 @@ func (f *File) Write() error {
 }
 
 // Read settings from file
-func (f *File) Read() (*dto.Config, error) {
+func (f *File) Read() error {
 	data, err := os.ReadFile(f.Path())
 	if err != nil {
-		return nil, err
+		return err
 	}
 	err = json.Unmarshal(data, &f.Config)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return &f.Config, nil
+	return nil
 }
 
 // FromPath returns File settings by directory
-func FromPath(directory string) *File {
+func FromPath(directory string) (*File, error) {
 	file := File{
 		DirPath: directory,
-		Name:    "settings" + FileExtension,
+		Name:    "settings.json",
 	}
-	return &file
+	err := file.Read()
+	return &file, err
 }
