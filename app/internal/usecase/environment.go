@@ -6,13 +6,18 @@ import (
 	"nuga_ui/internal/interfaces"
 	"nuga_ui/pkg/integrations/github"
 	go_runtime "runtime"
+
+	"github.com/jpillora/overseer"
 )
 
 // EnvironmentUsecase represents environment-related use case
-type EnvironmentUsecase struct{}
+type EnvironmentUsecase struct {
+	ctx context.Context
+}
 
 // OnStartup is a life-cycle hook that runs when app starts
-func (e *EnvironmentUsecase) OnStartup(_ context.Context, _ *interfaces.Repository) error {
+func (e *EnvironmentUsecase) OnStartup(ctx context.Context, _ *interfaces.Repository) error {
+	e.ctx = ctx
 	e.checkUpdates()
 	return nil
 }
@@ -34,6 +39,11 @@ func (e *EnvironmentUsecase) GetOS() string {
 		return "mac"
 	}
 	return os
+}
+
+// Restart app
+func (e *EnvironmentUsecase) Restart() {
+	overseer.Restart()
 }
 
 func (e *EnvironmentUsecase) checkUpdates() {

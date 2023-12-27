@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Button, FormGroup, FormRow, Modal, ModalActions, onHotkey, Typography } from '@naco-ui/svelte'
+  import { Button, FormGroup, FormRow, Modal, ModalActions, onHotkey, Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { AppDarkThemeToggle, AppUISwitchSegment } from '$features/app'
+  import { AppDarkThemeToggle, AppUISwitchSegment, RestartButton } from '$features/app'
   import { disconnected } from '$shared/model'
 
   let show = false
@@ -29,7 +29,9 @@
         title="User interface"
         align="top"
         subtitle="To fully switch the interface, you need to restart the application">
-        <AppUISwitchSegment />
+        <Stack justify="end">
+          <AppUISwitchSegment />
+        </Stack>
       </FormRow>
       <FormRow title="Dark theme">
         <AppDarkThemeToggle />
@@ -37,7 +39,10 @@
       <FormRow
         title="Reset connection"
         subtitle="Reset the current connection, to test the ability to recover or change the simulation template.">
-        <Button on:click={handleDisconnect}>Disconnect</Button>
+        <Stack align="end">
+          <Button on:click={handleDisconnect}>Disconnect</Button>
+          <RestartButton />
+        </Stack>
       </FormRow>
     </FormGroup>
     <ModalActions>
