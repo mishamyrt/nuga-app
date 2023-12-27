@@ -15,11 +15,11 @@ dependencies:
     specifier: ^2.2.2
     version: 2.2.2
   effector:
-    specifier: ^22.8.7
-    version: 22.8.7
+    specifier: ^23.1.0
+    version: 23.1.0
   patronum:
-    specifier: ^1.20.0
-    version: 1.20.0(effector@22.8.7)
+    specifier: ^2.1.1
+    version: 2.1.1(effector@23.1.0)
   svelte:
     specifier: ^4.0.5
     version: 4.0.5
@@ -44,8 +44,8 @@ devDependencies:
     specifier: ^5.60.1
     version: 5.60.1(eslint@8.44.0)(typescript@5.1.6)
   effector-logger:
-    specifier: ^0.14.1
-    version: 0.14.1(effector@22.8.7)
+    specifier: ^0.15.0
+    version: 0.15.0(effector@23.1.0)
   eslint:
     specifier: ^8.44.0
     version: 8.44.0
@@ -1132,18 +1132,18 @@ packages:
       domhandler: 5.0.3
     dev: true
 
-  /effector-logger@0.14.1(effector@22.8.7):
-    resolution: {integrity: sha512-gAfoIBoskQwjgjhs1VCgrQQmdkJt7FOkHP/RxsXMFmTXZOGDDCS9GU0KhL/aKp/Q6+Az2rSfy5VvDl7q51IoRQ==}
+  /effector-logger@0.15.0(effector@23.1.0):
+    resolution: {integrity: sha512-Eq/00DPW9N0Tsu0z+VlXQtlR3TdAJQraD56iadFHCBnDU31fBJxmD1wwED/yGFKI5QGMgITGFUXnKHTN1hcrNg==}
     peerDependencies:
-      effector: ^22.8.3
+      effector: ^22.8.8 || ^23.0.0
     dependencies:
       detect-node: 2.0.4
-      effector: 22.8.7
+      effector: 23.1.0
       just-debounce-it: 1.5.0
     dev: true
 
-  /effector@22.8.7:
-    resolution: {integrity: sha512-vCevjxmFwnZJuRGtqjwfi+sHtu+7gK3qdbv4fxi/AsMdDtoMeoz9C3/28pjNABviZeEARj6ZfAHbNAq5i9d7RQ==}
+  /effector@23.1.0:
+    resolution: {integrity: sha512-PsiNE2UmEnS/xmyshISjMwqqGcUKF0upnA/8o1qXafyfrV1kYkOwhs9fuDfUKIAbgZVSZb+bowymPpfrNu7jFw==}
     engines: {node: '>=11.0.0'}
 
   /emoji-regex@8.0.0:
@@ -2460,12 +2460,12 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /patronum@1.20.0(effector@22.8.7):
-    resolution: {integrity: sha512-UsUR8nUbSPJ0kEQPNorZ/0+Rwlk+c45O4BfqlLHAdRQvx1C7ZSfC9txfPwJo+fajRtzVLebZm1m+67+Ke9SgdA==}
+  /patronum@2.1.1(effector@23.1.0):
+    resolution: {integrity: sha512-VPGBzylMxmkpw94ApK887hXqlzF+81gK3UJeUyTACjGVoQsNOkWdwK8FWUCFvBZK4R/TG4tT0eytlUjytkvbEQ==}
     peerDependencies:
-      effector: ^22.1.2
+      effector: ^23
     dependencies:
-      effector: 22.8.7
+      effector: 23.1.0
     dev: false
 
   /periscopic@3.1.0:
