@@ -6,6 +6,7 @@ import (
 	"nuga/pkg/light"
 	"nuga/pkg/light/effect"
 	"nuga_ui/internal/dto"
+	"nuga_ui/internal/entity"
 	"nuga_ui/internal/interfaces"
 )
 
@@ -53,7 +54,7 @@ func (l *LightsUsecase) GetBacklightColors() dto.BacklightColors {
 		return nil
 	}
 	startOffset := 24
-	if config.IndividualSettings && config.OSMode == dto.WindowsOSMode.String() {
+	if config.IndividualSettings && config.OSMode == entity.WindowsOSMode {
 		startOffset = 0
 	}
 	return colors[startOffset : startOffset+24]
@@ -90,7 +91,7 @@ func (l *LightsUsecase) SetBacklightColor(mode, index uint8, color color.RGB) er
 		return err
 	}
 	if config.IndividualSettings {
-		if config.OSMode == dto.MacOSMode.String() {
+		if config.OSMode == entity.MacOSMode {
 			colors.SetMacBacklight(mode, index, color)
 		} else {
 			colors.SetWinBacklight(mode, index, color)

@@ -4,7 +4,7 @@ package interfaces
 import (
 	"nuga/pkg/device"
 	"nuga/pkg/light"
-	"nuga_ui/internal/dto"
+	"nuga_ui/internal/entity"
 )
 
 // Repository represents an aggregate repository that encapsulates various repositories related to the application.
@@ -25,15 +25,14 @@ type DeviceRepository interface {
 
 // SettingsRepository defines the interface for managing application settings.
 type SettingsRepository interface {
-	Read() error
-	GetMode() *dto.ModeConfig
-	SetMode(m dto.ModeConfig) error
-	GetUI() *dto.UIConfig
-	SetUI(ui dto.UIConfig) error
+	GetMode() *entity.ModeConfig
+	SetMode(m entity.ModeConfig) error
+	GetApp() *entity.AppConfig
+	SetApp(ui entity.AppConfig) error
 }
 
 // EnvironmentRepository defines the interface for retrieving environment-related information.
 type EnvironmentRepository interface {
-	GetOS() dto.OS
+	GetOS() string
 	GetVersion() string
 }

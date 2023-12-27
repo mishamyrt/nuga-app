@@ -8,16 +8,19 @@ import (
 	go_runtime "runtime"
 
 	"github.com/jpillora/overseer"
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 // EnvironmentUsecase represents environment-related use case
 type EnvironmentUsecase struct {
-	ctx context.Context
+	ctx  context.Context
+	repo *interfaces.Repository
 }
 
 // OnStartup is a life-cycle hook that runs when app starts
-func (e *EnvironmentUsecase) OnStartup(ctx context.Context, _ *interfaces.Repository) error {
+func (e *EnvironmentUsecase) OnStartup(ctx context.Context, repo *interfaces.Repository) error {
 	e.ctx = ctx
+	e.repo = repo
 	e.checkUpdates()
 	return nil
 }
@@ -47,15 +50,16 @@ func (e *EnvironmentUsecase) Restart() {
 }
 
 func (e *EnvironmentUsecase) checkUpdates() {
+	version := e.repo.Environment.GetVersion()
 	go func() {
 		updater := github.NewRepo("mishamyrt/Nuga")
-		latest, err := updater.Tags()
-		println(latest, err)
-		// if err != nil || len(latest) == 0 {
-		// 	return
-		// }
-		// if AppVersion != latest {
-		// 	runtime.EventsEmit(a.ctx, "update", updater.ReleaseURL(latest))
-		// }
+		tags, err := updater.Tags()
+		if err != nil {
+			return
+		}
+		latest := tags[0]
+		if version != latest {
+			runtime.EventsEmit(e.ctx, "update", updater.ReleaseURL(latest))
+		}
 	}()
 }

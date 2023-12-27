@@ -4,6 +4,7 @@ import (
 	"context"
 	"nuga/pkg/color"
 	"nuga_ui/internal/dto"
+	"nuga_ui/internal/entity"
 )
 
 // Usecase represents an aggregate use case that encapsulates various use cases related to the application.
@@ -49,10 +50,10 @@ type EnvironmentUsecase interface {
 // SettingsUsecase defines the interface for managing application settings use cases.
 type SettingsUsecase interface {
 	BasicUsecase
-	GetMode() dto.ModeConfig
-	SetMode(m dto.ModeConfig) error
-	GetUI() dto.UIConfig
-	SetUI(ui dto.UIConfig) error
+	GetModeSettings() entity.ModeConfig
+	SetModeSettings(m entity.ModeConfig) error
+	GetAppSettings() entity.AppConfig
+	SetAppSettings(ui entity.AppConfig) error
 }
 
 // LightsUsecase defines the interface for lighting-related use cases.
