@@ -2,13 +2,15 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 
 import { connected, started } from '$shared/model'
 
+import { restartApp } from '../api/app'
 import { getBackgroundColor } from '../api/browser'
 import { getAppSettings, setAppSettings } from '../api/settings'
-import { checkUpdates, getVersion } from '../api/version'
+import { getVersion } from '../api/version'
 import { defaultAppSettings } from './constants'
 import type { AppSettings } from './types'
 
 export const appSettingsChanged = createEvent<AppSettings>('appSettingsChanged')
+export const appRestarted = createEvent('appRestarted')
 
 export const appBackgroundStore = createStore<string>('#FFFFFF', {
   name: 'appBackgroundStore'
@@ -26,14 +28,14 @@ const getAppSettingsFx = createEffect('getAppSettingsFx', {
 const setAppSettingsFx = createEffect('setAppSettingsFx', {
   handler: setAppSettings
 })
-export const checkUpdatesFx = createEffect('checkUpdatesFx', {
-  handler: checkUpdates
-})
 export const getVersionFx = createEffect('getVersionFx', {
   handler: getVersion
 })
 const getAppBackgroundFx = createEffect('getAppBackgroundFx', {
   handler: getBackgroundColor
+})
+const restartAppFx = createEffect('restartAppFx', {
+  handler: restartApp
 })
 
 sample({
@@ -51,7 +53,7 @@ appSettingsStore.on([
 
 sample({
   clock: started,
-  target: [getVersionFx, checkUpdatesFx]
+  target: [getVersionFx]
 })
 versionStore.on(getVersionFx.doneData, (_, version) => version)
 
@@ -60,3 +62,8 @@ sample({
   target: getAppBackgroundFx
 })
 appBackgroundStore.on(getAppBackgroundFx.doneData, (_, background) => background)
+
+sample({
+  clock: appRestarted,
+  target: restartAppFx
+})

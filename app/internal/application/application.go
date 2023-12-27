@@ -7,6 +7,7 @@ import (
 	"log"
 	"nuga_ui/internal/interfaces"
 
+	"github.com/jpillora/overseer"
 	"github.com/wailsapp/wails/v2"
 )
 
@@ -42,23 +43,21 @@ func (a *Application) OnShutdown(_ context.Context) {
 
 // Start application in background
 func (a *Application) Start() {
-	if a.isRunning {
-		return
-	}
-	a.startSync()
+	overseer.Run(overseer.Config{
+		Program:       a.startSync,
+		RestartSignal: overseer.SIGTERM,
+	})
 }
 
-func (a *Application) startSync() {
+func (a *Application) startSync(overseer.State) {
 	err := a.repo.Settings.Read()
 	if err != nil {
 		log.Panicf("Error on reading config: %v", err)
 	}
-	a.isRunning = true
 	err = wails.Run(a.GetOptions())
 	if err != nil {
 		log.Fatalf("Error: %v", err)
 	}
-	a.isRunning = false
 }
 
 // New returns application instance

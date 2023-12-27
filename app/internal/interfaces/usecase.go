@@ -43,6 +43,7 @@ type EnvironmentUsecase interface {
 	BasicUsecase
 	GetVersion() string
 	GetOS() string
+	Restart()
 }
 
 // SettingsUsecase defines the interface for managing application settings use cases.
