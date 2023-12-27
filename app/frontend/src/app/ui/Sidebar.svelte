@@ -45,6 +45,7 @@
     .version {
       padding: 0 var(--space-xs) 16px;
     }
+
     .logo {
       padding: var(--space-xs) calc(var(--space-m) + var(--space-xs)) 0;
     }

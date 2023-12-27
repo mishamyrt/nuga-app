@@ -1,3 +1,4 @@
+// Package entity contains app entities
 package entity
 
 // OS represents operating system value
@@ -22,7 +23,7 @@ const (
 	WindowsOSMode OSMode = "win"
 )
 
-// UITheme represents app UI theme
+// AppTheme represents app UI theme
 type AppTheme string
 
 const (
