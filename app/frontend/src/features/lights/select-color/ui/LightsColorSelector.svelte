@@ -2,17 +2,21 @@
   import { ColorSelector } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { backlightColorsStore, defaultColors, type LightColorIndex, type LightDomain, modesStore, stateStore } from '$entities/lights'
+  import { backlightColorsStore, defaultColors, hexToRGB, type LightColorIndex, type LightDomain, modesStore, rgbToCSSProperty, stateStore } from '$entities/lights'
 
   import { colorChanged } from '../model/store'
 
   export let domain: LightDomain
 
+  function reduceOpacity (hex: RGBHexColor): RGBHexColor {
+    return rgbToCSSProperty(hexToRGB(hex), 0.7)
+  }
+
   $: modeCode = $stateStore[domain].mode
   $: mode = $modesStore[domain].find(m => m.code === modeCode)
   $: modeColors = domain === 'backlight'
-    ? $backlightColorsStore[modeCode]
-    : defaultColors
+    ? $backlightColorsStore[modeCode].map(reduceOpacity)
+    : defaultColors.map(reduceOpacity)
   $: supportsRandom = mode?.supports.randomColor ?? false
   $: supportsColor = mode?.supports.specificColor
 
