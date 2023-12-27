@@ -6,68 +6,37 @@ import { connected, disconnected } from '$shared/model'
 
 import { getBacklightColors, setBacklightColor } from '../api/color'
 import { getModes } from '../api/mode'
+import deepEqual from 'deep-equal'
 import { getLightState, setLightState } from '../api/state'
-import { backlightDefaultColors, defaultDomainState, defaultModes } from './const'
+import { backlightDefaultColors, defaultLightModes, defaultLightState } from './const'
 import type { LightBacklightColors, LightModes, LightState, SetBacklightColorParams } from './types'
 
-export const stateStore = createStore<LightState>({
-  backlight: defaultDomainState,
-  halo: defaultDomainState,
-  sidelight: defaultDomainState
-}, { name: 'state' })
 export const stateSet = createEvent<LightState>('stateSet')
+export const stateLoaded = createEvent<LightState>('stateLoaded')
+export const backlightColorsUpdated = createEvent<LightBacklightColors>('backlightColorsUpdated')
+export const backlightColorChanged = createEvent<SetBacklightColorParams>('backlightColorChanged')
 
 const [createHIDEffect] = createSequence({
   minInterval: 200
 })
+// HID effects
 // This effect is using for connection check
 const getStateFx = createHIDEffect('getState', getLightState)
-export const setStateFx = createHIDEffect('setState', setLightState)
-
-sample({
-  clock: stateSet,
-  target: setStateFx
-})
-
-stateStore.on(stateSet, (_, state) => state)
-stateStore.on(getStateFx.doneData, (current, loaded) => {
-  const backlight = loaded.backlight.enabled
-    ? loaded.backlight
-    : {
-        ...current.backlight,
-        enabled: false
-      }
-
-  return {
-    backlight,
-    halo: loaded.halo,
-    sidelight: loaded.sidelight
-  }
-})
-
-export const modesStore = createStore<LightModes>({
-  backlight: defaultModes,
-  halo: defaultModes,
-  sidelight: defaultModes
-}, { name: 'modes' })
+const setStateFx = createHIDEffect('setState', setLightState)
+const setBacklightColorFx = createHIDEffect('setBacklightColorFx', setBacklightColor)
+// Simple effects
 const getModesFx = createEffect(getModes)
-modesStore.on(getModesFx.doneData, (_, modes) => modes)
-
-export const backlightColorsStore = createStore<LightBacklightColors>(
-  backlightDefaultColors,
-  { name: 'backlightColors' }
-)
-export const backlightColorsUpdated = createEvent<LightBacklightColors>('backlightColors')
 const getBacklightColorsFx = createEffect('getBacklightColors', {
   handler: getBacklightColors
 })
-backlightColorsStore.on(getBacklightColorsFx.doneData, (_, colors) => colors)
 
-sample({
-  clock: connected,
-  target: [getModesFx, getBacklightColorsFx]
-})
-
+export const stateStore = createStore<LightState>(defaultLightState, { name: 'stateStore' })
+export const modesStore = createStore<LightModes>(defaultLightModes, { name: 'modesStore' })
+export const backlightColorsStore = createStore<LightBacklightColors>(
+  backlightDefaultColors,
+  { name: 'backlightColorsStore' }
+)
+// State update interval
 const { tick } = interval({
   timeout: 2000,
   start: connected,
@@ -79,14 +48,37 @@ sample({
   clock: tick,
   target: getStateFx
 })
-
 sample({
   clock: getStateFx.fail,
   target: disconnected
 })
+sample({
+  source: stateStore,
+  clock: getStateFx.doneData,
+  filter: (state, nextState) => !deepEqual(state, nextState),
+  fn: (_, state) => state,
+  target: stateLoaded
+})
+stateStore.on(stateLoaded, (current, loaded) => {
+  const backlight = loaded.backlight.enabled
+    ? loaded.backlight
+    : {
+        ...current.backlight,
+        enabled: false
+      }
+  return {
+    backlight,
+    halo: loaded.halo,
+    sidelight: loaded.sidelight
+  }
+})
 
-export const backlightColorChanged = createEvent<SetBacklightColorParams>('backlightColorChanged')
-export const setBacklightColorFx = createHIDEffect('setBacklightColorFx', setBacklightColor)
+sample({
+  clock: connected,
+  target: [getModesFx, getBacklightColorsFx]
+})
+modesStore.on(getModesFx.doneData, (_, modes) => modes)
+backlightColorsStore.on(getBacklightColorsFx.doneData, (_, colors) => colors)
 
 sample({
   clock: backlightColorChanged,
@@ -97,3 +89,9 @@ sample({
   clock: setBacklightColorFx.doneData,
   target: [getBacklightColorsFx]
 })
+
+sample({
+  clock: stateSet,
+  target: setStateFx
+})
+stateStore.on(stateSet, (_, state) => state)

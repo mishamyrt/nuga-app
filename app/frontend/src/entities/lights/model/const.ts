@@ -1,6 +1,6 @@
 import type { SupportedKeyboards } from '$shared/model/constants'
 
-import type { KeyboardLightsColor, KeyboardLightSupports, LightDomainMode, LightDomainState } from './types'
+import type { KeyboardLightsColor, KeyboardLightSupports, LightDomainMode, LightDomainState, LightModes, LightState } from './types'
 
 export const defaultDomainState: LightDomainState = {
   enabled: false,
@@ -56,4 +56,16 @@ export const defaultLightsColors: KeyboardLightsColor = {
   backlight: [],
   sidelight: 'transparent',
   halolight: 'transparent'
+}
+
+export const defaultLightState: LightState = {
+  backlight: defaultDomainState,
+  halo: defaultDomainState,
+  sidelight: defaultDomainState
+}
+
+export const defaultLightModes: LightModes = {
+  backlight: defaultModes,
+  halo: defaultModes,
+  sidelight: defaultModes
 }
