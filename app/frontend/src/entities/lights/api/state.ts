@@ -1,5 +1,5 @@
-import { nuga } from '$wailsjs/go/models'
-import { GetLightState, SetLightState } from '$wailsjs/go/nuga/App'
+import { dto } from '$wailsjs/go/models'
+import { GetLightState, SetLightState } from '$wailsjs/go/usecase/LightsUsecase'
 
 import { defaultDomainState } from '../model/const'
 import type { LightState } from '../model/types'
@@ -30,6 +30,6 @@ export async function setLightState (state: LightState): Promise<void> {
     state.halo.mode = 0
   }
   await SetLightState(
-    nuga.LightStateRequest.createFrom(state)
+    dto.LightStateRequest.createFrom(state)
   )
 }

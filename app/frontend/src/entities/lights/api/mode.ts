@@ -1,4 +1,5 @@
-import { GetLightModes } from '$wailsjs/go/nuga/App'
+
+import { GetLightModes } from '$wailsjs/go/usecase/LightsUsecase'
 
 import type { LightModes } from '../model/types'
 import { parseModes } from '../utils'

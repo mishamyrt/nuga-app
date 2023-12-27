@@ -1,4 +1,4 @@
-import { Connect, Disconnect, GetPath, SimulateConnection } from '$wailsjs/go/nuga/App'
+import { Connect, Disconnect, GetPath, SimulateConnection } from '$wailsjs/go/usecase/DeviceUsecase'
 
 import type { ConnectionDescription } from '../model'
 
