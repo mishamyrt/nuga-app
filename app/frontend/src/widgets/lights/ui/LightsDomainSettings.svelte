@@ -17,7 +17,7 @@
 
   $: isBacklight = domain === 'backlight'
 </script>
-<div use:fsd={'widgets/LightsDomainSettings'}>
+<div use:fsd={'widgets/LightsDomainSettings'} class="settings-group">
   <FormGroup largeContent title={capitalize(domain)}>
     <FormRow title="Enable">
       <LightsPowerToggle {domain} />
@@ -41,3 +41,9 @@
     </FormRow>
   </FormGroup>
 </div>
+
+<style lang="scss">
+  .settings-group:not(:first-child) :global(.form-group > .heading) {
+    margin-top: var(--space-l);
+  }
+</style>
