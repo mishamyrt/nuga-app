@@ -14,12 +14,24 @@ const FileExtension = ".json"
 type File struct {
 	DirPath string
 	Name    string
-	content Content
+	Content Content
 }
 
 // Path returns path to settings file
 func (f *File) Path() string {
 	return path.Join(f.DirPath, f.Name)
+}
+
+// WriteApp writes app ui settings to file
+func (f *File) WriteApp(c App) error {
+	f.Content.App = c
+	return f.Write(&f.Content)
+}
+
+// WriteMode writes keyboard mode settings to file
+func (f *File) WriteMode(c Mode) error {
+	f.Content.Mode = c
+	return f.Write(&f.Content)
 }
 
 // Write settings to file
@@ -47,11 +59,11 @@ func (f *File) Read() (*Content, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal(data, &f.content)
+	err = json.Unmarshal(data, &f.Content)
 	if err != nil {
 		return nil, err
 	}
-	return &f.content, nil
+	return &f.Content, nil
 }
 
 // ByPath returns File settings by directory

@@ -11,6 +11,11 @@ on:
         default: false
         type: boolean
 
+env:
+  GO_VERSION: '1.21.4'
+  WAILS_VERSION: '2.7.1'
+  PNPM_VERSION: '8.13.1'
+
 jobs:
   build:
     name: App
@@ -18,9 +23,6 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
     env:
-      GO_VERSION: '1.20'
-      PNPM_VERSION: '8.6.2'
-      WAILS_VERSION: '2.5.1'
       KEYCHAIN_NAME: macos-build
       KEYCHAIN_PROFILE: nuga-notary
     runs-on: ${{ matrix.os }}

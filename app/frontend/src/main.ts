@@ -1,7 +1,13 @@
 import './style.css'
-import './form.scss'
 
-import App from './App.svelte'
+import { attachLogger } from 'effector-logger'
+
+import { started } from '$shared/model'
+
+import App from './app/App.svelte'
+
+attachLogger()
+started()
 
 const target = document.getElementById('app')
 if (!target) {

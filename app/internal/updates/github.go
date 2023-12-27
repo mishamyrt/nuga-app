@@ -3,7 +3,7 @@ package updates
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -28,7 +28,7 @@ func (u *GitHubUpdater) Latest() (string, error) {
 		return "", err
 	}
 	defer response.Body.Close()
-	data, err := ioutil.ReadAll(response.Body)
+	data, err := io.ReadAll(response.Body)
 	if err != nil {
 		return "", err
 	}
