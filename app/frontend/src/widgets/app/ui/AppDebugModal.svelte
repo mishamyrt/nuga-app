@@ -2,7 +2,7 @@
   import { Button, FormGroup, FormRow, getTheme, Modal, ModalActions, onHotkey, Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { AppDarkThemeToggle, AppUISwitchSegment, RestartButton } from '$features/app'
+  import { AppDarkThemeToggle, AppUISwitchSegment, LoggingSwitch, RestartButton } from '$features/app'
   import { disconnected } from '$shared/model'
 
   const { os } = getTheme()
@@ -45,6 +45,10 @@
           <Button on:click={handleDisconnect}>Disconnect</Button>
           <RestartButton />
         </Stack>
+      </FormRow>
+      <FormRow
+        title="Logging">
+        <LoggingSwitch />
       </FormRow>
     </FormGroup>
     <ModalActions>
