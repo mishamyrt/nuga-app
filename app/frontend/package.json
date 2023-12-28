@@ -46,7 +46,7 @@
     "vite": "^5.0.10"
   },
   "dependencies": {
-    "@naco-ui/svelte": "1.3.0-beta.8",
+    "@naco-ui/svelte": "1.3.0-beta.9",
     "colorjs.io": "^0.4.5",
     "deep-equal": "^2.2.3",
     "effector": "^23.1.0",
