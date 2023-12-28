@@ -1,11 +1,15 @@
-import { attach } from 'effector'
+import { createEvent, sample } from 'effector'
 
-import { type LightDomainStateValue, setStateFx, stateStore } from '$entities/lights'
+import { stateSet, stateStore } from '$entities/lights'
 
-export const powerStateChanged = attach({
-  effect: setStateFx,
+import type { LightEnabledParams } from './types'
+
+export const powerStateChanged = createEvent<LightEnabledParams>('powerStateChanged')
+
+sample({
+  clock: powerStateChanged,
   source: stateStore,
-  mapParams: (req: LightDomainStateValue<'enabled'>, state) => {
+  fn: (state, req) => {
     return {
       ...state,
       [req.domain]: {
@@ -13,5 +17,6 @@ export const powerStateChanged = attach({
         enabled: req.enabled
       }
     }
-  }
+  },
+  target: stateSet
 })
