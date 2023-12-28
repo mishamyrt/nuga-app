@@ -19,7 +19,8 @@ export async function getLightState (): Promise<LightState> {
   }
 }
 
-export async function setLightState (state: LightState): Promise<void> {
+export async function setLightState (s: LightState): Promise<void> {
+  const state = structuredClone(s)
   if (!state.backlight.enabled) {
     state.backlight.mode = 0
   }
