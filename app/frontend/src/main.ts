@@ -1,12 +1,9 @@
 import './style.css'
 
-import { attachLogger } from 'effector-logger'
-
 import { started } from '$shared/model'
 
 import App from './app/App.svelte'
 
-attachLogger()
 started()
 
 const target = document.getElementById('app')
