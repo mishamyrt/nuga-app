@@ -58,6 +58,11 @@ func FromPath(directory string) (*File, error) {
 		DirPath: directory,
 		Name:    "settings.json",
 	}
-	err := file.Read()
-	return &file, err
+	if file.Read() != nil {
+		err := file.Write()
+		if err != nil {
+			return nil, err
+		}
+	}
+	return &file, nil
 }
