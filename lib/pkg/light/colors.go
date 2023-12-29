@@ -32,6 +32,10 @@ func (s *ColorState) Print() {
 	}
 }
 
+func (s *ColorState) Slice() [][]color.RGB {
+	return s.toSlice(s[:])
+}
+
 // Set color to state.
 func (s *ColorState) Set(rawIndex int, index int, c color.RGB) {
 	s[rawIndex][index] = c
@@ -89,6 +93,16 @@ func ParseColors(data []byte) *ColorState {
 				G: data[offset+1],
 				B: data[offset+2],
 			}
+		}
+	}
+	return &state
+}
+
+func ColorsFromSlice(modes [][]color.RGB) *ColorState {
+	var state ColorState
+	for effect := 0; effect < 48; effect++ {
+		for i := 0; i < 7; i++ {
+			state[effect][i] = modes[effect][i]
 		}
 	}
 	return &state
