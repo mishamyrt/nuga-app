@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { LoadPresetButton, SavePresetButton } from '$features/lights';
-import { Button, FormGroup, FormRow, Modal, ModalActions, Stack, Toggle, Typography } from '@naco-ui/svelte'
+  import { FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
+
+  import { LoadPresetButton, SavePresetButton } from '$features/lights'
 
 </script>
 <div class="container" use:fsd={'widgets/LightsPreset'}>

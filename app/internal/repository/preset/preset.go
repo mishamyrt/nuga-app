@@ -1,3 +1,4 @@
+// Package preset contains repository for preset files
 package preset
 
 import (
@@ -14,6 +15,7 @@ func New() *Repository {
 	return &Repository{}
 }
 
+// SaveLightsPreset saves preset to file
 func (r *Repository) SaveLightsPreset(path string, preset dto.LightsPreset) error {
 	content, err := json.Marshal(preset)
 	if err != nil {
@@ -22,6 +24,7 @@ func (r *Repository) SaveLightsPreset(path string, preset dto.LightsPreset) erro
 	return os.WriteFile(path, content, 0644)
 }
 
+// ReadLightsPreset reads preset from file
 func (r *Repository) ReadLightsPreset(path string) (dto.LightsPreset, error) {
 	var preset dto.LightsPreset
 	content, err := os.ReadFile(path)
