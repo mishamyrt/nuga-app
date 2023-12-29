@@ -107,6 +107,7 @@ func (l *LightsUsecase) SetBacklightColor(mode, index uint8, color color.RGB) er
 	return dev.Light.SetColors(colors)
 }
 
+// SavePreset initiates preset save process
 func (l *LightsUsecase) SavePreset() error {
 	dev := l.repo.Device.Get()
 	state, err := dev.Light.GetEffects()
@@ -135,6 +136,7 @@ func (l *LightsUsecase) SavePreset() error {
 	})
 }
 
+// LoadPreset initiates preset loading process
 func (l *LightsUsecase) LoadPreset() error {
 	var preset dto.LightsPreset
 	path, err := runtime.OpenFileDialog(l.ctx, runtime.OpenDialogOptions{

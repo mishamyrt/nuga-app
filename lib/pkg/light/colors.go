@@ -6,6 +6,7 @@ import (
 	"nuga/pkg/color"
 )
 
+// ModesCount represents modes count per OS mode
 const ModesCount = 24
 
 // ColorState represents keyboard color state.
@@ -32,6 +33,7 @@ func (s *ColorState) Print() {
 	}
 }
 
+// Slice returns colors as slice
 func (s *ColorState) Slice() [][]color.RGB {
 	return s.toSlice(s[:])
 }
@@ -61,11 +63,12 @@ func (s *ColorState) Get(effect uint8, index uint8) color.RGB {
 	return s[effect][index]
 }
 
+// GetMac returns colors for mac OS mode.
 func (s *ColorState) GetMac() [][]color.RGB {
 	return s.toSlice(s[ModesCount : ModesCount*2])
 }
 
-// Get color from state.
+// GetWin returns colors for win OS mode.
 func (s *ColorState) GetWin() [][]color.RGB {
 	return s.toSlice(s[0:ModesCount])
 }
@@ -74,9 +77,7 @@ func (s *ColorState) toSlice(modes [][7]color.RGB) [][]color.RGB {
 	result := make([][]color.RGB, len(modes))
 	for i, colors := range modes {
 		result[i] = make([]color.RGB, 7)
-		for j, color := range colors {
-			result[i][j] = color
-		}
+		copy(result[i], colors[:])
 	}
 	return result
 }
@@ -98,6 +99,7 @@ func ParseColors(data []byte) *ColorState {
 	return &state
 }
 
+// ColorsFromSlice loads color state from colors slice
 func ColorsFromSlice(modes [][]color.RGB) *ColorState {
 	var state ColorState
 	for effect := 0; effect < 48; effect++ {
