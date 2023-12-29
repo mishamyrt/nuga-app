@@ -6,8 +6,10 @@ import (
 	"nuga/pkg/color"
 )
 
+const ModesCount = 24
+
 // ColorState represents keyboard color state.
-type ColorState [48][7]color.RGB
+type ColorState [ModesCount * 2][7]color.RGB
 
 // Bytes converts color state to raw byte slice.
 func (s *ColorState) Bytes() []byte {
@@ -42,7 +44,7 @@ func (s *ColorState) SetBacklight(m uint8, i uint8, c color.RGB) {
 
 // SetMacBacklight color to state.
 func (s *ColorState) SetMacBacklight(m uint8, i uint8, c color.RGB) {
-	s.SetBacklight(m+24, i, c)
+	s.SetBacklight(m+ModesCount, i, c)
 }
 
 // SetWinBacklight color to state.
@@ -53,6 +55,26 @@ func (s *ColorState) SetWinBacklight(m uint8, i uint8, c color.RGB) {
 // Get color from state.
 func (s *ColorState) Get(effect uint8, index uint8) color.RGB {
 	return s[effect][index]
+}
+
+func (s *ColorState) GetMac() [][]color.RGB {
+	return s.toSlice(s[ModesCount : ModesCount*2])
+}
+
+// Get color from state.
+func (s *ColorState) GetWin() [][]color.RGB {
+	return s.toSlice(s[0:ModesCount])
+}
+
+func (s *ColorState) toSlice(modes [][7]color.RGB) [][]color.RGB {
+	result := make([][]color.RGB, len(modes))
+	for i, colors := range modes {
+		result[i] = make([]color.RGB, 7)
+		for j, color := range colors {
+			result[i][j] = color
+		}
+	}
+	return result
 }
 
 // ParseColors parses the raw byte slice into ColorState.
