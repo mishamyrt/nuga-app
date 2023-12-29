@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning][].
 
 To bring the look and feel of different operating systems out of this repository, the [Naco UI](https://naco.myrt.co/) Kit was developed. This release mainly focuses on UI relocation. In addition, the UI architecture has been extensively updated. This will allow to extend the application with less time consuming.
 
+### Added
+
+* Lights presets
+
 ## [1.0.0-rc]
 
 ### Fixed

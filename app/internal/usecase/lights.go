@@ -7,17 +7,22 @@ import (
 	"nuga/pkg/light/effect"
 	"nuga_ui/internal/dto"
 	"nuga_ui/internal/entity"
+	"nuga_ui/internal/errors"
 	"nuga_ui/internal/interfaces"
+
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 // LightsUsecase represents lights-related use case
 type LightsUsecase struct {
+	ctx  context.Context
 	repo *interfaces.Repository
 }
 
 // OnStartup is a life-cycle hook that runs when app starts
-func (l *LightsUsecase) OnStartup(_ context.Context, repo *interfaces.Repository) error {
+func (l *LightsUsecase) OnStartup(ctx context.Context, repo *interfaces.Repository) error {
 	l.repo = repo
+	l.ctx = ctx
 	return nil
 }
 
@@ -100,6 +105,63 @@ func (l *LightsUsecase) SetBacklightColor(mode, index uint8, color color.RGB) er
 		colors.SetMacBacklight(mode, index, color)
 	}
 	return dev.Light.SetColors(colors)
+}
+
+func (l *LightsUsecase) SavePreset() error {
+	dev := l.repo.Device.Get()
+	state, err := dev.Light.GetEffects()
+	if err != nil {
+		return err
+	}
+	if err != nil {
+		return err
+	}
+	colors, err := dev.Light.GetColors()
+	if err != nil {
+		return err
+	}
+	deviceName := dev.Name
+	path, err := runtime.SaveFileDialog(l.ctx, runtime.SaveDialogOptions{
+		Title:           "Save lights preset",
+		DefaultFilename: deviceName + ".lights.json",
+	})
+	if err != nil {
+		return err
+	}
+	return l.repo.Preset.SaveLightsPreset(path, dto.LightsPreset{
+		Name:   deviceName,
+		Colors: colors.Slice(),
+		State:  state,
+	})
+}
+
+func (l *LightsUsecase) LoadPreset() error {
+	var preset dto.LightsPreset
+	path, err := runtime.OpenFileDialog(l.ctx, runtime.OpenDialogOptions{
+		Title: "Open lights preset",
+	})
+	if err != nil {
+		return err
+	}
+	preset, err = l.repo.Preset.ReadLightsPreset(path)
+	if err != nil {
+		return err
+	}
+	dev := l.repo.Device.Get()
+	if preset.Name != dev.Name {
+		return errors.ErrPresetWrongDevice
+	}
+
+	colorState := light.ColorsFromSlice(preset.Colors)
+	err = dev.Light.SetColors(colorState)
+	if err != nil {
+		return err
+	}
+	err = dev.Light.SetEffects(preset.State)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (l *LightsUsecase) applyBacklightState(b *light.BacklightEffect, r dto.LightDomainRequest) error {

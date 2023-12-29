@@ -4,6 +4,7 @@ package interfaces
 import (
 	"nuga/pkg/device"
 	"nuga/pkg/light"
+	"nuga_ui/internal/dto"
 	"nuga_ui/internal/entity"
 )
 
@@ -12,6 +13,7 @@ type Repository struct {
 	Device      DeviceRepository
 	Settings    SettingsRepository
 	Environment EnvironmentRepository
+	Preset      PresetRepository
 }
 
 // DeviceRepository defines the interface for device-related operations.
@@ -35,4 +37,10 @@ type SettingsRepository interface {
 type EnvironmentRepository interface {
 	GetOS() string
 	GetVersion() string
+}
+
+// PresetRepository defines the interface for retrieving or writing presets.
+type PresetRepository interface {
+	SaveLightsPreset(path string, preset dto.LightsPreset) error
+	ReadLightsPreset(path string) (dto.LightsPreset, error)
 }

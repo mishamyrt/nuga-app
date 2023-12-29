@@ -7,6 +7,7 @@ import { connected, disconnected } from '$shared/model'
 
 import { getBacklightColors, setBacklightColor } from '../api/color'
 import { getModes } from '../api/mode'
+import { loadPreset, savePreset } from '../api/preset'
 import { getLightState, setLightState } from '../api/state'
 import { backlightDefaultColors, defaultLightModes, defaultLightState } from './const'
 import type { LightBacklightColors, LightModes, LightState, SetBacklightColorParams } from './types'
@@ -15,6 +16,8 @@ export const stateSet = createEvent<LightState>('stateSet')
 export const stateLoaded = createEvent<LightState>('stateLoaded')
 export const backlightColorsUpdated = createEvent<LightBacklightColors>('backlightColorsUpdated')
 export const backlightColorChanged = createEvent<SetBacklightColorParams>('backlightColorChanged')
+export const presetSaved = createEvent('presetSaved')
+export const presetLoaded = createEvent('presetLoaded')
 
 const [createHIDEffect] = createSequence({
   minInterval: 200
@@ -24,6 +27,8 @@ const [createHIDEffect] = createSequence({
 export const getStateFx = createHIDEffect('getState', getLightState)
 export const setStateFx = createHIDEffect('setState', setLightState)
 export const setBacklightColorFx = createHIDEffect('setBacklightColorFx', setBacklightColor)
+export const savePresetFx = createHIDEffect('savePresetFx', savePreset)
+export const loadPresetFx = createHIDEffect('loadPresetFx', loadPreset)
 // Simple effects
 export const getModesFx = createEffect(getModes)
 export const getBacklightColorsFx = createEffect('getBacklightColors', {
@@ -95,3 +100,12 @@ sample({
   target: setStateFx
 })
 stateStore.on(stateSet, (_, state) => state)
+
+sample({
+  clock: presetSaved,
+  target: savePresetFx
+})
+sample({
+  clock: presetLoaded,
+  target: loadPresetFx
+})

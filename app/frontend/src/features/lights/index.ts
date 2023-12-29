@@ -1,5 +1,6 @@
 export * from './edit-color'
 export * from './keyboard-preview'
+export * from './preset'
 export * from './select-brightness'
 export * from './select-color'
 export * from './select-mode'
