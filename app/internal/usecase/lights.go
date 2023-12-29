@@ -46,18 +46,17 @@ func (l *LightsUsecase) GetLightState() (dto.LightState, error) {
 }
 
 // GetBacklightColors returns backlight colors
-func (l *LightsUsecase) GetBacklightColors() dto.BacklightColors {
+func (l *LightsUsecase) GetBacklightColors() (dto.BacklightColors, error) {
 	dev := l.repo.Device.Get()
 	config := l.repo.Settings.GetMode()
 	colors, err := dev.Light.GetColors()
 	if err != nil {
-		return nil
+		return nil, err
 	}
-	startOffset := 24
 	if config.IndividualSettings && config.OSMode == entity.WindowsOSMode {
-		startOffset = 0
+		return colors.GetWin(), nil
 	}
-	return colors[startOffset : startOffset+24]
+	return colors.GetMac(), nil
 }
 
 // SetLightState updates lights state

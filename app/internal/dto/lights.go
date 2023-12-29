@@ -31,4 +31,4 @@ type LightStateRequest struct {
 }
 
 // BacklightColors represents backlight color array for modes
-type BacklightColors [][7]color.RGB
+type BacklightColors [][]color.RGB

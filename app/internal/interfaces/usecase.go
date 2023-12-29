@@ -62,6 +62,6 @@ type LightsUsecase interface {
 	GetLightModes() dto.LightModes
 	GetLightState() (dto.LightState, error)
 	SetLightState(r dto.LightStateRequest) error
-	GetBacklightColors() dto.BacklightColors
+	GetBacklightColors() (dto.BacklightColors, error)
 	SetBacklightColor(mode, index uint8, color color.RGB) error
 }
