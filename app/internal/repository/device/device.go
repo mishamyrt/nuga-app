@@ -18,7 +18,7 @@ func New() *Repository {
 
 // IsConnected checks if device is connected
 func (r *Repository) IsConnected() bool {
-	return r.dev == nil
+	return r.dev != nil
 }
 
 // Get returns device instance
