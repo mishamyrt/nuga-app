@@ -1,5 +1,5 @@
 # Nuga build Makefile targets
-BUILD_PATH = app/build/bin
+BUILD_PATH = build/bin
 PLATFORMS_DARWIN = darwin/amd64,darwin/arm64
 LD_FLAGS = -X 'nuga_ui/internal/nuga.AppVersion=v$(VERSION)' -s -w
 
@@ -49,7 +49,3 @@ build/release:
 release/darwin:
 	mv "$(DIST_PATH)/Nuga-arm64.zip" "$(DIST_PATH)/Nuga-$(VERSION)-mac-arm64.zip"
 	mv "$(DIST_PATH)/Nuga-amd64.zip" "$(DIST_PATH)/Nuga-$(VERSION)-mac-amd64.zip"
-
-.PHONY: build/dumper
-build/dumper:
-	go build -o dist/k916-dumper utils/k916-dumper/main.go

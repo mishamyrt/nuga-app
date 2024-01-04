@@ -7,8 +7,8 @@ on:
     - main
     paths:
       - '.github/workflows/linux-builder.yaml'
-      - 'app/build/linux/wails.Dockerfile'
-      - 'app/build/linux/build-nuga.sh'
+      - 'build/linux/wails.Dockerfile'
+      - 'build/linux/build-nuga.sh'
 
 jobs:
   arm64:

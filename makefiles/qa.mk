@@ -1,18 +1,15 @@
-define go_lint
-	golangci-lint run ./$(1)/...
-	revive -config ./revive.toml  ./$(1)/...
-endef
+GOLANGCI_LINT_VERSION = v1.55.2
+REVIVE_VERSION = v1.3.4
+
+.PHONY: setup-qa
+setup-qa:
+	curl -sSfL \
+		https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh \
+		| sh -s -- -b $(GO_BIN_PATH) $(GOLANGCI_LINT_VERSION)
+	go install github.com/mgechev/revive@$(REVIVE_VERSION)
 
 .PHONY: lint
 lint:
-	make lint-lib
-	make lint-app
+	golangci-lint run ./...
+	revive -config ./revive.toml  ./...
 
-.PHONY: lint-lib
-lint-lib:
-	$(call go_lint,lib)
-
-.PHONY: lint-app
-lint-app:
-	$(call go_lint,app)
-	cd app/frontend; pnpm run lint

@@ -4,7 +4,7 @@ APPIMAGE_BUILDER_IMAGE = mishamyrt/nuga-appimage-builder
 # Wails builder functions
 
 define build_builder
-	cd app/build/linux; docker buildx build \
+	cd build/linux; docker buildx build \
 		--file wails.Dockerfile \
 		--load \
 		--platform "linux/$(1)" \
@@ -28,14 +28,14 @@ define build_binary
 endef
 
 define copy_appimage
-	cp "app/build/bin/Nuga-latest-$(1).AppImage" "$(DIST_PATH)/Nuga-$(VERSION)-$(2).AppImage"
+	cp "build/bin/Nuga-latest-$(1).AppImage" "$(DIST_PATH)/Nuga-$(VERSION)-$(2).AppImage"
 endef
 
 # AppImage builder
 
 .PHONY: linux-builder/image-appimage
 linux-builder/image-appimage:
-	cd app/build/linux; docker buildx build \
+	cd build/linux; docker buildx build \
 		--file appimage.Dockerfile \
 		--load \
 		--platform "linux/amd64" \
@@ -70,12 +70,12 @@ linux-builder/push-image-amd64:
 .PHONY: linux-builder/binary-arm64
 linux-builder/binary-arm64: $(DIST_PATH)
 	$(call build_binary,arm64)
-	mv app/build/bin/Nuga-linux-aarch64 dist/Nuga-linux-arm64
+	mv build/bin/Nuga-linux-aarch64 dist/Nuga-linux-arm64
 
 .PHONY: linux-builder/binary-amd64
 linux-builder/binary-amd64:
 	$(call build_binary,amd64)
-	mv app/build/bin/Nuga-linux-x86_64 dist/Nuga-linux-amd64
+	mv build/bin/Nuga-linux-x86_64 dist/Nuga-linux-amd64
 
 .PHONY: linux-builder/binary
 linux-builder/binary:
