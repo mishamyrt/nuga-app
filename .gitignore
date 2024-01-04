@@ -3,9 +3,7 @@
 .vscode
 
 # App
-app/build/bin
-app/frontend/node_modules
-app/frontend/dist
-app/frontend/wailsjs
-
+bin
+node_modules
 dist
+wailsjs

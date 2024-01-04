@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: ${{ env.GO_VERSION }}
-          cache-dependency-path: app/go.sum
+          cache-dependency-path: go.sum
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -27,42 +27,30 @@ jobs:
         run: sudo apt install libudev-dev -y
       - name: Install frontend deps
         run: |
-          cd app/frontend
+          cd frontend
           pnpm install --frozen-lockfile
           cd ../..
       - name: Create dummy dist dir
         run: |
-          mkdir -p app/frontend/dist
-          echo "." > app/frontend/dist/.gitkeep
-      - name: Sync workspace
-        run: go work sync
-      - name: golangci-lint lib
+          mkdir -p frontend/dist
+          echo "." > frontend/dist/.gitkeep
+      - name: Install go deps
+        run: go mod tidy
+      - name: Lint with golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          args: --config=../.golangci.yaml
-          working-directory: ./lib
+          args: --config=./.golangci.yaml
           skip-cache: true
-      - name: revive lib
+      - name: Lint with revive
         uses: docker://morphy/revive-action:v2
         with:
           config: revive.toml
-          path: "./lib/..."
-      - name: golangci-lint app
-        uses: golangci/golangci-lint-action@v3
-        with:
-          args: --config=../.golangci.yaml
-          working-directory: ./app
-          skip-cache: true
-      - name: revive app
-        uses: docker://morphy/revive-action:v2
-        with:
-          config: revive.toml
-          path: "./app/..."
+          path: "./..."
       - name: Lint frontend scripts
         run: |
-          cd app/frontend
+          cd frontend
           pnpm run lint:scripts
       - name: Lint frontend styles
         run: |
-          cd app/frontend
+          cd frontend
           pnpm run lint:styles

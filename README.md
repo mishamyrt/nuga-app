@@ -21,11 +21,6 @@ Application for controlling NuPhy® keyboards.
 4. The application requests permission to Input Monitoring. This is required to work with the USB HID device. Grant permission.
 5. Restart the app
 
-## Packages
-
-* [lib](./lib/) – Golang library.
-* [app](./app/) – Graphic interface for managing the state of the keyboard.
-
 ## Development
 
 For local development, you need to set up environments. For this purpose you will need:
