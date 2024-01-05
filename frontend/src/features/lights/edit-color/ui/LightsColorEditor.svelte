@@ -53,48 +53,62 @@
     Edit
   </Button>
   <Modal open={visible} width={$os === 'mac' ? 264 : 370}>
-    <Stack>
-      <ColorPicker
-        isAlpha={false}
-        canChangeMode={false}
-        isInput={false}
-        isTextInput={false}
-        bind:rgb={rgba}
-        bind:hex
-      />
-      <div class="inputs">
-        <Stack gap="xs">
-            <Input fullWidth bind:value={hex} />
-            <Typography variant="caption-s" color="tertiary">HEX</Typography>
-        </Stack>
-        <Stack gap="xs">
-            <Input fullWidth value="{rgba?.r.toString()}" />
-            <Typography variant="caption-s" color="tertiary">R</Typography>
-        </Stack>
-        <Stack gap="xs">
-            <Input fullWidth value="{rgba?.g.toString()}" />
-            <Typography variant="caption-s" color="tertiary">G</Typography>
-        </Stack>
-        <Stack gap="xs">
-            <Input fullWidth value="{rgba?.b.toString()}" />
-            <Typography variant="caption-s" color="tertiary">B</Typography>
-        </Stack>
-      </div>
-    </Stack>
-    <ModalActions>
-      <Stack justify="end" direction="horizontal">
-        <Button on:click={handleClose}>
-          Cancel
-        </Button>
-        <Button primary on:click={applyColor}>
-          Apply
-        </Button>
+    <div class="color-editor">
+      <Stack>
+        <div class="picker">
+          <ColorPicker
+            isAlpha={false}
+            canChangeMode={false}
+            isInput={false}
+            isTextInput={false}
+            bind:rgb={rgba}
+            bind:hex
+          />
+        </div>
+        <div class="inputs">
+          <Stack gap="xs">
+              <Input fullWidth bind:value={hex} />
+              <Typography variant="caption-s" color="tertiary">HEX</Typography>
+          </Stack>
+          <Stack gap="xs">
+              <Input fullWidth value="{rgba?.r.toString()}" />
+              <Typography variant="caption-s" color="tertiary">R</Typography>
+          </Stack>
+          <Stack gap="xs">
+              <Input fullWidth value="{rgba?.g.toString()}" />
+              <Typography variant="caption-s" color="tertiary">G</Typography>
+          </Stack>
+          <Stack gap="xs">
+              <Input fullWidth value="{rgba?.b.toString()}" />
+              <Typography variant="caption-s" color="tertiary">B</Typography>
+          </Stack>
+        </div>
       </Stack>
-    </ModalActions>
+      <ModalActions>
+        <Stack justify="end" direction="horizontal">
+          <Button on:click={handleClose}>
+            Cancel
+          </Button>
+          <Button primary on:click={applyColor}>
+            Apply
+          </Button>
+        </Stack>
+      </ModalActions>
+    </div>
   </Modal>
 </div>
 
 <style lang="scss">
+  .color-editor {
+    --picker-width: 210px;
+    --picker-height: 210px;
+  }
+
+  :global(.os-linux) .color-editor {
+    --picker-width: 283px;
+    --picker-height: 283px;
+  }
+
   .inputs {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -103,10 +117,7 @@
   }
 
   /* stylelint-disable-next-line */
-  :global(.wrapper.is-open) {
-    --picker-width: 210px;
-    --picker-height: 210px;
-
+  .picker :global(.wrapper.isOpen) {
     background: transparent;
     border: none;
     padding: 0;
