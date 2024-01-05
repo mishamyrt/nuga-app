@@ -13,7 +13,7 @@ endef
 
 .PHONY: build/darwin
 build/darwin: $(DIST_PATH)
-	cd app; wails build \
+	wails build \
 		-clean \
 		-trimpath \
 		-platform "$(PLATFORMS_DARWIN)" \
@@ -22,7 +22,7 @@ build/darwin: $(DIST_PATH)
 
 .PHONY: build/linux
 build/linux: $(DIST_PATH)
-	cd app; wails build \
+	wails build \
 		-clean \
 		-o "Nuga-linux-amd64" \
 		-platform "linux/amd64" \
