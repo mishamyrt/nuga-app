@@ -2,7 +2,7 @@
   import { Button, FormGroup, FormRow, getTheme, Modal, ModalActions, onHotkey, Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { AppDarkThemeToggle, AppUISwitchSegment, LoggingSwitch, RestartButton } from '$features/app'
+  import { AppThemeSelect, AppUISwitchSegment, LoggingSwitch, RestartButton } from '$features/app'
   import { disconnected } from '$shared/model'
 
   const { os } = getTheme()
@@ -36,7 +36,7 @@
         </Stack>
       </FormRow>
       <FormRow title="Dark theme">
-        <AppDarkThemeToggle />
+        <AppThemeSelect />
       </FormRow>
       <FormRow
         title="Reset connection"

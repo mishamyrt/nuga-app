@@ -2,7 +2,7 @@ package application
 
 import (
 	"nuga_ui/config"
-	"nuga_ui/internal/entity"
+	"nuga_ui/internal/dto"
 
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
@@ -10,7 +10,7 @@ import (
 )
 
 // GetState builds UIState from settings
-func (a *Application) getState() (entity.AppTheme, bool) {
+func (a *Application) getState() (dto.AppTheme, bool) {
 	config := a.repo.Settings.GetApp()
 	currentOS := a.repo.Environment.GetOS()
 	universal := currentOS != string(config.UI)
@@ -26,11 +26,11 @@ func (a *Application) GetOptions() *options.App {
 	}
 	var macAppearance mac.AppearanceType
 	switch theme {
-	case entity.LightUITheme:
+	case dto.LightUITheme:
 		macAppearance = mac.NSAppearanceNameVibrantLight
-	case entity.DarkUITheme:
+	case dto.DarkUITheme:
 		macAppearance = mac.NSAppearanceNameDarkAqua
-	case entity.AutoUITheme:
+	case dto.AutoUITheme:
 	default:
 		macAppearance = mac.DefaultAppearance
 	}

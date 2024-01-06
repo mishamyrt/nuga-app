@@ -3,7 +3,6 @@ package interfaces
 import (
 	"context"
 	"nuga_ui/internal/dto"
-	"nuga_ui/internal/entity"
 
 	"github.com/mishamyrt/nuga-lib/light"
 )
@@ -51,10 +50,10 @@ type EnvironmentUsecase interface {
 // SettingsUsecase defines the interface for managing application settings use cases.
 type SettingsUsecase interface {
 	BasicUsecase
-	GetModeSettings() entity.ModeConfig
-	SetModeSettings(m entity.ModeConfig) error
-	GetAppSettings() entity.AppConfig
-	SetAppSettings(ui entity.AppConfig) error
+	GetModeSettings() dto.ModeSettings
+	SetModeSettings(m dto.ModeSettings) error
+	GetAppSettings() dto.AppSettings
+	SetAppSettings(ui dto.AppSettings) error
 }
 
 // LightsUsecase defines the interface for lighting-related use cases.

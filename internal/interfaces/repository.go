@@ -3,7 +3,6 @@ package interfaces
 
 import (
 	"nuga_ui/internal/dto"
-	"nuga_ui/internal/entity"
 
 	"github.com/mishamyrt/nuga-lib"
 )
@@ -27,10 +26,10 @@ type DeviceRepository interface {
 
 // SettingsRepository defines the interface for managing application settings.
 type SettingsRepository interface {
-	GetMode() *entity.ModeConfig
-	SetMode(m entity.ModeConfig) error
-	GetApp() *entity.AppConfig
-	SetApp(ui entity.AppConfig) error
+	GetMode() *dto.ModeSettings
+	SetMode(m dto.ModeSettings) error
+	GetApp() *dto.AppSettings
+	SetApp(ui dto.AppSettings) error
 }
 
 // EnvironmentRepository defines the interface for retrieving environment-related information.

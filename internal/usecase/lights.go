@@ -3,7 +3,6 @@ package usecase
 import (
 	"context"
 	"nuga_ui/internal/dto"
-	"nuga_ui/internal/entity"
 	"nuga_ui/internal/errors"
 	"nuga_ui/internal/interfaces"
 
@@ -68,7 +67,7 @@ func (l *LightsUsecase) GetBacklightColors() (dto.BacklightColors, error) {
 	if err != nil {
 		return nil, err
 	}
-	if config.IndividualSettings && config.OSMode == entity.WindowsOSMode {
+	if config.IndividualSettings && config.OSMode == dto.WindowsOSMode {
 		return colors.GetWin(), nil
 	}
 	return colors.GetMac(), nil
@@ -105,7 +104,7 @@ func (l *LightsUsecase) SetBacklightColor(mode, index uint8, color light.RGB) er
 		return err
 	}
 	if config.IndividualSettings {
-		if config.OSMode == entity.MacOSMode {
+		if config.OSMode == dto.MacOSMode {
 			colors.SetMac(mode, index, &color)
 		} else {
 			colors.SetWin(mode, index, &color)

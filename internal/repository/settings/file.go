@@ -3,7 +3,7 @@ package settings
 
 import (
 	"encoding/json"
-	"nuga_ui/internal/entity"
+	"nuga_ui/internal/dto"
 	"os"
 	"path"
 )
@@ -12,7 +12,7 @@ import (
 type File struct {
 	DirPath string
 	Name    string
-	Config  entity.Config
+	Content dto.Settings
 }
 
 // Path returns path to settings file
@@ -22,11 +22,11 @@ func (f *File) Path() string {
 
 // Write settings to file
 func (f *File) Write() error {
-	data, err := json.Marshal(f.Config)
+	data, err := json.Marshal(f.Content)
 	if err != nil {
 		return err
 	}
-	if !Exists(f.DirPath) {
+	if !fileExists(f.DirPath) {
 		err = os.MkdirAll(f.DirPath, 0755)
 		if err != nil {
 			return err
@@ -45,24 +45,16 @@ func (f *File) Read() error {
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal(data, &f.Config)
+	err = json.Unmarshal(data, &f.Content)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-// FromPath returns File settings by directory
-func FromPath(directory string) (*File, error) {
-	file := File{
-		DirPath: directory,
-		Name:    "settings.json",
+func fileExists(path string) bool {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return false
 	}
-	if file.Read() != nil {
-		err := file.Write()
-		if err != nil {
-			return nil, err
-		}
-	}
-	return &file, nil
+	return true
 }

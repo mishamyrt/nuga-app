@@ -3,7 +3,7 @@ package environment
 
 import (
 	"nuga_ui/config"
-	"nuga_ui/internal/entity"
+	"nuga_ui/internal/dto"
 	"runtime"
 )
 
@@ -20,7 +20,7 @@ func New() *Repository {
 func (r *Repository) GetOS() string {
 	os := runtime.GOOS
 	if os == "darwin" {
-		return string(entity.MacOS)
+		return string(dto.MacOS)
 	}
 	return os
 }

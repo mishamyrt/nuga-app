@@ -10,8 +10,8 @@ import (
 )
 
 // New creates new repository instance
-func New(filePath string) (*interfaces.Repository, error) {
-	settings, err := settings.New(filePath)
+func New(directory string) (*interfaces.Repository, error) {
+	settings, err := settings.NewAtDirectory(directory)
 	if err != nil {
 		return nil, err
 	}

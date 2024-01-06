@@ -1,5 +1,6 @@
-// Package entity contains app entities
-package entity
+package dto
+
+import "runtime"
 
 // OS represents operating system value
 type OS string
@@ -12,6 +13,17 @@ const (
 	// Linux represents GNU Linux
 	Linux OS = "linux"
 )
+
+// CurrentOS returns... current OS
+func CurrentOS() OS {
+	switch runtime.GOOS {
+	case "darwin":
+		return MacOS
+	case "windows":
+		return Windows
+	}
+	return Linux
+}
 
 // OSMode represents keyboard OS mode value
 type OSMode string
@@ -35,20 +47,32 @@ const (
 	AutoUITheme AppTheme = "auto"
 )
 
-// AppConfig represents the configuration for the user interface settings.
-type AppConfig struct {
+// AppThemeFromString creates AppTheme instance from string
+func AppThemeFromString(s string) AppTheme {
+	switch s {
+	case "light":
+		return LightUITheme
+	case "dark":
+		return DarkUITheme
+	default:
+		return AutoUITheme
+	}
+}
+
+// AppSettings represents the configuration for the user interface settings.
+type AppSettings struct {
 	UI    OS       `json:"ui"`
 	Theme AppTheme `json:"theme"`
 }
 
-// ModeConfig represents the configuration for the application mode settings.
-type ModeConfig struct {
+// ModeSettings represents the configuration for the application mode settings.
+type ModeSettings struct {
 	OSMode             OSMode `json:"osMode"`
 	IndividualSettings bool   `json:"individual"`
 }
 
-// Config represents the overall configuration for the application.
-type Config struct {
-	Mode ModeConfig `json:"mode"`
-	App  AppConfig  `json:"app"`
+// Settings represents the overall configuration for the application.
+type Settings struct {
+	Mode ModeSettings `json:"mode"`
+	App  AppSettings  `json:"app"`
 }

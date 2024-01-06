@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SidebarLayout, ThemeProvider } from '@naco-ui/svelte'
+  import { isDark, SidebarLayout, ThemeProvider } from '@naco-ui/svelte'
   import { FeatureSlicedDebug } from 'feature-sliced-svelte'
 
   import { appSettingsStore } from '$entities/app'
@@ -13,13 +13,19 @@
   import Toolbar from './ui/Toolbar.svelte'
 
   $: props = pages[$activePage].layoutProps ?? {}
+  $: theme = $appSettingsStore.theme
+  $: scheme = theme === 'auto'
+    ? $isDark
+      ? 'dark'
+      : 'light'
+    : theme
   const sidebarWidth = 200
 </script>
 
 <FeatureSlicedDebug />
 <ThemeProvider
   os={$appSettingsStore.ui}
-  scheme={$appSettingsStore.theme}>
+  {scheme}>
   <SidebarLayout {sidebarWidth} macInset={{
     show: true
   }} toolbar={{

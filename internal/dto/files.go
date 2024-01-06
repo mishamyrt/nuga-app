@@ -1,3 +1,4 @@
+// Package dto contains Nuga.app data transfer objects
 package dto
 
 import "github.com/wailsapp/wails/v2/pkg/runtime"

@@ -1,7 +1,7 @@
-import AppDarkThemeToggle from './ui/AppDarkThemeToggle.svelte'
+import AppThemeSelect from './ui/AppThemeSelect.svelte'
 import AppUISwitchSegment from './ui/AppUISwitchSegment.svelte'
 
 export {
-  AppDarkThemeToggle,
+  AppThemeSelect,
   AppUISwitchSegment
 }

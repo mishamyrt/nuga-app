@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	"nuga_ui/internal/entity"
+	"nuga_ui/internal/dto"
 	"nuga_ui/internal/interfaces"
 )
 
@@ -23,21 +23,21 @@ func (s *SettingsUsecase) OnShutdown() error {
 }
 
 // GetModeSettings returns stored mode settings
-func (s *SettingsUsecase) GetModeSettings() entity.ModeConfig {
+func (s *SettingsUsecase) GetModeSettings() dto.ModeSettings {
 	return *s.repo.Settings.GetMode()
 }
 
 // SetModeSettings writes mode settings to file
-func (s *SettingsUsecase) SetModeSettings(m entity.ModeConfig) error {
+func (s *SettingsUsecase) SetModeSettings(m dto.ModeSettings) error {
 	return s.repo.Settings.SetMode(m)
 }
 
 // GetAppSettings reads app theme settings from file
-func (s *SettingsUsecase) GetAppSettings() entity.AppConfig {
+func (s *SettingsUsecase) GetAppSettings() dto.AppSettings {
 	return *s.repo.Settings.GetApp()
 }
 
 // SetAppSettings writes app theme settings from file
-func (s *SettingsUsecase) SetAppSettings(app entity.AppConfig) error {
+func (s *SettingsUsecase) SetAppSettings(app dto.AppSettings) error {
 	return s.repo.Settings.SetApp(app)
 }
