@@ -5,8 +5,6 @@
 
   import { keyboardLightsColorStore } from '../model'
 
-  export let colorless = false
-
   $: lightsMap = $keyboardLightsColorStore.backlight
   $: sidelightColor = $keyboardLightsColorStore.sidelight
   $: haloColor = $keyboardLightsColorStore.halolight
@@ -25,7 +23,7 @@
       class="halo"
       class:random={isHaloRandom}
       style:--light-color="{haloColor}" />
-    <KeyboardKeys {template} {colorless} highlights={lightsMap} />
+    <KeyboardKeys {template} colorless highlights={lightsMap} />
   </div>
 </div>
 
