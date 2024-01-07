@@ -2,7 +2,7 @@
   import { Toggle } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { modeSettingsChanged, modeSettingsStore } from '$entities/device'
+  import { modeSettingsChanged, modeSettingsStore } from '$shared/model'
 
   function handleChange (e: CustomEvent<boolean>) {
     modeSettingsChanged({

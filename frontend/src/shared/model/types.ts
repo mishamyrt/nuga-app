@@ -1,6 +1,11 @@
 import type { SidebarLayoutProps } from '@naco-ui/svelte'
 import type { ComponentType, SvelteComponent } from 'svelte'
 
+export type SupportedKeyboards =
+  | 'Halo65'
+  | 'Halo75'
+  | 'Halo96'
+
 export interface ConnectionDescription {
   name: string
   path: string
@@ -13,4 +18,14 @@ export interface Page {
   Toolbar?: ComponentType<SvelteComponent>
   title?: string
   layoutProps?: SidebarLayoutProps
+}
+
+export enum OSMode {
+  Windows = 'win',
+  MacOS = 'mac'
+}
+
+export interface ModeSettings {
+  osMode: OSMode
+  individual: boolean
 }

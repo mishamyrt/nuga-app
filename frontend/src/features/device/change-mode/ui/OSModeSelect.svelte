@@ -2,7 +2,7 @@
   import { Segment } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { modeSettingsChanged, modeSettingsStore, type OSMode, osModeOptions } from '$entities/device'
+  import { modeSettingsChanged, modeSettingsStore, type OSMode, osModeOptions } from '$shared/model'
 
   function handleChange (e: CustomEvent<string>) {
     modeSettingsChanged({

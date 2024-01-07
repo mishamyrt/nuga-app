@@ -1,8 +1,8 @@
 import { combine, createEffect, createEvent, createStore, sample } from 'effector'
 import { interval } from 'patronum'
 
-import { connect, disconnect, simulate } from '../api'
-import type { ConnectionDescription } from './types'
+import { connect, disconnect, simulate } from '../../api'
+import type { ConnectionDescription } from '../types'
 
 const defaultConnection: ConnectionDescription = {
   path: '',

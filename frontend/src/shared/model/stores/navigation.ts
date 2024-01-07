@@ -1,6 +1,6 @@
 import { createEvent, createStore } from 'effector'
 
-import type { AppPage } from './types'
+import type { AppPage } from '../types'
 
 export const pageChanged = createEvent<AppPage>('changedPage')
 

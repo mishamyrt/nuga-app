@@ -2,7 +2,7 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 
 import { connected } from '$shared/model'
 
-import { getFirmware } from '../../api/firmware'
+import { getFirmware } from '../api/firmware'
 
 export const firmwareVersionStore = createStore('dev', {
   name: 'firmwareVersion'

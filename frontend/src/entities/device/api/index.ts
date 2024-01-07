@@ -1,2 +1,2 @@
+export * from '../../../shared/api/settings'
 export * from './firmware'
-export * from './settings'
