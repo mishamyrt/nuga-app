@@ -3,7 +3,7 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 import { interval } from 'patronum'
 
 import { createSequence } from '$shared/lib'
-import { connected, disconnected } from '$shared/model'
+import { connected, disconnected, modeSettingsChanged } from '$shared/model'
 
 import { getBacklightColors, setBacklightColor } from '../api/color'
 import { getModes } from '../api/mode'
@@ -81,6 +81,10 @@ stateStore.on(stateLoaded, (current, loaded) => {
 sample({
   clock: connected,
   target: [getModesFx, getBacklightColorsFx]
+})
+sample({
+  clock: modeSettingsChanged,
+  target: getBacklightColorsFx
 })
 modesStore.on(getModesFx.doneData, (_, modes) => modes)
 backlightColorsStore.on(getBacklightColorsFx.doneData, (_, colors) => colors)
