@@ -2,7 +2,7 @@
   import { fillMarks, Slider, type SliderChangeEvent } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { type LightDomain, type LightStateValue, stateStore } from '$entities/lights'
+  import { type LightDomain, type LightStateValue, modesStore, stateStore } from '$entities/lights'
 
   import { speedChanged } from '../model/store'
 
@@ -14,10 +14,15 @@
       speed: e.detail as LightStateValue
     })
   }
+
+  $: modeCode = $stateStore[domain].mode
+  $: mode = $modesStore[domain].find(m => m.code === modeCode)
+  $: supportsSpeed = mode?.supports.speed ?? false
 </script>
 
 <div use:fsd={'features/LightsSpeedSlider'}>
   <Slider
+    disabled={!supportsSpeed}
     min={0}
     max={4}
     step={1}
