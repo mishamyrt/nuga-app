@@ -1,4 +1,4 @@
-import type { AppPage, Page } from '$entities/app'
+import type { AppPage, Page } from '$shared/model'
 
 import { device } from './device'
 import { keys } from './keys'

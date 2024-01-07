@@ -1,5 +1,5 @@
 import { capitalize } from '$shared/lib'
-import type { effect } from '$wailsjs/go/models'
+import type { light } from '$wailsjs/go/models'
 
 import type { LightColorIndex, LightDomainMode, LightDomainState, LightEffectParams, LightStateValue } from '../model/types'
 
@@ -14,7 +14,7 @@ export function parseEffect (mode: number, params: LightEffectParams): LightDoma
   }
 }
 
-export function parseModes (m: effect.Mode[]): LightDomainMode[] {
+export function parseModes (m: light.Mode[]): LightDomainMode[] {
   return m
     .map(i => ({
       name: capitalize(i.name),
