@@ -1,4 +1,4 @@
-VERSION = 1.0.0-rc
+VERSION = 2.0.0
 DIST_PATH = dist
 
 OS := `echo $(shell uname) | tr A-Z a-z`
@@ -20,7 +20,7 @@ configure:
 .PHONY: generate
 generate:
 	./scripts/update-version.mjs wails.json "$(VERSION)"
-	cd app; wails generate module
+	wails generate module
 
 .PHONY: clean
 clean:

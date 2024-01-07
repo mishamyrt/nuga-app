@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
-## 2.0.0 - Unreleased
+## [2.0.0] - Unreleased
 
 To bring the look and feel of different operating systems out of this repository, the [Naco UI](https://naco.myrt.co/) Kit was developed. This release mainly focuses on UI relocation. In addition, the UI architecture has been extensively updated. This will allow to extend the application with less time consuming.
 
@@ -124,3 +124,4 @@ Initial beta release
 [1.0.0-beta6]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta6
 [1.0.0-beta7]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-beta7
 [1.0.0-rc]: https://github.com/mishamyrt/Nuga/releases/tag/v1.0.0-rc
+[2.0.0]: https://github.com/mishamyrt/Nuga/releases/tag/v2.0.0
