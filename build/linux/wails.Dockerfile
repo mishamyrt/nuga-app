@@ -1,5 +1,5 @@
-ARG GOLANG_VERSION=1.20
-ARG WAILS_VERSION=2.5.1
+ARG GOLANG_VERSION=1.21
+ARG WAILS_VERSION=2.7.1
 
 FROM golang:${GOLANG_VERSION}
 
@@ -15,7 +15,7 @@ RUN apt-get update && \
     build-essential
 
 # Setup Wails
-RUN go install github.com/wailsapp/wails/v2/cmd/wails@v2.5.1
+RUN go install github.com/wailsapp/wails/v2/cmd/wails@v2.7.1
 
 COPY build-nuga.sh /usr/bin/build-nuga
 RUN chmod +x /usr/bin/build-nuga
