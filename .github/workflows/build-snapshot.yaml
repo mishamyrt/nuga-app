@@ -9,6 +9,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  dev:
+  snapshot:
     uses: ./.github/workflows/build.yaml
     secrets: inherit
