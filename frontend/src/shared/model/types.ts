@@ -29,5 +29,3 @@ export interface ModeSettings {
   osMode: OSMode
   individual: boolean
 }
-
-export type Maybe<T> = T | null

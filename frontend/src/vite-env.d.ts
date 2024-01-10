@@ -8,3 +8,5 @@ declare interface RGBColor {
   G: number
   B: number
 }
+
+declare type Maybe<T> = T | null

@@ -1,7 +1,7 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 
 import { fromWailsEvent } from '$shared/lib'
-import { appStarted, type Maybe } from '$shared/model'
+import { appStarted } from '$shared/model'
 
 import { openBrowser } from '../../api/browser'
 import { checkUpdates, getVersion } from '../../api/version'
