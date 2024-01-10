@@ -2,7 +2,7 @@
   import { Select, type SelectOption } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { appSettingsChanged, appSettingsStore, type AppTheme } from '$entities/app'
+  import { type AppTheme, settingsChanged, settingsStore } from '$entities/app'
 
   const themeOptions: SelectOption[] = [
     { title: 'Auto', value: 'auto' },
@@ -11,8 +11,8 @@
   ]
 
   function handleChange (e: CustomEvent<string>) {
-    appSettingsChanged({
-      ui: $appSettingsStore.ui,
+    settingsChanged({
+      ui: $settingsStore.ui,
       theme: e.detail as AppTheme
     })
   }
@@ -22,7 +22,7 @@
 <div use:fsd={'features/AppDarkThemeToggle'}>
   <Select
     options={themeOptions}
-    value={$appSettingsStore.theme}
+    value={$settingsStore.theme}
     on:change={handleChange}
   />
 </div>

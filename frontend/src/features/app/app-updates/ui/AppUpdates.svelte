@@ -2,22 +2,22 @@
   import { Button, Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { versionStore } from '$entities/app'
-
-  import { updateOpened, updateUrlStore } from '../model/store'
+  import { updateOpened, updateUrlStore, versionStore } from '$entities/app'
 
   $: version = $versionStore
   $: updateUrl = $updateUrlStore
 
   function openUpdateUrl () {
-    updateOpened(updateUrl)
+    if (updateUrl) {
+      updateOpened(updateUrl)
+    }
   }
 </script>
 
 <div use:fsd={'features/AppUpdates'}>
   <div class="updates-container">
     <Stack gap="xs">
-      {#if updateUrl.length > 0}
+      {#if updateUrl}
         <Button on:click={openUpdateUrl} fullWidth>Update is available</Button>
       {/if}
       <div class="version">

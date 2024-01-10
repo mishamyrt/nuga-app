@@ -21,7 +21,6 @@ type EnvironmentUsecase struct {
 func (e *EnvironmentUsecase) OnStartup(ctx context.Context, repo *interfaces.Repository) error {
 	e.ctx = ctx
 	e.repo = repo
-	e.checkUpdates()
 	return nil
 }
 
@@ -44,22 +43,24 @@ func (e *EnvironmentUsecase) GetOS() string {
 	return os
 }
 
-// Restart app
-func (e *EnvironmentUsecase) Restart() {
-	overseer.Restart()
-}
-
-func (e *EnvironmentUsecase) checkUpdates() {
-	version := e.repo.Environment.GetVersion()
+// CheckUpdates finds latest release URL and emits it as event
+func (e *EnvironmentUsecase) CheckUpdates() {
 	go func() {
-		updater := github.NewRepo("mishamyrt/Nuga")
-		tags, err := updater.Tags()
-		if err != nil {
+		repo := github.NewRepo("mishamyrt/Nuga")
+		tags, err := repo.Tags()
+		if err != nil || len(tags) == 0 {
 			return
 		}
 		latest := tags[0]
-		if version != latest {
-			runtime.EventsEmit(e.ctx, "update", updater.ReleaseURL(latest))
+		current := e.repo.Environment.GetVersion()
+		if current != latest {
+			updateURL := repo.FormatTagURL(latest)
+			runtime.EventsEmit(e.ctx, "update", updateURL)
 		}
 	}()
+}
+
+// Restart app
+func (e *EnvironmentUsecase) Restart() {
+	overseer.Restart()
 }

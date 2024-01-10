@@ -4,13 +4,27 @@ import { EventsOn } from '$wailsjs/runtime'
 
 type WailsEventHandlerFn<T> = (...params: any[]) => T
 
+interface FromWailsEventConfig<T> {
+  name?: string
+  fn?: WailsEventHandlerFn<T>
+}
+
+/**
+ * Creates Effector event from Wails runtime event
+ * @see {@link https://wails.io/docs/reference/runtime/events}
+ */
 export function fromWailsEvent<T> (
-  eventName: string,
-  handler: WailsEventHandlerFn<T>
+  wailsEventName: string,
+  config?: FromWailsEventConfig<T>
 ): Event<T> {
-  const event = createEvent<T>()
-  EventsOn(eventName, (...data: any) => {
-    event(handler(...data))
+  const mapFn = config?.fn
+  const eventName = config?.name
+  const event = createEvent<T>(eventName)
+  EventsOn(wailsEventName, (...data: any) => {
+    const params = mapFn
+      ? mapFn(...data)
+      : data
+    event(params)
   })
   return event
 }

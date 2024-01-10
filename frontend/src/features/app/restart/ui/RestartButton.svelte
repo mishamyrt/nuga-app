@@ -2,7 +2,7 @@
   import { Button } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { appRestarted } from '$entities/app'
+  import { appRestarted } from '$shared/model'
 
   function handleRestart () {
     appRestarted()

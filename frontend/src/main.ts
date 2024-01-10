@@ -1,10 +1,10 @@
 import './style.css'
 
-import { started } from '$shared/model'
+import { appStarted } from '$shared/model'
 
 import App from './app/App.svelte'
 
-started()
+appStarted()
 
 const target = document.getElementById('app')
 if (!target) {

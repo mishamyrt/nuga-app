@@ -6,8 +6,8 @@ type Repo struct {
 	FullName string
 }
 
-// ReleaseURL formats release page URL from tag
-func (r *Repo) ReleaseURL(tag string) string {
+// FormatTagURL formats release page URL from tag
+func (r *Repo) FormatTagURL(tag string) string {
 	return "https://github.com/" + r.FullName + "/releases/tag/" + tag
 }
 

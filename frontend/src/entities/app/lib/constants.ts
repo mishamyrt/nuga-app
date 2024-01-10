@@ -4,3 +4,7 @@ export const defaultAppSettings: Readonly<AppSettings> = {
   ui: 'mac',
   theme: 'dark'
 }
+
+export const defaultVersion = 'snapshot'
+
+export const defaultBackgroundColor = '#FFFFFF'

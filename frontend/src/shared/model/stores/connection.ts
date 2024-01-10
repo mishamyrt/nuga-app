@@ -3,13 +3,12 @@ import { interval } from 'patronum'
 
 import { connect, disconnect, simulate } from '../../api'
 import type { ConnectionDescription } from '../types'
+import { appStarted } from './app'
 
 const defaultConnection: ConnectionDescription = {
   path: '',
   name: ''
 }
-
-export const started = createEvent('started')
 
 export const disconnected = createEvent('disconnected')
 export const connecting = createEvent('connecting')
@@ -20,7 +19,7 @@ export const connectionStore = createStore<ConnectionDescription>(defaultConnect
 export const isConnected = combine(connectionStore, c => c.name.length > 0)
 
 sample({
-  clock: [started],
+  clock: [appStarted],
   target: connecting
 })
 

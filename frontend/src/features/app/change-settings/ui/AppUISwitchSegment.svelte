@@ -2,12 +2,12 @@
   import { type OS, Segment } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { appSettingsChanged, appSettingsStore } from '$entities/app'
+  import { settingsChanged, settingsStore } from '$entities/app'
 
   function handleChange (e: CustomEvent<string>) {
-    appSettingsChanged({
+    settingsChanged({
       ui: e.detail as OS,
-      theme: $appSettingsStore.theme
+      theme: $settingsStore.theme
     })
   }
 
@@ -16,7 +16,7 @@
 <div use:fsd={'features/AppUISwitchSegment'}>
   <Segment
     on:change={handleChange}
-    value={$appSettingsStore.ui}
+    value={$settingsStore.ui}
     options={[
       { value: 'mac' },
       { value: 'linux' }

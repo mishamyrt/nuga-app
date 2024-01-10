@@ -2,7 +2,7 @@
   import { isDark, SidebarLayout, ThemeProvider } from '@naco-ui/svelte'
   import { FeatureSlicedDebug } from 'feature-sliced-svelte'
 
-  import { appSettingsStore } from '$entities/app'
+  import { settingsStore } from '$entities/app'
   import { pages } from '$pages'
   import { activePage } from '$shared/model'
   import { AppDebugModal } from '$widgets/app'
@@ -13,7 +13,7 @@
   import Toolbar from './ui/Toolbar.svelte'
 
   $: props = pages[$activePage].layoutProps ?? {}
-  $: theme = $appSettingsStore.theme
+  $: theme = $settingsStore.theme
   $: scheme = theme === 'auto'
     ? $isDark
       ? 'dark'
@@ -24,10 +24,10 @@
 
 <FeatureSlicedDebug />
 <ThemeProvider
-  os={$appSettingsStore.ui}
+  os={$settingsStore.ui}
   {scheme}>
   <SidebarLayout {sidebarWidth} macInset={{
-    show: true
+    enable: true
   }} toolbar={{
     transparent: true,
     border: 'scroll'
