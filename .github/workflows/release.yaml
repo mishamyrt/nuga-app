@@ -1,6 +1,7 @@
 name: Release Nuga
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*
@@ -21,6 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set envs
+        if: github.event_name == 'push'
         run: |
           export RELEASE_VERSION=${GITHUB_REF#refs/*/}
           echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
@@ -39,8 +41,10 @@ jobs:
       - name: Rename macOS build
         run: make release/darwin
       - name: Extract release notes
+        if: github.event_name == 'push'
         run: ./scripts/workflows/get-release-notes.mjs "$RELEASE_VERSION" > dist/notes.md
       - name: Create GitHub release
+        if: github.event_name == 'push'
         uses: softprops/action-gh-release@v1
         with:
           name: ${{ env.VERSION_DISPLAY }}
