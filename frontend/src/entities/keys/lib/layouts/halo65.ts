@@ -1,30 +1,8 @@
+import type { KeyboardLayout } from '../../model/types'
 
-import type { KeyboardLayout } from '../types'
-
-export const Halo96: KeyboardLayout = [
+export const Halo65: KeyboardLayout = [
   [
     { code: 'esc', color: 'mint' },
-    { code: 'f1' },
-    { code: 'f2' },
-    { code: 'f3' },
-    { code: 'f4' },
-    { code: 'f5', color: 'dark' },
-    { code: 'f6', color: 'dark' },
-    { code: 'f7', color: 'dark' },
-    { code: 'f8', color: 'dark' },
-    { code: 'f9' },
-    { code: 'f10' },
-    { code: 'f11' },
-    { code: 'f12' },
-    { code: 'prntscr', color: 'dark' },
-    { code: 'del', color: 'dark' },
-    { code: 'home', color: 'dark' },
-    { code: 'end', color: 'dark' },
-    { code: 'pgup', color: 'dark' },
-    { code: 'pgdn', color: 'dark' }
-  ],
-  [
-    { code: '~' },
     { code: '1' },
     { code: '2' },
     { code: '3' },
@@ -38,10 +16,7 @@ export const Halo96: KeyboardLayout = [
     { code: '-' },
     { code: '+' },
     { code: 'backspace', color: 'dark', width: 2 },
-    { code: 'numlk', color: 'dark' },
-    { code: '/', color: 'dark' },
-    { code: '×', color: 'dark' },
-    { code: '-', color: 'dark' }
+    { code: 'del', color: 'dark' }
   ],
   [
     { code: 'tab', color: 'dark', width: 1.5 },
@@ -58,10 +33,7 @@ export const Halo96: KeyboardLayout = [
     { code: '[' },
     { code: ']' },
     { code: '\\', width: 1.5 },
-    { code: 'num7' },
-    { code: 'num8' },
-    { code: 'num9' },
-    { code: 'numplus', height: 2, color: 'dark' }
+    { code: 'pgup', color: 'dark' }
   ],
   [
     { code: 'caps', color: 'dark', width: 1.75 },
@@ -77,9 +49,7 @@ export const Halo96: KeyboardLayout = [
     { code: ';' },
     { code: '\'' },
     { code: 'enter', width: 2.25, color: 'orange' },
-    { code: 'num4' },
-    { code: 'num5' },
-    { code: 'num6' }
+    { code: 'pgdn', color: 'dark' }
   ],
   [
     { code: 'lshift', color: 'dark', width: 2.25 },
@@ -95,10 +65,7 @@ export const Halo96: KeyboardLayout = [
     { code: '/' },
     { code: 'rshift', color: 'dark', width: 1.75 },
     { code: 'up', color: 'dark' },
-    { code: 'num1' },
-    { code: 'num2' },
-    { code: 'num3' },
-    { code: 'numenter', height: 2, color: 'mint' }
+    { code: 'end', color: 'dark' }
   ],
   [
     { code: 'lctrl', color: 'dark', width: 1.25 },
@@ -110,8 +77,6 @@ export const Halo96: KeyboardLayout = [
     { width: 0.5 },
     { code: 'left', color: 'dark' },
     { code: 'down', color: 'dark' },
-    { code: 'right', color: 'dark' },
-    { code: 'num0' },
-    { code: 'numdot' }
+    { code: 'right', color: 'dark' }
   ]
 ]

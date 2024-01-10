@@ -1,4 +1,4 @@
-import type { Key, KeyboardLayout, KeyboardTemplate, KeyDescription } from './types'
+import type { Key, KeyboardLayout, KeyboardTemplate, KeyDescription } from '../model/types'
 
 function toKey (k: KeyDescription): Key {
   return {

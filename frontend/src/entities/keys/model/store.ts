@@ -2,9 +2,9 @@ import { createStore, sample } from 'effector'
 
 import { connected, disconnected } from '$shared/model'
 
-import { defaultTemplate, supportedKeyboards } from './const'
+import { buildTemplate } from '../lib/build-template'
+import { defaultTemplate, supportedKeyboards } from '../lib/constants'
 import type { KeyboardTemplate } from './types'
-import { buildTemplate } from './utils'
 
 export const keyboardTemplateStore = createStore<KeyboardTemplate>(defaultTemplate, {
   name: 'keyboardTemplateStore'

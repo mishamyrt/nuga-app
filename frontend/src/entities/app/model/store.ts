@@ -3,10 +3,10 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 import { connected, started } from '$shared/model'
 
 import { restartApp } from '../api/app'
-import { getBackgroundColor } from '../api/browser'
 import { getAppSettings, setAppSettings } from '../api/settings'
 import { getVersion } from '../api/version'
-import { defaultAppSettings } from './constants'
+import { defaultAppSettings } from '../lib/constants'
+import { getBackgroundColor } from '../lib/get-background-color'
 import type { AppSettings } from './types'
 
 export const appSettingsChanged = createEvent<AppSettings>('appSettingsChanged')

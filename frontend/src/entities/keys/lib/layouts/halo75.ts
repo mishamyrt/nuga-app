@@ -1,4 +1,4 @@
-import type { KeyboardLayout } from '../types'
+import type { KeyboardLayout } from '../../model/types'
 
 export const Halo75: KeyboardLayout = [
   [
