@@ -9,6 +9,7 @@ on:
       - '.github/workflows/linux-builder.yaml'
       - 'build/linux/wails.Dockerfile'
       - 'build/linux/build-nuga.sh'
+      - 'build/linux/pack-appimage.sh'
 
 jobs:
   arm64:
