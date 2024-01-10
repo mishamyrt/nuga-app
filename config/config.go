@@ -2,7 +2,7 @@
 package config
 
 // AppVersion represents current executable version
-var AppVersion = "dev"
+var AppVersion = "snapshot"
 
 // AppName represents app name
 const AppName = "Nuga"
