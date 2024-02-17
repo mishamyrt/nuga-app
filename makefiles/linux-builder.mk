@@ -88,6 +88,7 @@ linux-builder/binary:
 linux-builder/appimage: $(DIST_PATH)
 	docker run \
 		--rm \
+		--pull \
 		--platform "linux/amd64" \
 		--volume ".:/opt/nuga" \
 		"$(APPIMAGE_BUILDER_IMAGE):latest" \
