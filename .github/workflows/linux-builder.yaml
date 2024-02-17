@@ -44,3 +44,18 @@ jobs:
         run: make linux-builder/image-amd64
       - name: Push image
         run: make linux-builder/push-image-amd64
+  appimage:
+    name: Build appimage builder
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build image
+        run: make linux-builder/image-appimage
+      - name: Push image
+        run: make linux-builder/push-image-appimage
