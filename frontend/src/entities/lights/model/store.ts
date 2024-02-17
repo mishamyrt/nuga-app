@@ -96,7 +96,7 @@ sample({
 
 sample({
   clock: setBacklightColorFx.doneData,
-  target: [getBacklightColorsFx]
+  target: getBacklightColorsFx
 })
 
 sample({
