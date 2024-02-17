@@ -12,3 +12,6 @@ jobs:
   snapshot:
     uses: ./.github/workflows/build.yaml
     secrets: inherit
+    with:
+      linux-arm64: true
+      linux-appimage: true
