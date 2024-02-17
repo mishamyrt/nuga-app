@@ -52,5 +52,5 @@ jobs:
           token: ${{ secrets.USER_PAT }}
           prerelease: ${{ env.IS_STABLE_VERSION == 'false' }}
           files: |
-            dist/Nuga-1.0.0-rc-*.AppImage
-            dist/Nuga-1.0.0-rc-mac-*.zip
+            dist/Nuga-*.AppImage
+            dist/Nuga-*-mac-*.zip
