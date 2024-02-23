@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"log"
+	"nuga_ui/internal/dto"
 	"nuga_ui/internal/interfaces"
 	"os"
 
@@ -84,4 +85,8 @@ func (d *DeviceUsecase) GetPath() string {
 // GetFirmware returns current device firmware version
 func (d *DeviceUsecase) GetFirmware() string {
 	return d.repo.Device.Get().Firmware
+}
+
+func (d *DeviceUsecase) GetSupports() *dto.Supports {
+	return dto.SupportedCapabilities(d.repo.Device.Get().Capabilities)
 }

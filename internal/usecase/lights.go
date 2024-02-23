@@ -92,6 +92,7 @@ func (l *LightsUsecase) SetLightState(r dto.LightStateRequest) error {
 	if err != nil {
 		return err
 	}
+	dev.Capabilities.Has(nuga.BacklightCapability)
 	return dev.Features.Light.SetEffects(state)
 }
 
