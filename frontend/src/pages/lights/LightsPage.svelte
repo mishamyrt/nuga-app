@@ -2,7 +2,7 @@
   import { Stack } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { LightsDomainSettings, LightsPreset } from '$widgets/lights'
+  import { LightsDomainSettings, LightsPreset } from '$widgets'
 </script>
 <div use:fsd={'pages/LightsPage'}>
   <Stack gap="m">

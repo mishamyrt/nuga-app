@@ -14,7 +14,7 @@
     "paths": {
       "$features/*": ["src/features/*"],
       "$shared/*": ["src/shared/*"],
-      "$widgets/*": ["src/widgets/*"],
+      "$widgets": ["src/widgets"],
       "$entities/*": ["src/entities/*"],
       "$pages": ["src/pages"],
       "$wailsjs/runtime": ["wailsjs/runtime/runtime"],
