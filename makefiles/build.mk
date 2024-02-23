@@ -1,7 +1,7 @@
 # Nuga build Makefile targets
 BUILD_PATH = build/bin
 PLATFORMS_DARWIN = darwin/amd64,darwin/arm64
-LD_FLAGS = -X 'nuga_ui/internal/nuga.AppVersion=v$(VERSION)' -s -w
+LD_FLAGS = -X 'nuga_ui/config.AppVersion=v$(VERSION)' -s -w
 
 define pack_darwin_release
 	mkdir -p "$(DIST_PATH)/$(1)"

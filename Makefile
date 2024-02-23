@@ -1,4 +1,4 @@
-VERSION = 2.0.0
+VERSION = 2.0.1
 DIST_PATH = dist
 
 OS := `echo $(shell uname) | tr A-Z a-z`

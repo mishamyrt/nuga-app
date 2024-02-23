@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
+## 2.0.1
+
+### Fixed
+
+* Displayed version
+* Removed message about non-existent update
+
 ## [2.0.0]
 
 To bring the look and feel of different operating systems out of this repository, the [Naco UI](https://naco.myrt.co/) Kit was developed. This release mainly focuses on UI relocation. In addition, the UI architecture has been extensively updated. This will allow to extend the application with less time consuming.

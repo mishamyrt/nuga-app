@@ -11,12 +11,6 @@ import (
 	"path"
 )
 
-// AppVersion represents current executable version
-var AppVersion = "dev"
-
-// AppName represents app name
-var AppName = "Nuga"
-
 //go:embed all:frontend/dist
 var assets embed.FS
 
