@@ -8,10 +8,12 @@ func New() *interfaces.Usecase {
 	device := DeviceUsecase{}
 	settings := SettingsUsecase{}
 	lights := LightsUsecase{}
+	keys := KeysUsecase{}
 	return &interfaces.Usecase{
 		Environment: &environment,
 		Device:      &device,
 		Settings:    &settings,
 		Lights:      &lights,
+		Keys:        &keys,
 	}
 }

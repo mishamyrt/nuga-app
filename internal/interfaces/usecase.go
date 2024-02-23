@@ -13,6 +13,7 @@ type Usecase struct {
 	Device      DeviceUsecase
 	Settings    SettingsUsecase
 	Lights      LightsUsecase
+	Keys        KeysUsecase
 }
 
 // Slice returns a slice of BasicUsecase containing the individual use cases.
@@ -67,4 +68,11 @@ type LightsUsecase interface {
 	SetBacklightColor(mode, index uint8, color light.RGB) error
 	SavePreset() error
 	LoadPreset() error
+}
+
+type KeysUsecase interface {
+	BasicUsecase
+	GetKeys() (*dto.KeyMap, error)
+	SetKeys(keys dto.KeyMap) error
+	GetKeyGroups() []dto.KeyGroup
 }

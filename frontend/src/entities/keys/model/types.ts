@@ -16,3 +16,13 @@ export interface KeyboardTemplate {
 }
 
 export type KeyHighlightMatrix = RGBHexColor[][]
+
+export interface KeyOption {
+  title: string
+  value: string
+}
+
+export interface KeyGroup {
+  title: string
+  keys: KeyOption[]
+}

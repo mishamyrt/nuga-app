@@ -94,7 +94,7 @@
   }
 
   .key-light+.key-fill {
-    opacity: 0.6;
+    opacity: 1;
   }
 
   .spacer {
