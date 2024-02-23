@@ -5,8 +5,7 @@
   import { settingsStore } from '$entities/app'
   import { pages } from '$pages'
   import { activePage } from '$shared/model'
-  import { AppDebugModal } from '$widgets/app'
-  import { DeviceConnection } from '$widgets/device'
+  import { AppDebugModal, DeviceConnection } from '$widgets'
 
   import Content from './ui/Content.svelte'
   import Sidebar from './ui/Sidebar.svelte'

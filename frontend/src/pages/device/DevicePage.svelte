@@ -2,7 +2,7 @@
   import { Stack } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { DeviceInfo, DeviceSettings } from '$widgets/device'
+  import { DeviceInfo, DeviceSettings } from '$widgets'
 
 </script>
 <div use:fsd={'pages/DevicePage'}>
