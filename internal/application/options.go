@@ -63,6 +63,7 @@ func (a *Application) GetOptions() *options.App {
 			a.usecase.Lights,
 			a.usecase.Environment,
 			a.usecase.Settings,
+			a.usecase.Keys,
 		},
 	}
 }

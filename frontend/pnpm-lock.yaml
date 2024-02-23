@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@naco-ui/svelte':
-    specifier: 1.3.0-beta.9
-    version: 1.3.0-beta.9(sass@1.69.5)(svelte@4.2.8)
+    specifier: 1.3.0-beta.10
+    version: 1.3.0-beta.10(sass@1.69.5)(svelte@4.2.8)
   colorjs.io:
     specifier: ^0.4.5
     version: 0.4.5
@@ -486,8 +486,8 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@naco-ui/svelte@1.3.0-beta.9(sass@1.69.5)(svelte@4.2.8):
-    resolution: {integrity: sha512-WaO/sTEjCXsT7ZjL68Zma631Fo8542ub0+wNqT+jDwrW7WlSEEPmcrBsjbb368js61IrOZejHH+ZRE3ly3rSwA==}
+  /@naco-ui/svelte@1.3.0-beta.10(sass@1.69.5)(svelte@4.2.8):
+    resolution: {integrity: sha512-lPSlVzBMGoY8/XRdVtN+VbM84vFOeTJy5bDvsmCEyolrF/qGZ9gS25ylYZoboP7zLI+IsWmXClLNW0k8PdCFxw==}
     peerDependencies:
       sass: ^1.66.0
       svelte: ^4.0.0

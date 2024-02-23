@@ -8,7 +8,7 @@
 <div use:fsd={'entities/AppSidebarMenu'}>
   <SidebarMenu size="l" on:change items={[
     { title: 'Lights', value: 'lights', icon: AppIconBulb },
-    { title: 'Keys', value: 'keys', icon: AppIconKeyboard, disabled: true },
+    { title: 'Keys', value: 'keys', icon: AppIconKeyboard },
     { title: 'Device', value: 'device', icon: AppIconGear }
   ]} />
 </div>
