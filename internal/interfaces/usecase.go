@@ -37,6 +37,7 @@ type DeviceUsecase interface {
 	Connect() string
 	SimulateConnection() string
 	Disconnect() error
+	GetSupports() *dto.Supports
 }
 
 // EnvironmentUsecase defines the interface for environment-related use cases.
