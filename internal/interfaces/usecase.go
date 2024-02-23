@@ -23,6 +23,7 @@ func (u *Usecase) Slice() []BasicUsecase {
 		u.Device,
 		u.Settings,
 		u.Lights,
+		u.Keys,
 	}
 }
 
