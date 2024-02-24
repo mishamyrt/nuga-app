@@ -5,6 +5,7 @@
   import { DeviceSupports } from '$features/device'
   import { LightsDomainSettings, LightsPreset } from '$widgets'
 </script>
+
 <div use:fsd={'pages/LightsPage'}>
   <Stack gap="m">
     <LightsDomainSettings domain="backlight" />

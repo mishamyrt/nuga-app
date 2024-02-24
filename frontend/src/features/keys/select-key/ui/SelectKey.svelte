@@ -1,13 +1,17 @@
 <script lang="ts">
   import { fsd } from 'feature-sliced-svelte'
 
-  import { KeyboardKeys, keyboardTemplateStore } from '$entities/keys'
+  import { KeyboardKeys, keyboardTemplateStore, keySelected } from '$entities/keys'
 
   $: template = $keyboardTemplateStore
+
+  function handleSelect (e: CustomEvent<string>) {
+    keySelected(e.detail)
+  }
 </script>
 
 <div class="lights-container" use:fsd={'features/KeyboardLights'}>
-  <KeyboardKeys {template} />
+  <KeyboardKeys on:keyClick={handleSelect} {template} />
 </div>
 
 <style lang="scss">

@@ -26,3 +26,19 @@ export interface KeyGroup {
   title: string
   keys: KeyOption[]
 }
+
+export interface Modifiers {
+  ctrl: boolean
+  shift: boolean
+  alt: boolean
+  meta: boolean
+}
+
+export interface KeyAction {
+  key: string
+  modifiers: Modifiers
+}
+
+export type KeyMap = Record<string, KeyAction>
+
+export type KeyNames = Record<string, string>

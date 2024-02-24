@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { isDark, SidebarLayout, ThemeProvider } from '@naco-ui/svelte'
+  import { fromMatchMedia, prefersDarkMediaQuery, SidebarLayout, ThemeProvider } from '@naco-ui/svelte'
   import { FeatureSlicedDebug } from 'feature-sliced-svelte'
 
   import { settingsStore } from '$entities/app'
@@ -10,6 +10,8 @@
   import Content from './ui/Content.svelte'
   import Sidebar from './ui/Sidebar.svelte'
   import Toolbar from './ui/Toolbar.svelte'
+
+  export const [isDark] = fromMatchMedia(prefersDarkMediaQuery)
 
   $: props = pages[$activePage].layoutProps ?? {}
   $: theme = $settingsStore.theme
