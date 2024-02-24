@@ -8,6 +8,7 @@ export const lights: Page = {
   Toolbar: LightsToolbar,
   layoutProps: {
     toolbar: {
+      draggable: true,
       height: 200
     },
     macInset: {

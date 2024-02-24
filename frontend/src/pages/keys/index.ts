@@ -8,6 +8,7 @@ export const keys: Page = {
   Toolbar: KeysToolbar,
   layoutProps: {
     toolbar: {
+      draggable: false,
       height: 200
     },
     macInset: {

@@ -1,12 +1,15 @@
 <svelte:options immutable={true}/>
 <script lang="ts">
   import { fsd } from 'feature-sliced-svelte'
+  import { createEventDispatcher } from 'svelte'
 
   import type { KeyboardTemplate, KeyHighlightMatrix } from '../model/types'
 
   export let template: KeyboardTemplate
   export let highlights: KeyHighlightMatrix = []
   export let colorless = false
+
+  const dispatch = createEventDispatcher()
 
   $: hasHighlights = highlights.length > 0
 </script>
@@ -23,7 +26,12 @@
           <div class="spacer"
             style:--key-width="{key.width}" />
         {:else}
-          <div class="key"
+          <div
+            role="button"
+            tabindex="0"
+            on:keydown={() => dispatch('keyClick', key.code)}
+            on:click={() => dispatch('keyClick', key.code)}
+            class="key"
             style:--key-delay="{(i * 20) + (j * 10)}ms"
             style:--key-width="{key.width}"
             style:--key-row-height="{key.height}">

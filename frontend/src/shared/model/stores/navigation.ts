@@ -4,7 +4,7 @@ import type { AppPage } from '../types'
 
 export const pageChanged = createEvent<AppPage>('changedPage')
 
-export const activePage = createStore<AppPage>('lights', {
+export const activePage = createStore<AppPage>('keys', {
   name: 'activePage'
 })
 

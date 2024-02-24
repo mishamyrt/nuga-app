@@ -6,7 +6,7 @@ toolchain go1.21.4
 
 require (
 	github.com/jpillora/overseer v1.1.6
-	github.com/mishamyrt/nuga-lib v0.4.1
+	github.com/mishamyrt/nuga-lib v0.4.2
 	github.com/wailsapp/wails/v2 v2.7.1
 )
 

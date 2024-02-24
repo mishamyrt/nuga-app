@@ -1,7 +1,7 @@
-import { GetKeyGroups } from '$wailsjs/go/usecase/KeysUsecase'
+import { GetKeys } from '$wailsjs/go/usecase/KeysUsecase'
 
-import type { KeyGroup } from '../model/types'
+import type { KeyMap } from '../model'
 
-export async function getGroups (): Promise<KeyGroup[]> {
-  return GetKeyGroups()
+export async function getKeys (): Promise<KeyMap> {
+  return await GetKeys()
 }
