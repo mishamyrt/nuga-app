@@ -13,11 +13,52 @@ export const defaultTemplate: Readonly<KeyboardTemplate> = {
 }
 
 export const defaultKeyAction: KeyAction = {
-  key: 'a',
+  key: 'none',
   modifiers: {
     ctrl: false,
     shift: false,
     alt: false,
     meta: false
   }
+}
+
+export const shortKeyNames: Record<string, string> = {
+  lctrl: '⌃',
+  rctrl: '⌃',
+  lshift: '⇧',
+  rshift: '⇧',
+  lalt: '⌥',
+  ralt: '⌥',
+  lmeta: '⌘',
+  lmeta_alias: '⌘',
+  rmeta: '⌘',
+  capslock: 'Caps',
+  tab: 'Tab',
+  grave: '~',
+  plus: '+',
+  minus: '-',
+  equal: '=',
+  backspace: '⌫',
+  enter: '↵',
+  space: '␣',
+  fn: 'Fn',
+  del: 'Del',
+  ins: 'Int',
+  pgup: 'PgUp',
+  pgdn: 'PgDn',
+  home: 'Home',
+  end: 'End',
+  left: '←',
+  right: '→',
+  up: '↑',
+  down: '↓',
+  fwdslash: '/',
+  backslash: '\\',
+  lbracket: '[',
+  rbracket: ']',
+  semicolon: ';',
+  quote: "'",
+  period: '.',
+  comma: ',',
+  screenshot: 'Scrn'
 }

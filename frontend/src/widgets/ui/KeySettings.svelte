@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { FormGroup, FormRow, Stack, Toggle, Typography } from '@naco-ui/svelte'
+  import { FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
 
-  import { supportsStore } from '$entities/device'
   import { CustomActionToggle, KeyActionSelect, KeystrokeInput } from '$features/keys'
 
 </script>
@@ -16,12 +15,7 @@
       <KeyActionSelect />
     </Stack>
   </FormRow>
-  <FormRow title="Record keystroke">
+  <FormRow title="Keystroke">
     <KeystrokeInput />
-  </FormRow>
-</FormGroup>
-<FormGroup>
-  <FormRow title="Model is supported">
-    <Toggle disabled checked={$supportsStore.keys} />
   </FormRow>
 </FormGroup>

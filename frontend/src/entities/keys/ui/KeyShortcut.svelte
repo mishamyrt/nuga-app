@@ -1,20 +1,29 @@
 <script lang="ts">
   import { fsd } from 'feature-sliced-svelte'
 
+  import { getShortName } from '../lib'
+
   export let ctrl = false
   export let shift = false
   export let alt = false
   export let meta = false
   export let key: string
   export let dimmed: boolean = false
+
+  const modifierStrings = ['ctrl', 'shift', 'alt', 'meta']
+
+  $: isModifiersVisible = !modifierStrings.some(m => key.includes(m))
+  $: symbol = key === 'none' ? '' : getShortName(key)
 </script>
 
 <div class="shortcut" use:fsd={'entities/KeyShortcut'}>
-  <span class="modifier" class:dimmed class:active={ctrl}>⇧</span>
-  <span class="modifier" class:dimmed class:active={shift}>⌃</span>
-  <span class="modifier" class:dimmed class:active={alt}>⌥</span>
-  <span class="modifier" class:dimmed class:active={meta}>⌘</span>
-  <span class="key">{key}</span>
+  {#if isModifiersVisible}
+    <span class="modifier" class:dimmed class:active={shift}>⇧</span>
+    <span class="modifier" class:dimmed class:active={ctrl}>⌃</span>
+    <span class="modifier" class:dimmed class:active={alt}>⌥</span>
+    <span class="modifier" class:dimmed class:active={meta}>⌘</span>
+  {/if}
+  <span class="key">{symbol}</span>
 </div>
 
 <style lang="scss">
