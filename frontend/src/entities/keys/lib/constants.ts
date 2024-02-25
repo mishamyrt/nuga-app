@@ -13,7 +13,7 @@ export const defaultTemplate: Readonly<KeyboardTemplate> = {
 }
 
 export const defaultKeyAction: KeyAction = {
-  key: 'none',
+  key: 'a',
   modifiers: {
     ctrl: false,
     shift: false,

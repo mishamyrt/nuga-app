@@ -10,7 +10,6 @@ sample({
   clock: selectedActionStore,
   source: keyNamesStore,
   fn: (map, { key }) => {
-    console.log({ map, key })
     return map[key] ?? 'None'
   },
   target: selectedNameStore

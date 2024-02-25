@@ -2,8 +2,7 @@ import deepEqual from 'deep-equal'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { interval } from 'patronum'
 
-import { createSequence } from '$shared/lib'
-import { connected, disconnected, modeSettingsChanged } from '$shared/model'
+import { connected, createHIDEffect, disconnected, modeSettingsChanged } from '$shared/model'
 
 import { getBacklightColors, setBacklightColor } from '../api/color'
 import { getModes } from '../api/mode'
@@ -19,9 +18,6 @@ export const backlightColorChanged = createEvent<SetBacklightColorParams>('backl
 export const presetSaved = createEvent('presetSaved')
 export const presetLoaded = createEvent('presetLoaded')
 
-const [createHIDEffect] = createSequence({
-  minInterval: 200
-})
 // HID effects
 // This effect is using for connection check
 export const getStateFx = createHIDEffect('getState', getLightState)

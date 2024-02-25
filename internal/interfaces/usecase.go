@@ -74,6 +74,7 @@ type LightsUsecase interface {
 type KeysUsecase interface {
 	BasicUsecase
 	GetKeys() (*dto.KeyMap, error)
+	GetDefaultKeys() (*dto.KeyMap, error)
 	SetKeys(keys dto.KeyMap) error
 	GetKeyGroups() []dto.KeyGroup
 }

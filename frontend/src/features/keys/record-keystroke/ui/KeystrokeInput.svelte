@@ -32,10 +32,10 @@
     <KeyShortcut
       key={action.key}
       dimmed={isRecording}
-      ctrl={action.modifiers.ctrl}
-      shift={action.modifiers.shift}
-      alt={action.modifiers.alt}
-      meta={action.modifiers.meta}
+      ctrl={action.modifiers?.ctrl}
+      shift={action.modifiers?.shift}
+      alt={action.modifiers?.alt}
+      meta={action.modifiers?.meta}
     />
   </div>
 </div>
