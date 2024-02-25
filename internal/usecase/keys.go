@@ -5,7 +5,7 @@ import (
 	"nuga_ui/internal/dto"
 	"nuga_ui/internal/interfaces"
 
-	"github.com/mishamyrt/nuga-lib/keys/layout"
+	"github.com/mishamyrt/nuga-lib/features/keys/layout"
 )
 
 type KeysUsecase struct {

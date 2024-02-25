@@ -7,7 +7,7 @@ import (
 	"nuga_ui/internal/interfaces"
 
 	"github.com/mishamyrt/nuga-lib"
-	"github.com/mishamyrt/nuga-lib/light"
+	"github.com/mishamyrt/nuga-lib/features/light"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
@@ -131,7 +131,7 @@ func (l *LightsUsecase) SavePreset() error {
 	if err != nil {
 		return err
 	}
-	deviceName := dev.Name
+	deviceName := string(dev.Name)
 	path, err := runtime.SaveFileDialog(l.ctx, runtime.SaveDialogOptions{
 		Title:           "Save lights preset",
 		DefaultFilename: deviceName + ".lights.json",
@@ -160,7 +160,7 @@ func (l *LightsUsecase) LoadPreset() error {
 		return err
 	}
 	dev := l.repo.Device.Get()
-	if preset.Name != dev.Name {
+	if preset.Name != string(dev.Name) {
 		return errors.ErrPresetWrongDevice
 	}
 

@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/mishamyrt/nuga-lib/keys/layout"
+import "github.com/mishamyrt/nuga-lib/features/keys/layout"
 
 type KeyMap layout.KeyMap
 
