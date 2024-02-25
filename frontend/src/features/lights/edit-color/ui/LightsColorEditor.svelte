@@ -52,7 +52,7 @@
   <Button disabled={!canEdit} on:click={handleOpen}>
     Edit
   </Button>
-  <Modal open={visible} width={$os === 'mac' ? 264 : 370}>
+  <Modal fixed open={visible} width={$os === 'mac' ? 264 : 370}>
     <div class="color-editor">
       <Stack>
         <div class="picker">
@@ -84,17 +84,17 @@
           </Stack>
         </div>
       </Stack>
-      <ModalActions>
-        <Stack justify="end" direction="horizontal">
-          <Button on:click={handleClose}>
-            Cancel
-          </Button>
-          <Button primary on:click={applyColor}>
-            Apply
-          </Button>
-        </Stack>
-      </ModalActions>
     </div>
+    <ModalActions slot="actions">
+      <Stack justify="end" direction="horizontal">
+        <Button on:click={handleClose}>
+          Cancel
+        </Button>
+        <Button primary on:click={applyColor}>
+          Apply
+        </Button>
+      </Stack>
+    </ModalActions>
   </Modal>
 </div>
 

@@ -51,8 +51,8 @@
         <LoggingSwitch />
       </FormRow>
     </FormGroup>
-    <ModalActions>
-      <Button on:click={handleClose}>Hide</Button>
-    </ModalActions>
   </div>
+  <ModalActions slot="actions">
+    <Button on:click={handleClose}>Hide</Button>
+  </ModalActions>
 </Modal>
