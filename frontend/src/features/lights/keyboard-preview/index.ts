@@ -1,4 +1,4 @@
-import KeyboardLights from './ui/KeyboardLights.svelte'
+import KeyboardLights from './ui/KeyboardPreview.svelte'
 
 export {
   KeyboardLights

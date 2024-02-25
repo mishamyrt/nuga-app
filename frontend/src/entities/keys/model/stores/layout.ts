@@ -42,7 +42,7 @@ selectedActionStore.on(keyActionChanged, (_, action) => action)
 selectedKeyStore.on(keySelected, (_, key) => key)
 
 sample({
-  clock: keySelected,
+  clock: selectedKeyStore,
   source: [keyMapStore, keyNamesStore],
   target: selectedActionStore,
   fn (sources, key) {

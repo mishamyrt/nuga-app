@@ -1,3 +1,4 @@
+import type { ComponentType, SvelteComponent } from 'svelte'
 
 export interface Key {
   code: string | 'spacer'
@@ -14,8 +15,6 @@ export interface KeyboardTemplate {
   keys: Key[][]
   columns: number
 }
-
-export type KeyHighlightMatrix = RGBHexColor[][]
 
 export interface KeyOption {
   title: string
@@ -42,3 +41,11 @@ export interface KeyAction {
 export type KeyMap = Record<string, KeyAction>
 
 export type KeyNames = Record<string, string>
+
+export interface KeyComponentProps {
+  key: Key
+  location: [number, number]
+  params?: Record<string, any>
+}
+
+export type KeyComponentType = ComponentType<SvelteComponent<KeyComponentProps>>

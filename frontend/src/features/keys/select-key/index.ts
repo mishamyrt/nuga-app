@@ -1,5 +1,5 @@
-import SelectKey from './ui/SelectKey.svelte'
+import SelectableKeyboard from './ui/SelectableKeyboard.svelte'
 
 export {
-  SelectKey
+  SelectableKeyboard
 }

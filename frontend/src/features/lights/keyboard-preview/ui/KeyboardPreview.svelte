@@ -1,11 +1,11 @@
 <script lang="ts">
   import { fsd } from 'feature-sliced-svelte'
 
-  import { KeyboardKeys, keyboardTemplateStore } from '$entities/keys'
+  import { AbstractKeyboard, keyboardTemplateStore } from '$entities/keys'
 
   import { keyboardLightsColorStore } from '../model'
+  import BacklightKey from './BacklightKey.svelte'
 
-  $: lightsMap = $keyboardLightsColorStore.backlight
   $: sidelightColor = $keyboardLightsColorStore.sidelight
   $: haloColor = $keyboardLightsColorStore.halolight
   $: template = $keyboardTemplateStore
@@ -23,7 +23,12 @@
       class="halo"
       class:random={isHaloRandom}
       style:--light-color="{haloColor}" />
-    <KeyboardKeys {template} colorless highlights={lightsMap} />
+    <AbstractKeyboard
+      width={300}
+      keyComponent={BacklightKey}
+      reduceColors
+      {template}
+    />
   </div>
 </div>
 
@@ -47,7 +52,6 @@
 
   .lights-wrapper {
     position: relative;
-    transform: scale(0.8);
   }
 
   .halo,

@@ -1,13 +1,13 @@
 import { createStore, sample } from 'effector'
 
-import { keyActionChanged, keyNamesStore } from '$entities/keys'
+import { keyNamesStore, selectedActionStore } from '$entities/keys'
 
 export const selectedNameStore = createStore('None', {
   name: 'selectedName'
 })
 
 sample({
-  clock: keyActionChanged,
+  clock: selectedActionStore,
   source: keyNamesStore,
   fn: (map, { key }) => {
     console.log({ map, key })
