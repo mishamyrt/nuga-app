@@ -9,6 +9,7 @@ import (
 	"github.com/mishamyrt/nuga-lib/features/keys/layout"
 )
 
+// KeysUsecase represents the keys use case
 type KeysUsecase struct {
 	ctx  context.Context
 	repo *interfaces.Repository
@@ -26,6 +27,7 @@ func (k *KeysUsecase) OnShutdown() error {
 	return nil
 }
 
+// GetKeys returns the current keys
 func (k *KeysUsecase) GetKeys() (*dto.KeyMap, error) {
 	config := k.repo.Settings.GetMode()
 	dev := k.repo.Device.Get()
@@ -44,6 +46,7 @@ func (k *KeysUsecase) GetKeys() (*dto.KeyMap, error) {
 	return dtoKeys, nil
 }
 
+// GetDefaultKeys returns the default keys
 func (k *KeysUsecase) GetDefaultKeys() (*dto.KeyMap, error) {
 	config := k.repo.Settings.GetMode()
 	dev := k.repo.Device.Get()
@@ -66,6 +69,7 @@ func (k *KeysUsecase) GetDefaultKeys() (*dto.KeyMap, error) {
 	return dtoKeys, nil
 }
 
+// SetKeys sets the keys
 func (k *KeysUsecase) SetKeys(keys dto.KeyMap) error {
 	config := k.repo.Settings.GetMode()
 	dev := k.repo.Device.Get()
@@ -76,6 +80,7 @@ func (k *KeysUsecase) SetKeys(keys dto.KeyMap) error {
 	return dev.Features.Keys.SetMac(&layoutKeys)
 }
 
+// GetKeyGroups returns the key groups
 func (k *KeysUsecase) GetKeyGroups() []dto.KeyGroup {
 	keys := make(map[string][]dto.Key)
 	for code, key := range layout.Keys {

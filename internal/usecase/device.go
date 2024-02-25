@@ -88,6 +88,7 @@ func (d *DeviceUsecase) GetFirmware() string {
 	return d.repo.Device.Get().Firmware
 }
 
+// GetSupports returns current device supports
 func (d *DeviceUsecase) GetSupports() *dto.Supports {
 	return dto.SupportedCapabilities(d.repo.Device.Get().Capabilities)
 }
