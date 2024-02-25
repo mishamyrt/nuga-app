@@ -2,11 +2,14 @@
   import { FormGroup, FormRow, Stack, Toggle, Typography } from '@naco-ui/svelte'
 
   import { supportsStore } from '$entities/device'
-  import { KeyActionSelect, KeystrokeInput } from '$features/keys'
+  import { CustomActionToggle, KeyActionSelect, KeystrokeInput } from '$features/keys'
 
 </script>
 
 <FormGroup>
+  <FormRow title="Custom">
+    <CustomActionToggle />
+  </FormRow>
   <FormRow>
     <Stack align="center" justify="space-between" direction="horizontal">
       <Typography>Action</Typography>

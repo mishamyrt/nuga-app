@@ -5,6 +5,7 @@ import (
 	"nuga_ui/internal/dto"
 	"nuga_ui/internal/interfaces"
 
+	"github.com/mishamyrt/nuga-lib/dump"
 	"github.com/mishamyrt/nuga-lib/features/keys/layout"
 )
 
@@ -36,6 +37,28 @@ func (k *KeysUsecase) GetKeys() (*dto.KeyMap, error) {
 	} else {
 		keys, err = dev.Features.Keys.GetMac()
 	}
+	if err != nil {
+		return nil, err
+	}
+	dtoKeys := (*dto.KeyMap)(keys)
+	return dtoKeys, nil
+}
+
+func (k *KeysUsecase) GetDefaultKeys() (*dto.KeyMap, error) {
+	config := k.repo.Settings.GetMode()
+	dev := k.repo.Device.Get()
+	defaultState, err := dump.GetDefaults(dev.Name)
+	if err != nil {
+		return nil, err
+	}
+	var codes []uint32
+	if config.OSMode == dto.WindowsOSMode {
+		codes = defaultState.Keys.Win
+	} else {
+		codes = defaultState.Keys.Mac
+	}
+
+	keys, err := dev.Features.Keys.Parse(codes)
 	if err != nil {
 		return nil, err
 	}
