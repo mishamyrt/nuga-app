@@ -4,7 +4,7 @@ import (
 	"context"
 	"nuga_ui/internal/dto"
 
-	"github.com/mishamyrt/nuga-lib/light"
+	"github.com/mishamyrt/nuga-lib/features/light"
 )
 
 // Usecase represents an aggregate use case that encapsulates various use cases related to the application.

@@ -5,6 +5,7 @@ import (
 	"nuga_ui/internal/dto"
 
 	"github.com/mishamyrt/nuga-lib"
+	"github.com/mishamyrt/nuga-lib/dump"
 )
 
 // Repository represents an aggregate repository that encapsulates various repositories related to the application.
@@ -20,7 +21,7 @@ type DeviceRepository interface {
 	IsConnected() bool
 	Connect() string
 	Disconnect() error
-	Simulate(template *nuga.SimulationTemplate) (string, error)
+	Simulate(template *dump.State) (string, error)
 	Get() *nuga.Device
 }
 

@@ -10,6 +10,7 @@ import (
 	"os"
 
 	"github.com/mishamyrt/nuga-lib"
+	"github.com/mishamyrt/nuga-lib/dump"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
@@ -53,7 +54,7 @@ func (d *DeviceUsecase) SimulateConnection() string {
 		log.Printf("Error while reading simulation template: %v", err)
 		return ""
 	}
-	var template nuga.SimulationTemplate
+	var template dump.State
 	err = json.Unmarshal(content, &template)
 	if err != nil {
 		log.Printf("Error while parsing simulation template: %v", err)

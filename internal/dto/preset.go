@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/mishamyrt/nuga-lib/light"
+import "github.com/mishamyrt/nuga-lib/features/light"
 
 // LightsStatePreset represents lights state
 type LightsStatePreset *light.Effects

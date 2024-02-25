@@ -44,8 +44,8 @@ github.com/mattn/go-isatty v0.0.14/go.mod h1:7GGIvUiUoEMVVmxf/4nioHXj79iQHKdU27k
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
 github.com/mattn/go-isatty v0.0.19 h1:JITubQf0MOLdlGRuRq+jtsDlekdYPia9ZFsB8h/APPA=
 github.com/mattn/go-isatty v0.0.19/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
-github.com/mishamyrt/nuga-lib v0.4.2 h1:kWtHjoB7gubjt1a4sQxM84im82OD21z3HB1EahyzGzQ=
-github.com/mishamyrt/nuga-lib v0.4.2/go.mod h1:Zvch+eplvbZyH0ubJSIV9bWoSDLJtbjOiuwu/YEPsYA=
+github.com/mishamyrt/nuga-lib v0.5.0 h1:hTX5u848lm4TDSbZ9Gu4NooOIa0DSGuhrdI6qAwzk/I=
+github.com/mishamyrt/nuga-lib v0.5.0/go.mod h1:Zvch+eplvbZyH0ubJSIV9bWoSDLJtbjOiuwu/YEPsYA=
 github.com/pkg/browser v0.0.0-20210911075715-681adbf594b8 h1:KoWmjvw+nsYOo29YJK9vDA65RGE3NrOnUtO7a+RF9HU=
 github.com/pkg/browser v0.0.0-20210911075715-681adbf594b8/go.mod h1:HKlIX3XHQyzLZPlr7++PzdhaXEj94dEiJgZDTsxEqUI=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=

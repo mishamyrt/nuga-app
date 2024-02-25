@@ -3,6 +3,7 @@ package device
 
 import (
 	"github.com/mishamyrt/nuga-lib"
+	"github.com/mishamyrt/nuga-lib/dump"
 )
 
 // Repository represents device repository
@@ -34,7 +35,7 @@ func (r *Repository) Connect() string {
 			return ""
 		}
 	}
-	return r.dev.Name
+	return string(r.dev.Name)
 }
 
 // Disconnect from device
@@ -48,11 +49,11 @@ func (r *Repository) Disconnect() error {
 }
 
 // Simulate connection with device
-func (r *Repository) Simulate(template *nuga.SimulationTemplate) (string, error) {
-	dev, err := nuga.OpenSimulation(template)
+func (r *Repository) Simulate(template *dump.State) (string, error) {
+	dev, err := dump.OpenSimulation(template)
 	if err != nil {
 		return "", err
 	}
 	r.dev = dev
-	return dev.Name, nil
+	return string(dev.Name), nil
 }

@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"github.com/mishamyrt/nuga-lib/light"
+	"github.com/mishamyrt/nuga-lib/features/light"
 )
 
 // LightModes represents all domain modes
