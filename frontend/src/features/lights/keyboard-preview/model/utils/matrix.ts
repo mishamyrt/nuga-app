@@ -1,6 +1,7 @@
 import ColorJS from 'colorjs.io'
 
-import type { KeyboardTemplate, KeyHighlightMatrix } from '$entities/keys'
+import type { KeyboardTemplate } from '$entities/keys'
+import type { KeyHighlightMatrix } from '$entities/lights'
 
 const GRADIENT_TOP = '#0578FF'
 const GRADIENT_BOTTOM = '#FF014D'
