@@ -32,7 +32,7 @@ export const Halo75: KeyboardLayout = [
     { code: 'num9' },
     { code: 'num0' },
     { code: 'minus' },
-    { code: 'plus' },
+    { code: 'equal' },
     { code: 'backspace', color: 'dark', width: 2 },
     { code: 'home', color: 'dark' }
   ],
@@ -54,7 +54,7 @@ export const Halo75: KeyboardLayout = [
     { code: 'end', color: 'dark' }
   ],
   [
-    { code: 'caps', color: 'dark', width: 1.75 },
+    { code: 'capslock', color: 'dark', width: 1.75 },
     { code: 'a' },
     { code: 's' },
     { code: 'd' },
@@ -65,7 +65,7 @@ export const Halo75: KeyboardLayout = [
     { code: 'k' },
     { code: 'l' },
     { code: 'semicolon' },
-    { code: 'period' },
+    { code: 'quote' },
     { code: 'enter', width: 2.25, color: 'orange' },
     { code: 'pgup', color: 'dark' }
   ],
@@ -78,8 +78,8 @@ export const Halo75: KeyboardLayout = [
     { code: 'b' },
     { code: 'n' },
     { code: 'm' },
-    { code: '<' },
-    { code: '>' },
+    { code: 'comma' },
+    { code: 'period' },
     { code: 'fwdslash' },
     { code: 'rshift', color: 'dark', width: 1.75 },
     { code: 'up', color: 'dark' },
@@ -87,10 +87,10 @@ export const Halo75: KeyboardLayout = [
   ],
   [
     { code: 'lctrl', color: 'dark', width: 1.25 },
-    { code: 'option', color: 'dark', width: 1.25 },
-    { code: 'lcmd', color: 'dark', width: 1.25 },
+    { code: 'lalt', color: 'dark', width: 1.25 },
+    { code: 'lmeta', color: 'dark', width: 1.25 },
     { code: 'space', color: 'yellow', width: 6.25 },
-    { code: 'rcmd', color: 'dark', width: 1.25 },
+    { code: 'rmeta', color: 'dark', width: 1.25 },
     { code: 'fn', color: 'dark', width: 1.25 },
     { width: 0.5 },
     { code: 'left', color: 'dark' },
