@@ -71,6 +71,7 @@ type LightsUsecase interface {
 	LoadPreset() error
 }
 
+// KeysUsecase defines the interface for key-related use cases.
 type KeysUsecase interface {
 	BasicUsecase
 	GetKeys() (*dto.KeyMap, error)

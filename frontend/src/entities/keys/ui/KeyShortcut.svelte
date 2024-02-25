@@ -31,7 +31,6 @@
     display: flex;
     align-items: center;
     gap: var(--space-s);
-
     font: var(--typography-heading-l);
     color: var(--color-content-primary);
   }
