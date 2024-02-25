@@ -33,8 +33,8 @@ const handleKeyUp = (e: KeyboardEvent) => {
 }
 
 recordedKeystrokeStore
-  .on(keystrokeChanged, (_, keystroke) => keystroke)
   .on(recordStarted, () => defaultKeystroke)
+  .on(keystrokeChanged, (_, keystroke) => keystroke)
 
 sample({
   clock: recordStarted,

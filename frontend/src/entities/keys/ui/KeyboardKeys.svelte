@@ -3,7 +3,9 @@
   import { fsd } from 'feature-sliced-svelte'
   import { createEventDispatcher } from 'svelte'
 
-  import type { KeyboardTemplate, KeyHighlightMatrix } from '../model/types'
+  import type { KeyHighlightMatrix } from '$entities/lights'
+
+  import type { KeyboardTemplate } from '../model/types'
 
   export let template: KeyboardTemplate
   export let highlights: KeyHighlightMatrix = []

@@ -1,5 +1,5 @@
-import type { KeyboardTemplate, KeyHighlightMatrix } from '$entities/keys'
-import { byModeCode, defaultColors, type LightBacklightColors, type LightDomainMode, type LightDomainState } from '$entities/lights'
+import type { KeyboardTemplate } from '$entities/keys'
+import { byModeCode, defaultColors, type KeyHighlightMatrix, type LightBacklightColors, type LightDomainMode, type LightDomainState } from '$entities/lights'
 
 import { fillGradientMatrix, fillMatrix } from './matrix'
 

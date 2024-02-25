@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { SelectKey } from '$features/keys'
+  import { SelectableKeyboard } from '$features/keys'
 
 </script>
 <div class="lights-toolbar">
-  <SelectKey />
+  <SelectableKeyboard />
 </div>
 
 <style lang="scss">

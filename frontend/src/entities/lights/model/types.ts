@@ -1,5 +1,3 @@
-import type { KeyHighlightMatrix } from '$entities/keys'
-
 export type LightColorIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 export type LightStateValue = 0 | 1 | 2 | 3 | 4
@@ -36,6 +34,8 @@ export interface LightEffectParams {
 export type LightState = Record<LightDomain, LightDomainState>
 
 export type LightModes = Record<LightDomain, LightDomainMode[]>
+
+export type KeyHighlightMatrix = RGBHexColor[][]
 
 export type LightDomainStateValue<T extends keyof LightDomainState> = {
   domain: LightDomain
