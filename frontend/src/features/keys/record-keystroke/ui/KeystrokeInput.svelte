@@ -48,6 +48,7 @@
     transition-property: background-color, outline;
     outline: 0 solid transparent;
     padding: var(--space-xxs) var(--space-s);
+    min-width: 110px;
 
     &.active {
       transition-duration: 0s;
