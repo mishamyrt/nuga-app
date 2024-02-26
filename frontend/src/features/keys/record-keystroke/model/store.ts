@@ -32,6 +32,10 @@ const handleKeyUp = (e: KeyboardEvent) => {
   keystrokeChanged(keystrokeFromEvent(e))
 }
 
+const handleMouseDown = () => {
+  recordFinished()
+}
+
 recordedKeystrokeStore
   .on(recordStarted, () => defaultKeystroke)
   .on(keystrokeChanged, (_, keystroke) => keystroke)
@@ -41,6 +45,7 @@ sample({
   fn () {
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('keyup', handleKeyUp)
+    window.addEventListener('mousedown', handleMouseDown)
     return true
   },
   target: isRecordingStore
@@ -51,6 +56,7 @@ sample({
   fn () {
     window.removeEventListener('keydown', handleKeyDown)
     window.removeEventListener('keyup', handleKeyUp)
+    window.removeEventListener('mousedown', handleMouseDown)
     return false
   },
   target: isRecordingStore

@@ -28,8 +28,10 @@
 
 <style lang="scss">
   .shortcut {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: end;
     gap: var(--space-s);
     font: var(--typography-heading-l);
     color: var(--color-content-primary);
