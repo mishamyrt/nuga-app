@@ -3,6 +3,7 @@ import { createEffect, createStore, sample } from 'effector'
 import { createHIDEffect } from '$shared/model'
 
 import { getDefaultKeys, getGroups } from '../../api'
+import { codelessKeyNames } from '../../lib'
 import type { KeyGroup, KeyMap, KeyNames } from '../types'
 import { keysInitiated } from './keymap'
 
@@ -27,5 +28,5 @@ keyNamesStore.on(keyGroupsStore, (_, groups) => {
     .reduce((all, group) => ({
       ...all,
       [group.value]: group.title
-    }), {})
+    }), codelessKeyNames)
 })

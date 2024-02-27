@@ -54,7 +54,7 @@ export const shortKeyNames: Record<string, string> = {
   space: '␣',
   fn: 'Fn',
   del: 'Del',
-  ins: 'Int',
+  ins: 'Ins',
   pgup: 'PgUp',
   pgdn: 'PgDn',
   home: 'Home',
@@ -72,4 +72,11 @@ export const shortKeyNames: Record<string, string> = {
   period: '.',
   comma: ',',
   screenshot: 'Scrn'
+}
+
+export const codelessKeyNames: Record<string, string> = {
+  fn_left: 'Fn + Left',
+  fn_down: 'Fn + Down',
+  fn_right: 'Fn + Right',
+  fn_up: 'Fn + Up'
 }
