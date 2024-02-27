@@ -51,3 +51,8 @@ export interface KeyComponentProps {
 }
 
 export type KeyComponentType = ComponentType<SvelteComponent<KeyComponentProps>>
+
+export interface ActionChangeParams {
+  key: string
+  action: KeyAction
+}

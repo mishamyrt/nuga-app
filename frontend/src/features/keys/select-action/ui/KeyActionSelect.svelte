@@ -20,7 +20,15 @@
   }
 
   function handleActionClick (value: string) {
-    dispatcher('input', value)
+    dispatcher('input', {
+      key: value,
+      modifiers: {
+        ctrl: false,
+        shift: false,
+        alt: false,
+        meta: false
+      }
+    })
     handleClose()
   }
 
