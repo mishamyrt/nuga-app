@@ -2,7 +2,7 @@ import { combine, createEvent, createStore, sample } from 'effector'
 import { empty, not } from 'patronum'
 
 import { supportsStore } from '$entities/device'
-import { defaultKey, defaultKeyMap } from '$entities/keys'
+import { defaultKey, defaultKeyAction, defaultKeyMap } from '$entities/keys'
 import { createHIDEffect } from '$shared/model'
 
 import { getKeys } from '../../api'
@@ -16,11 +16,17 @@ export const keyMapStore = createStore<KeyMap>(defaultKeyMap, { name: 'keyMap' }
 export const selectedKeyStore = createStore<Key>(defaultKey, { name: 'selectedKey' })
 
 export const primaryActionStore = combine(keyMapStore, selectedKeyStore, (keyMap, key) => {
+  if (key.code === 'none' || !keyMap[key.code]) {
+    return defaultKeyAction
+  }
   return keyMap[key.code]
 })
 export const secondaryActionStore = combine(keyMapStore, selectedKeyStore, (keyMap, key) => {
   if (!key.secondaryCode) {
     return null
+  }
+  if (key.secondaryCode === 'none') {
+    return defaultKeyAction
   }
   return keyMap[key.secondaryCode] ?? null
 })
