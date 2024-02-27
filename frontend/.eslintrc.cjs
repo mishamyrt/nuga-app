@@ -33,6 +33,7 @@ module.exports = {
     '@typescript-eslint/promise-function-async': 'off',
     '@typescript-eslint/triple-slash-reference': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/return-await': 'off',
     'no-undef-init': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error'
