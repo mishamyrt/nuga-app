@@ -1,18 +1,24 @@
 <script lang="ts">
-  import { Stack, Typography } from '@naco-ui/svelte'
+  import { FormGroup, Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
   import { selectedKeyStore } from '$entities/keys'
+  import { getShortName } from '$entities/keys/lib'
   import { KeySettings } from '$widgets'
 
   $: selectedKey = $selectedKeyStore
+  $: keyTitle = getShortName(selectedKey.code)
 </script>
 
 <div use:fsd={'pages/KeysPage'}>
   <Stack gap="m">
-    <KeySettings keyCode={selectedKey.code} />
+    <FormGroup>
+      <KeySettings keyCode={selectedKey.code} />
+    </FormGroup>
     {#if selectedKey?.secondaryCode}
+    <FormGroup title={`Fn + ${keyTitle}`}>
       <KeySettings keyCode={selectedKey.secondaryCode} />
+    </FormGroup>
     {/if}
     {#if selectedKey.readonly && selectedKey.code !== 'none'}
       <Typography
