@@ -1,9 +1,12 @@
 <script lang="ts">
   import { Button, FormGroup, FormRow, Modal, ModalActions, Select, Stack } from '@naco-ui/svelte'
+  import { createEventDispatcher } from 'svelte'
 
-  import { keyActionChanged, keyGroupsStore } from '$entities/keys'
+  import { keyGroupsStore, keyNamesStore } from '$entities/keys'
 
-  import { selectedNameStore } from '../model/store'
+  const dispatcher = createEventDispatcher()
+
+  export let keyCode: string
 
   let showModal = false
 
@@ -16,20 +19,12 @@
     showModal = false
   }
 
-  function handleRowClick (value: string) {
-    keyActionChanged({
-      key: value,
-      modifiers: {
-        ctrl: false,
-        shift: false,
-        alt: false,
-        meta: false
-      }
-    })
-    showModal = false
+  function handleActionClick (value: string) {
+    dispatcher('input', value)
+    handleClose()
   }
 
-  $: title = $selectedNameStore
+  $: title = $keyNamesStore[keyCode]
 </script>
 
 <div>
@@ -39,7 +34,7 @@
       {#each $keyGroupsStore as group}
       <FormGroup title={group.title}>
         {#each group.keys as key}
-          <FormRow on:click={() => handleRowClick(key.value)} interactive title={key.title} />
+          <FormRow on:click={() => handleActionClick(key.value)} interactive title={key.title} />
         {/each}
       </FormGroup>
       {/each}

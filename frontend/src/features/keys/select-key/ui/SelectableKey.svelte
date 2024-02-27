@@ -9,10 +9,10 @@
 
   function handleClick (e: MouseEvent) {
     e.preventDefault()
-    keySelected(key.code)
+    keySelected(key)
   }
 
-  $: active = $selectedKeyStore === key.code
+  $: active = $selectedKeyStore.code === key.code
 </script>
 
 <div class="key" class:active on:click={handleClick}>{symbol}</div>

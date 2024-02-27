@@ -2,6 +2,7 @@ import type { ComponentType, SvelteComponent } from 'svelte'
 
 export interface Key {
   code: string | 'spacer'
+  secondaryCode?: string
   color: 'light' | 'dark' | 'orange' | 'yellow' | 'mint'
   width: number
   height: number
