@@ -4,5 +4,11 @@ export function getShortName (key: string): string {
   if (key.startsWith('num')) {
     return key.slice(3)
   }
-  return shortKeyNames[key] ?? key.toUpperCase()
+  if (shortKeyNames[key]) {
+    return shortKeyNames[key]
+  }
+  if (key.length <= 3) {
+    return key.toUpperCase()
+  }
+  return ''
 }

@@ -2,7 +2,7 @@
   import { Button, FormGroup, FormRow, Modal, ModalActions, Select, Stack } from '@naco-ui/svelte'
   import { createEventDispatcher } from 'svelte'
 
-  import { keyGroupsStore, keyNamesStore } from '$entities/keys'
+  import { keyGroupsStore, keyMapStore, keyNamesStore } from '$entities/keys'
 
   const dispatcher = createEventDispatcher()
 
@@ -24,7 +24,7 @@
     handleClose()
   }
 
-  $: title = $keyNamesStore[keyCode]
+  $: title = $keyNamesStore[$keyMapStore[keyCode]?.key] ?? 'None'
 </script>
 
 <div>
