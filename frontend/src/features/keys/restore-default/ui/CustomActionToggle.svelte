@@ -3,7 +3,7 @@
   import deepEqual from 'deep-equal'
   import { createEventDispatcher } from 'svelte'
 
-  import { defaultKeyMapStore, keyMapStore } from '$entities/keys'
+  import { defaultKeyMapStore, keyMapStore, selectedKeyStore } from '$entities/keys'
 
   export let keyCode: string
 
@@ -15,12 +15,13 @@
 
   $: defaultAction = $defaultKeyMapStore[keyCode]
   $: isCustom = !deepEqual(defaultAction, $keyMapStore[keyCode])
+  $: disabled = $selectedKeyStore.readonly
 </script>
 
 <div>
   <Toggle
     on:change={handleToggleChange}
     checked={isCustom}
-    disabled={!isCustom}
+    disabled={disabled && !isCustom}
   />
 </div>

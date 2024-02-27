@@ -13,16 +13,10 @@
   <FormRow>
     <Stack align="center" justify="space-between" direction="horizontal">
       <Typography>Action</Typography>
-      <KeyActionSelect
-        {keyCode}
-        on:input
-      />
+      <KeyActionSelect {keyCode} on:input />
     </Stack>
   </FormRow>
   <FormRow title="Keystroke">
-    <KeystrokeInput
-      {keyCode}
-      on:input
-    />
+    <KeystrokeInput {keyCode} on:input/>
   </FormRow>
 </FormGroup>

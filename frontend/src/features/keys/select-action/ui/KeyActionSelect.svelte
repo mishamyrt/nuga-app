@@ -2,7 +2,7 @@
   import { Button, FormGroup, FormRow, Modal, ModalActions, Select, Stack } from '@naco-ui/svelte'
   import { createEventDispatcher } from 'svelte'
 
-  import { keyGroupsStore, keyMapStore, keyNamesStore } from '$entities/keys'
+  import { keyGroupsStore, keyMapStore, keyNamesStore, selectedKeyStore } from '$entities/keys'
 
   const dispatcher = createEventDispatcher()
 
@@ -24,11 +24,13 @@
     handleClose()
   }
 
-  $: title = $keyNamesStore[$keyMapStore[keyCode]?.key] ?? 'None'
+  $: activeKey = $keyMapStore[keyCode]
+  $: title = $keyNamesStore[activeKey?.key] ?? 'None'
+  $: disabled = $selectedKeyStore.readonly
 </script>
 
 <div>
-  <Select on:mousedown={handleOpen} value={title} options={[{ value: title, title }]} />
+  <Select {disabled} on:mousedown={handleOpen} value={title} options={[{ value: title, title }]} />
   <Modal open={showModal} width={400}>
     <Stack gap="m">
       {#each $keyGroupsStore as group}

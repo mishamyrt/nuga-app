@@ -2,7 +2,7 @@
   import { fsd } from 'feature-sliced-svelte'
   import { createEventDispatcher, onDestroy } from 'svelte'
 
-  import { type KeyAction, keyMapStore, KeyShortcut } from '$entities/keys'
+  import { type KeyAction, keyMapStore, KeyShortcut, selectedKeyStore } from '$entities/keys'
 
   import { defaultKeystroke, keystrokeFromEvent } from '../lib'
 
@@ -57,6 +57,7 @@
   })
 
   $: keyAction = recording ? keystroke : $keyMapStore[keyCode] ?? defaultKeystroke
+  $: disabled = $selectedKeyStore.readonly
 </script>
 
 <div use:fsd={'features/KeystrokeInput'}>
@@ -64,6 +65,7 @@
   <div
     on:click={startRecording}
     class="preview"
+    class:disabled
     class:active={recording}
     role="button"
     tabindex="0"
@@ -88,6 +90,11 @@
     outline: 0 solid transparent;
     padding: var(--space-xxs) var(--space-s);
     min-width: 110px;
+
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
     &.active {
       transition-duration: 0s;
