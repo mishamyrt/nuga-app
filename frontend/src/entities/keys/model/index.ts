@@ -1,3 +1,2 @@
-export * from './stores/layout'
-export * from './stores/template'
+export * from './stores'
 export * from './types'

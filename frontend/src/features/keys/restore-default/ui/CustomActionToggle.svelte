@@ -1,15 +1,26 @@
 <script lang="ts">
   import { Toggle } from '@naco-ui/svelte'
+  import deepEqual from 'deep-equal'
+  import { createEventDispatcher } from 'svelte'
 
-  import { defaultActionRestored, isActionChangedStore } from '../model/store'
+  import { defaultKeyMapStore, keyMapStore } from '$entities/keys'
+
+  export let keyCode: string
+
+  const dispatch = createEventDispatcher()
 
   function handleToggleChange (e: CustomEvent<boolean>) {
-    defaultActionRestored()
+    dispatch('restore')
   }
 
-  $: isCustom = $isActionChangedStore
+  $: defaultAction = $defaultKeyMapStore[keyCode]
+  $: isCustom = !deepEqual(defaultAction, $keyMapStore[keyCode])
 </script>
 
 <div>
-  <Toggle checked={isCustom} on:change={handleToggleChange} disabled={!isCustom} />
+  <Toggle
+    on:change={handleToggleChange}
+    checked={isCustom}
+    disabled={!isCustom}
+  />
 </div>

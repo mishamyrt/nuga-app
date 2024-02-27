@@ -3,18 +3,18 @@ import type { KeyboardLayout } from '../../model/types'
 export const Halo75: KeyboardLayout = [
   [
     { code: 'esc', color: 'mint' },
-    { code: 'f1' },
-    { code: 'f2' },
-    { code: 'f3' },
-    { code: 'f4' },
-    { code: 'f5', color: 'dark' },
-    { code: 'f6', color: 'dark' },
-    { code: 'f7', color: 'dark' },
-    { code: 'f8', color: 'dark' },
-    { code: 'f9' },
-    { code: 'f10' },
-    { code: 'f11' },
-    { code: 'f12' },
+    { code: 'f1', secondaryCode: 'fn_f1' },
+    { code: 'f2', secondaryCode: 'fn_f2' },
+    { code: 'f3', secondaryCode: 'fn_f3' },
+    { code: 'f4', secondaryCode: 'fn_f4' },
+    { code: 'f5', color: 'dark', secondaryCode: 'fn_f5' },
+    { code: 'f6', color: 'dark', secondaryCode: 'fn_f6' },
+    { code: 'f7', color: 'dark', secondaryCode: 'fn_f7' },
+    { code: 'f8', color: 'dark', secondaryCode: 'fn_f8' },
+    { code: 'f9', color: 'dark', secondaryCode: 'fn_f9' },
+    { code: 'f10', color: 'dark', secondaryCode: 'fn_f10' },
+    { code: 'f11', color: 'dark', secondaryCode: 'fn_f11' },
+    { code: 'f12', color: 'dark', secondaryCode: 'fn_f12' },
     { code: 'screenshot', color: 'dark' },
     { code: 'del', color: 'dark' },
     { code: 'ins', color: 'dark' }
@@ -82,7 +82,7 @@ export const Halo75: KeyboardLayout = [
     { code: 'period' },
     { code: 'fwdslash' },
     { code: 'rshift', color: 'dark', width: 1.75 },
-    { code: 'up', color: 'dark' },
+    { code: 'up', color: 'dark', secondaryCode: 'fn_up' },
     { code: 'pgdn', color: 'dark' }
   ],
   [
@@ -93,8 +93,8 @@ export const Halo75: KeyboardLayout = [
     { code: 'rmeta', color: 'dark', width: 1.25 },
     { code: 'fn', color: 'dark', width: 1.25 },
     { width: 0.5 },
-    { code: 'left', color: 'dark' },
-    { code: 'down', color: 'dark' },
-    { code: 'right', color: 'dark' }
+    { code: 'left', color: 'dark', secondaryCode: 'fn_left' },
+    { code: 'down', color: 'dark', secondaryCode: 'fn_down' },
+    { code: 'right', color: 'dark', secondaryCode: 'fn_right' }
   ]
 ]

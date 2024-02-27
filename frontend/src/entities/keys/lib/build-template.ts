@@ -5,7 +5,8 @@ function toKey (k: KeyDescription): Key {
     width: k.width ? k.width * 4 : 4,
     height: k.height ?? 1,
     color: k.color ?? 'light',
-    code: k.code ?? 'spacer'
+    code: k.code ?? 'spacer',
+    secondaryCode: k.secondaryCode
   }
 }
 

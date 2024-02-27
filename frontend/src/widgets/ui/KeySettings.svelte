@@ -3,19 +3,26 @@
 
   import { CustomActionToggle, KeyActionSelect, KeystrokeInput } from '$features/keys'
 
+  export let keyCode: string
 </script>
 
 <FormGroup>
   <FormRow title="Custom">
-    <CustomActionToggle />
+    <CustomActionToggle {keyCode} on:restore />
   </FormRow>
   <FormRow>
     <Stack align="center" justify="space-between" direction="horizontal">
       <Typography>Action</Typography>
-      <KeyActionSelect />
+      <KeyActionSelect
+        {keyCode}
+        on:input
+      />
     </Stack>
   </FormRow>
   <FormRow title="Keystroke">
-    <KeystrokeInput />
+    <KeystrokeInput
+      {keyCode}
+      on:input
+    />
   </FormRow>
 </FormGroup>

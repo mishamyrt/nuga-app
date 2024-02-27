@@ -1,41 +1,80 @@
 <script lang="ts">
   import { fsd } from 'feature-sliced-svelte'
-  import { onDestroy } from 'svelte'
+  import { createEventDispatcher, onDestroy } from 'svelte'
 
-  import { KeyShortcut, selectedActionStore } from '$entities/keys'
+  import { type KeyAction, keyMapStore, KeyShortcut } from '$entities/keys'
 
-  import { isRecordingStore, recordedKeystrokeStore, recordFinished, recordStarted } from '../model/store'
+  import { defaultKeystroke, keystrokeFromEvent } from '../lib'
 
-  $: isRecording = $isRecordingStore
-  $: action = isRecording ? $recordedKeystrokeStore : $selectedActionStore
+  const dispatch = createEventDispatcher()
 
-  function toggleRecording () {
-    if (isRecording) {
-      recordFinished()
-    } else {
-      recordStarted()
+  export let keyCode: string = 'none'
+
+  let keystroke: KeyAction = defaultKeystroke
+  let recording = false
+
+  function handleKeyDown (e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      e.preventDefault()
+      stopRecording()
+      return
     }
+    const nextKeystroke = keystrokeFromEvent(e)
+    if (nextKeystroke.key !== 'none') {
+      e.preventDefault()
+      stopRecording()
+      dispatch('input', nextKeystroke)
+    }
+    keystroke = nextKeystroke
   }
 
-  onDestroy(recordFinished)
+  function handleKeyUp (e: KeyboardEvent) {
+    keystroke = keystrokeFromEvent(e)
+  }
+
+  function handleMouseDown () {
+    stopRecording()
+  }
+
+  function startRecording () {
+    recording = true
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+    window.addEventListener('mousedown', handleMouseDown)
+  }
+
+  function stopRecording () {
+    recording = false
+    window.removeEventListener('keydown', handleKeyDown)
+    window.removeEventListener('keyup', handleKeyUp)
+    window.removeEventListener('mousedown', handleMouseDown)
+  }
+
+  onDestroy(() => {
+    if (recording) {
+      stopRecording()
+    }
+  })
+
+  $: keyAction = recording ? keystroke : $keyMapStore[keyCode] ?? defaultKeystroke
 </script>
 
-<div use:fsd={'features/RecordKeystroke'}>
+<div use:fsd={'features/KeystrokeInput'}>
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div
-    on:click={toggleRecording}
+    on:click={startRecording}
     class="preview"
-    class:active={isRecording}
+    class:active={recording}
     role="button"
     tabindex="0"
   >
     <KeyShortcut
-      key={action.key}
-      dimmed={isRecording}
-      ctrl={action.modifiers?.ctrl}
-      shift={action.modifiers?.shift}
-      alt={action.modifiers?.alt}
-      meta={action.modifiers?.meta}
+      key={keyAction?.key}
+      dimmed={recording}
+      ctrl={keyAction.modifiers?.ctrl}
+      shift={keyAction.modifiers?.shift}
+      alt={keyAction.modifiers?.alt}
+      meta={keyAction.modifiers?.meta}
     />
   </div>
 </div>
