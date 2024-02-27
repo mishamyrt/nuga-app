@@ -9,13 +9,13 @@
 
   const dispatch = createEventDispatcher()
 
-  function handleToggleChange (e: CustomEvent<boolean>) {
-    dispatch('restore')
-  }
-
   $: defaultAction = $defaultKeyMapStore[keyCode]
   $: isCustom = !deepEqual(defaultAction, $keyMapStore[keyCode])
   $: disabled = $selectedKeyStore.readonly
+
+  function handleToggleChange (e: CustomEvent<boolean>) {
+    dispatch('restore', defaultAction)
+  }
 </script>
 
 <div>

@@ -2,18 +2,17 @@ import { combine, createEvent, createStore, sample } from 'effector'
 import { empty, not } from 'patronum'
 
 import { supportsStore } from '$entities/device'
-import { defaultKey } from '$entities/keys'
+import { defaultKey, defaultKeyMap } from '$entities/keys'
 import { createHIDEffect } from '$shared/model'
 
 import { getKeys } from '../../api'
-import type { Key, KeyAction, KeyMap } from '../types'
+import type { ActionChangeParams, Key, KeyMap } from '../types'
 
 export const keysInitiated = createEvent('keysInitiated')
 export const keySelected = createEvent<Key>('keySelected')
-export const primaryActionChanged = createEvent<KeyAction>('primaryActionChanged')
-export const secondaryActionChanged = createEvent<KeyAction>('secondaryActionChanged')
+export const actionChanged = createEvent<ActionChangeParams>('actionChanged')
 
-export const keyMapStore = createStore<KeyMap>({}, { name: 'keyMap' })
+export const keyMapStore = createStore<KeyMap>(defaultKeyMap, { name: 'keyMap' })
 export const selectedKeyStore = createStore<Key>(defaultKey, { name: 'selectedKey' })
 
 export const primaryActionStore = combine(keyMapStore, selectedKeyStore, (keyMap, key) => {
@@ -51,30 +50,7 @@ sample({
   clock: keySelected,
   target: selectedKeyStore
 })
-sample({
-  clock: primaryActionChanged,
-  source: [keyMapStore, selectedKeyStore],
-  fn (args, action) {
-    const [keyMap, key] = args as [KeyMap, Key]
-    return {
-      ...keyMap,
-      [key.code]: action
-    }
-  },
-  target: keyMapStore
-})
-sample({
-  clock: secondaryActionChanged,
-  source: [keyMapStore, selectedKeyStore],
-  fn (args, action) {
-    const [keyMap, key] = args as [KeyMap, Key]
-    if (!key.secondaryCode) {
-      throw new Error('No secondary key code')
-    }
-    return {
-      ...keyMap,
-      [key.secondaryCode]: action
-    }
-  },
-  target: keyMapStore
-})
+keyMapStore.on(actionChanged, (map, { key, action }) => ({
+  ...map,
+  [key]: action
+}))

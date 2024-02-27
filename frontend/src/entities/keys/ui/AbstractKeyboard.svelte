@@ -7,7 +7,6 @@
   export let keyComponent: KeyComponentType
   export let template: KeyboardTemplate
   export let width: number
-  export let params: Record<string, any> = {}
   export let reduceColors = false
 
   $: columnWidth = (width / template.columns)
@@ -40,7 +39,7 @@
             <div
               class="base"
               style:--key-color="var(--key-color-{key.color})" />
-            <svelte:component this={keyComponent} {key} location={[x, y]} {params} />
+            <svelte:component this={keyComponent} {key} location={[x, y]} />
           </div>
         {/if}
       {/each}
