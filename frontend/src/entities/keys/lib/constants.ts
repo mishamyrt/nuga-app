@@ -60,6 +60,7 @@ export const shortKeyNames: Record<string, string> = {
   pgdn: 'PgDn',
   home: 'Home',
   end: 'End',
+  esc: 'Esc',
   left: '←',
   right: '→',
   up: '↑',
