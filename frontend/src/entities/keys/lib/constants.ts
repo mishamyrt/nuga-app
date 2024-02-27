@@ -30,7 +30,8 @@ export const defaultKey: Key = {
   width: 1,
   height: 1,
   color: 'light',
-  code: 'none'
+  code: 'none',
+  readonly: true
 }
 
 export const shortKeyNames: Record<string, string> = {

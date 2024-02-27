@@ -6,6 +6,7 @@ export interface Key {
   color: 'light' | 'dark' | 'orange' | 'yellow' | 'mint'
   width: number
   height: number
+  readonly: boolean
 }
 
 export type KeyDescription = Partial<Key>

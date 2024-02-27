@@ -91,7 +91,7 @@ export const Halo75: KeyboardLayout = [
     { code: 'lmeta', color: 'dark', width: 1.25 },
     { code: 'space', color: 'yellow', width: 6.25 },
     { code: 'rmeta', color: 'dark', width: 1.25 },
-    { code: 'fn', color: 'dark', width: 1.25 },
+    { code: 'fn', color: 'dark', width: 1.25, readonly: true },
     { width: 0.5 },
     { code: 'left', color: 'dark', secondaryCode: 'fn_left' },
     { code: 'down', color: 'dark', secondaryCode: 'fn_down' },

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Stack } from '@naco-ui/svelte'
+  import { Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
   import { selectedKeyStore } from '$entities/keys'
@@ -13,6 +13,15 @@
     <KeySettings keyCode={selectedKey.code} />
     {#if selectedKey?.secondaryCode}
       <KeySettings keyCode={selectedKey.secondaryCode} />
+    {/if}
+    {#if selectedKey.readonly && selectedKey.code !== 'none'}
+      <Typography
+        align="center"
+        color="tertiary"
+        variant="caption-m"
+      >
+        This button is read-only. Its actions cannot be changed
+      </Typography>
     {/if}
   </Stack>
 </div>
