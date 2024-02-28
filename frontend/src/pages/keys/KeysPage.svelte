@@ -4,7 +4,8 @@
 
   import { selectedKeyStore } from '$entities/keys'
   import { getShortName } from '$entities/keys/lib'
-  import { KeySettings } from '$widgets'
+  import { DeviceSupports } from '$features/device'
+  import { KeySettings, KeysNotSupported } from '$widgets'
 
   $: selectedKey = $selectedKeyStore
   $: keyTitle = getShortName(selectedKey.code)
@@ -12,22 +13,25 @@
 
 <div use:fsd={'pages/KeysPage'}>
   <Stack gap="m">
-    <FormGroup>
-      <KeySettings keyCode={selectedKey.code} />
-    </FormGroup>
-    {#if selectedKey?.secondaryCode}
-    <FormGroup title={`Fn + ${keyTitle}`}>
-      <KeySettings keyCode={selectedKey.secondaryCode} />
-    </FormGroup>
-    {/if}
-    {#if selectedKey.readonly && selectedKey.code !== 'none'}
-      <Typography
-        align="center"
-        color="tertiary"
-        variant="caption-m"
-      >
-        This button is read-only. Its actions cannot be changed
-      </Typography>
-    {/if}
+    <DeviceSupports capability="keys">
+      <FormGroup>
+        <KeySettings keyCode={selectedKey.code} />
+      </FormGroup>
+      {#if selectedKey?.secondaryCode}
+      <FormGroup title={`Fn + ${keyTitle}`}>
+        <KeySettings keyCode={selectedKey.secondaryCode} />
+      </FormGroup>
+      {/if}
+      {#if selectedKey.readonly && selectedKey.code !== 'none'}
+        <Typography
+          align="center"
+          color="tertiary"
+          variant="caption-m"
+        >
+          This button is read-only. Its actions cannot be changed
+        </Typography>
+      {/if}
+      <KeysNotSupported slot="not-supported" />
+    </DeviceSupports>
   </Stack>
 </div>
