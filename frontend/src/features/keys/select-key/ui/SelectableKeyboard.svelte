@@ -8,7 +8,7 @@
 
   const disabledStore = not(supportsKeyStore)
 
-  $: disabled = disabledStore
+  $: disabled = $disabledStore
   $: template = $keyboardTemplateStore
 </script>
 
