@@ -16,6 +16,12 @@
   }
 </script>
 
-<div use:fsd={'features/LightsPowerToggle'}>
+<div class="power-container" use:fsd={'features/LightsPowerToggle'}>
   <Toggle on:change={handleChange} checked={$stateStore[domain].enabled} />
 </div>
+
+<style lang="scss">
+  .power-container {
+    display: flex;
+  }
+</style>

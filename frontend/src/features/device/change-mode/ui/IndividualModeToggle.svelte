@@ -13,9 +13,15 @@
 
 </script>
 
-<div use:fsd={'features/IndividualModeToggle'}>
+<div class="mode-container" use:fsd={'features/IndividualModeToggle'}>
   <Toggle
     checked={$modeSettingsStore.individual}
     on:change={handleChange}
   />
 </div>
+
+<style lang="scss">
+  .mode-container {
+    display: flex;
+  }
+</style>
