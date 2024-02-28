@@ -15,7 +15,13 @@
   $: active = $selectedKeyStore.code === key.code
 </script>
 
-<div class="key" class:active on:click={handleClick}>{symbol}</div>
+<div
+  class="key"
+  class:active
+  on:click={handleClick}
+>
+  {symbol}
+</div>
 
 <style lang="scss">
   .key {

@@ -8,6 +8,7 @@ import { createHIDEffect } from '$shared/model'
 import { getKeys } from '../../api'
 import type { ActionChangeParams, Key, KeyMap } from '../types'
 
+export const supportsKeyStore = supportsStore.map(({ keys }) => keys)
 export const keysInitiated = createEvent('keysInitiated')
 export const keySelected = createEvent<Key>('keySelected')
 export const actionChanged = createEvent<ActionChangeParams>('actionChanged')
