@@ -1,4 +1,4 @@
-import { GetDefaultKeys, GetKeys } from '$wailsjs/go/usecase/KeysUsecase'
+import { GetDefaultKeys, GetKeys, SetKeys } from '$wailsjs/go/usecase/KeysUsecase'
 
 import type { KeyMap } from '../model'
 
@@ -8,4 +8,8 @@ export async function getKeys (): Promise<KeyMap> {
 
 export async function getDefaultKeys (): Promise<KeyMap> {
   return await GetDefaultKeys()
+}
+
+export async function setKeys (map: KeyMap): Promise<void> {
+  return await SetKeys(map)
 }

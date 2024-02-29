@@ -1,11 +1,11 @@
-import { combine, createEvent, createStore, sample } from 'effector'
+import { combine, createEffect, createEvent, createStore, sample } from 'effector'
 import { empty, not } from 'patronum'
 
 import { supportsStore } from '$entities/device'
 import { defaultKey, defaultKeyAction, defaultKeyMap } from '$entities/keys'
 import { createHIDEffect } from '$shared/model'
 
-import { getKeys } from '../../api'
+import { getKeys, setKeys } from '../../api'
 import type { ActionChangeParams, Key, KeyMap } from '../types'
 
 export const supportsKeyStore = supportsStore.map(({ keys }) => keys)
@@ -33,7 +33,8 @@ export const secondaryActionStore = combine(keyMapStore, selectedKeyStore, (keyM
 })
 export const hasSecondaryActionStore = not(empty(secondaryActionStore))
 
-const getKeysFx = createHIDEffect('getKeysFx', getKeys)
+const getKeysFx = createHIDEffect('getKeys', getKeys)
+const setKeysFx = createEffect('setKeys', { handler: setKeys })
 
 // Report that supported device is connected
 sample({
@@ -57,7 +58,13 @@ sample({
   clock: keySelected,
   target: selectedKeyStore
 })
-keyMapStore.on(actionChanged, (map, { key, action }) => ({
-  ...map,
-  [key]: action
-}))
+
+sample({
+  clock: actionChanged,
+  source: keyMapStore,
+  fn: (map, { key, action }) => ({
+    ...map,
+    [key]: action
+  }),
+  target: [keyMapStore, setKeysFx]
+})
