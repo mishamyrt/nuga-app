@@ -1,4 +1,4 @@
-import { createEffect, type Effect } from 'effector'
+import { createEffect, createEvent, createStore, type Effect, sample, type Store } from 'effector'
 
 type EffectHandlerFn<Params, Done> = (params: Params) => Promise<Done>
 
@@ -15,7 +15,7 @@ interface SequenceParams {
   started?: boolean
 }
 
-type SequenceReturn = [EffectCreatorFn, SequenceHooks]
+type SequenceReturn = [EffectCreatorFn, Store<boolean>, SequenceHooks]
 
 export function createSequence ({
   minInterval = 0,
@@ -25,6 +25,12 @@ export function createSequence ({
   let lastTaskTime: number = 0
   let isActive = started
   const taskQueue: Array<() => Promise<any>> = []
+  const $pending = createStore<boolean>(false, { name: 'isRunning' })
+  const runningStateChanged = createEvent<boolean>('runningStateChanged')
+  sample({
+    clock: runningStateChanged,
+    target: $pending
+  })
 
   function processQueue () {
     if (taskQueue.length === 0 || !isActive) return
@@ -36,10 +42,12 @@ export function createSequence ({
       const delay = Math.max(0, minInterval - timeSinceLastTask)
 
       currentTask = new Promise((resolve) => {
+        runningStateChanged(true)
         setTimeout(() => {
           task().then((result) => {
             lastTaskTime = Date.now()
             resolve(result)
+            runningStateChanged(false)
             processQueue()
           })
         }, delay)
@@ -73,6 +81,7 @@ export function createSequence ({
 
   return [
     createSequentialEffect,
+    $pending,
     { start, stop }
   ]
 }
