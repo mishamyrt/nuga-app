@@ -8,9 +8,11 @@ import { restoreDefaultState, restoreState, saveState } from '../api/state'
 import { defaultSupports } from '../lib/constants'
 
 export const firmwareVersionUpdated = createEvent<string>('firmwareVersionUpdated')
-export const stateSaved = createEvent('stateSaved')
-export const stateRestored = createEvent('stateRestored')
+export const userStateSaved = createEvent('stateSaved')
+export const userStateRestored = createEvent('stateRestored')
 export const defaultStateRestored = createEvent('defaultStateRestored')
+// Combined events. Triggers AFTER state effects
+export const anyStateRestored = createEvent('anyStateRestored')
 
 export const supportsStore = createStore(defaultSupports, { name: 'supports' })
 export const firmwareVersionStore = createStore('dev', {
@@ -20,7 +22,7 @@ export const firmwareVersionStore = createStore('dev', {
 export const getFirmwareFx = createEffect('getFirmware', { handler: getFirmware })
 export const getSupportsFx = createEffect('getSupports', { handler: getSupports })
 export const saveStateFx = createHIDEffect('saveState', saveState)
-export const restoreStateFx = createHIDEffect('restoreState', restoreState)
+export const restoreUserStateFx = createHIDEffect('restoreUserStateFx', restoreState)
 export const restoreDefaultStateFx = createHIDEffect(
   'restoreDefaultState',
   restoreDefaultState
@@ -40,16 +42,20 @@ sample({
 })
 
 sample({
-  clock: stateSaved,
+  clock: userStateSaved,
   target: saveStateFx
 })
 sample({
-  clock: stateRestored,
-  target: restoreStateFx
+  clock: userStateRestored,
+  target: restoreUserStateFx
 })
 sample({
   clock: defaultStateRestored,
   target: restoreDefaultStateFx
 })
+sample({
+  clock: [restoreUserStateFx.done, restoreDefaultStateFx.done],
+  target: anyStateRestored
+})
 
-export const restoringStateStore = or(restoreStateFx.pending, restoreDefaultStateFx.pending)
+export const restoringStateStore = or(restoreUserStateFx.pending, restoreDefaultStateFx.pending)

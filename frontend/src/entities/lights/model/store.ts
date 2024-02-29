@@ -2,6 +2,7 @@ import deepEqual from 'deep-equal'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { interval } from 'patronum'
 
+import { anyStateRestored } from '$entities/device/@x/lights'
 import { connected, createHIDEffect, disconnected, modeSettingsChanged } from '$shared/model'
 
 import { getBacklightColors, setBacklightColor } from '../api/color'
@@ -73,7 +74,7 @@ sample({
   target: [getModesFx, getBacklightColorsFx]
 })
 sample({
-  clock: modeSettingsChanged,
+  clock: [modeSettingsChanged, anyStateRestored],
   target: getBacklightColorsFx
 })
 modesStore.on(getModesFx.doneData, (_, modes) => modes)
@@ -95,12 +96,6 @@ sample({
   clock: backlightColorChanged,
   target: setBacklightColorFx
 })
-
-sample({
-  clock: setBacklightColorFx.done,
-  target: getBacklightColorsFx
-})
-
 sample({
   clock: stateSet,
   target: [setStateFx, stateStore]
