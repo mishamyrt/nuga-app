@@ -13,7 +13,7 @@ type Repository struct {
 	Device      DeviceRepository
 	Settings    SettingsRepository
 	Environment EnvironmentRepository
-	Preset      PresetRepository
+	State       StateRepository
 }
 
 // DeviceRepository defines the interface for device-related operations.
@@ -40,7 +40,7 @@ type EnvironmentRepository interface {
 }
 
 // PresetRepository defines the interface for retrieving or writing presets.
-type PresetRepository interface {
-	SaveLightsPreset(path string, preset dto.LightsPreset) error
-	ReadLightsPreset(path string) (dto.LightsPreset, error)
+type StateRepository interface {
+	WriteFile(path string, preset dto.StateFile) error
+	ReadFile(path string) (dto.StateFile, error)
 }

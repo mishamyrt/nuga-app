@@ -40,6 +40,7 @@ func (a *Application) GetOptions() *options.App {
 		MinWidth:  730,
 		Height:    700,
 		MinHeight: 450,
+		MaxWidth:  1000,
 		AssetServer: &assetserver.Options{
 			Assets: a.assets,
 		},

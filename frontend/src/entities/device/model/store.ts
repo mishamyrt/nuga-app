@@ -1,11 +1,16 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
+import { or } from 'patronum'
 
-import { connected } from '$shared/model'
+import { connected, createHIDEffect } from '$shared/model'
 
 import { getFirmware, getSupports } from '../api'
+import { restoreDefaultState, restoreState, saveState } from '../api/state'
 import { defaultSupports } from '../lib/constants'
 
 export const firmwareVersionUpdated = createEvent<string>('firmwareVersionUpdated')
+export const stateSaved = createEvent('stateSaved')
+export const stateRestored = createEvent('stateRestored')
+export const defaultStateRestored = createEvent('defaultStateRestored')
 
 export const supportsStore = createStore(defaultSupports, { name: 'supports' })
 export const firmwareVersionStore = createStore('dev', {
@@ -14,6 +19,12 @@ export const firmwareVersionStore = createStore('dev', {
 
 export const getFirmwareFx = createEffect('getFirmware', { handler: getFirmware })
 export const getSupportsFx = createEffect('getSupports', { handler: getSupports })
+export const saveStateFx = createHIDEffect('saveState', saveState)
+export const restoreStateFx = createHIDEffect('restoreState', restoreState)
+export const restoreDefaultStateFx = createHIDEffect(
+  'restoreDefaultState',
+  restoreDefaultState
+)
 
 sample({
   clock: getFirmwareFx.doneData,
@@ -27,3 +38,18 @@ sample({
   clock: connected,
   target: [getFirmwareFx, getSupportsFx]
 })
+
+sample({
+  clock: stateSaved,
+  target: saveStateFx
+})
+sample({
+  clock: stateRestored,
+  target: restoreStateFx
+})
+sample({
+  clock: defaultStateRestored,
+  target: restoreDefaultStateFx
+})
+
+export const restoringStateStore = or(restoreStateFx.pending, restoreDefaultStateFx.pending)

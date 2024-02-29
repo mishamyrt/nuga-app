@@ -5,8 +5,8 @@ import (
 	"nuga_ui/internal/interfaces"
 	"nuga_ui/internal/repository/device"
 	"nuga_ui/internal/repository/environment"
-	"nuga_ui/internal/repository/preset"
 	"nuga_ui/internal/repository/settings"
+	"nuga_ui/internal/repository/state"
 )
 
 // New creates new repository instance
@@ -19,6 +19,6 @@ func New(directory string) (*interfaces.Repository, error) {
 		Device:      device.New(),
 		Settings:    settings,
 		Environment: environment.New(),
-		Preset:      preset.New(),
+		State:       state.New(),
 	}, nil
 }
