@@ -74,10 +74,22 @@ func (k *KeysUsecase) SetKeys(keys dto.KeyMap) error {
 	config := k.repo.Settings.GetMode()
 	dev := k.repo.Device.Get()
 	layoutKeys := layout.KeyMap(keys)
+	effect, err := dev.Features.Light.GetEffects()
+	if err != nil {
+		return err
+	}
 	if config.OSMode == dto.WindowsOSMode {
 		return dev.Features.Keys.SetWin(&layoutKeys)
 	}
-	return dev.Features.Keys.SetMac(&layoutKeys)
+	err = dev.Features.Keys.SetMac(&layoutKeys)
+	if err != nil {
+		return err
+	}
+	err = dev.Features.Light.SetEffects(effect)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // GetKeyGroups returns the key groups
