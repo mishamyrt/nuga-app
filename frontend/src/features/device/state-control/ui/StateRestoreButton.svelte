@@ -2,12 +2,12 @@
   import { Button } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { stateRestored } from '$entities/device'
+  import { userStateRestored } from '$entities/device'
 
   export let disabled: boolean
 
   function handleClick () {
-    stateRestored()
+    userStateRestored()
   }
 </script>
 

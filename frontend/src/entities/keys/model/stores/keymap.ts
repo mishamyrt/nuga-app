@@ -1,7 +1,7 @@
 import { combine, createEffect, createEvent, createStore, sample } from 'effector'
 import { empty, not } from 'patronum'
 
-import { supportsStore } from '$entities/device'
+import { anyStateRestored, supportsStore } from '$entities/device/@x/keys'
 import { defaultKey, defaultKeyAction, defaultKeyMap } from '$entities/keys'
 import { createHIDEffect } from '$shared/model'
 
@@ -45,7 +45,7 @@ sample({
 
 // Load keys on device connect
 sample({
-  clock: keysInitiated,
+  clock: [keysInitiated, anyStateRestored],
   target: getKeysFx
 })
 sample({

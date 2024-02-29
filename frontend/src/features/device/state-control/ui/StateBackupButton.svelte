@@ -2,10 +2,10 @@
   import { Button } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { stateSaved } from '$entities/device'
+  import { userStateSaved } from '$entities/device'
 
   function handleClick () {
-    stateSaved()
+    userStateSaved()
   }
 </script>
 
