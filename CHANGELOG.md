@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
+## 2.1.0
+
+### Added
+
+* Keys settings (Halo75 for now)
+* Full state control (save, restore, reset)
+
+### Removed
+
+* Light state control
+* Non individual mode (write both win and mac)
+
+### Fixed
+
+* Race condition on colors loading
+
 ## [2.0.1]
 
 ### Fixed

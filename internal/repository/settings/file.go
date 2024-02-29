@@ -49,6 +49,9 @@ func (f *File) Read() error {
 	if err != nil {
 		return err
 	}
+	if f.Content.Mode != "mac" && f.Content.Mode != "win" {
+		f.Content.Mode = "mac"
+	}
 	return nil
 }
 

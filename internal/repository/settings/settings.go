@@ -30,19 +30,16 @@ func initSettings(s *dto.Settings) {
 		UI:    dto.CurrentOS(),
 		Theme: dto.AutoUITheme,
 	}
-	s.Mode = dto.ModeSettings{
-		IndividualSettings: false,
-		OSMode:             dto.MacOSMode,
-	}
+	s.Mode = dto.MacOSMode
 }
 
 // GetMode returns stored mode settings
-func (r *Repository) GetMode() *dto.ModeSettings {
-	return &r.storage.Content.Mode
+func (r *Repository) GetMode() dto.OSMode {
+	return r.storage.Content.Mode
 }
 
 // SetMode writes mode settings to file
-func (r *Repository) SetMode(m dto.ModeSettings) error {
+func (r *Repository) SetMode(m dto.OSMode) error {
 	r.storage.Content.Mode = m
 	return r.storage.Write()
 }
