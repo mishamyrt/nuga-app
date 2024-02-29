@@ -3,12 +3,10 @@ package usecase
 import (
 	"context"
 	"nuga_ui/internal/dto"
-	"nuga_ui/internal/errors"
 	"nuga_ui/internal/interfaces"
 
 	"github.com/mishamyrt/nuga-lib"
 	"github.com/mishamyrt/nuga-lib/features/light"
-	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 // LightsUsecase represents lights-related use case
@@ -92,7 +90,6 @@ func (l *LightsUsecase) SetLightState(r dto.LightStateRequest) error {
 	if err != nil {
 		return err
 	}
-	dev.Capabilities.Has(nuga.BacklightCapability)
 	return dev.Features.Light.SetEffects(state)
 }
 
@@ -101,6 +98,10 @@ func (l *LightsUsecase) SetBacklightColor(mode, index uint8, color light.RGB) er
 	dev := l.repo.Device.Get()
 	config := l.repo.Settings.GetMode()
 	colors, err := dev.Features.Light.GetBacklightColors()
+	if err != nil {
+		return err
+	}
+	state, err := dev.Features.Light.GetEffects()
 	if err != nil {
 		return err
 	}
@@ -114,66 +115,11 @@ func (l *LightsUsecase) SetBacklightColor(mode, index uint8, color light.RGB) er
 		colors.SetWin(mode, index, &color)
 		colors.SetMac(mode, index, &color)
 	}
-	return dev.Features.Light.SetBacklightColors(colors)
-}
-
-// SavePreset initiates preset save process
-func (l *LightsUsecase) SavePreset() error {
-	dev := l.repo.Device.Get()
-	state, err := dev.Features.Light.GetEffects()
+	err = dev.Features.Light.SetBacklightColors(colors)
 	if err != nil {
 		return err
 	}
-	if err != nil {
-		return err
-	}
-	colors, err := dev.Features.Light.GetBacklightColors()
-	if err != nil {
-		return err
-	}
-	deviceName := string(dev.Name)
-	path, err := runtime.SaveFileDialog(l.ctx, runtime.SaveDialogOptions{
-		Title:           "Save lights preset",
-		DefaultFilename: deviceName + ".lights.json",
-	})
-	if err != nil {
-		return err
-	}
-	return l.repo.Preset.SaveLightsPreset(path, dto.LightsPreset{
-		Name:   deviceName,
-		Colors: colors.Slice(),
-		State:  state,
-	})
-}
-
-// LoadPreset initiates preset loading process
-func (l *LightsUsecase) LoadPreset() error {
-	var preset dto.LightsPreset
-	path, err := runtime.OpenFileDialog(l.ctx, runtime.OpenDialogOptions{
-		Title: "Open lights preset",
-	})
-	if err != nil {
-		return err
-	}
-	preset, err = l.repo.Preset.ReadLightsPreset(path)
-	if err != nil {
-		return err
-	}
-	dev := l.repo.Device.Get()
-	if preset.Name != string(dev.Name) {
-		return errors.ErrPresetWrongDevice
-	}
-
-	colorState := light.BacklightColorsFromSlice(preset.Colors)
-	err = dev.Features.Light.SetBacklightColors(colorState)
-	if err != nil {
-		return err
-	}
-	err = dev.Features.Light.SetEffects(preset.State)
-	if err != nil {
-		return err
-	}
-	return nil
+	return dev.Features.Light.SetEffects(state)
 }
 
 func (l *LightsUsecase) applyBacklightState(b *light.BacklightEffect, r dto.LightDomainRequest) error {

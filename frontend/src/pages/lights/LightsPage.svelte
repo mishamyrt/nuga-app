@@ -3,7 +3,7 @@
   import { fsd } from 'feature-sliced-svelte'
 
   import { DeviceSupports } from '$features/device'
-  import { LightsDomainSettings, LightsPreset } from '$widgets'
+  import { LightsDomainSettings } from '$widgets'
 </script>
 
 <div use:fsd={'pages/LightsPage'}>
@@ -15,6 +15,5 @@
     <DeviceSupports capability="sidelight">
       <LightsDomainSettings domain="sidelight" />
     </DeviceSupports>
-    <LightsPreset />
   </Stack>
 </div>

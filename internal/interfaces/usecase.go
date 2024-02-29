@@ -40,6 +40,9 @@ type DeviceUsecase interface {
 	SimulateConnection() string
 	Disconnect() error
 	GetSupports() *dto.Supports
+	SaveState() error
+	RestoreState() error
+	RestoreDefaultState() error
 }
 
 // EnvironmentUsecase defines the interface for environment-related use cases.
@@ -67,8 +70,6 @@ type LightsUsecase interface {
 	SetLightState(r dto.LightStateRequest) error
 	GetBacklightColors() (dto.BacklightColors, error)
 	SetBacklightColor(mode, index uint8, color light.RGB) error
-	SavePreset() error
-	LoadPreset() error
 }
 
 // KeysUsecase defines the interface for key-related use cases.
