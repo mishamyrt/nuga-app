@@ -5,7 +5,6 @@
 
   import { restoringStateStore } from '$entities/device'
   import {
-    IndividualModeToggle,
     OSModeSelect,
     StateBackupButton,
     StateRestoreButton,
@@ -15,11 +14,6 @@
   $: isRestoring = $restoringStateStore
 </script>
 <div use:fsd={'widgets/DeviceSettings'}>
-  <FormGroup>
-    <FormRow title="Individual mode settings">
-      <IndividualModeToggle />
-    </FormRow>
-  </FormGroup>
   <FormGroup title="Configuration">
     <FormRow title="System mode">
       <OSModeSelect />

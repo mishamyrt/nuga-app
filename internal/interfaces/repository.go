@@ -27,8 +27,8 @@ type DeviceRepository interface {
 
 // SettingsRepository defines the interface for managing application settings.
 type SettingsRepository interface {
-	GetMode() *dto.ModeSettings
-	SetMode(m dto.ModeSettings) error
+	GetMode() dto.OSMode
+	SetMode(m dto.OSMode) error
 	GetApp() *dto.AppSettings
 	SetApp(ui dto.AppSettings) error
 }

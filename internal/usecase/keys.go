@@ -29,12 +29,12 @@ func (k *KeysUsecase) OnShutdown() error {
 
 // GetKeys returns the current keys
 func (k *KeysUsecase) GetKeys() (*dto.KeyMap, error) {
-	config := k.repo.Settings.GetMode()
+	mode := k.repo.Settings.GetMode()
 	dev := k.repo.Device.Get()
 	var keys *layout.KeyMap
 	var err error
 
-	if config.OSMode == dto.WindowsOSMode {
+	if mode == dto.WindowsOSMode {
 		keys, err = dev.Features.Keys.GetWin()
 	} else {
 		keys, err = dev.Features.Keys.GetMac()
@@ -48,14 +48,14 @@ func (k *KeysUsecase) GetKeys() (*dto.KeyMap, error) {
 
 // GetDefaultKeys returns the default keys
 func (k *KeysUsecase) GetDefaultKeys() (*dto.KeyMap, error) {
-	config := k.repo.Settings.GetMode()
+	mode := k.repo.Settings.GetMode()
 	dev := k.repo.Device.Get()
 	defaultState, err := dump.GetDefaults(dev.Name)
 	if err != nil {
 		return nil, err
 	}
 	var codes []uint32
-	if config.OSMode == dto.WindowsOSMode {
+	if mode == dto.WindowsOSMode {
 		codes = defaultState.Keys.Win
 	} else {
 		codes = defaultState.Keys.Mac
@@ -71,14 +71,14 @@ func (k *KeysUsecase) GetDefaultKeys() (*dto.KeyMap, error) {
 
 // SetKeys sets the keys
 func (k *KeysUsecase) SetKeys(keys dto.KeyMap) error {
-	config := k.repo.Settings.GetMode()
+	mode := k.repo.Settings.GetMode()
 	dev := k.repo.Device.Get()
 	layoutKeys := layout.KeyMap(keys)
 	effect, err := dev.Features.Light.GetEffects()
 	if err != nil {
 		return err
 	}
-	if config.OSMode == dto.WindowsOSMode {
+	if mode == dto.WindowsOSMode {
 		return dev.Features.Keys.SetWin(&layoutKeys)
 	}
 	err = dev.Features.Keys.SetMac(&layoutKeys)

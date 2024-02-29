@@ -60,12 +60,12 @@ func (l *LightsUsecase) GetLightState() (dto.LightState, error) {
 // GetBacklightColors returns backlight colors
 func (l *LightsUsecase) GetBacklightColors() (dto.BacklightColors, error) {
 	dev := l.repo.Device.Get()
-	config := l.repo.Settings.GetMode()
+	mode := l.repo.Settings.GetMode()
 	colors, err := dev.Features.Light.GetBacklightColors()
 	if err != nil {
 		return nil, err
 	}
-	if config.IndividualSettings && config.OSMode == dto.WindowsOSMode {
+	if mode == dto.WindowsOSMode {
 		return colors.GetWin(), nil
 	}
 	return colors.GetMac(), nil
@@ -96,7 +96,7 @@ func (l *LightsUsecase) SetLightState(r dto.LightStateRequest) error {
 // SetBacklightColor sets backlight color by mode and index
 func (l *LightsUsecase) SetBacklightColor(mode, index uint8, color light.RGB) error {
 	dev := l.repo.Device.Get()
-	config := l.repo.Settings.GetMode()
+	OSMode := l.repo.Settings.GetMode()
 	colors, err := dev.Features.Light.GetBacklightColors()
 	if err != nil {
 		return err
@@ -105,15 +105,10 @@ func (l *LightsUsecase) SetBacklightColor(mode, index uint8, color light.RGB) er
 	if err != nil {
 		return err
 	}
-	if config.IndividualSettings {
-		if config.OSMode == dto.MacOSMode {
-			colors.SetMac(mode, index, &color)
-		} else {
-			colors.SetWin(mode, index, &color)
-		}
+	if OSMode == dto.MacOSMode {
+		colors.SetMac(mode, index, &color)
 	} else {
 		colors.SetWin(mode, index, &color)
-		colors.SetMac(mode, index, &color)
 	}
 	err = dev.Features.Light.SetBacklightColors(colors)
 	if err != nil {

@@ -23,12 +23,12 @@ func (s *SettingsUsecase) OnShutdown() error {
 }
 
 // GetModeSettings returns stored mode settings
-func (s *SettingsUsecase) GetModeSettings() dto.ModeSettings {
-	return *s.repo.Settings.GetMode()
+func (s *SettingsUsecase) GetMode() dto.OSMode {
+	return s.repo.Settings.GetMode()
 }
 
 // SetModeSettings writes mode settings to file
-func (s *SettingsUsecase) SetModeSettings(m dto.ModeSettings) error {
+func (s *SettingsUsecase) SetMode(m dto.OSMode) error {
 	return s.repo.Settings.SetMode(m)
 }
 

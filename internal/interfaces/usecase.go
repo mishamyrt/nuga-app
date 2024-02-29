@@ -56,8 +56,8 @@ type EnvironmentUsecase interface {
 // SettingsUsecase defines the interface for managing application settings use cases.
 type SettingsUsecase interface {
 	BasicUsecase
-	GetModeSettings() dto.ModeSettings
-	SetModeSettings(m dto.ModeSettings) error
+	GetMode() dto.OSMode
+	SetMode(m dto.OSMode) error
 	GetAppSettings() dto.AppSettings
 	SetAppSettings(ui dto.AppSettings) error
 }

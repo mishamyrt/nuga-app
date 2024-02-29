@@ -65,14 +65,8 @@ type AppSettings struct {
 	Theme AppTheme `json:"theme"`
 }
 
-// ModeSettings represents the configuration for the application mode settings.
-type ModeSettings struct {
-	OSMode             OSMode `json:"osMode"`
-	IndividualSettings bool   `json:"individual"`
-}
-
 // Settings represents the overall configuration for the application.
 type Settings struct {
-	Mode ModeSettings `json:"mode"`
-	App  AppSettings  `json:"app"`
+	Mode OSMode      `json:"mode"`
+	App  AppSettings `json:"app"`
 }
