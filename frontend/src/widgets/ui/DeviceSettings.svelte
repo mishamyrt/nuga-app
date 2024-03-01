@@ -21,7 +21,7 @@
     <FormRow align="top" title="State" subtitle="The complete state of the device: lights and keys is saved to the file.
     The state can be restored only on the same model of the keyboard.
     Files made in different program versions may be incompatible.">
-      <Stack justify="end" direction="horizontal" gap="s">
+      <Stack fullHeight align="start" justify="end" direction="horizontal" gap="s">
         <StateBackupButton>Save...</StateBackupButton>
         <StateRestoreButton disabled={isRestoring}>Load...</StateRestoreButton>
       </Stack>
