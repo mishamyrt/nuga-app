@@ -54,7 +54,7 @@
   }
 
   .keys {
-    --key-color-dark: #757575;
+    --key-color-dark: #6b6b6b;
     --key-color-light: rgb(196 196 196);
     --key-color-mint: rgb(46 218 151);
     --key-color-orange: rgb(226 121 80 / 100%);
