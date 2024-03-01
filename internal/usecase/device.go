@@ -95,7 +95,7 @@ func (d *DeviceUsecase) GetSupports() *dto.Supports {
 	return dto.SupportedCapabilities(d.repo.Device.Get().Capabilities)
 }
 
-// SavePreset initiates preset save process
+// SaveState initiates state save process
 func (d *DeviceUsecase) SaveState() error {
 	dev := d.repo.Device.Get()
 	path, err := runtime.SaveFileDialog(d.ctx, runtime.SaveDialogOptions{
@@ -115,6 +115,7 @@ func (d *DeviceUsecase) SaveState() error {
 	})
 }
 
+// RestoreState initiates state restore process
 func (d *DeviceUsecase) RestoreState() error {
 	path, err := runtime.OpenFileDialog(d.ctx, runtime.OpenDialogOptions{
 		Filters: []runtime.FileFilter{
@@ -141,6 +142,7 @@ func (d *DeviceUsecase) RestoreState() error {
 	return dump.Restore(dev.Handle, state.State)
 }
 
+// RestoreDefaultState restores default state
 func (d *DeviceUsecase) RestoreDefaultState() error {
 	dev := d.repo.Device.Get()
 	defaultState, err := dump.GetDefaults(dev.Name)

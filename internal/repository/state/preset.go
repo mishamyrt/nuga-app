@@ -1,4 +1,4 @@
-// Package preset contains repository for preset files
+// Package state contains repository for state files
 package state
 
 import (
@@ -15,7 +15,7 @@ func New() *Repository {
 	return &Repository{}
 }
 
-// SaveLightsPreset saves preset to file
+// WriteFile saves state to file
 func (r *Repository) WriteFile(path string, s dto.StateFile) error {
 	content, err := json.Marshal(s)
 	if err != nil {
@@ -24,7 +24,7 @@ func (r *Repository) WriteFile(path string, s dto.StateFile) error {
 	return os.WriteFile(path, content, 0644)
 }
 
-// ReadLightsPreset reads preset from file
+// ReadFile reads state from file
 func (r *Repository) ReadFile(path string) (dto.StateFile, error) {
 	var preset dto.StateFile
 	content, err := os.ReadFile(path)

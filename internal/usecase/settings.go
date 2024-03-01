@@ -22,12 +22,12 @@ func (s *SettingsUsecase) OnShutdown() error {
 	return nil
 }
 
-// GetModeSettings returns stored mode settings
+// GetMode returns stored mode settings
 func (s *SettingsUsecase) GetMode() dto.OSMode {
 	return s.repo.Settings.GetMode()
 }
 
-// SetModeSettings writes mode settings to file
+// SetMode writes mode settings to file
 func (s *SettingsUsecase) SetMode(m dto.OSMode) error {
 	return s.repo.Settings.SetMode(m)
 }
