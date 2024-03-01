@@ -3,7 +3,7 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 import { interval } from 'patronum'
 
 import { anyStateRestored } from '$entities/device/@x/lights'
-import { connected, createHIDEffect, disconnected, modeSettingsChanged } from '$shared/model'
+import { connected, createHIDEffect, disconnected, modeChanged } from '$shared/model'
 
 import { getBacklightColors, setBacklightColor } from '../api/color'
 import { getModes } from '../api/mode'
@@ -74,7 +74,7 @@ sample({
   target: [getModesFx, getBacklightColorsFx]
 })
 sample({
-  clock: [modeSettingsChanged, anyStateRestored],
+  clock: [modeChanged, anyStateRestored],
   target: getBacklightColorsFx
 })
 modesStore.on(getModesFx.doneData, (_, modes) => modes)

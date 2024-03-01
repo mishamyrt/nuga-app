@@ -3,7 +3,7 @@ import { empty, not } from 'patronum'
 
 import { anyStateRestored, supportsStore } from '$entities/device/@x/keys'
 import { defaultKey, defaultKeyAction, defaultKeyMap } from '$entities/keys'
-import { createHIDEffect } from '$shared/model'
+import { createHIDEffect, modeChanged } from '$shared/model'
 
 import { getKeys, setKeys } from '../../api'
 import type { ActionChangeParams, Key, KeyMap } from '../types'
@@ -45,7 +45,7 @@ sample({
 
 // Load keys on device connect
 sample({
-  clock: [keysInitiated, anyStateRestored],
+  clock: [keysInitiated, anyStateRestored, modeChanged],
   target: getKeysFx
 })
 sample({
