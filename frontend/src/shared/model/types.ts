@@ -24,8 +24,3 @@ export enum OSMode {
   Windows = 'win',
   MacOS = 'mac'
 }
-
-export interface ModeSettings {
-  osMode: OSMode
-  individual: boolean
-}

@@ -2,17 +2,14 @@
   import { Segment } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { modeSettingsChanged, modeSettingsStore, type OSMode, osModeOptions } from '$shared/model'
+  import { modeChanged, modeStore, type OSMode, osModeOptions } from '$shared/model'
 
   function handleChange (e: CustomEvent<string>) {
-    modeSettingsChanged({
-      osMode: e.detail as OSMode,
-      individual: $modeSettingsStore.individual
-    })
+    modeChanged(e.detail as OSMode)
   }
 
 </script>
 
 <div use:fsd={'features/OSModeSelect'}>
-  <Segment value={$modeSettingsStore.osMode} on:change={handleChange} options={osModeOptions} />
+  <Segment value={$modeStore} on:change={handleChange} options={osModeOptions} />
 </div>
