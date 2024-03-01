@@ -39,7 +39,7 @@ type EnvironmentRepository interface {
 	GetVersion() string
 }
 
-// PresetRepository defines the interface for retrieving or writing presets.
+// StateRepository defines the interface for retrieving or writing state.
 type StateRepository interface {
 	WriteFile(path string, preset dto.StateFile) error
 	ReadFile(path string) (dto.StateFile, error)
