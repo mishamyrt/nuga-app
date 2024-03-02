@@ -27,6 +27,8 @@ import { FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
     align="top"
     title="Keyboard dump"
     subtitle="The dump must be written with the default keyboard settings. Be sure to reset them before saving">
-    <StateBackupButton >Save...</StateBackupButton>
+    <Stack justify="start" align="end" fullHeight>
+      <StateBackupButton>Save...</StateBackupButton>
+    </Stack>
   </FormRow>
 </FormGroup>
