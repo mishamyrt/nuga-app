@@ -13,6 +13,7 @@
   $: rowHeight = columnWidth * 3.4
   $: borderRadius = columnWidth / 2.2
   $: rows = template.keys.length
+  $: fontSize = columnWidth * 1.1
 </script>
 
 <div class="abstract-keyboard" use:fsd={'entities/AbstractKeyboard'}>
@@ -35,7 +36,8 @@
           <div
             class="key"
             style:--key-width="{key.width}"
-            style:--key-height="{key.height}">
+            style:--key-height="{key.height}"
+            style:--key-font-size="{fontSize}px">
             <div
               class="base"
               style:--key-color="var(--key-color-{key.color})" />
@@ -75,7 +77,7 @@
 
   .key {
     grid-column: span var(--key-width);
-    grid-row: span var(--key-row-height);
+    grid-row: span var(--key-height);
     position: relative;
   }
 
