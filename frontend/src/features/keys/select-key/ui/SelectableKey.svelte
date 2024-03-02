@@ -36,7 +36,7 @@
     border-radius: var(--key-border-radius);
     font-family: var(--typography-font-family);
     font-weight: 500;
-    font-size: 10px;
+    font-size: var(--key-font-size);
     text-align: center;
     padding-top: var(--space-xxs);
     background-color: transparent;

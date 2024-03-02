@@ -73,7 +73,14 @@ export const shortKeyNames: Record<string, string> = {
   quote: "'",
   period: '.',
   comma: ',',
-  screenshot: 'Scrn'
+  screenshot: 'Scrn',
+  numlock: 'Lk',
+  numpad_div: '/',
+  numpad_mul: '*',
+  numpad_sub: '-',
+  numpad_add: '+',
+  numpad_enter: '↵',
+  numpad_dot: '.'
 }
 
 export const codelessKeyNames: Record<string, string> = {
