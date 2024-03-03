@@ -1,4 +1,4 @@
-VERSION = 2.0.1
+VERSION = 2.1.0
 DIST_PATH = dist
 
 OS := `echo $(shell uname) | tr A-Z a-z`
@@ -30,8 +30,8 @@ clean:
 	rm -rf "$(BUILD_PATH)"
 	rm -rf "$(DIST_PATH)"
 
-.PHONY: release
-release:
+.PHONY: publish
+publish:
 # Add Makefile We add the file because of the $VERSION variable
 	git add Makefile
 # Update changelog
