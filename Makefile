@@ -32,6 +32,8 @@ clean:
 
 .PHONY: release
 release:
+# Add Makefile We add the file because of the $VERSION variable
+	git add Makefile
 # Update changelog
 	node ./scripts/add-release-link.mjs "$(VERSION)"
 	git add CHANGELOG.md
