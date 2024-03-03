@@ -7,7 +7,7 @@ Application for controlling NuPhy® keyboards.
 ### Features
 
 * Lights control.
-* ~~Key mapping control~~ Not ready yet. 
+* Key mapping control (only Halo75 for now). 
 
 **Supported devices**: Halo75, Halo65, Halo96.
 
@@ -70,7 +70,13 @@ The result of the build will be archives with the application in the `dist` or `
 
 ### Release
 
-The release is automated through GitHub Actions. To publish a new release, just run a version tag. Automatic build, signing and notarization will be started. Once the build is complete, the files will be attached to the new GitHub Release.
+To publish a new release, set version in [Makefile](./Makefile) and run:
+
+```
+make release
+```
+
+Automatic build, signing and notarization will be started. Once the build is complete, the files will be attached to the created GitHub Release.
 
 The release description is compiled automatically from the [CHANGELOG.md](./CHANGELOG.md) file.
 

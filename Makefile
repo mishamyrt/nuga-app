@@ -30,8 +30,8 @@ clean:
 	rm -rf "$(BUILD_PATH)"
 	rm -rf "$(DIST_PATH)"
 
-.PHONY: publish
-publish:
+.PHONY: release
+release:
 # Update changelog
 	node ./scripts/add-release-link.mjs "$(VERSION)"
 	git add CHANGELOG.md
