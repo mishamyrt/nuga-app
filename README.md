@@ -73,7 +73,7 @@ The result of the build will be archives with the application in the `dist` or `
 To publish a new release, set version in [Makefile](./Makefile) and run:
 
 ```
-make release
+make publish
 ```
 
 Automatic build, signing and notarization will be started. Once the build is complete, the files will be attached to the created GitHub Release.
