@@ -10,6 +10,7 @@ include makefiles/install.mk
 include makefiles/dev.mk
 include makefiles/qa.mk
 include makefiles/linux-builder.mk
+include makefiles/glyphs.mk
 
 .PHONY: configure
 configure:

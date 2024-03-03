@@ -7,3 +7,4 @@ bin
 node_modules
 dist
 wailsjs
+scripts/venv

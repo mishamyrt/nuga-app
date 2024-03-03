@@ -32,6 +32,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-svelte": "^2.35.1",
     "feature-sliced-svelte": "^1.4.0",
+    "fontkit": "^2.0.2",
     "postcss": "^8.4.32",
     "postcss-html": "^1.5.0",
     "sass": "^1.69.5",
