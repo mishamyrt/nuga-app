@@ -40,7 +40,7 @@ publish:
 	git commit -m "docs: Release $(VERSION) 🔥"
 # Create tag
 	git tag "v$(VERSION)"
-	git push --tags
+	git push --follow-tags
 
 $(DIST_PATH):
 	mkdir -p $(DIST_PATH)
