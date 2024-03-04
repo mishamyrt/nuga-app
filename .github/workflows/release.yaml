@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set envs
         if: github.event_name == 'push'
         run: |
@@ -29,12 +29,12 @@ jobs:
           echo "IS_STABLE_VERSION=$(node scripts/workflows/is-stable.mjs $RELEASE_VERSION)" >> $GITHUB_ENV
           echo "VERSION_DISPLAY=${RELEASE_VERSION:1}" >> $GITHUB_ENV
       - name: Download Linux build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Linux-dist
           path: dist/
       - name: Download macOS build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: macOS-dist
           path: dist/

@@ -30,14 +30,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
           cache-dependency-path: go.sum
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
           run_install: |
               cwd: frontend/
@@ -45,7 +45,7 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
       - name: Setup QEMU
         if: inputs.linux-arm64 && runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       - name: Setup Linux deps
         if: runner.os == 'Linux'
         run: |
@@ -74,7 +74,7 @@ jobs:
         run: make build/darwin
       - name: Import certificate
         if: runner.os == 'macOS'
-        uses: apple-actions/import-codesign-certs@v2
+        uses: mishamyrt/import-codesign-certs@v2
         with:
           p12-file-base64: ${{ secrets.APPLE_CERT_DATA }}
           p12-password:  ${{ secrets.APPLE_CERT_PASSWORD }}
@@ -102,7 +102,7 @@ jobs:
             "$KEYCHAIN_PROFILE"
           ./scripts/workflows/notarize-mac.sh dist/Nuga*.zip
       - name: Upload binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ runner.os }}-dist
           path: ./dist
