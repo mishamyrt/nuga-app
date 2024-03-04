@@ -29,7 +29,6 @@
     "src/**/*.svelte",
     "vite.config.ts",
     "svelte.config.js",
-    ".eslintrc.cjs",
     ".stylelintrc.cjs",
     "wailsjs/**/*.js",
     "wailsjs/**/*.d.ts"

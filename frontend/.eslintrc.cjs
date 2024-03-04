@@ -1,7 +1,25 @@
+const { FS_LAYERS } = require('./eslint/utils.cjs')
+const { resolve } = require('path')
+
+/** Для запрета приватных путей */
+const DENIED_PATH_GROUPS = [
+  // Private imports are prohibited, use public imports instead
+  'app/**',
+  'pages/*/**',
+  'widgets/*/**',
+  'features/*/**',
+  'entities/*/(?!@x)/**',
+  'entities/*/!(@x)',
+  'shared/*/*/**', // Для shared +1 уровень, т.к. там чаще мы обращаемся к конкретной библиотеке/компоненты
+  // Prefer absolute imports instead of relatives (for root modules)
+  ...FS_LAYERS.map((layer) => `../**/${layer}`)
+]
+
 module.exports = {
   extends: [
     'standard-with-typescript',
-    'plugin:svelte/recommended'
+    'plugin:svelte/recommended',
+    resolve(__dirname, './eslint/layers-slices.cjs'),
   ],
   plugins: [
     'eslint-plugin-simple-import-sort'
@@ -36,6 +54,12 @@ module.exports = {
     '@typescript-eslint/return-await': 'off',
     'no-undef-init': 'off',
     'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error'
+    'simple-import-sort/exports': 'error',
+    'import/no-internal-modules': [
+      'error',
+      {
+        forbid: DENIED_PATH_GROUPS,
+      },
+    ],
   }
 }
