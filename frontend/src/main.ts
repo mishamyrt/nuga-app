@@ -2,7 +2,7 @@ import './style.css'
 
 import { appStarted } from '$shared/model'
 
-import App from './app/App.svelte'
+import { App } from './app'
 
 appStarted()
 
