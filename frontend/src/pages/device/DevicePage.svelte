@@ -11,3 +11,9 @@
     <DeviceSettings />
   </Stack>
 </div>
+
+<style lang="scss">
+  :global(.os-mac .toolbar.paddingDefault.transparent) {
+    --toolbar-border-shadow: transparent;
+  }
+</style>
