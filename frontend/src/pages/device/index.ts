@@ -7,7 +7,8 @@ export const device: Page = {
   title: 'Device',
   layoutProps: {
     toolbar: {
-      draggable: true
+      draggable: true,
+      transparent: true
     },
     macInset: {
       enable: true
