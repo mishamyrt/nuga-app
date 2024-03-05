@@ -2,12 +2,12 @@
   import { SelectableKeyboard } from '$features/keys'
 
 </script>
-<div class="lights-toolbar">
+<div class="keys-toolbar">
   <SelectableKeyboard />
 </div>
 
 <style lang="scss">
-  .lights-toolbar {
+  .keys-toolbar {
     flex: 1;
     height: 100%;
     width: 100%;
