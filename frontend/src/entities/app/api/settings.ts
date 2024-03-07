@@ -1,4 +1,3 @@
-
 import { GetAppSettings, SetAppSettings } from '$wailsjs/go/usecase/SettingsUsecase'
 
 import type { AppSettings } from '../model/types'

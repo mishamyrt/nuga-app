@@ -1,4 +1,3 @@
-
 import type { KeyboardLayout } from '../../model/types'
 
 export const Halo96: KeyboardLayout = [

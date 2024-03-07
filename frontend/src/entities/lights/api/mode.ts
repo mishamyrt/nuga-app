@@ -1,4 +1,3 @@
-
 import type { light } from '$wailsjs/go/models'
 import { GetLightModes } from '$wailsjs/go/usecase/LightsUsecase'
 

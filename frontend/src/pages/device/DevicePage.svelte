@@ -13,7 +13,9 @@
 </div>
 
 <style lang="scss">
+  /* stylelint-disable selector-class-pattern */
   :global(.os-mac .toolbar.paddingDefault.transparent) {
     --toolbar-border-shadow: transparent;
   }
+  /* stylelint-enable selector-class-pattern */
 </style>
