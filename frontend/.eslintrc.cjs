@@ -53,6 +53,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/return-await': 'off',
     'no-undef-init': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     'import/no-internal-modules': [
