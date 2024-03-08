@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning][].
 
 ### Fixed
 
-- Fixes macOS sidebar (styles are more accurate).
+- macOS sidebar (styles are more accurate).
+- Default page is lights again.
 
 ## [2.1.0]
 
