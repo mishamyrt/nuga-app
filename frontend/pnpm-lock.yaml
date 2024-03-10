@@ -17,6 +17,9 @@ dependencies:
   effector:
     specifier: 23.2.0
     version: 23.2.0
+  effector-queue:
+    specifier: 1.0.2
+    version: 1.0.2(effector@23.2.0)
   patronum:
     specifier: 2.2.0
     version: 2.2.0(effector@23.2.0)
@@ -1415,6 +1418,14 @@ packages:
       effector: 23.2.0
       just-debounce-it: 1.5.0
     dev: true
+
+  /effector-queue@1.0.2(effector@23.2.0):
+    resolution: {integrity: sha512-6g84iRCNE7ifqC9ljFGwk6yVaXwK1TtexzKb4VQOkSaoW7bmYPIxxZVIAipW8Hs9dJc2EQaUK1lfUeq5xHrFTA==}
+    peerDependencies:
+      effector: ^23
+    dependencies:
+      effector: 23.2.0
+    dev: false
 
   /effector@23.2.0:
     resolution: {integrity: sha512-TqR/e5BSfAk4ZkHOykmqPmT9Nn4fLE/BhuBiVmy2cb7Vp6in8N+xMDFhWWZAgOdQjehgt/dIVQyXuWpXh3EoZA==}

@@ -33,10 +33,22 @@ const { tick } = interval({
 
 // HID effects
 // This effect is using for connection check
-export const getStateFx = createHIDEffect('getState', getLightState)
-export const setStateFx = createHIDEffect('setState', setLightState)
-export const setBacklightColorFx = createHIDEffect('setBacklightColorFx', setBacklightColor)
-export const getBacklightColorsFx = createHIDEffect('getBacklightColors', getBacklightColors)
+export const getStateFx = createHIDEffect({
+  name: 'getStateFx',
+  handler: getLightState
+})
+export const setStateFx = createHIDEffect({
+  name: 'setStateFx',
+  handler: setLightState
+})
+export const setBacklightColorFx = createHIDEffect({
+  name: 'setBacklightColorFx',
+  handler: setBacklightColor
+})
+export const getBacklightColorsFx = createHIDEffect({
+  name: 'getBacklightColorsFx',
+  handler: getBacklightColors
+})
 // Simple effects
 export const getModesFx = createEffect(getModes)
 

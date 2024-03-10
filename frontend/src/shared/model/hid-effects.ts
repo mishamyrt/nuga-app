@@ -1,6 +1,6 @@
-import { createSequence } from '$shared/lib'
+import { createQueue } from 'effector-queue'
 
-const [createHIDEffect, pendingHIDStore] = createSequence({
+const [createHIDEffect, pendingHIDStore] = createQueue({
   minInterval: 200
 })
 

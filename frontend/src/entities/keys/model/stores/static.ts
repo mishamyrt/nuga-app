@@ -13,7 +13,10 @@ export const keyGroupsStore = createStore<KeyGroup[]>([], { name: 'keyGroups' })
 export const keyNamesStore = createStore<KeyNames>({}, { name: 'keyNames' })
 
 const getGroupsFx = createEffect('getGroupsFx', { handler: getGroups })
-const getDefaultKeysFx = createHIDEffect('getDefaultKeysFx', getDefaultKeys)
+const getDefaultKeysFx = createHIDEffect({
+  name: 'getDefaultKeysFx',
+  handler: getDefaultKeys
+})
 
 sample({
   clock: keysInitiated,

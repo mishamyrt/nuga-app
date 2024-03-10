@@ -21,12 +21,18 @@ export const firmwareVersionStore = createStore('dev', {
 
 export const getFirmwareFx = createEffect('getFirmware', { handler: getFirmware })
 export const getSupportsFx = createEffect('getSupports', { handler: getSupports })
-export const saveStateFx = createHIDEffect('saveState', saveState)
-export const restoreUserStateFx = createHIDEffect('restoreUserStateFx', restoreState)
-export const restoreDefaultStateFx = createHIDEffect(
-  'restoreDefaultState',
-  restoreDefaultState
-)
+export const saveStateFx = createHIDEffect({
+  name: 'saveStateFx',
+  handler: saveState
+})
+export const restoreUserStateFx = createHIDEffect({
+  name: 'restoreUserStateFx',
+  handler: restoreState
+})
+export const restoreDefaultStateFx = createHIDEffect({
+  name: 'restoreDefaultStateFx',
+  handler: restoreDefaultState
+})
 
 sample({
   clock: getFirmwareFx.doneData,

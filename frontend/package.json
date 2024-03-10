@@ -53,6 +53,7 @@
     "colorjs.io": "0.5.0",
     "deep-equal": "2.2.3",
     "effector": "23.2.0",
+    "effector-queue": "1.0.2",
     "patronum": "2.2.0",
     "svelte-awesome-color-picker": "2.4.8"
   }

@@ -33,7 +33,10 @@ export const secondaryActionStore = combine(keyMapStore, selectedKeyStore, (keyM
 })
 export const hasSecondaryActionStore = not(empty(secondaryActionStore))
 
-const getKeysFx = createHIDEffect('getKeys', getKeys)
+const getKeysFx = createHIDEffect({
+  name: 'getKeysFx',
+  handler: getKeys
+})
 const setKeysFx = createEffect('setKeys', { handler: setKeys })
 
 // Report that supported device is connected
