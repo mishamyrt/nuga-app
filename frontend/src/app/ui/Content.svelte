@@ -15,7 +15,7 @@
     flex: 1;
   }
 
-  :global(.os-mac) .border {
+  :global(.os-mac.dark) .border {
     position: fixed;
     pointer-events: none;
     width: 100%;
