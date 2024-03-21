@@ -18,6 +18,7 @@ export interface Page {
   Toolbar?: ComponentType<SvelteComponent>
   title?: string
   layoutProps?: SidebarLayoutProps
+  gradientToolbar?: boolean
 }
 
 export enum OSMode {

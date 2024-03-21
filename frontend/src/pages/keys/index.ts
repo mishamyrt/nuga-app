@@ -9,7 +9,8 @@ export const keys: Page = {
   layoutProps: {
     toolbar: {
       draggable: false,
-      height: 200
+      height: 200,
+      padding: 'none'
     },
     macInset: {
       enable: true

@@ -7,9 +7,10 @@
 
   $: toolbar = pages[$activePage].Toolbar
   $: title = pages[$activePage].title
+  $: isCustomBackground = pages[$activePage].layoutProps?.toolbar?.padding === 'none'
 </script>
 
-<div class="toolbar" use:fsd={'app/Toolbar'}>
+<div class="toolbar" class:gradient={isCustomBackground} use:fsd={'app/Toolbar'}>
   {#if toolbar}
     <svelte:component this={toolbar} />
   {:else if title}
@@ -20,15 +21,27 @@
 </div>
 
 <style lang="scss">
+  .toolbar {
+    flex: 1;
+    height: 100%;
+
+    &.gradient {
+      background: var(--toolbar-background-gradient);
+    }
+  }
+
+  :global(.os-mac.dark) .toolbar {
+    --toolbar-background-gradient: linear-gradient(0deg, #323232, var(--color-background-secondary));
+  }
+
+  :global(.os-mac.light) .toolbar {
+    --toolbar-background-gradient: linear-gradient(0deg, #EBEBEB, var(--color-background-secondary));
+  }
+
   .titlebar {
     padding: 0 var(--space-sl);
     height: 100%;
     align-items: center;
     display: flex;
-  }
-
-  .toolbar {
-    flex: 1;
-    height: 100%;
   }
 </style>
