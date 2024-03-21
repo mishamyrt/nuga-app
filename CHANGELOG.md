@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning][].
 
 - Improved toolbar styles on macOS.
 - Glyphs font loading.
+- Light mode keyboard appearance.
 
 ## [2.2.0-beta1]
 
