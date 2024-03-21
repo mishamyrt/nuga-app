@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Nuga Glyphs";
-  src: url("frontend/src/assets/fonts/Nuga-glyphs.otf");
+  src: url("./assets/fonts/Nuga-glyphs.otf");
   font-weight: 500;
 }
 

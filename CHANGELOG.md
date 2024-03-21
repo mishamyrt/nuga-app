@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ### Fixed
 
 - Improved toolbar styles on macOS.
+- Glyphs font loading.
 
 ## [2.2.0-beta1]
 
