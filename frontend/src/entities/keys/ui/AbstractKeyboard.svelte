@@ -79,10 +79,10 @@
 
   :global(.naco.light) .keys {
     --key-color-dark: #5c5c5c;
-    --key-color-light: rgb(255, 255, 255);
-    --key-color-mint: rgb(54, 251, 174);
-    --key-color-orange: rgba(255, 109, 52);
-    --key-color-yellow: rgb(255, 214, 0);
+    --key-color-light: rgb(255 255 255);
+    --key-color-mint: rgb(54 251 174);
+    --key-color-orange: rgb(255 109 52);
+    --key-color-yellow: rgb(255 214 0);
   }
 
   .key {
