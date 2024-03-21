@@ -3,7 +3,7 @@
 
 declare type RGBHexColor = string
 
-declare interface RGBColor {
+declare type RGBColor = {
   R: number
   G: number
   B: number

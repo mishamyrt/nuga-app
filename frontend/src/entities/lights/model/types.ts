@@ -4,7 +4,7 @@ export type LightStateValue = 0 | 1 | 2 | 3 | 4
 
 export type LightDomain = 'backlight' | 'sidelight' | 'halo'
 
-export interface LightDomainState {
+export type LightDomainState = {
   color: LightColorIndex
   speed: LightStateValue
   brightness: LightStateValue
@@ -15,7 +15,7 @@ export interface LightDomainState {
 export type LightDomainColors = RGBHexColor[]
 export type LightBacklightColors = RGBHexColor[][]
 
-export interface LightDomainMode {
+export type LightDomainMode = {
   code: number
   supports: {
     specificColor: boolean
@@ -25,7 +25,7 @@ export interface LightDomainMode {
   name: string
 }
 
-export interface LightEffectParams {
+export type LightEffectParams = {
   color: number
   speed: number
   brightness: number
@@ -41,19 +41,19 @@ export type LightDomainStateValue<T extends keyof LightDomainState> = {
   domain: LightDomain
 } & Pick<LightDomainState, T>
 
-export interface KeyboardLightSupports {
+export type KeyboardLightSupports = {
   sidelight: boolean
   halolight: boolean
   backlight: boolean
 }
 
-export interface KeyboardLightsColor {
+export type KeyboardLightsColor = {
   sidelight: RGBHexColor
   halolight: RGBHexColor
   backlight: KeyHighlightMatrix
 }
 
-export interface SetBacklightColorParams {
+export type SetBacklightColorParams = {
   mode: number
   colorIndex: number
   color: RGBColor

@@ -1,4 +1,4 @@
-export interface Supports {
+export type Supports = {
   backlight: boolean
   sidelight: boolean
   halolight: boolean

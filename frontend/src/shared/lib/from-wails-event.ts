@@ -4,7 +4,7 @@ import { EventsOn } from '$wailsjs/runtime'
 
 type WailsEventHandlerFn<T> = (...params: any[]) => T
 
-interface FromWailsEventConfig<T> {
+type FromWailsEventConfig<T> = {
   name?: string
   fn?: WailsEventHandlerFn<T>
 }

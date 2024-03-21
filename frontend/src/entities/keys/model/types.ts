@@ -1,6 +1,6 @@
 import type { ComponentType, SvelteComponent } from 'svelte'
 
-export interface Key {
+export type Key = {
   code: string | 'spacer'
   secondaryCode?: string
   color: 'light' | 'dark' | 'orange' | 'yellow' | 'mint'
@@ -13,29 +13,29 @@ export type KeyDescription = Partial<Key>
 
 export type KeyboardLayout = KeyDescription[][]
 
-export interface KeyboardTemplate {
+export type KeyboardTemplate = {
   keys: Key[][]
   columns: number
 }
 
-export interface KeyOption {
+export type KeyOption = {
   title: string
   value: string
 }
 
-export interface KeyGroup {
+export type KeyGroup = {
   title: string
   keys: KeyOption[]
 }
 
-export interface Modifiers {
+export type Modifiers = {
   ctrl: boolean
   shift: boolean
   alt: boolean
   meta: boolean
 }
 
-export interface KeyAction {
+export type KeyAction = {
   key: string
   modifiers: Modifiers
 }
@@ -44,7 +44,7 @@ export type KeyMap = Record<string, KeyAction>
 
 export type KeyNames = Record<string, string>
 
-export interface KeyComponentProps {
+export type KeyComponentProps = {
   key: Key
   location: [number, number]
   params?: Record<string, any>
@@ -52,7 +52,7 @@ export interface KeyComponentProps {
 
 export type KeyComponentType = ComponentType<SvelteComponent<KeyComponentProps>>
 
-export interface ActionChangeParams {
+export type ActionChangeParams = {
   key: string
   action: KeyAction
 }

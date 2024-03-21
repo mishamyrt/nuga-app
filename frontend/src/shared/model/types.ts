@@ -6,14 +6,14 @@ export type SupportedKeyboards =
   | 'Halo75'
   | 'Halo96'
 
-export interface ConnectionDescription {
+export type ConnectionDescription = {
   name: string
   path: string
 }
 
 export type AppPage = 'lights' | 'keys' | 'device'
 
-export interface Page {
+export type Page = {
   Content: ComponentType<SvelteComponent>
   Toolbar?: ComponentType<SvelteComponent>
   title?: string
