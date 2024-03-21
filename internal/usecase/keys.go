@@ -79,9 +79,10 @@ func (k *KeysUsecase) SetKeys(keys dto.KeyMap) error {
 		return err
 	}
 	if mode == dto.WindowsOSMode {
-		return dev.Features.Keys.SetWin(&layoutKeys)
+		err = dev.Features.Keys.SetWin(&layoutKeys)
+	} else {
+		err = dev.Features.Keys.SetMac(&layoutKeys)
 	}
-	err = dev.Features.Keys.SetMac(&layoutKeys)
 	if err != nil {
 		return err
 	}
