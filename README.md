@@ -7,7 +7,7 @@ Application for controlling NuPhy® keyboards.
 ### Features
 
 * Lights control.
-* Key mapping control (only Halo75 for now). 
+* Key mapping control (Halo75 and Halo65 for now). 
 
 **Supported devices**: Halo75, Halo65, Halo96.
 
