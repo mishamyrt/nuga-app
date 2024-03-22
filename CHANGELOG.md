@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning][].
 
 ## 2.2.0
 
+### Added
+
+- Custom keys highlight.
+
 ### Fixed
 
 - Hanging past state of Keystroke input.

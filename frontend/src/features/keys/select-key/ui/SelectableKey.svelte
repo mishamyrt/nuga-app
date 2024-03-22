@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { type Key, keySelected, selectedKeyStore } from '$entities/keys'
+  import deepEqual from 'deep-equal'
+
+  import { defaultKeyMapStore, type Key, keyMapStore, keySelected, selectedKeyStore } from '$entities/keys'
   import { getShortName } from '$entities/keys/lib'
 
   export let key: Key
@@ -14,6 +16,8 @@
 
   $: dark = key.color === 'dark'
   $: active = $selectedKeyStore.code === key.code
+  $: defaultAction = $defaultKeyMapStore[key.code]
+  $: custom = !deepEqual(defaultAction, $keyMapStore[key.code])
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -21,6 +25,7 @@
   class="key"
   class:dark
   class:active
+  class:custom
   on:click={handleClick}
   role="button"
   tabindex="0"
@@ -64,6 +69,10 @@
       border-radius: calc(var(--key-border-radius) + 4px);
       box-shadow: 0 0 0 6px transparent;
     }
+  }
+
+  .custom {
+    background-color: var(--color-content-accent-translucent);
   }
 
   .active {
