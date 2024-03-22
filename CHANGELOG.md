@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][],
 and this project adheres to [Semantic Versioning][].
 
+## 2.2.0
+
+### Fixed
+
+- Hanging past state of Keystroke input.
+
 ## [2.2.0-beta2]
 
 ### Fixed

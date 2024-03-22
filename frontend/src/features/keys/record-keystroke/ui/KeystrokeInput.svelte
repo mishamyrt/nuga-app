@@ -37,6 +37,7 @@
   }
 
   function startRecording () {
+    keystroke = defaultKeystroke
     recording = true
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('keyup', handleKeyUp)
