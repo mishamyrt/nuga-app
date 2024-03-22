@@ -12,7 +12,7 @@
 
   $: defaultAction = $defaultKeyMapStore[keyCode]
   $: isCustom = !deepEqual(defaultAction, $keyMapStore[keyCode])
-  $: disabled = $selectedKeyStore.readonly
+  $: disabled = $selectedKeyStore.readonly || !isCustom
 
   function handleToggleChange (e: CustomEvent<boolean>) {
     dispatch('restore', defaultAction)
