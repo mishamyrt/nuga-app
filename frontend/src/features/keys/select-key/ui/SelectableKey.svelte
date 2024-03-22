@@ -16,11 +16,14 @@
   $: active = $selectedKeyStore.code === key.code
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   class="key"
   class:dark
   class:active
   on:click={handleClick}
+  role="button"
+  tabindex="0"
 >
   {symbol}
 </div>
