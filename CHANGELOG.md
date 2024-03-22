@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning][].
 
 - Hanging past state of Keystroke input.
 - Custom switch is now disabled when action is default.
+- The order of action output is now correct and predictable.
 
 ## [2.2.0-beta2]
 

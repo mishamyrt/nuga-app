@@ -4,6 +4,9 @@ import (
 	"context"
 	"nuga_ui/internal/dto"
 	"nuga_ui/internal/interfaces"
+	"slices"
+	"sort"
+	"strconv"
 
 	"github.com/mishamyrt/nuga-lib/dump"
 	"github.com/mishamyrt/nuga-lib/features/keys/layout"
@@ -93,6 +96,19 @@ func (k *KeysUsecase) SetKeys(keys dto.KeyMap) error {
 	return nil
 }
 
+var groupsOrder = []string{
+	"Backlight",
+	"Multimedia",
+	"Modifiers",
+	"Special",
+	"Navigation",
+	"Letters",
+	"Numbers",
+	"Function",
+	"Symbols",
+	"NumPad",
+}
+
 // GetKeyGroups returns the key groups
 func (k *KeysUsecase) GetKeyGroups() []dto.KeyGroup {
 	keys := make(map[string][]dto.Key)
@@ -107,10 +123,33 @@ func (k *KeysUsecase) GetKeyGroups() []dto.KeyGroup {
 	}
 	groups := make([]dto.KeyGroup, 0)
 	for group, keys := range keys {
+		k.sortGroup(group, keys)
 		groups = append(groups, dto.KeyGroup{
 			Title: group,
 			Keys:  keys,
 		})
 	}
+	sort.Slice(groups, func(i, j int) bool {
+		firstIndex := slices.Index(groupsOrder, groups[i].Title)
+		secondIndex := slices.Index(groupsOrder, groups[j].Title)
+		return firstIndex < secondIndex
+	})
 	return groups
+}
+
+func (k *KeysUsecase) sortGroup(group string, keys []dto.Key) {
+	if group == "Function" {
+		sort.Slice(keys, func(i, j int) bool {
+			first, firstErr := strconv.Atoi(keys[i].Title[1:])
+			second, secondErr := strconv.Atoi(keys[j].Title[1:])
+			if firstErr != nil || secondErr != nil {
+				return false
+			}
+			return first < second
+		})
+	} else {
+		sort.Slice(keys, func(i, j int) bool {
+			return keys[i].Title < keys[j].Title
+		})
+	}
 }
