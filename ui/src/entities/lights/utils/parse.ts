@@ -1,5 +1,5 @@
 import { capitalize } from '$shared/lib'
-import type { light } from '$wailsjs/go/models'
+import type { light } from '$wails/go/models'
 
 import type { LightColorIndex, LightDomainMode, LightDomainState, LightEffectParams, LightStateValue } from '../model/types'
 

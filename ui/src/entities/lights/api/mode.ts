@@ -1,5 +1,5 @@
-import type { light } from '$wailsjs/go/models'
-import { GetLightModes } from '$wailsjs/go/usecase/LightsUsecase'
+import type { light } from '$wails/go/models'
+import { GetLightModes } from '$wails/go/usecase/LightsUsecase'
 
 import type { LightModes } from '../model/types'
 import { parseModes } from '../utils'

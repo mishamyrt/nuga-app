@@ -1,4 +1,4 @@
-import { GetSupports } from '$wailsjs/go/usecase/DeviceUsecase'
+import { GetSupports } from '$wails/go/usecase/DeviceUsecase'
 
 import type { Supports } from '../model/types'
 

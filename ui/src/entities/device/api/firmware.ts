@@ -1,4 +1,4 @@
-import { GetFirmware } from '$wailsjs/go/usecase/DeviceUsecase'
+import { GetFirmware } from '$wails/go/usecase/DeviceUsecase'
 
 export async function getFirmware (): Promise<string> {
   const version = await GetFirmware()

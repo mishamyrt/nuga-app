@@ -1,5 +1,5 @@
-import { dto } from '$wailsjs/go/models'
-import { GetLightState, SetLightState } from '$wailsjs/go/usecase/LightsUsecase'
+import { dto } from '$wails/go/models'
+import { GetLightState, SetLightState } from '$wails/go/usecase/LightsUsecase'
 
 import { defaultDomainState } from '../model/const'
 import type { LightState } from '../model/types'

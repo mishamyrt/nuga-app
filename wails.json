@@ -7,6 +7,7 @@
   "frontend:build": "pnpm run build",
   "frontend:dev:watcher": "pnpm run dev",
   "frontend:dev:serverUrl": "auto",
+  "wailsjsdir": "ui/src",
   "author": {
     "name": "mishamyrt",
     "email": "misha@myrt.co"
@@ -14,6 +15,6 @@
   "info": {
     "productVersion": "2.1.0",
     "comments": "NuPhy(R) keyboard configurator",
-    "copyright": "Copyright 2023 The Nuga Project Authors (https://github.com/mishamyrt/Nuga/blob/master/AUTHORS)"
+    "copyright": "Copyright 2024 The Nuga Project Authors (https://github.com/mishamyrt/Nuga/blob/master/AUTHORS)"
   }
 }

@@ -1,6 +1,6 @@
 import { createEvent, type Event } from 'effector'
 
-import { EventsOn } from '$wailsjs/runtime'
+import { EventsOn } from '$wails/runtime'
 
 type WailsEventHandlerFn<T> = (...params: any[]) => T
 

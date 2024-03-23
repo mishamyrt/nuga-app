@@ -1,4 +1,4 @@
-import { GetKeyGroups } from '$wailsjs/go/usecase/KeysUsecase'
+import { GetKeyGroups } from '$wails/go/usecase/KeysUsecase'
 
 import type { KeyGroup } from '../model'
 

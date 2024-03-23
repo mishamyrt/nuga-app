@@ -11,8 +11,8 @@ export default defineConfig({
       $entities: resolve(__dirname, './src/entities'),
       $widgets: resolve(__dirname, './src/widgets'),
       $pages: resolve(__dirname, './src/pages'),
-      '$wailsjs/runtime': resolve(__dirname, './wailsjs/runtime/runtime'),
-      '$wailsjs/go': resolve(__dirname, './wailsjs/go')
+      '$wails/runtime': resolve(__dirname, './src/wailsjs/runtime/runtime'),
+      '$wails/go': resolve(__dirname, './src/wailsjs/go')
     }
   },
   plugins: [svelte()]

@@ -1,4 +1,4 @@
-import { GetBacklightColors, SetBacklightColor } from '$wailsjs/go/usecase/LightsUsecase'
+import { GetBacklightColors, SetBacklightColor } from '$wails/go/usecase/LightsUsecase'
 
 import type { LightBacklightColors, SetBacklightColorParams } from '../model/types'
 import { rgbToHex } from '../utils/hex'

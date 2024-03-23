@@ -1,4 +1,4 @@
-import { GetMode, SetMode } from '$wailsjs/go/usecase/SettingsUsecase'
+import { GetMode, SetMode } from '$wails/go/usecase/SettingsUsecase'
 
 import type { OSMode } from '../model/types'
 

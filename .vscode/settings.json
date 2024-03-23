@@ -1,6 +1,6 @@
 {
   "eslint.workingDirectories": [
-    "./frontend/"
+    "./ui/"
 ],
 "cSpell.words": [
     "DOCKERHUB"

@@ -1,4 +1,4 @@
-import { Restart } from '$wailsjs/go/usecase/EnvironmentUsecase'
+import { Restart } from '$wails/go/usecase/EnvironmentUsecase'
 
 export async function restartApp () {
   await Restart()

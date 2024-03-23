@@ -17,8 +17,8 @@
       "$widgets": ["src/widgets"],
       "$entities/*": ["src/entities/*"],
       "$pages": ["src/pages"],
-      "$wailsjs/runtime": ["wailsjs/runtime/runtime"],
-      "$wailsjs/go/*": ["wailsjs/go/*"]
+      "$wails/runtime": ["src/wailsjs/runtime/runtime"],
+      "$wails/go/*": ["src/wailsjs/go/*"]
     },
     "outDir": "dist"
   },

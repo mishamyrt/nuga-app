@@ -1,4 +1,4 @@
-import { GetDefaultKeys, GetKeys, SetKeys } from '$wailsjs/go/usecase/KeysUsecase'
+import { GetDefaultKeys, GetKeys, SetKeys } from '$wails/go/usecase/KeysUsecase'
 
 import type { KeyMap } from '../model'
 
