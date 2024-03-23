@@ -11,7 +11,7 @@ import (
 	"path"
 )
 
-//go:embed all:frontend/dist
+//go:embed all:ui/dist
 var assets embed.FS
 
 //go:embed build/appicon.png

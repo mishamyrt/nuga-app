@@ -25,15 +25,15 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
       - name: Install C/C++ deps
         run: sudo apt install libudev-dev -y
-      - name: Install frontend deps
+      - name: Install ui deps
         run: |
-          cd frontend
+          cd ui
           pnpm install --frozen-lockfile
           cd ../..
       - name: Create dummy dist dir
         run: |
-          mkdir -p frontend/dist
-          echo "." > frontend/dist/.gitkeep
+          mkdir -p ui/dist
+          echo "." > ui/dist/.gitkeep
       - name: Install go deps
         run: go mod tidy
       - name: Lint with golangci-lint
@@ -46,11 +46,11 @@ jobs:
         with:
           config: revive.toml
           path: "./..."
-      - name: Lint frontend scripts
+      - name: Lint ui scripts
         run: |
-          cd frontend
+          cd ui
           pnpm run lint:scripts
-      - name: Lint frontend styles
+      - name: Lint ui styles
         run: |
-          cd frontend
+          cd ui
           pnpm run lint:styles

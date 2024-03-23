@@ -11,14 +11,14 @@ setup-qa:
 .PHONY: lint
 lint:
 	make lint-backend
-	make lint-frontend
+	make lint-ui
 
 .PHONY: lint-backend
 lint-backend:
 	golangci-lint run ./...
 	revive -config ./revive.toml  ./...
 
-.PHONY: lint-frontend
-lint-frontend:
-	cd frontend; pnpm lint
-	cd frontend; tsc
+.PHONY: lint-ui
+lint-ui:
+	cd ui; pnpm lint
+	cd ui; tsc

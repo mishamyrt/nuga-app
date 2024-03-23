@@ -25,8 +25,8 @@ generate:
 
 .PHONY: clean
 clean:
-	rm -rf frontend/node_modules
-	rm -rf frontend/dist
+	rm -rf ui/node_modules
+	rm -rf ui/dist
 	rm -rf "$(BUILD_PATH)"
 	rm -rf "$(DIST_PATH)"
 

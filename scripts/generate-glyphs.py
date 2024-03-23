@@ -2,7 +2,7 @@ from fontTools import subset
 from fontTools.ttLib import TTFont
 
 INPUT_PATH = "/Library/Fonts/SF-Pro-Display-Semibold.otf"
-OUTPUT_PATH = "./frontend/src/assets/fonts/Nuga-glyphs.otf"
+OUTPUT_PATH = "./ui/src/assets/fonts/Nuga-glyphs.otf"
 TARGET_GLYPHS = [
     '2325', # ⌥
     '2318', # ⌘

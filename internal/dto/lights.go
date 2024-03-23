@@ -13,7 +13,7 @@ type LightState struct {
 	BacklightParams *light.EffectParams `json:"backlightParams"`
 }
 
-// LightDomainRequest represents request part from frontend
+// LightDomainRequest represents request part from ui
 type LightDomainRequest struct {
 	Color      uint8 `json:"color"`
 	Speed      uint8 `json:"speed"`
@@ -21,7 +21,7 @@ type LightDomainRequest struct {
 	Mode       uint8 `json:"mode"`
 }
 
-// LightStateRequest represents request from frontend
+// LightStateRequest represents request from ui
 type LightStateRequest struct {
 	Backlight LightDomainRequest `json:"backlight"`
 	Sidelight LightDomainRequest `json:"sidelight"`
