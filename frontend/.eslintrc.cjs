@@ -17,7 +17,7 @@ const DENIED_PATH_GROUPS = [
 
 module.exports = {
   extends: [
-    'standard-with-typescript',
+    'love',
     'plugin:svelte/recommended',
     resolve(__dirname, './eslint/layers-slices.cjs'),
   ],
