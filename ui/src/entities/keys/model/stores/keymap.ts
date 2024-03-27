@@ -2,10 +2,10 @@ import { combine, createEffect, createEvent, createStore, sample } from 'effecto
 import { empty, not } from 'patronum'
 
 import { anyStateRestored, supportsStore } from '$entities/device/@x/keys'
-import { defaultKey, defaultKeyAction, defaultKeyMap } from '$entities/keys'
 import { createHIDEffect, modeChanged } from '$shared/model'
 
 import { getKeys, setKeys } from '../../api'
+import { defaultKey, defaultKeyAction, defaultKeyMap } from '../../lib'
 import type { ActionChangeParams, Key, KeyMap } from '../types'
 
 export const supportsKeyStore = supportsStore.map(({ keys }) => keys)
@@ -31,6 +31,7 @@ export const secondaryActionStore = combine(keyMapStore, selectedKeyStore, (keyM
   }
   return keyMap[key.secondaryCode] ?? null
 })
+
 export const hasSecondaryActionStore = not(empty(secondaryActionStore))
 
 const getKeysFx = createHIDEffect({
