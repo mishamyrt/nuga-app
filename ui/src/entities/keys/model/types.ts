@@ -42,6 +42,8 @@ export type KeyAction = {
 
 export type KeyMap = Record<string, KeyAction>
 
+export type KeyChangesMap = Record<string, boolean>
+
 export type KeyNames = Record<string, string>
 
 export type KeyComponentProps = {

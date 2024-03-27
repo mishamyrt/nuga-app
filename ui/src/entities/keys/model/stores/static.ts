@@ -3,12 +3,12 @@ import { createEffect, createStore, sample } from 'effector'
 import { createHIDEffect } from '$shared/model'
 
 import { getDefaultKeys, getGroups } from '../../api'
-import { codelessKeyNames } from '../../lib'
+import { codelessKeyNames, defaultKeyMap } from '../../lib'
 import type { KeyGroup, KeyMap, KeyNames } from '../types'
 import { keysInitiated } from './keymap'
 
 // This stores is mostly static. Data should be loaded only once after connection
-export const defaultKeyMapStore = createStore<KeyMap>({}, { name: 'defaultKeyMap' })
+export const defaultKeyMapStore = createStore<KeyMap>(defaultKeyMap, { name: 'defaultKeyMap' })
 export const keyGroupsStore = createStore<KeyGroup[]>([], { name: 'keyGroups' })
 export const keyNamesStore = createStore<KeyNames>({}, { name: 'keyNames' })
 
