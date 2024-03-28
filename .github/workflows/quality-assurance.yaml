@@ -49,8 +49,12 @@ jobs:
       - name: Lint ui scripts
         run: |
           cd ui
-          pnpm run lint:scripts
+          pnpm lint:scripts
       - name: Lint ui styles
         run: |
           cd ui
-          pnpm run lint:styles
+          pnpm lint:styles
+      - name: Test ui
+        run: |
+          cd ui
+          pnpm test
