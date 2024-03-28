@@ -22,3 +22,7 @@ lint-backend:
 lint-ui:
 	cd ui; pnpm lint
 	cd ui; tsc
+
+.PHONY: test
+test:
+	cd ui; pnpm test
