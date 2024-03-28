@@ -1,25 +1,9 @@
-import type { KeyAction } from '..'
-import { shortKeyNames } from './constants'
-
-const prefixes = ['numpad', 'num_', 'num']
-
-export function getShortName (key: string): string {
-  if (shortKeyNames[key]) {
-    return shortKeyNames[key]
-  }
-  for (const prefix of prefixes) {
-    if (key.startsWith(prefix)) {
-      return key.slice(prefix.length)
-    }
-  }
-  if (key.length <= 3) {
-    return key.toUpperCase()
-  }
-  return ''
-}
+import type { KeyAction } from '../model/types'
 
 export function isSameAction (a: KeyAction, b: KeyAction): boolean {
   let isModifiersDiffers = false
+  // NOTE: False positive
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   if ((a.modifiers && !b.modifiers) || (!a.modifiers && b.modifiers)) {
     return false
   } else if (a.modifiers && b.modifiers) {
