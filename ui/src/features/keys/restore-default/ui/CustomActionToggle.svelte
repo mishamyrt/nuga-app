@@ -1,17 +1,16 @@
 <script lang="ts">
   import { Toggle } from '@naco-ui/svelte'
-  import deepEqual from 'deep-equal'
   import { fsd } from 'feature-sliced-svelte'
   import { createEventDispatcher } from 'svelte'
 
-  import { defaultKeyMapStore, keyMapStore, selectedKeyStore } from '$entities/keys'
+  import { changesMapStore, defaultKeyMapStore, selectedKeyStore } from '$entities/keys'
 
   export let keyCode: string
 
   const dispatch = createEventDispatcher()
 
   $: defaultAction = $defaultKeyMapStore[keyCode]
-  $: isCustom = !deepEqual(defaultAction, $keyMapStore[keyCode])
+  $: isCustom = Boolean($changesMapStore[keyCode])
   $: disabled = $selectedKeyStore.readonly || !isCustom
 
   function handleToggleChange (e: CustomEvent<boolean>) {

@@ -1,7 +1,5 @@
 <script lang="ts">
-  import deepEqual from 'deep-equal'
-
-  import { defaultKeyMapStore, type Key, keyMapStore, keySelected, selectedKeyStore } from '$entities/keys'
+  import { changesMapStore, type Key, keySelected, selectedKeyStore } from '$entities/keys'
   import { getShortName } from '$entities/keys/lib'
 
   export let key: Key
@@ -16,8 +14,7 @@
 
   $: dark = key.color === 'dark'
   $: active = $selectedKeyStore.code === key.code
-  $: defaultAction = $defaultKeyMapStore[key.code]
-  $: custom = !deepEqual(defaultAction, $keyMapStore[key.code])
+  $: custom = $changesMapStore[key.code]
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

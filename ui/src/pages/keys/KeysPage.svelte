@@ -2,9 +2,10 @@
   import { FormGroup, Stack, Typography } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { selectedKeyStore } from '$entities/keys'
+  import { changesMapStore, selectedKeyStore } from '$entities/keys'
   import { getShortName } from '$entities/keys/lib'
   import { DeviceSupports } from '$features/device'
+  import { StoreDescription } from '$shared/ui'
   import { KeySettings, KeysNotSupported } from '$widgets'
 
   $: selectedKey = $selectedKeyStore
@@ -31,6 +32,7 @@
           This button is read-only. Its actions cannot be changed
         </Typography>
       {/if}
+      <StoreDescription store={changesMapStore} />
       <KeysNotSupported slot="not-supported" />
     </DeviceSupports>
   </Stack>
