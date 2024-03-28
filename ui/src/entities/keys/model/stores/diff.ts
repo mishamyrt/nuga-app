@@ -1,8 +1,7 @@
-import deepEqual from 'deep-equal'
 import { combine, createEvent, createStore, sample } from 'effector'
 import { once } from 'patronum'
 
-import { defaultChangesMap } from '../../lib'
+import { defaultChangesMap, isSameAction } from '../../lib'
 import type { KeyChangesMap, KeyMap } from '../types'
 import { actionChanged, keyMapStore, keysInitiated } from './keymap'
 import { defaultKeyMapStore } from './static'
@@ -35,9 +34,10 @@ sample({
   clock: keysLoaded,
   source: [keyMapStore, defaultKeyMapStore],
   fn: ([keyMap, defaultKeyMap]) => {
+    console.log('Keys init', { keyMap, defaultKeyMap })
     const changes: KeyChangesMap = {}
     for (const key in defaultKeyMap) {
-      changes[key] = !deepEqual(defaultKeyMap[key], keyMap[key])
+      changes[key] = !isSameAction(defaultKeyMap[key], keyMap[key])
     }
     return changes
   },
@@ -49,16 +49,9 @@ sample({
   source: [defaultKeyMapStore, changesMapStore],
   fn: (sources, { key, action }) => {
     const [defaultKeyMap, changesMap] = sources as [KeyMap, KeyChangesMap]
-    const defaultAction = defaultKeyMap[key]
-    const isModifiersChanged =
-      defaultAction.modifiers.ctrl !== action.modifiers.ctrl ||
-      defaultAction.modifiers.shift !== action.modifiers.shift ||
-      defaultAction.modifiers.alt !== action.modifiers.alt ||
-      defaultAction.modifiers.meta !== action.modifiers.meta
-    const isKeyChanged = defaultAction.key !== action.key || isModifiersChanged
     return {
       ...changesMap,
-      [key]: isKeyChanged
+      [key]: !isSameAction(defaultKeyMap[key], action)
     }
   },
   target: changesMapStore
