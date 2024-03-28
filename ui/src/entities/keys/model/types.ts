@@ -37,7 +37,7 @@ export type Modifiers = {
 
 export type KeyAction = {
   key: string
-  modifiers: Modifiers
+  modifiers?: Modifiers
 }
 
 export type KeyMap = Record<string, KeyAction>
