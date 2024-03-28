@@ -30,9 +30,9 @@
     "vite.config.ts",
     "svelte.config.js",
     ".stylelintrc.cjs",
-    "wailsjs/**/*.js",
-    "wailsjs/**/*.d.ts"
+    "src/wailsjs/**/*.d.ts"
   ],
+  "exclude": ["src/wailsjs/**/*.js"],
   "references": [
     {
       "path": "./tsconfig.node.json"
