@@ -1,10 +1,16 @@
 <script lang="ts">
-  import { FormRow, Stack, Typography } from '@naco-ui/svelte'
+  import { FormGroup, FormRow, Select, Stack, Typography } from '@naco-ui/svelte'
 
-  import { actionChanged, type KeyAction } from '$entities/keys'
+  import { actionChanged, keyMapStore } from '$entities/keys'
+  import { getShortName } from '$entities/keys/lib'
+  import type { KeyAction } from '$entities/keys/model/types'
   import { CustomActionToggle, KeyActionSelect, KeystrokeInput } from '$features/keys'
+  import KeyMacros from '$features/keys/select-macro/ui/KeyMacros.svelte'
 
   export let keyCode: string
+  export let secondary: boolean = false
+
+  let selectedType = 'none'
 
   function handleChange (e: CustomEvent<KeyAction>) {
     actionChanged({
@@ -13,17 +19,42 @@
     })
   }
 
+  function handleTypeChange (e: CustomEvent<string>) {
+    selectedType = e.detail
+  }
+
+  $: action = $keyMapStore[keyCode]
+  $: currentType = action?.type ?? 'none'
+  $: currentType && (() => {
+    selectedType = currentType
+  })()
+  $: keyTitle = getShortName(keyCode)
+
 </script>
 
-<FormRow title="Custom">
-  <CustomActionToggle {keyCode} on:restore={handleChange} />
-</FormRow>
-<FormRow>
-  <Stack align="center" justify="space-between" direction="horizontal">
-    <Typography>Action</Typography>
-    <KeyActionSelect {keyCode} on:input={handleChange} />
-  </Stack>
-</FormRow>
-<FormRow title="Keystroke">
-  <KeystrokeInput {keyCode} on:input={handleChange} />
-</FormRow>
+<FormGroup title={secondary ? `Fn + ${keyTitle}` : undefined}>
+  <FormRow title="Custom">
+    <CustomActionToggle {keyCode} on:restore={handleChange} />
+  </FormRow>
+  <FormRow align="center" title="Type">
+    <Select bind:value={selectedType} on:change={handleTypeChange} options={[
+      { value: 'none', title: 'None' },
+      { value: 'keystroke', title: 'Keystroke' },
+      { value: 'macro', title: 'Macro' }
+    ]} />
+  </FormRow>
+  {#if selectedType === 'keystroke'}
+  <FormRow>
+    <Stack align="center" justify="space-between" direction="horizontal">
+      <Typography>Action</Typography>
+      <KeyActionSelect {keyCode} on:input={handleChange} />
+    </Stack>
+  </FormRow>
+  <FormRow title="Keystroke">
+    <KeystrokeInput {keyCode} on:input={handleChange} />
+  </FormRow>
+  {/if}
+</FormGroup>
+{#if selectedType === 'macro'}
+  <KeyMacros {keyCode} />
+{/if}

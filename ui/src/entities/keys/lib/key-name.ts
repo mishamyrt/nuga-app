@@ -1,18 +1,19 @@
 import { shortKeyNames } from './constants'
 
-const prefixes = ['numpad', 'num_', 'num']
+const prefixes = ['numpad', 'num_', 'num', 'fn_']
 
 export function getShortName (key: string): string {
-  if (shortKeyNames[key]) {
-    return shortKeyNames[key]
-  }
+  let keyName = key
   for (const prefix of prefixes) {
     if (key.startsWith(prefix)) {
-      return key.slice(prefix.length)
+      keyName = key.slice(prefix.length)
     }
   }
-  if (key.length <= 3) {
-    return key.toUpperCase()
+  if (shortKeyNames[keyName]) {
+    return shortKeyNames[keyName]
+  }
+  if (keyName.length <= 3) {
+    return keyName.toUpperCase()
   }
   return ''
 }

@@ -33,7 +33,7 @@
   }
 
   $: activeKey = $keyMapStore[keyCode]
-  $: title = $keyNamesStore[activeKey?.key] ?? 'None'
+  $: title = $keyNamesStore[activeKey?.type === 'keystroke' ? activeKey.keystroke.key : 'None'] ?? 'None'
   $: disabled = $selectedKeyStore.readonly
 </script>
 
