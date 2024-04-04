@@ -2,7 +2,7 @@
   import { fsd } from 'feature-sliced-svelte'
   import { createEventDispatcher, onDestroy } from 'svelte'
 
-  import { type KeyAction, keyMapStore, KeyShortcut, selectedKeyStore } from '$entities/keys'
+  import { KeyActionType, keyMapStore, KeyShortcut, type KeystrokeAction, selectedKeyStore } from '$entities/keys'
 
   import { defaultKeystroke, keystrokeFromEvent } from '../lib'
 
@@ -10,7 +10,7 @@
 
   export let keyCode: string = 'none'
 
-  let keystroke: KeyAction = defaultKeystroke
+  let keystroke: KeystrokeAction = defaultKeystroke
   let recording = false
 
   function handleKeyDown (e: KeyboardEvent) {
@@ -20,7 +20,7 @@
       return
     }
     const nextKeystroke = keystrokeFromEvent(e)
-    if (nextKeystroke.key !== 'none') {
+    if (nextKeystroke.keystroke.key !== 'none') {
       e.preventDefault()
       stopRecording()
       dispatch('input', nextKeystroke)
@@ -62,8 +62,9 @@
 </script>
 
 <div use:fsd={'features/KeystrokeInput'}>
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div
+  {#if keyAction.type === KeyActionType.Keystroke}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div
     on:click={startRecording}
     class="preview"
     class:disabled
@@ -72,14 +73,15 @@
     tabindex="0"
   >
     <KeyShortcut
-      key={keyAction?.key}
+      key={keyAction.keystroke.key}
       dimmed={recording}
-      ctrl={keyAction.modifiers?.ctrl}
-      shift={keyAction.modifiers?.shift}
-      alt={keyAction.modifiers?.alt}
-      meta={keyAction.modifiers?.meta}
+      ctrl={keyAction.keystroke?.modifiers?.ctrl}
+      shift={keyAction.keystroke?.modifiers?.ctrl}
+      alt={keyAction.keystroke.modifiers?.alt}
+      meta={keyAction.keystroke.modifiers?.meta}
     />
   </div>
+  {/if}
 </div>
 
 <style lang="scss">

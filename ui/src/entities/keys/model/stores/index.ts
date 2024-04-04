@@ -1,4 +1,5 @@
 export * from './diff'
 export * from './keymap'
+export * from './macros'
 export * from './static'
 export * from './template'

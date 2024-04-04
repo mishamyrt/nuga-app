@@ -1,4 +1,4 @@
-import type { KeyAction } from '$entities/keys'
+import { type KeyAction, KeyActionType, type KeystrokeAction } from '$entities/keys'
 
 import { keyNameReplacements, keyPrefixReplacements, keysWithSameName } from './constants'
 
@@ -18,14 +18,17 @@ function keyNameFromEvent (e: KeyboardEvent): string {
   return 'none'
 }
 
-export function keystrokeFromEvent (e: KeyboardEvent): KeyAction {
+export function keystrokeFromEvent (e: KeyboardEvent): KeystrokeAction {
   return {
-    key: keyNameFromEvent(e),
-    modifiers: {
-      ctrl: e.ctrlKey,
-      shift: e.shiftKey,
-      alt: e.altKey,
-      meta: e.metaKey
+    type: KeyActionType.Keystroke,
+    keystroke: {
+      key: keyNameFromEvent(e),
+      modifiers: {
+        ctrl: e.ctrlKey,
+        shift: e.shiftKey,
+        alt: e.altKey,
+        meta: e.metaKey
+      }
     }
   }
 }

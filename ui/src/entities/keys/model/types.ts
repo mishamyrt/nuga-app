@@ -35,10 +35,37 @@ export type Modifiers = {
   meta: boolean
 }
 
-export type KeyAction = {
+export const enum KeyActionType {
+  None = 'none',
+  Macro = 'macro',
+  Keystroke = 'keystroke'
+}
+
+export type KeystrokeParams = {
   key: string
   modifiers?: Modifiers
 }
+
+export type KeyAction = KeystrokeAction | MacroKeyAction | NoneKeyAction
+
+type BaseAction = {
+  type: KeyActionType
+}
+
+export type NoneKeyAction = {
+  type: KeyActionType.None
+} & BaseAction
+
+export type MacroKeyAction = {
+  type: KeyActionType.Macro
+  macroIndex: number
+} & BaseAction
+
+export type KeystrokeAction = {
+  type: KeyActionType.Keystroke
+  keystroke: KeystrokeParams
+  macroIndex?: never // Ensures that macroIndex cannot be present when type is 'Keystroke'
+} & BaseAction
 
 export type KeyMap = Record<string, KeyAction>
 
@@ -57,4 +84,21 @@ export type KeyComponentType = ComponentType<SvelteComponent<KeyComponentProps>>
 export type ActionChangeParams = {
   key: string
   action: KeyAction
+}
+
+export const enum MacroActionType {
+  KeyDown = 'down',
+  KeyUp = 'up',
+}
+
+export type MacroAction = {
+  key: string
+  type: MacroActionType
+  delay?: number
+}
+
+export type Macro = {
+  actions: MacroAction[]
+  repeats: number
+  title: string
 }

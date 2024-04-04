@@ -1,9 +1,21 @@
 package dto
 
-import "github.com/mishamyrt/nuga-lib/features/keys/layout"
+import (
+	"github.com/mishamyrt/nuga-lib/features/keys"
+	"github.com/mishamyrt/nuga-lib/features/keys/layout"
+)
 
 // KeyMap represents a map of keys.
 type KeyMap layout.KeyMap
+
+// MacroWithTitle represents a macro with a title.
+type MacroWithTitle struct {
+	keys.Macro
+	Title string `json:"title"`
+}
+
+// Macros represents a list of macros.
+type Macros []MacroWithTitle
 
 // Key ... as it names
 type Key struct {
