@@ -10,16 +10,16 @@ import (
 )
 
 // GetState builds UIState from settings
-func (a *Application) getState() (dto.AppTheme, bool) {
+func (a *Application) getState() (dto.AppTheme, dto.OS, bool) {
 	config := a.repo.Settings.GetApp()
-	currentOS := a.repo.Environment.GetOS()
-	universal := currentOS != string(config.UI)
-	return config.Theme, universal
+	os := a.repo.Environment.GetOS()
+	universal := os != string(config.UI)
+	return config.Theme, config.UI, universal
 }
 
 // GetOptions for wails
 func (a *Application) GetOptions() *options.App {
-	theme, universal := a.getState()
+	theme, os, universal := a.getState()
 	macTitleBar := mac.TitleBarHiddenInset()
 	if universal {
 		macTitleBar = mac.TitleBarDefault()
@@ -34,12 +34,19 @@ func (a *Application) GetOptions() *options.App {
 	default:
 		macAppearance = mac.DefaultAppearance
 	}
+
+	minWidth := 730
+	minHeight := 600
+	if os == "linux" {
+		minWidth = 800
+		minHeight = 730
+	}
 	return &options.App{
 		Title:     config.AppName,
 		Width:     800,
-		MinWidth:  730,
-		Height:    700,
-		MinHeight: 450,
+		MinWidth:  minWidth,
+		Height:    minHeight,
+		MinHeight: minHeight,
 		MaxWidth:  1000,
 		AssetServer: &assetserver.Options{
 			Assets: a.assets,
