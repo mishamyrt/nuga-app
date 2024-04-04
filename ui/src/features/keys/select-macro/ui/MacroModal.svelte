@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, FormGroup, FormRow, Modal, ModalActions, Stack, Typography, getTheme } from '@naco-ui/svelte'
+  import { Button, FormGroup, FormRow, getTheme, Modal, ModalActions, Stack, Typography } from '@naco-ui/svelte'
   import { createEventDispatcher } from 'svelte'
 
   import { macroStore } from '$entities/keys'

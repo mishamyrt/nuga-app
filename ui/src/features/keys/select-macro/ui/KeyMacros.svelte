@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button, FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
 
-  import { keyMapStore, macroStore } from '$entities/keys'
+  import { actionChanged, isKeysSettingStore, KeyActionType, keyMapStore, macroStore } from '$entities/keys'
   import { MoreButton } from '$shared/ui'
 
   import MacroModal from './MacroModal.svelte'
@@ -34,6 +34,16 @@
     }
   }
 
+  function dispatchMacroChange (i: number) {
+    actionChanged({
+      key: keyCode,
+      action: {
+        type: KeyActionType.Macro,
+        macro: i
+      }
+    })
+  }
+
   $: macros = $macroStore
   $: selectedAction = $keyMapStore[keyCode]
   $: keyMacroIndex = selectedAction?.type === 'macro' ? selectedAction.macro : -1
@@ -49,7 +59,7 @@
         <Typography>{macro.title}</Typography>
         <Stack align="center" justify="end" direction="horizontal" gap="l">
           <div class="select-button" class:visible={hovered === macro.title && keyMacroIndex !== i}>
-            <Button disabled>
+            <Button disabled={$isKeysSettingStore} on:click={() => dispatchMacroChange(i)}>
               Select
             </Button>
           </div>
@@ -65,9 +75,14 @@
   />
 </FormGroup>
 <div class="add">
-  <Button on:click={handleCreate}>
-    Add macro...
-  </Button>
+  <Stack direction="horizontal" align="start" justify="space-between">
+    <div class="caption">
+      <Typography variant="caption-s" color="tertiary">The macro will start working after closing the Nuga application.</Typography>
+    </div>
+    <Button on:click={handleCreate}>
+      Add macro...
+    </Button>
+  </Stack>
 </div>
 
 <style lang="scss">
@@ -75,6 +90,10 @@
     margin-top: var(--space-m);
     display: flex;
     justify-content: flex-end;
+  }
+
+  .caption {
+    width: 180px;
   }
 
   .macro-row {
