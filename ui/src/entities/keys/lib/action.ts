@@ -1,17 +1,31 @@
-import type { KeyAction } from '../model/types'
+import { type KeyAction, KeyActionType } from '../model/types'
 
 export function isSameAction (a: KeyAction, b: KeyAction): boolean {
-  let isModifiersDiffers = false
-  if (Boolean(a.modifiers) !== Boolean(b.modifiers)) {
+  if (a.type !== b.type) {
     return false
   }
-  if (a.modifiers && b.modifiers) {
-    isModifiersDiffers = !(
-      a.modifiers.ctrl === b.modifiers.ctrl &&
-      a.modifiers.shift === b.modifiers.shift &&
-      a.modifiers.alt === b.modifiers.alt &&
-      a.modifiers.meta === b.modifiers.meta
-    )
+  if (a.type === KeyActionType.Keystroke && b.type === KeyActionType.Keystroke) {
+    let isModifiersDiffers = false
+    const aModifiers = a.keystroke.modifiers
+    const bModifiers = b.keystroke.modifiers
+    if (Boolean(aModifiers) !== Boolean(bModifiers)) {
+      return false
+    }
+    if (aModifiers && bModifiers) {
+      isModifiersDiffers = !(
+        aModifiers.ctrl === bModifiers.ctrl &&
+          aModifiers.shift === bModifiers.shift &&
+          aModifiers.alt === bModifiers.alt &&
+          aModifiers.meta === bModifiers.meta
+      )
+    }
+    return a.keystroke.key === b.keystroke.key && !isModifiersDiffers
   }
-  return a.key === b.key && !isModifiersDiffers
+  if (a.type === KeyActionType.Macro && b.type === KeyActionType.Macro) {
+    return a.macroIndex === b.macroIndex
+  }
+  if (a.type === KeyActionType.None && b.type === KeyActionType.None) {
+    return true
+  }
+  return false
 }

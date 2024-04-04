@@ -30,6 +30,24 @@ func (k *KeysUsecase) OnShutdown() error {
 	return nil
 }
 
+func (k *KeysUsecase) GetMacros() (*dto.Macros, error) {
+	dev := k.repo.Device.Get()
+	macros, err := dev.Features.Keys.GetMacros()
+	if err != nil {
+		return nil, err
+	}
+
+	titled := make([]dto.MacroWithTitle, 0, len(macros))
+	for i, macro := range macros {
+		titled = append(titled, dto.MacroWithTitle{
+			Macro: macro,
+			Title: "Macro " + strconv.Itoa(i),
+		})
+	}
+
+	return (*dto.Macros)(&titled), nil
+}
+
 // GetKeys returns the current keys
 func (k *KeysUsecase) GetKeys() (*dto.KeyMap, error) {
 	mode := k.repo.Settings.GetMode()

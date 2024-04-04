@@ -1,4 +1,4 @@
-import type { Key, KeyAction, KeyboardLayout, KeyboardTemplate, KeyChangesMap, KeyMap } from '../model/types'
+import { type Key, type KeyAction, KeyActionType, type KeyboardLayout, type KeyboardTemplate, type KeyChangesMap, type KeyMap } from '../model/types'
 import { Halo65, Halo75, Halo96 } from './layouts'
 
 export const supportedKeyboards: Record<string, KeyboardLayout> = {
@@ -13,13 +13,7 @@ export const defaultTemplate: Readonly<KeyboardTemplate> = {
 }
 
 export const defaultKeyAction: KeyAction = {
-  key: 'none',
-  modifiers: {
-    ctrl: false,
-    shift: false,
-    alt: false,
-    meta: false
-  }
+  type: KeyActionType.None
 }
 
 export const defaultKeyMap: KeyMap = {
