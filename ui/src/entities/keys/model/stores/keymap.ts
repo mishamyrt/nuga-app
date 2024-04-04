@@ -40,6 +40,8 @@ const getKeysFx = createHIDEffect({
 })
 const setKeysFx = createEffect('setKeys', { handler: setKeys })
 
+export const isKeysSettingStore = getKeysFx.pending
+
 // Report that supported device is connected
 sample({
   clock: supportsStore,
