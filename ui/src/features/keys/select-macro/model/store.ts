@@ -1,6 +1,7 @@
+import { getUniqueId } from '@naco-ui/svelte'
 import { createEvent, createStore, sample } from 'effector'
 
-import { macroChanged, macrosStore, type MacroStep, macroStepsStore, MacroStepType } from '$entities/keys'
+import { macroChanged, type MacroKeyStepType, macrosStore, type MacroStep, macroStepsStore, MacroStepType } from '$entities/keys'
 import { stepsToActions } from '$entities/keys/lib'
 
 import type { StepDelayChangedParams, StepKeystrokeChangedParams } from './types'
@@ -9,9 +10,10 @@ export const macroEdited = createEvent<number>('macroEdited')
 export const macroCreated = createEvent('macroCreated')
 export const macroStepKeystrokeChanged = createEvent<StepKeystrokeChangedParams>('macroStepKeystrokeChanged')
 export const macroStepDelayChanged = createEvent<StepDelayChangedParams>('macroStepActionChanged')
+export const macroStepKeystrokeAdded = createEvent('macroKeystrokeAdded')
+export const macroStepDelayAdded = createEvent('macroDelayRemoved')
 
 export const macroSubmitted = createEvent('macroSubmitted')
-
 export const modalClosed = createEvent('modalClosed')
 
 export const macroTitleChanged = createEvent<string>('macroTitleChanged')
@@ -138,3 +140,26 @@ currentMacroStepsStore.on(macroStepKeystrokeChanged, (steps, { id, keyName }) =>
     return step
   })
 })
+
+// Added macro steps
+currentMacroStepsStore.on(macroStepDelayAdded, (steps) => [
+  ...steps,
+  {
+    id: getUniqueId(),
+    type: MacroStepType.Wait,
+    delay: 50
+  }
+])
+currentMacroStepsStore.on(macroStepKeystrokeAdded, (steps) => [
+  ...steps,
+  {
+    id: getUniqueId(),
+    type: MacroStepType.KeyDown as MacroKeyStepType,
+    keyName: 'm'
+  },
+  {
+    id: getUniqueId(),
+    type: MacroStepType.KeyUp as MacroKeyStepType,
+    keyName: 'm'
+  }
+])
