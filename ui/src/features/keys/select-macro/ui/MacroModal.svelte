@@ -3,7 +3,7 @@
 
   import { TransparentInput, TransparentInputNumber } from '$shared/ui/TransparentInput'
 
-  import { macroRepeatsChanged, macroRepeatsStore, macroStepDelayAdded, macroStepKeystrokeAdded, macroSubmitted, macroTitleChanged, macroTitleStore, modalClosed, showMacroModalStore } from '../model'
+  import { currentMacroStepsStore, macroRepeatsChanged, macroRepeatsStore, macroStepDelayAdded, macroStepKeystrokeAdded, macroSubmitted, macroTitleChanged, macroTitleStore, modalClosed, showMacroModalStore } from '../model'
   import MacroSteps from './MacroSteps.svelte'
 
   const { os } = getTheme()
@@ -26,6 +26,7 @@
   }
 
   $: open = $showMacroModalStore
+  $: canSave = $macroTitleStore !== '' && $macroRepeatsStore > 0 && $currentMacroStepsStore.length > 0
 </script>
 
 <Modal fixed {open} width={$os === 'linux' ? 800 : 600}>
@@ -58,7 +59,7 @@
       <Button disabled on:click={handleClose} color="error">Delete</Button>
       <Stack gap="m" justify="end" direction="horizontal">
         <Button on:click={handleClose}>Cancel</Button>
-        <Button on:click={handleSubmit} primary>OK</Button>
+        <Button on:click={handleSubmit} disabled={!canSave} primary>OK</Button>
       </Stack>
     </Stack>
   </ModalActions>
