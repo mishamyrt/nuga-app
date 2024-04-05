@@ -1,25 +1,55 @@
 <script lang="ts">
-  import { MacroStepType } from '$entities/keys/model/types'
+  import { flip } from 'svelte/animate'
+  import { dndzone } from 'svelte-dnd-action'
 
-  import { currentMacroStepsStore } from '../model'
+  import { checkMacroStepsOrder } from '$entities/keys/lib'
+  import { MacroStepType } from '$entities/keys/model/types'
+  import { StepDelayInput } from '$entities/keys/ui'
+  import StepKeystrokeInput from '$entities/keys/ui/StepKeystrokeInput.svelte'
+
+  import { currentMacroStepsStore, macroStepDelayChanged, macroStepKeystrokeChanged, macroStepsChanged } from '../model'
+  import { type CustomDragEvent } from '../model/types'
+
+  const flipDurationMs = 300
+  function handleDndConsider (e: CustomDragEvent) {
+    if (checkMacroStepsOrder(e.detail.items)) {
+      macroStepsChanged(e.detail.items)
+    }
+  }
+  function handleDndFinalize (e: CustomDragEvent) {
+    macroStepsChanged(e.detail.items)
+  }
 
   $: macroSteps = $currentMacroStepsStore
 </script>
 
 <div class="container">
-  <div class="steps">
-    {#each macroSteps as step}
-      <div class="step" role="button">
+  <div
+    class="steps"
+    use:dndzone="{{ items: macroSteps, flipDurationMs }}"
+    on:consider="{handleDndConsider}"
+    on:finalize="{handleDndFinalize}"
+  >
+    {#each macroSteps as step(step.id)}
+      <div animate:flip="{{ duration: flipDurationMs }}" class="step">
         <div class="title">
           {step.type}
         </div>
-        <div class="value">
-          {#if step.type === MacroStepType.KeyDown || step.type === MacroStepType.KeyUp}
-            {step.keyName}
-          {:else if step.type === MacroStepType.Wait}
-            {step.delay} ms
-          {/if}
-        </div>
+        {#if step.type === MacroStepType.KeyDown || step.type === MacroStepType.KeyUp}
+          <StepKeystrokeInput
+            on:input={(e) => macroStepKeystrokeChanged({
+              id: step.id,
+              keyName: e.detail
+            })}
+            keyName={step.keyName} />
+        {:else if step.type === MacroStepType.Wait}
+          <StepDelayInput
+            on:input={(e) => macroStepDelayChanged({
+              id: step.id,
+              delay: e.detail
+            })}
+            value={step.delay} />
+        {/if}
       </div>
     {/each}
   </div>
@@ -45,6 +75,7 @@
   }
 
   .step {
+    cursor: default !important;
     font: var(--typography-heading-s);
     color: var(--color-content-primary);
     display: flex;
@@ -53,25 +84,6 @@
     border-radius: var(--border-radius-l);
     border: 1px solid var(--color-border-dimmed);
     align-items: center;
-  }
-
-  .value {
-    position: relative;
-    margin-left: var(--space-s);
-    padding: var(--space-xs);
-    color: var(--color-content-accent);
-
-    &::before {
-      content: ' ';
-      display: block;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: var(--color-content-accent);
-      opacity: 0.1;
-      border-radius: var(--border-radius-s);
-    }
+    user-select: none;
   }
 </style>

@@ -107,3 +107,48 @@ export function paramsToMacro (params: MacroChangedParams): Macro {
     actions: params.actions
   }
 }
+
+export function checkMacroStepsOrder (steps: MacroStep[]): boolean {
+  for (let i = 0; i < steps.length; i++) {
+    const step = steps[i]
+    let isFound
+    switch (step.type) {
+      case MacroStepType.KeyDown:
+        isFound = false
+        for (let j = i + 1; j < steps.length; j++) {
+          const { keyName, type } = steps[j]
+          if (keyName === step.keyName) {
+            isFound = true
+            if (type === MacroStepType.KeyDown) {
+              return false
+            }
+          }
+        }
+        if (!isFound) {
+          return false
+        }
+        break
+      case MacroStepType.KeyUp:
+        isFound = false
+        for (let j = i - 1; j >= 0; j--) {
+          const prevStep = steps[j]
+          if (prevStep.keyName === step.keyName) {
+            isFound = true
+            if (prevStep.type === MacroStepType.KeyUp) {
+              return false
+            }
+          }
+        }
+        if (!isFound) {
+          return false
+        }
+        break
+      case MacroStepType.Wait:
+        if (i === 0) {
+          return false
+        }
+        break
+    }
+  }
+  return true
+}
