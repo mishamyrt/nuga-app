@@ -98,35 +98,17 @@ function simplifyStepsDelay (steps: MacroStep[]): MacroStep[] {
 export function checkMacroStepsOrder (steps: MacroStep[]): boolean {
   for (let i = 0; i < steps.length; i++) {
     const step = steps[i]
-    let isFound
+    let pairIndex: number
     switch (step.type) {
       case MacroStepType.KeyDown:
-        isFound = false
-        for (let j = i + 1; j < steps.length; j++) {
-          const { keyName, type } = steps[j]
-          if (keyName === step.keyName) {
-            isFound = true
-            if (type === MacroStepType.KeyDown) {
-              return false
-            }
-          }
-        }
-        if (!isFound) {
+        pairIndex = findStepIndexToBottom(steps, step.keyName, i)
+        if (pairIndex === -1 || steps[pairIndex].type === MacroStepType.KeyDown) {
           return false
         }
         break
       case MacroStepType.KeyUp:
-        isFound = false
-        for (let j = i - 1; j >= 0; j--) {
-          const prevStep = steps[j]
-          if (prevStep.keyName === step.keyName) {
-            isFound = true
-            if (prevStep.type === MacroStepType.KeyUp) {
-              return false
-            }
-          }
-        }
-        if (!isFound) {
+        pairIndex = findStepIndexToTop(steps, step.keyName, i)
+        if (pairIndex === -1 || steps[pairIndex].type === MacroStepType.KeyUp) {
           return false
         }
         break
@@ -138,4 +120,22 @@ export function checkMacroStepsOrder (steps: MacroStep[]): boolean {
     }
   }
   return true
+}
+
+export function findStepIndexToTop (steps: MacroStep[], keyName: string, startIndex: number): number {
+  for (let i = startIndex - 1; i >= 0; i--) {
+    if (steps[i].keyName === keyName) {
+      return i
+    }
+  }
+  return -1
+}
+
+export function findStepIndexToBottom (steps: MacroStep[], keyName: string, startIndex: number): number {
+  for (let i = startIndex + 1; i < steps.length; i++) {
+    if (steps[i].keyName === keyName) {
+      return i
+    }
+  }
+  return -1
 }
