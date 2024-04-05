@@ -60,10 +60,9 @@ sample({
   target: currentMacroStepsStore,
   fn: (macros, i) => macros[i]
 })
-sample({
-  clock: macroEdited,
-  target: indexStore
-})
+
+indexStore.on(macroEdited, (_, index) => index)
+indexStore.reset(macroCreated)
 
 // Set clear macro on create
 sample({
