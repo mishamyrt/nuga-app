@@ -3,18 +3,17 @@ import { createEvent, createStore, sample } from 'effector'
 import { createHIDEffect, disconnected } from '$shared/model'
 
 import { getMacros, setMacros } from '../../api'
-import { macroToSteps, paramsToMacro } from '../../lib'
-import type { Macro, MacroChangedParams } from '../types'
-import { keysInitiated } from './keymap'
+import { paramsToMacro } from '../../lib'
+import { type KeyAction, KeyActionType, type KeyMap, type Macro, type MacroChangedParams } from '../types'
+import { keyMapChanged, keyMapStore, keysInitiated } from './keymap'
 
 export const macroChanged = createEvent<MacroChangedParams>('macrosUpdated')
+export const macroRemoved = createEvent<number>('macroRemoved')
 export const macrosChanged = createEvent<Macro[]>('macrosChanged')
 
 export const macrosStore = createStore<Macro[]>([], {
   name: 'macros'
 })
-
-export const macroStepsStore = macrosStore.map(macros => macros.map(macroToSteps))
 
 const getMacrosFx = createHIDEffect({
   name: 'getMacrosFx',
@@ -44,6 +43,41 @@ sample({
     }
   },
   target: macrosChanged
+})
+
+sample({
+  clock: macroRemoved,
+  source: macrosStore,
+  fn: (all, index) => all.filter((_, i) => i !== index),
+  target: macrosChanged
+})
+
+sample({
+  clock: macroRemoved,
+  source: keyMapStore,
+  fn: (keyMap, index) => {
+    return Object.entries(keyMap).reduce<KeyMap>((acc, [key, action]) => {
+      let nextAction: KeyAction
+      if (action.type === KeyActionType.Macro) {
+        if (action.macro === index) {
+          nextAction = { type: KeyActionType.None }
+        } else if (action.macro > index) {
+          nextAction = { type: KeyActionType.Macro, macro: action.macro - 1 }
+        } else {
+          nextAction = action
+        }
+        return {
+          ...acc,
+          [key]: nextAction
+        }
+      }
+      return {
+        ...acc,
+        [key]: action
+      }
+    }, {})
+  },
+  target: keyMapChanged
 })
 
 sample({

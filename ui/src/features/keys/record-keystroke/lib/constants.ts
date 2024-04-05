@@ -16,27 +16,3 @@ export const defaultKeystroke: KeystrokeAction = {
     }
   }
 }
-
-export const keyPrefixReplacements: Record<string, string> = {
-  Key: '',
-  Digit: 'num'
-}
-
-export const keyNameReplacements: Record<string, string> = {
-  BracketLeft: 'lbracket',
-  BracketRight: 'rbracket'
-}
-
-export const keysWithSameName = [
-  'Space',
-  'Enter',
-  'Delete',
-  'End',
-  'Backslash',
-  'Backspace',
-  'Slash',
-  'Comma',
-  'CapsLock',
-  'Semicolon',
-  'Quote'
-]

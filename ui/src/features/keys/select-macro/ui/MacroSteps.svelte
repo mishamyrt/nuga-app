@@ -4,14 +4,12 @@
   import { flip } from 'svelte/animate'
   import { dndzone } from 'svelte-dnd-action'
 
-  import { checkMacroStepsOrder } from '$entities/keys/lib'
-  import { MacroStepType } from '$entities/keys/model/types'
   import { StepDelayInput } from '$entities/keys/ui'
   import StepKeystrokeInput from '$entities/keys/ui/StepKeystrokeInput.svelte'
 
-  import { observeStepsOn } from '../lib'
+  import { checkMacroStepsOrder, observeStepsOn } from '../lib'
   import { currentMacroStepsStore, macroStepDelayAdded, macroStepDelayChanged, macroStepKeystrokeAdded, macroStepKeystrokeChanged, macroStepsChanged } from '../model'
-  import { type CustomDragEvent } from '../model/types'
+  import { type CustomDragEvent, MacroStepType } from '../model/types'
 
   let stepsContainer: HTMLDivElement
   let subscriptions: Subscription[]

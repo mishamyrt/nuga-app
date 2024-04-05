@@ -87,3 +87,45 @@ export const codelessKeyNames: Record<string, string> = {
   fn_right: 'Fn + Right',
   fn_up: 'Fn + Up'
 }
+
+export const keyPrefixReplacements: Record<string, string> = {
+  Key: '',
+  Digit: 'num'
+}
+
+export const keyNameReplacements: Record<string, string> = {
+  BracketLeft: 'lbracket',
+  BracketRight: 'rbracket',
+  ControlLeft: 'lctrl',
+  ControlRight: 'rctrl',
+  AltLeft: 'lalt',
+  AltRight: 'ralt',
+  MetaLeft: 'lmeta',
+  MetaRight: 'rmeta',
+  ShiftLeft: 'lshift',
+  ShiftRight: 'rshift',
+  Backquote: 'grave',
+  ArrowRight: 'right',
+  ArrowLeft: 'left',
+  ArrowUp: 'up',
+  ArrowDown: 'down'
+}
+
+export const keysWithSameName = [
+  'Tab',
+  'Space',
+  'Home',
+  'Equal',
+  'Minus',
+  'Space',
+  'Enter',
+  'Delete',
+  'End',
+  'Backslash',
+  'Backspace',
+  'Slash',
+  'Comma',
+  'CapsLock',
+  'Semicolon',
+  'Quote'
+]
