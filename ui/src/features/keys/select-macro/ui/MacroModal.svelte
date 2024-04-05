@@ -3,7 +3,7 @@
 
   import { TransparentInput, TransparentInputNumber } from '$shared/ui/TransparentInput'
 
-  import { macroRepeatsChanged, macroRepeatsStore, macroSubmitted, macroTitleChanged, macroTitleStore, modalClosed, showMacroModalStore } from '../model'
+  import { macroRepeatsChanged, macroRepeatsStore, macroStepDelayAdded, macroStepKeystrokeAdded, macroSubmitted, macroTitleChanged, macroTitleStore, modalClosed, showMacroModalStore } from '../model'
   import MacroSteps from './MacroSteps.svelte'
 
   const { os } = getTheme()
@@ -32,8 +32,8 @@
   <Stack gap="m">
     <MacroSteps />
     <Stack gap="m" justify="start" direction="horizontal">
-      <Button disabled>Add keystroke</Button>
-      <Button disabled>Add wait</Button>
+      <Button on:click={() => macroStepKeystrokeAdded()}>Add keystroke</Button>
+      <Button on:click={() => macroStepDelayAdded()}>Add wait</Button>
       <Button disabled>Record</Button>
     </Stack>
     <FormGroup>

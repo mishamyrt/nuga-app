@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { Subscription } from 'effector'
+  import { onDestroy, onMount } from 'svelte'
   import { flip } from 'svelte/animate'
   import { dndzone } from 'svelte-dnd-action'
 
@@ -7,8 +9,12 @@
   import { StepDelayInput } from '$entities/keys/ui'
   import StepKeystrokeInput from '$entities/keys/ui/StepKeystrokeInput.svelte'
 
-  import { currentMacroStepsStore, macroStepDelayChanged, macroStepKeystrokeChanged, macroStepsChanged } from '../model'
+  import { observeStepsOn } from '../lib'
+  import { currentMacroStepsStore, macroStepDelayAdded, macroStepDelayChanged, macroStepKeystrokeAdded, macroStepKeystrokeChanged, macroStepsChanged } from '../model'
   import { type CustomDragEvent } from '../model/types'
+
+  let stepsContainer: HTMLDivElement
+  let subscriptions: Subscription[]
 
   const flipDurationMs = 300
   function handleDndConsider (e: CustomDragEvent) {
@@ -21,11 +27,32 @@
   }
 
   $: macroSteps = $currentMacroStepsStore
+
+  onMount(() => {
+    subscriptions = observeStepsOn(stepsContainer,
+      {
+        event: macroStepKeystrokeAdded,
+        offset: 1,
+        actionSelector: '.step-keystroke',
+        fn: (node: HTMLButtonElement) => node.click()
+      },
+      {
+        event: macroStepDelayAdded,
+        actionSelector: 'input',
+        fn: (node: HTMLInputElement) => node.focus()
+      }
+    )
+  })
+
+  onDestroy(() => {
+    subscriptions.forEach((s) => s.unsubscribe())
+  })
 </script>
 
 <div class="container">
   <div
     class="steps"
+    bind:this={stepsContainer}
     use:dndzone="{{ items: macroSteps, flipDurationMs }}"
     on:consider="{handleDndConsider}"
     on:finalize="{handleDndFinalize}"
