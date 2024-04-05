@@ -1,29 +1,22 @@
 <script lang="ts">
   import { Button, FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
 
-  import { actionChanged, isKeysSettingStore, KeyActionType, keyMapStore, macroStore } from '$entities/keys'
+  import { actionChanged, isKeysSettingStore, KeyActionType, keyMapStore, macrosStore } from '$entities/keys'
   import { MoreButton } from '$shared/ui'
 
+  import { macroCreated, macroEdited } from '../model'
   import MacroModal from './MacroModal.svelte'
 
   export let keyCode: string
 
-  let showModal = false
-  let selectedIndex = -1
   let hovered: string | undefined
 
   function handleCreate () {
-    selectedIndex = -1
-    showModal = true
+    macroCreated()
   }
 
   function handleEdit (i: number) {
-    selectedIndex = i
-    showModal = true
-  }
-
-  function handleCloseModal () {
-    showModal = false
+    macroEdited(i)
   }
 
   function setHovered (e: CustomEvent<boolean>, title: string | undefined) {
@@ -44,7 +37,7 @@
     })
   }
 
-  $: macros = $macroStore
+  $: macros = $macrosStore
   $: selectedAction = $keyMapStore[keyCode]
   $: keyMacroIndex = selectedAction?.type === 'macro' ? selectedAction.macro : -1
 </script>
@@ -68,11 +61,7 @@
       </div>
     </FormRow>
   {/each}
-  <MacroModal
-    open={showModal}
-    index={selectedIndex}
-    on:close={handleCloseModal}
-  />
+  <MacroModal />
 </FormGroup>
 <div class="add">
   <Stack direction="horizontal" align="start" justify="space-between">
@@ -113,7 +102,6 @@
   .selected-mark {
     visibility: hidden;
     font: var(--typography-heading-m);
-
     color: var(--color-content-primary);
 
     &.visible {

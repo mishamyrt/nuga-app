@@ -26,6 +26,9 @@ dependencies:
   svelte-awesome-color-picker:
     specifier: 2.4.8
     version: 2.4.8
+  svelte-dnd-action:
+    specifier: ^0.9.42
+    version: 0.9.42(svelte@4.2.12)
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte':
@@ -4119,6 +4122,14 @@ packages:
       - stylus
       - sugarss
     dev: true
+
+  /svelte-dnd-action@0.9.42(svelte@4.2.12):
+    resolution: {integrity: sha512-hrlMnAtUrQP8V4vH9+dKHzX3z5u9BAo6F/BUUqKftiF6/Wh+yC560kgzTzB2fSZxumd2e6A4RalwlH0NYIllSw==}
+    peerDependencies:
+      svelte: '>=3.23.0'
+    dependencies:
+      svelte: 4.2.12
+    dev: false
 
   /svelte-eslint-parser@0.33.1(svelte@4.2.12):
     resolution: {integrity: sha512-vo7xPGTlKBGdLH8T5L64FipvTrqv3OQRx9d2z5X05KKZDlF4rQk8KViZO4flKERY+5BiVdOh7zZ7JGJWo5P0uA==}

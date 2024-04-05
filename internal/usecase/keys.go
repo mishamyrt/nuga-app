@@ -30,7 +30,8 @@ func (k *KeysUsecase) OnShutdown() error {
 	return nil
 }
 
-func (k *KeysUsecase) GetMacros() (*dto.Macros, error) {
+// GetMacros returns the list of macros
+func (k *KeysUsecase) GetMacros() (dto.Macros, error) {
 	dev := k.repo.Device.Get()
 	macros, err := dev.Features.Keys.GetMacros()
 	if err != nil {
@@ -38,14 +39,48 @@ func (k *KeysUsecase) GetMacros() (*dto.Macros, error) {
 	}
 
 	titled := make([]dto.MacroWithTitle, 0, len(macros))
+	stored := k.repo.Settings.GetMacros()
+
 	for i, macro := range macros {
+		var title string
+		for _, storedMacro := range stored {
+			isSame, err := dto.IsSameMacro(macro, storedMacro.Macro)
+			if err != nil {
+				return nil, err
+			}
+			if isSame {
+				title = storedMacro.Title
+				break
+			}
+		}
+		if title == "" {
+			title = "Macro " + strconv.Itoa(i+1)
+		}
 		titled = append(titled, dto.MacroWithTitle{
 			Macro: macro,
-			Title: "Macro " + strconv.Itoa(i),
+			Title: title,
 		})
 	}
 
-	return (*dto.Macros)(&titled), nil
+	return titled, nil
+}
+
+// SetMacros sets the list of macros
+func (k *KeysUsecase) SetMacros(macros dto.Macros) error {
+	dev := k.repo.Device.Get()
+	effect, err := dev.Features.Light.GetEffects()
+	if err != nil {
+		return err
+	}
+	err = dev.Features.Keys.SetMacros(macros.ToDomain())
+	if err != nil {
+		return err
+	}
+	err = k.repo.Settings.SetMacros(macros)
+	if err != nil {
+		return err
+	}
+	return dev.Features.Light.SetEffects(effect)
 }
 
 // GetKeys returns the current keys

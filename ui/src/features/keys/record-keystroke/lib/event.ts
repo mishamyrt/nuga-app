@@ -1,4 +1,4 @@
-import { type KeyAction, KeyActionType, type KeystrokeAction } from '$entities/keys'
+import { KeyActionType, type KeystrokeAction } from '$entities/keys'
 
 import { keyNameReplacements, keyPrefixReplacements, keysWithSameName } from './constants'
 

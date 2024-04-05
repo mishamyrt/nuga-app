@@ -67,6 +67,7 @@ type AppSettings struct {
 
 // Settings represents the overall configuration for the application.
 type Settings struct {
-	Mode OSMode      `json:"mode"`
-	App  AppSettings `json:"app"`
+	Mode  OSMode      `json:"mode"`
+	App   AppSettings `json:"app"`
+	Macro Macros      `json:"macros"`
 }

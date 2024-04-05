@@ -31,6 +31,8 @@ type SettingsRepository interface {
 	SetMode(m dto.OSMode) error
 	GetApp() *dto.AppSettings
 	SetApp(ui dto.AppSettings) error
+	GetMacros() dto.Macros
+	SetMacros(macros dto.Macros) error
 }
 
 // EnvironmentRepository defines the interface for retrieving environment-related information.

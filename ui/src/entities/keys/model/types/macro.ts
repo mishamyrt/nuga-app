@@ -25,6 +25,7 @@ export type MacroKeyStepType = MacroStepType.KeyDown | MacroStepType.KeyUp
 
 export type MacroBasicStep = {
   type: MacroStepType
+  id: string
   keyName?: string
   delay?: number
 }
@@ -40,3 +41,10 @@ export type MacroKeyStep = {
 } & MacroBasicStep
 
 export type MacroStep = MacroWaitStep | MacroKeyStep
+
+export type MacroChangedParams = {
+  index: number
+  title: string
+  actions: MacroAction[]
+  repeats: number
+}
