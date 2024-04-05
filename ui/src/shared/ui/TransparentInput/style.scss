@@ -1,0 +1,19 @@
+.transparent-input {
+  color-scheme: light dark;
+  border: none;
+  background: none;
+  appearance: none;
+  font: var(--typography-text-m);
+  color: var(--color-content-primary);
+  text-align: var(--input-align);
+  transition: var(--transition-default);
+  transition-property: outline;
+  padding: var(--space-xs);
+  border-radius: var(--border-radius-s);
+  margin: calc(var(--space-xs) * -1) 0;
+  outline: 0 solid transparent;
+
+  &:focus {
+    outline: var(--space-xxs) solid var(--color-content-accent-translucent);
+  }
+}

@@ -1,17 +1,15 @@
 <script lang="ts">
-  import { macroStepsStore } from '$entities/keys'
   import { MacroStepType } from '$entities/keys/model/types'
 
-  export let index: number
+  import { currentMacroStepsStore } from '../model'
 
-  $: isNew = index === -1
-  $: macroSteps = isNew ? [] : $macroStepsStore[index]
+  $: macroSteps = $currentMacroStepsStore
 </script>
 
 <div class="container">
   <div class="steps">
     {#each macroSteps as step}
-      <div class="step">
+      <div class="step" role="button">
         <div class="title">
           {step.type}
         </div>
@@ -29,7 +27,7 @@
 
 <style lang="scss">
   .container {
-    height: 400px;
+    height: 386px;
     padding: 0 var(--space-m);
     background-color: var(--color-background-overlay);
     border: 1px solid var(--color-border-main);
@@ -41,8 +39,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-m);
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden scroll;
     margin-right: calc(var(--scroll-bar-track-width) * -1);
     padding: var(--space-m) 0;
   }

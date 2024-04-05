@@ -22,7 +22,7 @@ export function isSameAction (a: KeyAction, b: KeyAction): boolean {
     return a.keystroke.key === b.keystroke.key && !isModifiersDiffers
   }
   if (a.type === KeyActionType.Macro && b.type === KeyActionType.Macro) {
-    return a.macroIndex === b.macroIndex
+    return a.macro === b.macro
   }
   if (a.type === KeyActionType.None && b.type === KeyActionType.None) {
     return true

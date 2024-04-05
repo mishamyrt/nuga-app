@@ -1,49 +1,64 @@
 <script lang="ts">
-  import { Button, FormGroup, FormRow, getTheme, Modal, ModalActions, Stack, Typography } from '@naco-ui/svelte'
-  import { createEventDispatcher } from 'svelte'
+  import { Button, FormGroup, FormRow, getTheme, Modal, ModalActions, Stack } from '@naco-ui/svelte'
 
-  import { macroStore } from '$entities/keys'
+  import { TransparentInput, TransparentInputNumber } from '$shared/ui/TransparentInput'
 
+  import { macroRepeatsChanged, macroRepeatsStore, macroSubmitted, macroTitleChanged, macroTitleStore, modalClosed, showMacroModalStore } from '../model'
   import MacroSteps from './MacroSteps.svelte'
-
-  export let open = false
-  export let index: number
-
-  const dispatch = createEventDispatcher()
 
   const { os } = getTheme()
 
   function handleClose () {
-    dispatch('close')
+    modalClosed()
   }
 
-  $: isNew = index === -1
-  $: name = isNew ? `Macro ${$macroStore.length}` : $macroStore[index].title
-  $: repeats = isNew ? 1 : $macroStore[index].repeats
+  function handleNameChange (e: CustomEvent<string>) {
+    macroTitleChanged(e.detail)
+  }
+
+  function handleRepeatsChange (e: CustomEvent<number>) {
+    macroRepeatsChanged(e.detail)
+  }
+
+  function handleSubmit () {
+    macroSubmitted()
+    modalClosed()
+  }
+
+  $: open = $showMacroModalStore
 </script>
 
 <Modal fixed {open} width={$os === 'linux' ? 800 : 600}>
   <Stack gap="m">
-    <MacroSteps {index} />
+    <MacroSteps />
+    <Stack gap="m" justify="start" direction="horizontal">
+      <Button disabled>Add keystroke</Button>
+      <Button disabled>Add wait</Button>
+      <Button disabled>Record</Button>
+    </Stack>
     <FormGroup>
       <FormRow title="Name">
-        <Typography>{name}</Typography>
+        <TransparentInput
+          value={$macroTitleStore}
+          align="right"
+          on:change={handleNameChange}
+        />
       </FormRow>
       <FormRow title="Repeats count">
-        <Typography>{repeats}</Typography>
+        <TransparentInputNumber
+          value={$macroRepeatsStore}
+          align="right"
+          on:change={handleRepeatsChange}
+        />
       </FormRow>
     </FormGroup>
   </Stack>
   <ModalActions slot="actions">
     <Stack direction="horizontal" justify="space-between">
-      <Stack gap="m" justify="start" direction="horizontal">
-        <Button disabled>Add keystroke</Button>
-        <Button disabled>Add wait</Button>
-        <Button disabled>Record</Button>
-      </Stack>
+      <Button disabled on:click={handleClose} color="error">Delete</Button>
       <Stack gap="m" justify="end" direction="horizontal">
         <Button on:click={handleClose}>Cancel</Button>
-        <Button disabled on:click={handleClose} primary>OK</Button>
+        <Button on:click={handleSubmit} primary>OK</Button>
       </Stack>
     </Stack>
   </ModalActions>

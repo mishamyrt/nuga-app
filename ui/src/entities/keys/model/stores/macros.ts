@@ -1,29 +1,49 @@
-import { createStore, sample } from 'effector'
+import { createEvent, createStore, sample } from 'effector'
 
-import { createHIDEffect } from '$shared/model'
+import { createHIDEffect, disconnected } from '$shared/model'
 
-import { getMacros } from '../../api'
-import { macroToSteps } from '../../lib'
-import type { Macro, MacroStep } from '../types'
+import { getMacros, setMacros } from '../../api'
+import { macroToSteps, paramsToMacro } from '../../lib'
+import type { Macro, MacroChangedParams } from '../types'
 import { keysInitiated } from './keymap'
 
-export const macroStore = createStore<Macro[]>([], {
+export const macroChanged = createEvent<MacroChangedParams>('macrosUpdated')
+export const macrosChanged = createEvent<Macro[]>('macrosChanged')
+
+export const macrosStore = createStore<Macro[]>([], {
   name: 'macros'
 })
 
-export const macroStepsStore = createStore<MacroStep[][]>([], {
-  name: 'macroSteps'
-})
-
-sample({
-  clock: macroStore,
-  fn: macros => macros.map(macroToSteps),
-  target: macroStepsStore
-})
+export const macroStepsStore = macrosStore.map(macros => macros.map(macroToSteps))
 
 const getMacrosFx = createHIDEffect({
   name: 'getMacrosFx',
   handler: getMacros
+})
+const setMacrosFx = createHIDEffect({
+  name: 'setMacrosFx',
+  handler: setMacros
+})
+
+macrosStore.on(macrosChanged, (_, macros) => macros)
+macrosStore.reset(disconnected)
+
+sample({
+  clock: macroChanged,
+  source: macrosStore,
+  fn: (all, updatedMacro) => {
+    if (updatedMacro.index === -1) {
+      return [...all, paramsToMacro(updatedMacro)]
+    } else {
+      return all.map((macro, i) => {
+        if (i === updatedMacro.index) {
+          return paramsToMacro(updatedMacro)
+        }
+        return macro
+      })
+    }
+  },
+  target: macrosChanged
 })
 
 sample({
@@ -33,5 +53,10 @@ sample({
 
 sample({
   clock: getMacrosFx.doneData,
-  target: macroStore
+  target: macrosStore
+})
+
+sample({
+  clock: macrosChanged,
+  target: setMacrosFx
 })

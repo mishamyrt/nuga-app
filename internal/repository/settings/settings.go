@@ -54,3 +54,14 @@ func (r *Repository) SetApp(ui dto.AppSettings) error {
 	r.storage.Content.App = ui
 	return r.storage.Write()
 }
+
+// GetMacros returns stored macros
+func (r *Repository) GetMacros() dto.Macros {
+	return r.storage.Content.Macro
+}
+
+// SetMacros writes macros to file
+func (r *Repository) SetMacros(macros dto.Macros) error {
+	r.storage.Content.Macro = macros
+	return r.storage.Write()
+}

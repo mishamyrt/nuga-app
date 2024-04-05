@@ -79,4 +79,6 @@ type KeysUsecase interface {
 	GetDefaultKeys() (*dto.KeyMap, error)
 	SetKeys(keys dto.KeyMap) error
 	GetKeyGroups() []dto.KeyGroup
+	GetMacros() (dto.Macros, error)
+	SetMacros(macros dto.Macros) error
 }
