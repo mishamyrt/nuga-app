@@ -3,7 +3,7 @@ import { createEvent, createStore, sample } from 'effector'
 
 import { macroChanged, macroRemoved, macrosStore } from '$entities/keys'
 
-import { macroToSteps, stepsToActions } from '../lib'
+import { findStepIndexToBottom, findStepIndexToTop, macroToSteps, stepsToActions } from '../lib'
 import type {
   MacroKeyStepType,
   MacroStep,
@@ -21,6 +21,7 @@ export const macroStepKeystrokeChanged = createEvent<StepKeystrokeChangedParams>
 export const macroStepDelayChanged = createEvent<StepDelayChangedParams>('macroStepActionChanged')
 export const macroStepKeystrokeAdded = createEvent('macroKeystrokeAdded')
 export const macroStepDelayAdded = createEvent('macroDelayRemoved')
+export const macroStepRemoved = createEvent<string>('macroStepRemoved')
 
 export const macroSubmitted = createEvent('macroSubmitted')
 export const modalClosed = createEvent('modalClosed')
@@ -177,3 +178,28 @@ currentMacroStepsStore.on(macroStepKeystrokeAdded, (steps) => [
     keyName: 'm'
   }
 ])
+
+// Removed macro steps
+currentMacroStepsStore.on(macroStepRemoved, (steps, id) => {
+  const index = steps.findIndex(step => step.id === id)
+  if (index === -1) {
+    throw new Error(`Step ${id} not found`)
+  }
+  const step = steps[index]
+  if (step.type === MacroStepType.Wait) {
+    return steps.filter((_, i) => i !== index && i !== index + 1)
+  }
+  let pairIndex: number
+  if (step.type === MacroStepType.KeyDown) {
+    pairIndex = findStepIndexToBottom(steps, step.keyName, index)
+  } else {
+    pairIndex = findStepIndexToTop(steps, step.keyName, index)
+  }
+  if (index === 0 || pairIndex === 0) {
+    const filtered = steps.filter((_, i) => i !== index && i !== pairIndex)
+    const startOffset = filtered.findIndex(step => step.type !== MacroStepType.Wait)
+    return filtered.slice(startOffset)
+  }
+
+  return steps.filter((_, i) => i !== index && i !== pairIndex)
+})
