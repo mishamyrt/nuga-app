@@ -35,6 +35,10 @@
     if (e.metaKey || e.ctrlKey) {
       return
     }
+    const input = e.target as HTMLInputElement
+    if (input.value === '0' && !allowedKeys.includes(e.code)) {
+      e.preventDefault()
+    }
     if (!e.code.startsWith('Digit') && !allowedKeys.includes(e.code)) {
       e.preventDefault()
     }
@@ -47,6 +51,7 @@
       value = 65280
     }
     e.preventDefault()
+    input.value = value.toString()
     dispatch('input', value)
     active = false
   }
