@@ -7,6 +7,7 @@ export function getShortName (key: string): string {
   for (const prefix of prefixes) {
     if (key.startsWith(prefix)) {
       keyName = key.slice(prefix.length)
+      break
     }
   }
   if (shortKeyNames[keyName]) {
