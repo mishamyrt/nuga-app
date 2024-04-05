@@ -9,7 +9,7 @@
 
   export let keyCode: string
 
-  let hovered: string | undefined
+  let hovered: number | undefined
 
   function handleCreate () {
     macroCreated()
@@ -19,9 +19,9 @@
     macroEdited(i)
   }
 
-  function setHovered (e: CustomEvent<boolean>, title: string | undefined) {
+  function setHovered (e: CustomEvent<boolean>, i: number | undefined) {
     if (e.detail) {
-      hovered = title
+      hovered = i
     } else {
       hovered = undefined
     }
@@ -44,14 +44,14 @@
 
 <FormGroup>
   {#each macros as macro, i}
-    <FormRow on:hover={(e) => setHovered(e, macro.title)}>
+    <FormRow on:hover={(e) => setHovered(e, i)}>
       <div class="macro-row">
         <div class="selected-mark" class:visible={keyMacroIndex === i}>
           ✓
         </div>
         <Typography>{macro.title}</Typography>
         <Stack align="center" justify="end" direction="horizontal" gap="l">
-          <div class="select-button" class:visible={hovered === macro.title && keyMacroIndex !== i}>
+          <div class="select-button" class:visible={hovered === i && keyMacroIndex !== i}>
             <Button disabled={$isKeysSettingStore} on:click={() => dispatchMacroChange(i)}>
               Select
             </Button>
