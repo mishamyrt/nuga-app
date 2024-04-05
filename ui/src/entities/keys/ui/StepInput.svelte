@@ -2,8 +2,7 @@
   export let active = false
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="step-input" class:active on:click role="button" tabindex="0">
+<div class="step-input" class:active on:click on:keydown role="button" tabindex="0">
   <slot />
 </div>
 
@@ -33,6 +32,10 @@
       &::before {
         opacity: 1;
       }
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 </style>

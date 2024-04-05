@@ -2,10 +2,10 @@ import { KeyActionType, type KeystrokeAction } from '$entities/keys'
 
 import { keyNameReplacements, keyPrefixReplacements, keysWithSameName } from './constants'
 
-function keyNameFromEvent (e: KeyboardEvent): string {
+export function keyNameFromEvent (e: KeyboardEvent): string {
   for (const [prefix, replacement] of Object.entries(keyPrefixReplacements)) {
     if (e.code.startsWith(prefix)) {
-      return replacement + e.code.slice(prefix.length).toLowerCase()
+      return `${replacement}${e.code.slice(prefix.length).toLowerCase()}`
     }
   }
   if (keysWithSameName.includes(e.code)) {

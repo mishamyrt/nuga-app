@@ -1,13 +1,22 @@
 import { getUniqueId } from '@naco-ui/svelte'
 import { createEvent, createStore, sample } from 'effector'
 
-import { macroChanged, type MacroKeyStepType, macrosStore, type MacroStep, macroStepsStore, MacroStepType } from '$entities/keys'
-import { stepsToActions } from '$entities/keys/lib'
+import { macroChanged, macroRemoved, macrosStore } from '$entities/keys'
 
-import type { StepDelayChangedParams, StepKeystrokeChangedParams } from './types'
+import { macroToSteps, stepsToActions } from '../lib'
+import type {
+  MacroKeyStepType,
+  MacroStep,
+  StepDelayChangedParams,
+  StepKeystrokeChangedParams
+} from './types'
+import { MacroStepType } from './types'
+
+export const macroStepsStore = macrosStore.map(macros => macros.map(macroToSteps))
 
 export const macroEdited = createEvent<number>('macroEdited')
 export const macroCreated = createEvent('macroCreated')
+export const currentMacroRemoved = createEvent('currentMacroRemoved')
 export const macroStepKeystrokeChanged = createEvent<StepKeystrokeChangedParams>('macroStepKeystrokeChanged')
 export const macroStepDelayChanged = createEvent<StepDelayChangedParams>('macroStepActionChanged')
 export const macroStepKeystrokeAdded = createEvent('macroKeystrokeAdded')
@@ -25,6 +34,12 @@ export const macroTitleStore = createStore<string>('Macro', { name: 'macroTitle'
 export const macroRepeatsStore = createStore<number>(1, { name: 'macroRepeats' })
 export const currentMacroStepsStore = createStore<MacroStep[]>([], { name: 'currentMacroSteps' })
 export const showMacroModalStore = createStore<boolean>(false, { name: 'showMacroModal' })
+
+sample({
+  clock: currentMacroRemoved,
+  source: indexStore,
+  target: macroRemoved
+})
 
 // Load macros data on edit
 sample({
@@ -57,8 +72,8 @@ sample({
   fn: macros => `Macro ${macros.length + 1}`,
   target: macroTitleStore
 })
-currentMacroStepsStore.reset(macroCreated)
-macroRepeatsStore.reset(macroCreated)
+currentMacroStepsStore.reset(macroCreated, currentMacroRemoved)
+macroRepeatsStore.reset(macroCreated, currentMacroRemoved)
 
 // Update fields value on change
 macroTitleStore.on(macroTitleChanged, (_, title) => title)

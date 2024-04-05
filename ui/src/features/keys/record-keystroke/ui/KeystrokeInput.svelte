@@ -3,8 +3,9 @@
   import { createEventDispatcher, onDestroy } from 'svelte'
 
   import { KeyActionType, keyMapStore, KeyShortcut, type KeystrokeAction, selectedKeyStore } from '$entities/keys'
+  import { keystrokeFromEvent } from '$entities/keys/lib'
 
-  import { defaultKeystroke, keystrokeFromEvent } from '../lib'
+  import { defaultKeystroke } from '../lib'
 
   const dispatch = createEventDispatcher()
 

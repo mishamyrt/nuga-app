@@ -11,6 +11,7 @@ import type { ActionChangeParams, Key, KeyMap } from '../types'
 export const supportsKeyStore = supportsStore.map(({ keys }) => keys)
 export const keysInitiated = createEvent('keysInitiated')
 export const keySelected = createEvent<Key>('keySelected')
+export const keyMapChanged = createEvent<KeyMap>('keyMapChanged')
 export const actionChanged = createEvent<ActionChangeParams>('actionChanged')
 
 export const keyMapStore = createStore<KeyMap>(defaultKeyMap, { name: 'keyMap' })
@@ -72,5 +73,10 @@ sample({
     ...map,
     [key]: action
   }),
+  target: [keyMapStore, setKeysFx]
+})
+
+sample({
+  clock: keyMapChanged,
   target: [keyMapStore, setKeysFx]
 })

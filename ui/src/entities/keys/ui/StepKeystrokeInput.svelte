@@ -1,9 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
 
-  import { keystrokeFromEvent } from '$features/keys/record-keystroke/lib'
-
-  import { getShortName } from '../lib'
+  import { getShortName, keyNameFromEvent } from '../lib'
   import StepInput from './StepInput.svelte'
 
   const dispatch = createEventDispatcher()
@@ -14,9 +12,9 @@
 
   function handleKeyDown (e: KeyboardEvent) {
     e.preventDefault()
-    const { keystroke } = keystrokeFromEvent(e)
-    if (keystroke.key !== 'none') {
-      dispatch('input', keystroke.key)
+    const key = keyNameFromEvent(e)
+    if (key !== 'none') {
+      dispatch('input', key)
       stopRecording()
     }
   }
