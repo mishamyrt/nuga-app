@@ -9,7 +9,6 @@ pack_arch() {
 
 if [ -z "$1" ]; then
   pack_arch amd64
-  pack_arch arm64
 else
   pack_arch "$1"
 fi
