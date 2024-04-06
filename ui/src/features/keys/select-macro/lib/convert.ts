@@ -4,7 +4,7 @@ import { type Macro, type MacroAction, MacroActionType } from '$entities/keys'
 
 import { type MacroKeyStepType, type MacroStep, MacroStepType } from '../model'
 
-export function convertActionType (type: MacroActionType): MacroKeyStepType {
+export function actionToStepType (type: MacroActionType): MacroKeyStepType {
   switch (type) {
     case MacroActionType.KeyDown:
       return MacroStepType.KeyDown
@@ -15,7 +15,7 @@ export function convertActionType (type: MacroActionType): MacroKeyStepType {
   }
 }
 
-export function convertStepType (type: MacroKeyStepType): MacroActionType {
+export function stepToActionType (type: MacroKeyStepType): MacroActionType {
   switch (type) {
     case MacroStepType.KeyDown:
       return MacroActionType.KeyDown
@@ -31,7 +31,7 @@ export function macroToSteps (macro: Macro): MacroStep[] {
   for (const action of macro.actions) {
     steps.push({
       id: getUniqueId(),
-      type: convertActionType(action.type),
+      type: actionToStepType(action.type),
       keyName: action.key
     })
     if (action.delay) {
@@ -47,7 +47,6 @@ export function macroToSteps (macro: Macro): MacroStep[] {
 
 export function stepsToActions (steps: MacroStep[]): MacroAction[] {
   const macro: MacroAction[] = []
-  // const simplifiedSteps = simplifyStepsDelay(steps)
   for (let i = 0; i < steps.length; i++) {
     const step = steps[i]
     if (step.type === MacroStepType.KeyDown || step.type === MacroStepType.KeyUp) {
@@ -58,7 +57,7 @@ export function stepsToActions (steps: MacroStep[]): MacroAction[] {
       }
       macro.push({
         key: step.keyName,
-        type: convertStepType(step.type),
+        type: stepToActionType(step.type),
         delay
       })
     } else {
