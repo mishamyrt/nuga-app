@@ -41,6 +41,7 @@
   $: keyMacroIndex = selectedAction?.type === 'macro' ? selectedAction.macro : -1
 </script>
 
+{#if macros.length > 0}
 <FormGroup>
   {#each macros as macro, i}
     <FormRow on:hover={(e) => setHovered(e, i)}>
@@ -61,6 +62,7 @@
     </FormRow>
   {/each}
 </FormGroup>
+{/if}
 <div class="add">
   <Stack direction="horizontal" align="start" justify="space-between">
     <div class="caption">
