@@ -1,7 +1,7 @@
 import { type MacroStep, MacroStepType } from '../model'
 
 /**
- * Takes an array of MacroStep objects and combines consecutive Wait steps
+ * Takes MacroStep objects and combines consecutive Wait steps
  * into a single Wait step with the cumulative delay.
  * @param steps - an array of MacroStep objects
  * @returns normalized steps
@@ -17,7 +17,7 @@ export function normalizeDelaySteps (steps: MacroStep[]): MacroStep[] {
     } else {
       if (sumDelay > 0) {
         result.push({
-          id: step.id,
+          id: lastDelayId,
           type: MacroStepType.Wait,
           delay: sumDelay
         })
