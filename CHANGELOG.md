@@ -13,7 +13,8 @@ and this project adheres to [Semantic Versioning][].
 
 ### Fixed
 
-- Hid actions for buttons that could cause keyboard misbehavior. 
+- Hid actions for buttons that could cause keyboard misbehavior.
+- Fixed keystroke modifiers input.
 
 ### Removed
 

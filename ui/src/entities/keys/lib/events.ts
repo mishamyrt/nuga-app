@@ -8,7 +8,7 @@ export function keyNameFromEvent (e: KeyboardEvent): string {
       return `${replacement}${e.code.slice(prefix.length).toLowerCase()}`
     }
   }
-  if (keysWithSameName.includes(e.code)) {
+  if (keysWithSameName.has(e.code)) {
     return e.code.toLowerCase()
   }
   if (keyNameReplacements[e.code]) {

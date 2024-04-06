@@ -111,7 +111,7 @@ export const keyNameReplacements: Record<string, string> = {
   ArrowDown: 'down'
 }
 
-export const keysWithSameName = [
+export const keysWithSameName: ReadonlySet<string> = new Set([
   'Tab',
   'Space',
   'Home',
@@ -128,9 +128,20 @@ export const keysWithSameName = [
   'CapsLock',
   'Semicolon',
   'Quote'
-]
+])
 
-export const hiddenGroups = new Set([
+export const hiddenGroups: ReadonlySet<string> = new Set([
   'System',
   'Backlight'
+])
+
+export const modifierKeys: ReadonlySet<string> = new Set([
+  'lctrl',
+  'rctrl',
+  'lshift',
+  'rshift',
+  'lalt',
+  'ralt',
+  'lmeta',
+  'rmeta'
 ])

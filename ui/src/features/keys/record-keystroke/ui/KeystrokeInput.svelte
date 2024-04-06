@@ -3,7 +3,7 @@
   import { createEventDispatcher, onDestroy } from 'svelte'
 
   import { KeyActionType, keyMapStore, KeyShortcut, type KeystrokeAction, selectedKeyStore } from '$entities/keys'
-  import { keystrokeFromEvent } from '$entities/keys/lib'
+  import { isModifierAction, keystrokeFromEvent } from '$entities/keys/lib'
 
   import { defaultKeystroke } from '../lib'
 
@@ -21,7 +21,9 @@
       return
     }
     const nextKeystroke = keystrokeFromEvent(e)
-    if (nextKeystroke.keystroke.key !== 'none') {
+    if (isModifierAction(nextKeystroke)) {
+      nextKeystroke.keystroke.key = 'none'
+    } else if (nextKeystroke.keystroke.key !== 'none') {
       e.preventDefault()
       stopRecording()
       dispatch('input', nextKeystroke)
@@ -30,7 +32,11 @@
   }
 
   function handleKeyUp (e: KeyboardEvent) {
-    keystroke = keystrokeFromEvent(e)
+    const nextKeystroke = keystrokeFromEvent(e)
+    if (isModifierAction(nextKeystroke)) {
+      nextKeystroke.keystroke.key = 'none'
+    }
+    keystroke = nextKeystroke
   }
 
   function handleMouseDown () {
@@ -77,7 +83,7 @@
       key={keyAction.keystroke.key}
       dimmed={recording}
       ctrl={keyAction.keystroke?.modifiers?.ctrl}
-      shift={keyAction.keystroke?.modifiers?.ctrl}
+      shift={keyAction.keystroke?.modifiers?.shift}
       alt={keyAction.keystroke.modifiers?.alt}
       meta={keyAction.keystroke.modifiers?.meta}
     />

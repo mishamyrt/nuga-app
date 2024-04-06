@@ -1,4 +1,5 @@
 import { type KeyAction, KeyActionType } from '../model/types'
+import { modifierKeys } from './constants'
 
 export function isSameAction (a: KeyAction, b: KeyAction): boolean {
   if (a.type !== b.type) {
@@ -28,4 +29,11 @@ export function isSameAction (a: KeyAction, b: KeyAction): boolean {
     return true
   }
   return false
+}
+
+export function isModifierAction (action: KeyAction): boolean {
+  if (action.type !== KeyActionType.Keystroke) {
+    return false
+  }
+  return modifierKeys.has(action.keystroke.key)
 }
