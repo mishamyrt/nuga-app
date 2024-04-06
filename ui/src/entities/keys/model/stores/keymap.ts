@@ -50,6 +50,13 @@ sample({
   target: keysInitiated
 })
 
+sample({
+  clock: anyStateRestored,
+  source: supportsStore,
+  filter: ({ keys }) => keys,
+  target: keysInitiated
+})
+
 // Load keys on device connect
 sample({
   clock: [keysInitiated, anyStateRestored, modeChanged],

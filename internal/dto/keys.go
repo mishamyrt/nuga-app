@@ -2,10 +2,14 @@ package dto
 
 import (
 	"bytes"
+	"fmt"
 
 	"github.com/mishamyrt/nuga-lib/features/keys"
 	"github.com/mishamyrt/nuga-lib/features/keys/layout"
 )
+
+// ErrMacrosLengthMismatch is returned when macros and titles have different lengths
+var ErrMacrosLengthMismatch = fmt.Errorf("macros and titles must have the same length")
 
 // KeyMap represents a map of keys.
 type KeyMap layout.KeyMap
@@ -39,6 +43,30 @@ func (m Macros) ToDomain() keys.Macros {
 		macros = append(macros, macro.Macro)
 	}
 	return macros
+}
+
+// MacrosFromDomain converts keys.Macros to Macros
+func MacrosFromDomain(k keys.Macros, titles []string) (Macros, error) {
+	if len(k) != len(titles) {
+		return nil, ErrMacrosLengthMismatch
+	}
+	m := make([]MacroWithTitle, 0, len(k))
+	for i, macro := range k {
+		m = append(m, MacroWithTitle{
+			Macro: macro,
+			Title: titles[i],
+		})
+	}
+	return m, nil
+}
+
+// Titles returns titles of macros
+func (m Macros) Titles() []string {
+	titles := make([]string, 0, len(m))
+	for _, macro := range m {
+		titles = append(titles, macro.Title)
+	}
+	return titles
 }
 
 // Key ... as it names

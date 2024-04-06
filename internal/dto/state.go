@@ -6,6 +6,7 @@ import (
 
 // StateFile represents keyboard state file
 type StateFile struct {
-	Version string `json:"version"`
+	Version     string   `json:"version"`
+	MacroTitles []string `json:"macro_titles"`
 	*dump.State
 }

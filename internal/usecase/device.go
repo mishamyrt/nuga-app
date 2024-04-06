@@ -13,6 +13,7 @@ import (
 
 	"github.com/mishamyrt/nuga-lib"
 	"github.com/mishamyrt/nuga-lib/dump"
+	"github.com/mishamyrt/nuga-lib/features/keys"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
@@ -109,9 +110,11 @@ func (d *DeviceUsecase) SaveState() error {
 	if err != nil {
 		return err
 	}
+	titles := d.repo.Settings.GetMacros().Titles()
 	return d.repo.State.WriteFile(path, dto.StateFile{
-		Version: config.AppVersion,
-		State:   &state,
+		Version:     config.AppVersion,
+		State:       &state,
+		MacroTitles: titles,
 	})
 }
 
@@ -138,6 +141,22 @@ func (d *DeviceUsecase) RestoreState() error {
 	dev := d.repo.Device.Get()
 	if state.Name != dev.Name {
 		return errors.ErrStateWrongDevice
+	}
+	err = dump.Restore(dev.Handle, state.State)
+	if err != nil {
+		return err
+	}
+	macros, err := keys.ParseHeadlessMacros(state.Keys.Macros)
+	if err != nil {
+		return err
+	}
+	macrosSettings, err := dto.MacrosFromDomain(macros, state.MacroTitles)
+	if err != nil {
+		return err
+	}
+	err = d.repo.Settings.SetMacros(macrosSettings)
+	if err != nil {
+		return err
 	}
 	return dump.Restore(dev.Handle, state.State)
 }
