@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"log"
 	"nuga_ui/internal/dto"
 	"nuga_ui/internal/interfaces"
 	"slices"
@@ -46,7 +47,8 @@ func (k *KeysUsecase) GetMacros() (dto.Macros, error) {
 		for _, storedMacro := range stored {
 			isSame, err := dto.IsSameMacro(macro, storedMacro.Macro)
 			if err != nil {
-				return nil, err
+				log.Printf("Error comparing macros: %v", err)
+				continue
 			}
 			if isSame {
 				title = storedMacro.Title
