@@ -92,7 +92,6 @@ linux-builder/appimage: $(DIST_PATH)
 		--volume ".:/opt/nuga" \
 		"$(APPIMAGE_BUILDER_IMAGE):latest" \
 		pack-appimage
-	$(call copy_appimage,aarch64,arm64)
 	$(call copy_appimage,x86_64,amd64)
 
 
