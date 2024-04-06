@@ -49,8 +49,8 @@
       {
         event: macroStepKeystrokeAdded,
         offset: 1,
-        actionSelector: '.step-keystroke',
-        fn: (node: HTMLButtonElement) => node.click()
+        actionSelector: 'input',
+        fn: (node: HTMLInputElement) => node.focus()
       },
       {
         event: macroStepDelayAdded,
