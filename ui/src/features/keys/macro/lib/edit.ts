@@ -75,6 +75,9 @@ export function removeStep (steps: MacroStep[], id: string): MacroStep[] {
   if (index === 0 || pairIndex === 0) {
     const filtered = steps.filter((_, i) => i !== index && i !== pairIndex)
     const startOffset = filtered.findIndex(step => step.type !== MacroStepType.Wait)
+    if (startOffset === -1) {
+      return []
+    }
     return filtered.slice(startOffset)
   }
 

@@ -241,4 +241,18 @@ describe('removeStep', () => {
       sameNameSteps[3]
     ])
   })
+
+  it('should remove all steps if only waits are left', () => {
+    const steps = [
+      mockKeyDown('a'),
+      mockWait(100),
+      mockWait(200),
+      mockKeyUp('a'),
+      mockWait(300),
+      mockWait(400)
+    ]
+
+    const result = removeStep(steps, steps[0].id)
+    expect(result).toEqual([])
+  })
 })
