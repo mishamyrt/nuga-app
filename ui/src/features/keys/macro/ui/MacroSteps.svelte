@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Typography } from '@naco-ui/svelte'
   import type { Subscription } from 'effector'
   import { onMount } from 'svelte'
   import { flip } from 'svelte/animate'
@@ -8,7 +9,15 @@
   import StepKeystrokeInput from '$entities/keys/ui/StepKeystrokeInput.svelte'
 
   import { checkMacroStepsOrder, observeStepsOn } from '../lib'
-  import { currentMacroStepsStore, macroStepDelayAdded, macroStepDelayChanged, macroStepKeystrokeAdded, macroStepKeystrokeChanged, macroStepRemoved, macroStepsChanged } from '../model'
+  import {
+    currentMacroStepsStore,
+    macroStepDelayAdded,
+    macroStepDelayChanged,
+    macroStepKeystrokeAdded,
+    macroStepKeystrokeChanged,
+    macroStepRemoved,
+    macroStepsChanged
+  } from '../model'
   import { type CustomDragEvent, MacroStepType } from '../model/types'
 
   let stepsContainer: HTMLDivElement
@@ -62,6 +71,13 @@
     on:consider="{handleDndConsider}"
     on:finalize="{handleDndFinalize}"
   >
+    {#if macroSteps.length === 0}
+      <div class="empty">
+        <Typography variant="caption-m" color="tertiary">
+          Add actions by pressing buttons on the bottom to build your macro.
+        </Typography>
+      </div>
+    {/if}
     {#each macroSteps as step(step.id)}
       <div animate:flip="{{ duration: flipDurationMs }}" class="step">
         <div class="step-value">
@@ -148,5 +164,11 @@
     &:hover .delete {
       opacity: 0.7;
     }
+  }
+
+  .empty {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-m);
   }
 </style>
