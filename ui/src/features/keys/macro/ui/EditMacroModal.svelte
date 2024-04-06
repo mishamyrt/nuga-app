@@ -51,7 +51,11 @@
     <MacroSteps />
     <Stack gap="m" justify="start" direction="horizontal">
       <Button on:click={() => stepKeystrokeAdded()}>Add keystroke</Button>
-      <Button disabled on:click={() => stepDelayAdded()}>Add wait</Button>
+      <Button
+        disabled={$stepsStore.length === 0}
+        on:click={() => stepDelayAdded()}>
+        Add wait
+      </Button>
       <Button disabled>Record</Button>
     </Stack>
     <FormGroup>
