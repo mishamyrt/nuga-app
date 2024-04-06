@@ -1,8 +1,12 @@
 <script lang="ts">
-  import { fromMatchMedia, prefersDarkMediaQuery, SidebarLayout, ThemeProvider } from '@naco-ui/svelte'
+  import {
+    BodyThemeProvider,
+    SidebarLayout
+  } from '@naco-ui/svelte'
   import { FeatureSlicedDebug } from 'feature-sliced-svelte'
+  import { onDestroy } from 'svelte'
 
-  import { settingsStore } from '$entities/app'
+  import { settingsStore, themeContextFromSettings } from '$entities/app'
   import { pages } from '$pages'
   import { activePage } from '$shared/model'
   import { AppDebugModal, DeviceConnection } from '$widgets'
@@ -11,32 +15,35 @@
   import Sidebar from './ui/Sidebar.svelte'
   import Toolbar from './ui/Toolbar.svelte'
 
-  export const [isDark] = fromMatchMedia(prefersDarkMediaQuery)
+  const [context, subscription] = themeContextFromSettings(settingsStore)
 
   $: props = pages[$activePage].layoutProps ?? {}
-  $: theme = $settingsStore.theme
-  $: scheme = theme === 'auto'
-    ? $isDark
-      ? 'dark'
-      : 'light'
-    : theme
+
   const sidebarWidth = 200
+
+  onDestroy(() => {
+    subscription.unsubscribe()
+  })
 </script>
 
 <FeatureSlicedDebug />
-<ThemeProvider
-  os={$settingsStore.ui}
-  {scheme}>
-  <SidebarLayout {sidebarWidth} macInset={{
-    enable: true
-  }} toolbar={{
-    transparent: true,
-    border: 'scroll'
-  }} transparent {...props}>
+<BodyThemeProvider {context}>
+  <SidebarLayout
+    {sidebarWidth}
+    macInset={{
+      enable: true
+    }}
+    toolbar={{
+      transparent: true,
+      border: 'scroll'
+    }}
+    transparent
+    {...props}
+  >
     <Sidebar slot="sidebar" />
     <Toolbar slot="toolbar" />
     <Content />
   </SidebarLayout>
   <DeviceConnection {sidebarWidth} />
   <AppDebugModal />
-</ThemeProvider>
+</BodyThemeProvider>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Subscription } from 'effector'
-  import { onDestroy, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import { flip } from 'svelte/animate'
   import { dndzone } from 'svelte-dnd-action'
 
@@ -42,10 +42,8 @@
         fn: (node: HTMLInputElement) => node.focus()
       }
     )
-  })
 
-  onDestroy(() => {
-    subscriptions.forEach((s) => s.unsubscribe())
+    return () => subscriptions.forEach((s) => s.unsubscribe())
   })
 </script>
 
@@ -53,7 +51,13 @@
   <div
     class="steps"
     bind:this={stepsContainer}
-    use:dndzone="{{ items: macroSteps, flipDurationMs }}"
+    use:dndzone="{{
+      items: macroSteps,
+      flipDurationMs,
+      dropTargetStyle: {
+        outline: 'none'
+      }
+    }}"
     on:consider="{handleDndConsider}"
     on:finalize="{handleDndFinalize}"
   >
