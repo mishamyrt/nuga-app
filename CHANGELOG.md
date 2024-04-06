@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning][].
 
 - Macros configuration support.
 
+### Removed
+
+- Linux arm64 build. You can still build via `make linux-builder/binary-arm64`.
+
 ## [2.2.1]
 
 ### Fixed

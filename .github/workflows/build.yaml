@@ -3,9 +3,6 @@ name: Build app
 on:
   workflow_call:
     inputs:
-      linux-arm64:
-        default: false
-        type: boolean
       linux-appimage:
         default: false
         type: boolean
@@ -43,9 +40,6 @@ jobs:
               cwd: ui/
               args: [--frozen-lockfile]
           version: ${{ env.PNPM_VERSION }}
-      - name: Setup QEMU
-        if: inputs.linux-arm64 && runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v3
       - name: Setup Linux deps
         if: runner.os == 'Linux'
         run: |
@@ -62,9 +56,6 @@ jobs:
       - name: Build x86_64 binary
         if: runner.os == 'Linux'
         run: make build/linux
-      - name: Build arm64 binary
-        if: runner.os == 'Linux' && inputs.linux-arm64
-        run: make linux-builder/binary-arm64
       - name: Build AppImage
         if: runner.os == 'Linux' && inputs.linux-appimage
         run: make linux-builder/appimage
