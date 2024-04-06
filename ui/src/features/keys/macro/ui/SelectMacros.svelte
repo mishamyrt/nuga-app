@@ -5,7 +5,6 @@
   import { MoreButton } from '$shared/ui'
 
   import { macroCreated, macroEdited } from '../model'
-  import MacroModal from './MacroModal.svelte'
 
   export let keyCode: string
 
@@ -61,7 +60,6 @@
       </div>
     </FormRow>
   {/each}
-  <MacroModal />
 </FormGroup>
 <div class="add">
   <Stack direction="horizontal" align="start" justify="space-between">

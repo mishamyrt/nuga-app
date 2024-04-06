@@ -4,6 +4,7 @@
 
   import { selectedKeyStore } from '$entities/keys'
   import { DeviceSupports } from '$features/device'
+  import { EditMacroModal } from '$features/keys'
   import { KeySettings, KeysNotSupported } from '$widgets'
 
   $: selectedKey = $selectedKeyStore
@@ -28,4 +29,5 @@
       <KeysNotSupported slot="not-supported" />
     </DeviceSupports>
   </Stack>
+  <EditMacroModal />
 </div>
