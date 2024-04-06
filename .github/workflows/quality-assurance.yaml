@@ -42,7 +42,7 @@ jobs:
       - name: Generate Wails JS bindings
         run: wails generate module
       - name: Lint with golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v4
         with:
           args: --config=./.golangci.yaml
           skip-cache: true
