@@ -1,6 +1,32 @@
 import type { MacroStep } from '../model/types'
 import { MacroStepType } from '../model/types'
 
+export function findStepIndexToTop (
+  steps: MacroStep[],
+  keyName: string,
+  startIndex: number
+): number {
+  for (let i = startIndex - 1; i >= 0; i--) {
+    if (steps[i].keyName === keyName) {
+      return i
+    }
+  }
+  return -1
+}
+
+export function findStepIndexToBottom (
+  steps: MacroStep[],
+  keyName: string,
+  startIndex: number
+): number {
+  for (let i = startIndex + 1; i < steps.length; i++) {
+    if (steps[i].keyName === keyName) {
+      return i
+    }
+  }
+  return -1
+}
+
 export function checkMacroStepsOrder (steps: MacroStep[]): boolean {
   for (let i = 0; i < steps.length; i++) {
     const step = steps[i]
@@ -26,30 +52,4 @@ export function checkMacroStepsOrder (steps: MacroStep[]): boolean {
     }
   }
   return true
-}
-
-export function findStepIndexToTop (
-  steps: MacroStep[],
-  keyName: string,
-  startIndex: number
-): number {
-  for (let i = startIndex - 1; i >= 0; i--) {
-    if (steps[i].keyName === keyName) {
-      return i
-    }
-  }
-  return -1
-}
-
-export function findStepIndexToBottom (
-  steps: MacroStep[],
-  keyName: string,
-  startIndex: number
-): number {
-  for (let i = startIndex + 1; i < steps.length; i++) {
-    if (steps[i].keyName === keyName) {
-      return i
-    }
-  }
-  return -1
 }
