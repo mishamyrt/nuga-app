@@ -61,7 +61,9 @@ export function stepsToActions (steps: MacroStep[]): MacroAction[] {
         delay
       })
     } else {
-      throw new Error('Incorrect step order')
+      throw new Error(
+        'Incorrect step order: A Wait step cannot directly follow another Wait step without an intervening KeyUp or KeyDown step.'
+      )
     }
   }
   return macro
