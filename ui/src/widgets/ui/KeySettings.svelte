@@ -37,7 +37,7 @@
   </FormRow>
   <FormRow align="center" title="Type">
     <Select bind:value={selectedType} on:change={handleTypeChange} options={[
-      { value: 'none', title: 'None' },
+      { value: 'none', title: 'None', disabled: true },
       { value: 'keystroke', title: 'Keystroke' },
       { value: 'macro', title: 'Macro' }
     ]} />
