@@ -4,8 +4,7 @@
   import { actionChanged, keyMapStore } from '$entities/keys'
   import { getShortName } from '$entities/keys/lib'
   import type { KeyAction } from '$entities/keys/model/types'
-  import { CustomActionToggle, KeyActionSelect, KeystrokeInput } from '$features/keys'
-  import KeyMacros from '$features/keys/select-macro/ui/KeyMacros.svelte'
+  import { CustomActionToggle, KeyActionSelect, KeystrokeInput, SelectMacros } from '$features/keys'
 
   export let keyCode: string
   export let secondary: boolean = false
@@ -56,5 +55,5 @@
   {/if}
 </FormGroup>
 {#if selectedType === 'macro'}
-  <KeyMacros {keyCode} />
+  <SelectMacros {keyCode} />
 {/if}

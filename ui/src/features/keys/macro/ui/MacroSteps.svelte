@@ -27,6 +27,13 @@
   }
 
   $: macroSteps = $currentMacroStepsStore
+  $: dndZoneParams = {
+    items: macroSteps,
+    flipDurationMs,
+    dropTargetStyle: {
+      outline: 'none'
+    }
+  }
 
   onMount(() => {
     subscriptions = observeStepsOn(stepsContainer,
@@ -51,13 +58,7 @@
   <div
     class="steps"
     bind:this={stepsContainer}
-    use:dndzone="{{
-      items: macroSteps,
-      flipDurationMs,
-      dropTargetStyle: {
-        outline: 'none'
-      }
-    }}"
+    use:dndzone="{dndZoneParams}"
     on:consider="{handleDndConsider}"
     on:finalize="{handleDndFinalize}"
   >
