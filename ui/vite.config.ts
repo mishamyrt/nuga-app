@@ -14,7 +14,8 @@ const testExclude = [
   '**/*.types.ts',
   '**/index.ts',
   '**/.svelte-kit/**',
-  '**/.pnpm/**'
+  '**/.pnpm/**',
+  'src/**/__tests__/__*__.ts'
 ]
 
 // https://vitejs.dev/config/

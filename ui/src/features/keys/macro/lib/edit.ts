@@ -2,8 +2,10 @@ import { type MacroStep, MacroStepType } from '../model'
 import { findStepIndexToBottom, findStepIndexToTop } from './order'
 
 export function updateDelay (steps: MacroStep[], id: string, delay: number): MacroStep[] {
-  return steps.map(step => {
+  let isStepFound = false
+  const result = steps.map(step => {
     if (step.id === id) {
+      isStepFound = true
       return {
         ...step,
         delay
@@ -11,6 +13,10 @@ export function updateDelay (steps: MacroStep[], id: string, delay: number): Mac
     }
     return step
   })
+  if (!isStepFound) {
+    throw new Error(`Step ${id} not found`)
+  }
+  return result
 }
 
 export function updateKeystroke (
@@ -26,10 +32,10 @@ export function updateKeystroke (
   let pairIndex: number = -1
   switch (changedItem.type) {
     case MacroStepType.KeyDown:
-      pairIndex = findStepIndexToBottom(steps, keyName, itemIndex)
+      pairIndex = findStepIndexToBottom(steps, changedItem.keyName, itemIndex)
       break
     case MacroStepType.KeyUp:
-      pairIndex = findStepIndexToTop(steps, keyName, itemIndex)
+      pairIndex = findStepIndexToTop(steps, changedItem.keyName, itemIndex)
       break
     default:
       throw new Error('Incorrect step type')
@@ -55,13 +61,16 @@ export function removeStep (steps: MacroStep[], id: string): MacroStep[] {
   }
   const step = steps[index]
   if (step.type === MacroStepType.Wait) {
-    return steps.filter((_, i) => i !== index && i !== index + 1)
+    return steps.filter((_, i) => i !== index)
   }
-  let pairIndex: number
+  let pairIndex = -1
   if (step.type === MacroStepType.KeyDown) {
     pairIndex = findStepIndexToBottom(steps, step.keyName, index)
   } else {
     pairIndex = findStepIndexToTop(steps, step.keyName, index)
+  }
+  if (pairIndex === -1) {
+    throw new Error(`Step pair for ${step.keyName} not found`)
   }
   if (index === 0 || pairIndex === 0) {
     const filtered = steps.filter((_, i) => i !== index && i !== pairIndex)
