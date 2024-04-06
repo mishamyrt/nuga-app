@@ -21,7 +21,9 @@
     }
   }
   function handleDndFinalize (e: CustomDragEvent) {
-    macroStepsChanged(e.detail.items)
+    if (checkMacroStepsOrder(e.detail.items)) {
+      macroStepsChanged(e.detail.items)
+    }
   }
 
   $: macroSteps = $currentMacroStepsStore
