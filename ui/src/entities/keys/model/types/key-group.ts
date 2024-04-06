@@ -7,3 +7,7 @@ export type KeyGroup = {
   title: string
   keys: KeyOption[]
 }
+
+export type DisplayedKeyGroup = {
+  visible: boolean
+} & KeyGroup

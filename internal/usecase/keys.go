@@ -153,6 +153,7 @@ func (k *KeysUsecase) SetKeys(keys dto.KeyMap) error {
 
 var groupsOrder = []string{
 	"Backlight",
+	"System",
 	"Multimedia",
 	"Modifiers",
 	"Special",

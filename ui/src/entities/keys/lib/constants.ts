@@ -129,3 +129,8 @@ export const keysWithSameName = [
   'Semicolon',
   'Quote'
 ]
+
+export const hiddenGroups = new Set([
+  'System',
+  'Backlight'
+])

@@ -2,7 +2,12 @@
   import { Button, FormGroup, FormRow, Modal, ModalActions, Select, Stack } from '@naco-ui/svelte'
   import { createEventDispatcher } from 'svelte'
 
-  import { keyGroupsStore, keyMapStore, keyNamesStore, selectedKeyStore } from '$entities/keys'
+  import {
+    keyGroupsStore,
+    keyMapStore,
+    keyNamesStore,
+    selectedKeyStore
+  } from '$entities/keys'
 
   const dispatcher = createEventDispatcher()
 
@@ -42,11 +47,17 @@
   <Modal open={showModal} width={400}>
     <Stack gap="m">
       {#each $keyGroupsStore as group}
-      <FormGroup title={group.title}>
-        {#each group.keys as key}
-          <FormRow on:click={() => handleActionClick(key.value)} interactive title={key.title} />
-        {/each}
-      </FormGroup>
+        {#if group.visible}
+          <FormGroup title={group.title}>
+            {#each group.keys as key}
+              <FormRow
+                on:click={() => handleActionClick(key.value)}
+                interactive
+                title={key.title}
+              />
+            {/each}
+          </FormGroup>
+        {/if}
       {/each}
     </Stack>
     <ModalActions slot="actions">
