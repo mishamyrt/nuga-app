@@ -1,4 +1,4 @@
-import { type KeyAction, KeyActionType } from '../model/types'
+import { type KeyAction, KeyActionType, type StrictKeystrokeAction } from '../model/types'
 import { modifierKeys } from './constants'
 
 export function isSameAction (a: KeyAction, b: KeyAction): boolean {
@@ -36,4 +36,38 @@ export function isModifierAction (action: KeyAction): boolean {
     return false
   }
   return modifierKeys.has(action.keystroke.key)
+}
+
+export function isStrictKeystroke (x: KeyAction): x is StrictKeystrokeAction {
+  if (x.type !== KeyActionType.Keystroke) {
+    return false
+  }
+  return Boolean(x.keystroke?.modifiers)
+}
+
+export function safeKeystrokeAction (action: KeyAction): StrictKeystrokeAction {
+  const defaultModifiers = {
+    ctrl: false,
+    shift: false,
+    alt: false,
+    meta: false
+  }
+  if (action.type !== KeyActionType.Keystroke) {
+    return {
+      type: KeyActionType.Keystroke,
+      keystroke: {
+        key: 'none',
+        modifiers: defaultModifiers
+      }
+    }
+  } else if (!isStrictKeystroke(action)) {
+    return {
+      type: KeyActionType.Keystroke,
+      keystroke: {
+        key: action.keystroke.key,
+        modifiers: defaultModifiers
+      }
+    }
+  }
+  return action
 }

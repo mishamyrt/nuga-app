@@ -26,11 +26,19 @@ export type KeystrokeParams = {
   modifiers?: Modifiers
 }
 
+export type StrictKeystrokeParams = {
+  modifiers: Modifiers
+} & KeystrokeParams
+
 export type KeystrokeAction = {
   type: KeyActionType.Keystroke
   keystroke: KeystrokeParams
   macro?: never // Ensures that macroIndex cannot be present when type is 'Keystroke'
 } & BaseAction
+
+export type StrictKeystrokeAction = {
+  keystroke: StrictKeystrokeParams
+} & KeystrokeAction
 
 export type ActionChangeParams = {
   key: string

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { type KeyAction, KeyActionType } from '$entities/keys'
 
-import { isModifierAction, isSameAction } from '../action'
+import { isModifierAction, isSameAction, isStrictKeystroke, safeKeystrokeAction } from '../action'
 
 describe('isSameAction', () => {
   it('should return true for equal actions', () => {
@@ -198,5 +198,99 @@ describe('isModifierAction', () => {
       type: KeyActionType.Macro,
       macro: 0
     })).toBe(false)
+  })
+})
+
+describe('isStrictKeystroke', () => {
+  it('should return false for non keystroke actions', () => {
+    expect(isStrictKeystroke({
+      type: KeyActionType.Macro,
+      macro: 0
+    })).toBe(false)
+  })
+
+  it('should return true for keystroke actions', () => {
+    expect(isStrictKeystroke({
+      type: KeyActionType.Keystroke,
+      keystroke: {
+        key: 'k',
+        modifiers: {
+          ctrl: false,
+          shift: false,
+          alt: false,
+          meta: false
+        }
+      }
+    })).toBe(true)
+  })
+
+  it('should return false for keystroke actions without modifiers', () => {
+    expect(isStrictKeystroke({
+      type: KeyActionType.Keystroke,
+      keystroke: {
+        key: 'k'
+      }
+    })).toBe(false)
+  })
+
+  it('should return false for non keystroke actions', () => {
+    expect(isStrictKeystroke({
+      type: KeyActionType.None
+    })).toBe(false)
+  })
+})
+
+describe('safeKeystrokeAction', () => {
+  it('should return keystroke action', () => {
+    const action: KeyAction = {
+      type: KeyActionType.Keystroke,
+      keystroke: {
+        key: 'k',
+        modifiers: {
+          ctrl: false,
+          shift: false,
+          alt: false,
+          meta: false
+        }
+      }
+    }
+    expect(safeKeystrokeAction(action)).toEqual(action)
+  })
+
+  it('should return macro action', () => {
+    const action: KeyAction = {
+      type: KeyActionType.Macro,
+      macro: 0
+    }
+    expect(safeKeystrokeAction(action)).toEqual({
+      type: KeyActionType.Keystroke,
+      keystroke: {
+        key: 'none',
+        modifiers: {
+          ctrl: false,
+          shift: false,
+          alt: false,
+          meta: false
+        }
+      }
+    })
+  })
+
+  it('should return none action', () => {
+    const action: KeyAction = {
+      type: KeyActionType.None
+    }
+    expect(safeKeystrokeAction(action)).toEqual({
+      type: KeyActionType.Keystroke,
+      keystroke: {
+        key: 'none',
+        modifiers: {
+          ctrl: false,
+          shift: false,
+          alt: false,
+          meta: false
+        }
+      }
+    })
   })
 })

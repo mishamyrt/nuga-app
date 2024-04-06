@@ -2,8 +2,8 @@
   import { fsd } from 'feature-sliced-svelte'
   import { createEventDispatcher, onDestroy } from 'svelte'
 
-  import { KeyActionType, keyMapStore, KeyShortcut, type KeystrokeAction, selectedKeyStore } from '$entities/keys'
-  import { isModifierAction, keystrokeFromEvent } from '$entities/keys/lib'
+  import { keyMapStore, KeyShortcut, type KeystrokeAction, selectedKeyStore } from '$entities/keys'
+  import { isModifierAction, keystrokeFromEvent, safeKeystrokeAction } from '$entities/keys/lib'
 
   import { defaultKeystroke } from '../lib'
 
@@ -66,10 +66,10 @@
 
   $: keyAction = recording ? keystroke : $keyMapStore[keyCode] ?? defaultKeystroke
   $: disabled = $selectedKeyStore.readonly
+  $: action = safeKeystrokeAction(keyAction)
 </script>
 
 <div use:fsd={'features/KeystrokeInput'}>
-  {#if keyAction.type === KeyActionType.Keystroke}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
     on:click={startRecording}
@@ -80,15 +80,14 @@
     tabindex="0"
   >
     <KeyShortcut
-      key={keyAction.keystroke.key}
+      key={action.keystroke.key}
       dimmed={recording}
-      ctrl={keyAction.keystroke?.modifiers?.ctrl}
-      shift={keyAction.keystroke?.modifiers?.shift}
-      alt={keyAction.keystroke.modifiers?.alt}
-      meta={keyAction.keystroke.modifiers?.meta}
+      ctrl={action.keystroke.modifiers.ctrl}
+      shift={action.keystroke.modifiers.shift}
+      alt={action.keystroke.modifiers.alt}
+      meta={action.keystroke.modifiers.meta}
     />
   </div>
-  {/if}
 </div>
 
 <style lang="scss">
