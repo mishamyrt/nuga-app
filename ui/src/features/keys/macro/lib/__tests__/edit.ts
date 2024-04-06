@@ -202,4 +202,43 @@ describe('removeStep', () => {
       steps[4]
     ])
   })
+
+  const sameNameSteps = [
+    mockKeyDown('a'),
+    mockKeyUp('a'),
+    mockKeyDown('a'),
+    mockKeyUp('a'),
+    mockKeyDown('a'),
+    mockKeyUp('a')
+  ]
+
+  it('should correctly remove first steps with same keyName', () => {
+    const result = removeStep(sameNameSteps, sameNameSteps[0].id)
+    expect(result).toEqual([
+      sameNameSteps[2],
+      sameNameSteps[3],
+      sameNameSteps[4],
+      sameNameSteps[5]
+    ])
+  })
+
+  it('should correctly remove second steps with same keyName', () => {
+    const result = removeStep(sameNameSteps, sameNameSteps[3].id)
+    expect(result).toEqual([
+      sameNameSteps[0],
+      sameNameSteps[1],
+      sameNameSteps[4],
+      sameNameSteps[5]
+    ])
+  })
+
+  it('should correctly remove third steps with same keyName', () => {
+    const result = removeStep(sameNameSteps, sameNameSteps[5].id)
+    expect(result).toEqual([
+      sameNameSteps[0],
+      sameNameSteps[1],
+      sameNameSteps[2],
+      sameNameSteps[3]
+    ])
+  })
 })
