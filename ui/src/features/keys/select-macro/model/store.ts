@@ -3,7 +3,13 @@ import { createEvent, createStore, sample } from 'effector'
 
 import { macroChanged, macroRemoved, macrosStore } from '$entities/keys'
 
-import { findStepIndexToBottom, findStepIndexToTop, macroToSteps, stepsToActions } from '../lib'
+import {
+  findStepIndexToBottom,
+  findStepIndexToTop,
+  macroToSteps,
+  normalizeDelaySteps,
+  stepsToActions
+} from '../lib'
 import type {
   MacroKeyStepType,
   MacroStep,
@@ -93,7 +99,9 @@ sample({
     return {
       title,
       repeats,
-      actions: stepsToActions(steps),
+      actions: stepsToActions(
+        normalizeDelaySteps(steps)
+      ),
       index
     }
   },
