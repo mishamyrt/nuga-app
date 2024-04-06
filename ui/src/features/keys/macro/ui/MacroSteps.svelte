@@ -9,33 +9,20 @@
   import StepKeystrokeInput from '$entities/keys/ui/StepKeystrokeInput.svelte'
 
   import { checkMacroStepsOrder, observeStepsOn } from '../lib'
-  import {
-    currentMacroStepsStore,
-    macroStepDelayAdded,
-    macroStepDelayChanged,
-    macroStepKeystrokeAdded,
-    macroStepKeystrokeChanged,
-    macroStepRemoved,
-    macroStepsChanged
-  } from '../model'
+  import { stepDelayAdded, stepDelayChanged, stepKeystrokeAdded, stepKeystrokeChanged, stepRemoved, stepsChanged, stepsStore } from '../model'
   import { type CustomDragEvent, MacroStepType } from '../model/types'
 
   let stepsContainer: HTMLDivElement
   let subscriptions: Subscription[]
 
   const flipDurationMs = 300
-  function handleDndConsider (e: CustomDragEvent) {
+  function handleDragAndDrop (e: CustomDragEvent) {
     if (checkMacroStepsOrder(e.detail.items)) {
-      macroStepsChanged(e.detail.items)
-    }
-  }
-  function handleDndFinalize (e: CustomDragEvent) {
-    if (checkMacroStepsOrder(e.detail.items)) {
-      macroStepsChanged(e.detail.items)
+      stepsChanged(e.detail.items)
     }
   }
 
-  $: macroSteps = $currentMacroStepsStore
+  $: macroSteps = $stepsStore
   $: dndZoneParams = {
     items: macroSteps,
     flipDurationMs,
@@ -47,13 +34,13 @@
   onMount(() => {
     subscriptions = observeStepsOn(stepsContainer,
       {
-        event: macroStepKeystrokeAdded,
+        event: stepKeystrokeAdded,
         offset: 1,
         actionSelector: 'input',
         fn: (node: HTMLInputElement) => node.focus()
       },
       {
-        event: macroStepDelayAdded,
+        event: stepDelayAdded,
         actionSelector: 'input',
         fn: (node: HTMLInputElement) => node.focus()
       }
@@ -68,8 +55,8 @@
     class="steps"
     bind:this={stepsContainer}
     use:dndzone="{dndZoneParams}"
-    on:consider="{handleDndConsider}"
-    on:finalize="{handleDndFinalize}"
+    on:consider="{handleDragAndDrop}"
+    on:finalize="{handleDragAndDrop}"
   >
     {#if macroSteps.length === 0}
       <div class="empty">
@@ -86,21 +73,21 @@
           </div>
           {#if step.type === MacroStepType.KeyDown || step.type === MacroStepType.KeyUp}
             <StepKeystrokeInput
-              on:input={(e) => macroStepKeystrokeChanged({
+              on:input={(e) => stepKeystrokeChanged({
                 id: step.id,
                 keyName: e.detail
               })}
               keyName={step.keyName} />
           {:else if step.type === MacroStepType.Wait}
             <StepDelayInput
-              on:input={(e) => macroStepDelayChanged({
+              on:input={(e) => stepDelayChanged({
                 id: step.id,
                 delay: e.detail
               })}
               value={step.delay} />
           {/if}
         </div>
-        <button on:click={() => macroStepRemoved(step.id)} class="delete">×</button>
+        <button on:click={() => stepRemoved(step.id)} class="delete">×</button>
       </div>
     {/each}
   </div>

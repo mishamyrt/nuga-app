@@ -4,17 +4,17 @@
   import { TransparentInput, TransparentInputNumber } from '$shared/ui/TransparentInput'
 
   import {
-    currentMacroRemoved,
-    currentMacroStepsStore,
+    editedMacroRemoved,
+    editedMacroSubmitted,
     macroRepeatsChanged,
     macroRepeatsStore,
-    macroStepDelayAdded,
-    macroStepKeystrokeAdded,
-    macroSubmitted,
     macroTitleChanged,
     macroTitleStore,
     modalClosed,
-    showMacroModalStore
+    showMacroModalStore,
+    stepDelayAdded,
+    stepKeystrokeAdded,
+    stepsStore
   } from '../model'
   import MacroSteps from './MacroSteps.svelte'
 
@@ -33,25 +33,25 @@
   }
 
   function handleSubmit () {
-    macroSubmitted()
+    editedMacroSubmitted()
     modalClosed()
   }
 
   function handleDelete () {
-    currentMacroRemoved()
+    editedMacroRemoved()
     modalClosed()
   }
 
   $: open = $showMacroModalStore
-  $: canSave = $macroTitleStore !== '' && $macroRepeatsStore > 0 && $currentMacroStepsStore.length > 0
+  $: canSave = $macroTitleStore !== '' && $macroRepeatsStore > 0 && $stepsStore.length > 0
 </script>
 
 <Modal fixed {open} width={$os === 'linux' ? 800 : 600}>
   <Stack gap="m">
     <MacroSteps />
     <Stack gap="m" justify="start" direction="horizontal">
-      <Button on:click={() => macroStepKeystrokeAdded()}>Add keystroke</Button>
-      <Button on:click={() => macroStepDelayAdded()}>Add wait</Button>
+      <Button on:click={() => stepKeystrokeAdded()}>Add keystroke</Button>
+      <Button disabled on:click={() => stepDelayAdded()}>Add wait</Button>
       <Button disabled>Record</Button>
     </Stack>
     <FormGroup>
