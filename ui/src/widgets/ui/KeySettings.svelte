@@ -1,9 +1,7 @@
 <script lang="ts">
   import { FormGroup, FormRow, Select, Stack, Typography } from '@naco-ui/svelte'
 
-  import { actionChanged, keyMapStore } from '$entities/keys'
-  import { getShortName } from '$entities/keys/lib'
-  import type { KeyAction } from '$entities/keys/model/types'
+  import { actionChanged, getShortName, type KeyAction, keyMapStore } from '$entities/keys'
   import { CustomActionToggle, KeyActionSelect, KeystrokeInput, SelectMacros } from '$features/keys'
 
   export let keyCode: string

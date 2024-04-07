@@ -2,8 +2,15 @@
   import { fsd } from 'feature-sliced-svelte'
   import { createEventDispatcher, onDestroy } from 'svelte'
 
-  import { keyMapStore, KeyShortcut, type KeystrokeAction, selectedKeyStore } from '$entities/keys'
-  import { isModifierAction, keystrokeFromEvent, safeKeystrokeAction } from '$entities/keys/lib'
+  import {
+    isModifierAction,
+    keyMapStore,
+    KeyShortcut,
+    type KeystrokeAction,
+    keystrokeFromEvent,
+    safeKeystrokeAction,
+    selectedKeyStore
+  } from '$entities/keys'
 
   import { defaultKeystroke } from '../lib'
 

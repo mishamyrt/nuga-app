@@ -1,6 +1,11 @@
 <script lang="ts">
-  import { changesMapStore, type Key, keySelected, selectedKeyStore } from '$entities/keys'
-  import { getShortName } from '$entities/keys/lib'
+  import {
+    changesMapStore,
+    getShortName,
+    type Key,
+    keySelected,
+    selectedKeyStore
+  } from '$entities/keys'
 
   export let key: Key
   export let location: [number, number]

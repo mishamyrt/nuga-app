@@ -5,8 +5,7 @@
   import { flip } from 'svelte/animate'
   import { dndzone } from 'svelte-dnd-action'
 
-  import { StepDelayInput } from '$entities/keys/ui'
-  import StepKeystrokeInput from '$entities/keys/ui/StepKeystrokeInput.svelte'
+  import { StepDelayInput, StepKeystrokeInput } from '$entities/keys'
 
   import { checkMacroStepsOrder, observeStepsOn } from '../lib'
   import { stepDelayAdded, stepDelayChanged, stepKeystrokeAdded, stepKeystrokeChanged, stepRemoved, stepsChanged, stepsStore } from '../model'

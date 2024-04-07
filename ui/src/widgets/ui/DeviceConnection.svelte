@@ -2,7 +2,7 @@
 <script lang="ts">
   import { onHotkey } from '@naco-ui/svelte'
 
-  import AppConnectionDialog from '$entities/app/ui/AppConnectionDialog.svelte'
+  import { AppConnectionDialog } from '$entities/app'
   import { isConnected, simulating } from '$shared/model'
 
   export let sidebarWidth: number

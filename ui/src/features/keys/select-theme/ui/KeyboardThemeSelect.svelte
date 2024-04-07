@@ -1,8 +1,11 @@
 <script lang="ts">
   import { Select } from '@naco-ui/svelte'
 
-  import { keyboardThemeNameStore, keyboardThemeUpdated } from '$entities/keys'
-  import type { KeyboardThemeName } from '$entities/keys/lib/themes'
+  import {
+    type KeyboardThemeName,
+    keyboardThemeNameStore,
+    keyboardThemeUpdated
+  } from '$entities/keys'
 
   function handleChange (e: CustomEvent<string>) {
     keyboardThemeUpdated(e.detail as KeyboardThemeName)
