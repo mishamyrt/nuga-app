@@ -25,3 +25,5 @@ export enum OSMode {
   Windows = 'win',
   MacOS = 'mac'
 }
+
+export type CheatFeatures = 'keyboardThemes'

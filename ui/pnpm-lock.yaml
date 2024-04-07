@@ -20,6 +20,9 @@ dependencies:
   effector-queue:
     specifier: 1.0.2
     version: 1.0.2(effector@23.2.0)
+  hesoyam:
+    specifier: ^0.0.3
+    version: 0.0.3
   patronum:
     specifier: 2.2.0
     version: 2.2.0(effector@23.2.0)
@@ -2682,6 +2685,10 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+
+  /hesoyam@0.0.3:
+    resolution: {integrity: sha512-lPGGoXIaeEVdAbzAX5EI6PU3Lwn3usFXSY0mlvCqvrvsyduxNZY+Mw8+KtHQ2KNjTjnBUofVuZj50lAIlJEu5g==}
+    dev: false
 
   /html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
