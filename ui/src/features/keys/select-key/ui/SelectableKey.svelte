@@ -12,7 +12,6 @@
     keySelected(key)
   }
 
-  $: dark = key.color === 'dark'
   $: active = $selectedKeyStore.code === key.code
   $: custom = $changesMapStore[key.code]
 </script>
@@ -20,7 +19,6 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   class="key"
-  class:dark
   class:active
   class:custom
   on:click={handleClick}
@@ -48,10 +46,7 @@
     padding-top: var(--space-xxs);
     background-color: transparent;
     cursor: default;
-
-    &.dark {
-      color: white;
-    }
+    color: var(--key-text-color);
 
     &::after {
       top: -4px;

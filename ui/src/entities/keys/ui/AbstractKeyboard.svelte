@@ -37,7 +37,9 @@
             class="key"
             style:--key-width="{key.width}"
             style:--key-height="{key.height}"
-            style:--key-font-size="{fontSize}px">
+            style:--key-font-size="{fontSize}px"
+            style:--key-text-color={key.color === 'dark' ? 'var(--key-text-color-light)' : 'var(--key-text-color-dark)'}
+            >
             <div
               class="base"
               style:--key-color="var(--key-color-{key.color})" />
@@ -67,22 +69,6 @@
       --key-color-orange: var(--key-color-dark);
       --key-color-yellow: var(--key-color-dark);
     }
-  }
-
-  :global(.naco.dark) .keys {
-    --key-color-dark: #6b6b6b;
-    --key-color-light: rgb(196 196 196);
-    --key-color-mint: rgb(46 218 151);
-    --key-color-orange: rgb(226 121 80);
-    --key-color-yellow: rgb(195 164 0);
-  }
-
-  :global(.naco.light) .keys {
-    --key-color-dark: #5c5c5c;
-    --key-color-light: rgb(255 255 255);
-    --key-color-mint: rgb(54 251 174);
-    --key-color-orange: rgb(255 109 52);
-    --key-color-yellow: rgb(255 214 0);
   }
 
   .key {

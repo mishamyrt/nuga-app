@@ -7,6 +7,7 @@
   import { onDestroy } from 'svelte'
 
   import { settingsStore, themeContextFromSettings } from '$entities/app'
+  import { KeyboardThemeProvider } from '$features/keys'
   import { pages } from '$pages'
   import { activePage } from '$shared/model'
   import { AppDebugModal, DeviceConnection } from '$widgets'
@@ -27,23 +28,25 @@
 </script>
 
 <FeatureSlicedDebug />
-<BodyThemeProvider {context}>
-  <SidebarLayout
-    {sidebarWidth}
-    macInset={{
-      enable: true
-    }}
-    toolbar={{
-      transparent: true,
-      border: 'scroll'
-    }}
-    transparent
-    {...props}
-  >
-    <Sidebar slot="sidebar" />
-    <Toolbar slot="toolbar" />
-    <Content />
-  </SidebarLayout>
-  <DeviceConnection {sidebarWidth} />
-  <AppDebugModal />
-</BodyThemeProvider>
+  <KeyboardThemeProvider>
+  <BodyThemeProvider {context}>
+    <SidebarLayout
+      {sidebarWidth}
+      macInset={{
+        enable: true
+      }}
+      toolbar={{
+        transparent: true,
+        border: 'scroll'
+      }}
+      transparent
+      {...props}
+    >
+      <Sidebar slot="sidebar" />
+      <Toolbar slot="toolbar" />
+      <Content />
+    </SidebarLayout>
+    <DeviceConnection {sidebarWidth} />
+    <AppDebugModal />
+  </BodyThemeProvider>
+</KeyboardThemeProvider>

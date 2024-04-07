@@ -1,6 +1,6 @@
 <svelte:options immutable={true}/>
 <script lang="ts">
-  import { FormGroup, FormRow, Stack } from '@naco-ui/svelte'
+  import { FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
 
   import { restoringStateStore } from '$entities/device'
   import { supportsKeyStore } from '$entities/keys'
@@ -10,6 +10,8 @@
     StateRestoreButton,
     StateRestoreDefaultButton
   } from '$features/device'
+  import { KeyboardThemeSelect } from '$features/keys'
+  import { activeFeaturesStore } from '$shared/model'
 
   $: isRestoring = $restoringStateStore
   $: supportsKeys = $supportsKeyStore
@@ -26,6 +28,16 @@
       <StateRestoreButton disabled={isRestoring}>Load...</StateRestoreButton>
     </Stack>
   </FormRow>
+  {#if $activeFeaturesStore.keyboardThemes}
+  <FormRow>
+    <Stack align="center" justify="space-between" direction="horizontal">
+      <Typography>
+        Keyboard theme
+      </Typography>
+      <KeyboardThemeSelect />
+    </Stack>
+  </FormRow>
+  {/if}
 </FormGroup>
 <div class="restore">
   <StateRestoreDefaultButton disabled={!supportsKeys || isRestoring}>Restore default</StateRestoreDefaultButton>
