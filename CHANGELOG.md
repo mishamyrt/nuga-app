@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ### Added
 
 - Macros configuration support.
+- Hidden keyboard theme options.
 
 ### Fixed
 

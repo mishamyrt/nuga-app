@@ -1,6 +1,8 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { createCheatsListener } from 'hesoyam'
 
+import { attachStorage } from '$shared/lib'
+
 import { defaultFeatures, featureCheats } from '../constants'
 import type { CheatFeatures } from '../types'
 
@@ -34,6 +36,11 @@ activeFeaturesStore.on(cheatReceived, (state, cheat) => ({
   ...state,
   [cheat]: !state[cheat as CheatFeatures]
 }))
+
+attachStorage({
+  source: activeFeaturesStore,
+  key: 'active-features'
+})
 
 sample({
   clock: cheatReceived,
