@@ -13,7 +13,7 @@ export const macroRepeatsStore = createStore(defaultMacroRepeats, { name: 'macro
 
 sample({
   clock: macroTitleChanged,
-  source: macroTitleStore
+  target: macroTitleStore
 })
 sample({
   clock: macroEdited,
