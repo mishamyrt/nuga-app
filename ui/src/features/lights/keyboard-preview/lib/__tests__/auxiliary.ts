@@ -21,7 +21,7 @@ describe('getAuxiliaryColor', () => {
       },
     ]
     const color = getAuxiliaryColor(state, modes)
-    expect(color).toBe('#FF0000')
+    expect(color).toBe('#ff0000')
   })
 
   it('should return random color', () => {

@@ -7,4 +7,4 @@ export const defaultAppSettings: Readonly<AppSettings> = {
 
 export const defaultVersion = 'snapshot'
 
-export const defaultBackgroundColor = '#FFFFFF'
+export const defaultBackgroundColor = '#ffffff'

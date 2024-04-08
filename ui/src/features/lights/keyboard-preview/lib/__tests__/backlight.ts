@@ -64,7 +64,7 @@ describe('renderBacklightColors', () => {
       brightness: 1,
     }
     const result = renderBacklightColors(state, backlightDefaultColors, template)
-    result.forEach((row) => row.forEach((color) => expect(color).toBe('#FF0000')))
+    result.forEach((row) => row.forEach((color) => expect(color).toBe('#ff0000')))
   })
 
   it('should return correct transparent matrix if disabled', () => {})
