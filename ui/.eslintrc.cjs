@@ -14,7 +14,7 @@ const DENIED_PATH_GROUPS = [
 ]
 
 module.exports = {
-  plugins: ['eslint-plugin-simple-import-sort', 'effector', '@stylistic/ts', 'import'],
+  plugins: ['eslint-plugin-simple-import-sort', 'effector', 'import'],
   extends: [
     'plugin:svelte/recommended',
     'plugin:import/typescript',
