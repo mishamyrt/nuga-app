@@ -11,10 +11,10 @@ const events = new Map<string, (...args: any[]) => void>()
 vi.spyOn(mod, 'EventsOn')
 vi.mock('$wails/runtime', async (importOriginal) => {
   return {
-    ...await importOriginal<typeof import('$wails/runtime')>(),
+    ...(await importOriginal<typeof import('$wails/runtime')>()),
     EventsOn: (eventName: string, cb: (...args: any[]) => void) => {
       events.set(eventName, cb)
-    }
+    },
   }
 })
 
@@ -50,7 +50,7 @@ describe('fromWailsEvent', () => {
   it('should pass correct data to event', () => {
     const eventName = 'data'
     const payload = {
-      value: 'test'
+      value: 'test',
     }
     const cb = vi.fn()
     fromWailsEvent(eventName, { fn: cb })

@@ -6,9 +6,9 @@ Application for controlling NuPhy® keyboards.
 
 ### Features
 
-* Lights control.
-* Key mapping control (Halo75 and Halo65 for now). 
-* Macros control.
+- Lights control.
+- Key mapping control (Halo75 and Halo65 for now).
+- Macros control.
 
 **Supported devices**: Halo75, Halo65, Halo96.
 
@@ -26,9 +26,9 @@ Application for controlling NuPhy® keyboards.
 
 For local development, you need to set up environments. For this purpose you will need:
 
-* [golang](https://go.dev/doc/install) 1.20+
-* [Wails](https://wails.io/docs/gettingstarted/installation) 2.5+
-* [pnpm](https://pnpm.io/installation) 8+
+- [golang](https://go.dev/doc/install) 1.20+
+- [Wails](https://wails.io/docs/gettingstarted/installation) 2.5+
+- [pnpm](https://pnpm.io/installation) 8+
 
 ### Libraries
 
@@ -58,8 +58,8 @@ Cross-compiling the application is not possible at this time. Therefore, full bu
 
 For native builds, there are targets in the Makefile:
 
-* `build/darwin` – To build macOS app (arm64, amd64)
-* `build/linux` – To build Linux app binary (arm64, amd64)
+- `build/darwin` – To build macOS app (arm64, amd64)
+- `build/linux` – To build Linux app binary (arm64, amd64)
 
 The `build` command is a common alias for these commands and performs a build on the OS that is currently in use.
 

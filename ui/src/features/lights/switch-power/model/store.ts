@@ -14,9 +14,9 @@ sample({
       ...state,
       [req.domain]: {
         ...state[req.domain],
-        enabled: req.enabled
-      }
+        enabled: req.enabled,
+      },
     }
   },
-  target: stateSet
+  target: stateSet,
 })

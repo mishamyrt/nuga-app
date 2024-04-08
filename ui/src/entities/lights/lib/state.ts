@@ -4,7 +4,7 @@ import type {
   LightEffectParams,
   LightState,
   LightStateValue,
-  RawLightState
+  RawLightState,
 } from '../model/types'
 import { defaultDomainState } from './constants'
 
@@ -13,7 +13,7 @@ import { defaultDomainState } from './constants'
  */
 export function effectParamsToState (
   mode: number,
-  params: LightEffectParams
+  params: LightEffectParams,
 ): LightDomainState {
   const enabled = mode !== 0
   return {
@@ -21,7 +21,7 @@ export function effectParamsToState (
     mode: enabled ? mode : 1,
     color: params.color as LightColorIndex,
     speed: params.speed as LightStateValue,
-    brightness: params.brightness as LightStateValue
+    brightness: params.brightness as LightStateValue,
   }
 }
 
@@ -31,12 +31,9 @@ export function effectParamsToState (
 export function parseEffectParamsState (state: RawLightState): LightState {
   return {
     backlight: state.backlightParams
-      ? effectParamsToState(
-        state.backlight.mode.code,
-        state.backlightParams
-      )
+      ? effectParamsToState(state.backlight.mode.code, state.backlightParams)
       : defaultDomainState,
     halo: effectParamsToState(state.halo.mode.code, state.halo),
-    sidelight: effectParamsToState(state.sidelight.mode.code, state.sidelight)
+    sidelight: effectParamsToState(state.sidelight.mode.code, state.sidelight),
   }
 }

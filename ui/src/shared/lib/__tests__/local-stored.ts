@@ -11,10 +11,12 @@ describe('attachStorage', () => {
     fork()
     const key = getTestId()
     const store = createStore(0)
-    expect(attachStorage({
-      source: store,
-      key
-    })).toBeUndefined()
+    expect(
+      attachStorage({
+        source: store,
+        key,
+      }),
+    ).toBeUndefined()
     localStorage.removeItem(key)
   })
 
@@ -22,11 +24,10 @@ describe('attachStorage', () => {
     fork()
     const key = getTestId()
     const valueUpdated = createEvent<number>('setValue')
-    const store = createStore(0)
-      .on(valueUpdated, (_, value) => value)
+    const store = createStore(0).on(valueUpdated, (_, value) => value)
     attachStorage({
       source: store,
-      key
+      key,
     })
     valueUpdated(1)
     expect(localStorage.getItem(key)).toBe('1')
@@ -40,7 +41,7 @@ describe('attachStorage', () => {
     localStorage.setItem(key, '1')
     attachStorage({
       source: store,
-      key
+      key,
     })
     await allSettled<number>(store, { scope, params: 0 })
     expect(store.getState()).toBe(1)
@@ -50,12 +51,12 @@ describe('attachStorage', () => {
     const scope = fork()
     const key = getTestId()
     const store = createStore({
-      value: 0
+      value: 0,
     })
     localStorage.setItem(key, '{"value": 1}')
     attachStorage({
       source: store,
-      key
+      key,
     })
     await allSettled(store, { scope, params: { value: 0 } })
     expect(store.getState()).toEqual({ value: 1 })
@@ -65,12 +66,11 @@ describe('attachStorage', () => {
     const key = getTestId()
     const valueUpdated = createEvent<{ value: number }>('setValue')
     const store = createStore({
-      value: 0
-    })
-      .on(valueUpdated, (_, value) => value)
+      value: 0,
+    }).on(valueUpdated, (_, value) => value)
     attachStorage({
       source: store,
-      key
+      key,
     })
     valueUpdated({ value: 1 })
     expect(localStorage.getItem(key)).toEqual('{"value":1}')

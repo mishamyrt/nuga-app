@@ -3,7 +3,7 @@ import type { Modifiers } from './key'
 export const enum KeyActionType {
   None = 'none',
   Macro = 'macro',
-  Keystroke = 'keystroke'
+  Keystroke = 'keystroke',
 }
 
 export type KeyAction = KeystrokeAction | MacroKeyAction | NoneKeyAction

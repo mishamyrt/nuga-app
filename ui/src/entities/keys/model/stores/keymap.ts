@@ -14,30 +14,42 @@ export const keySelected = createEvent<Key>('keySelected')
 export const keyMapChanged = createEvent<KeyMap>('keyMapChanged')
 export const actionChanged = createEvent<ActionChangeParams>('actionChanged')
 
-export const keyMapStore = createStore<KeyMap>(defaultKeyMap, { name: 'keyMap' })
-export const selectedKeyStore = createStore<Key>(defaultKey, { name: 'selectedKey' })
+export const keyMapStore = createStore<KeyMap>(defaultKeyMap, {
+  name: 'keyMap',
+})
+export const selectedKeyStore = createStore<Key>(defaultKey, {
+  name: 'selectedKey',
+})
 
-export const primaryActionStore = combine(keyMapStore, selectedKeyStore, (keyMap, key) => {
-  if (key.code === 'none' || !keyMap[key.code]) {
-    return defaultKeyAction
-  }
-  return keyMap[key.code]
-})
-export const secondaryActionStore = combine(keyMapStore, selectedKeyStore, (keyMap, key) => {
-  if (!key.secondaryCode) {
-    return null
-  }
-  if (key.secondaryCode === 'none') {
-    return defaultKeyAction
-  }
-  return keyMap[key.secondaryCode] ?? null
-})
+export const primaryActionStore = combine(
+  keyMapStore,
+  selectedKeyStore,
+  (keyMap, key) => {
+    if (key.code === 'none' || !keyMap[key.code]) {
+      return defaultKeyAction
+    }
+    return keyMap[key.code]
+  },
+)
+export const secondaryActionStore = combine(
+  keyMapStore,
+  selectedKeyStore,
+  (keyMap, key) => {
+    if (!key.secondaryCode) {
+      return null
+    }
+    if (key.secondaryCode === 'none') {
+      return defaultKeyAction
+    }
+    return keyMap[key.secondaryCode] ?? null
+  },
+)
 
 export const hasSecondaryActionStore = not(empty(secondaryActionStore))
 
 const getKeysFx = createHIDEffect({
   name: 'getKeysFx',
-  handler: getKeys
+  handler: getKeys,
 })
 const setKeysFx = createEffect('setKeys', { handler: setKeys })
 
@@ -47,30 +59,30 @@ export const isKeysSettingStore = getKeysFx.pending
 sample({
   clock: supportsStore,
   filter: ({ keys }) => keys,
-  target: keysInitiated
+  target: keysInitiated,
 })
 
 sample({
   clock: anyStateRestored,
   source: supportsStore,
   filter: ({ keys }) => keys,
-  target: keysInitiated
+  target: keysInitiated,
 })
 
 // Load keys on device connect
 sample({
   clock: [keysInitiated, anyStateRestored, modeChanged],
-  target: getKeysFx
+  target: getKeysFx,
 })
 sample({
   clock: getKeysFx.doneData,
-  target: keyMapStore
+  target: keyMapStore,
 })
 
 // Handle key
 sample({
   clock: keySelected,
-  target: selectedKeyStore
+  target: selectedKeyStore,
 })
 
 sample({
@@ -78,12 +90,12 @@ sample({
   source: keyMapStore,
   fn: (map, { key, action }) => ({
     ...map,
-    [key]: action
+    [key]: action,
   }),
-  target: [keyMapStore, setKeysFx]
+  target: [keyMapStore, setKeysFx],
 })
 
 sample({
   clock: keyMapChanged,
-  target: [keyMapStore, setKeysFx]
+  target: [keyMapStore, setKeysFx],
 })

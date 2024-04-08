@@ -14,17 +14,17 @@ const { start, stop } = createCheatsListener({
   onCheat: (cheat) => {
     cheatReceived(cheat)
   },
-  cheats: featureCheats
+  cheats: featureCheats,
 })
 
 const startFx = createEffect(start)
 const stopFx = createEffect(stop)
 
 export const cheatListeningStore = createStore(false, {
-  name: 'cheatListening'
+  name: 'cheatListening',
 })
 export const activeFeaturesStore = createStore(defaultFeatures, {
-  name: 'activeFeatures'
+  name: 'activeFeatures',
 })
 
 cheatListeningStore.on(cheatInputStarted, () => true)
@@ -32,24 +32,24 @@ cheatListeningStore.on(cheatInputEnded, () => false)
 
 activeFeaturesStore.on(cheatReceived, (state, cheat) => ({
   ...state,
-  [cheat]: !state[cheat as CheatFeatures]
+  [cheat]: !state[cheat as CheatFeatures],
 }))
 
 attachStorage({
   source: activeFeaturesStore,
-  key: 'active-features'
+  key: 'active-features',
 })
 
 sample({
   clock: cheatReceived,
-  target: cheatInputEnded
+  target: cheatInputEnded,
 })
 
 sample({
   source: cheatInputStarted,
-  target: startFx
+  target: startFx,
 })
 sample({
   source: cheatInputEnded,
-  target: stopFx
+  target: stopFx,
 })

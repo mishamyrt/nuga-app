@@ -1,7 +1,7 @@
 <script lang="ts">
   import { KeyboardLights } from '$features/lights'
-
 </script>
+
 <div class="lights-toolbar">
   <KeyboardLights />
 </div>

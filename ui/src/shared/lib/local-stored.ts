@@ -13,22 +13,22 @@ export function attachStorage<T> ({ source, key }: AttachStorageParams<T>) {
         return JSON.parse(value) as T
       }
       return null as T
-    }
+    },
   })
   const writeStorageFx = createEffect('writeStorageFx', {
     handler: (value: T) => {
       localStorage.setItem(key, JSON.stringify(value))
-    }
+    },
   })
 
   sample({
     clock: source,
-    target: writeStorageFx
+    target: writeStorageFx,
   })
   sample({
     clock: readStorageFx.doneData,
     filter: (value) => value !== null,
-    target: source
+    target: source,
   })
   readStorageFx()
 }

@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
 import { type MacroStep, MacroStepType } from '../../model'
-import { checkMacroStepsOrder, findStepIndexToBottom, findStepIndexToTop } from '../order'
+import {
+  checkMacroStepsOrder,
+  findStepIndexToBottom,
+  findStepIndexToTop,
+} from '../order'
 
 const exampleSteps: MacroStep[] = [
   { id: '1', type: MacroStepType.KeyDown, keyName: 'x' },
@@ -10,7 +14,7 @@ const exampleSteps: MacroStep[] = [
   { id: '4', type: MacroStepType.KeyDown, keyName: 'y' },
   { id: '5', type: MacroStepType.KeyUp, keyName: 'y' },
   { id: '6', type: MacroStepType.Wait, delay: 200 },
-  { id: '7', type: MacroStepType.KeyDown, keyName: 'z' }
+  { id: '7', type: MacroStepType.KeyDown, keyName: 'z' },
 ]
 
 describe('findStepIndexToTop', () => {
@@ -30,14 +34,14 @@ describe('findStepIndexToTop', () => {
     const steps: MacroStep[] = [
       { id: '1', keyName: 'a', type: MacroStepType.KeyDown },
       { id: '2', keyName: 'b', type: MacroStepType.KeyDown },
-      { id: '3', keyName: 'a', type: MacroStepType.KeyUp }
+      { id: '3', keyName: 'a', type: MacroStepType.KeyUp },
     ]
     expect(findStepIndexToTop(steps, 'a', 2)).toEqual(0)
   })
 
   it('should return -1 if no matching step is found above the start index', () => {
     const steps: MacroStep[] = [
-      { id: '1', keyName: 'a', type: MacroStepType.KeyDown }
+      { id: '1', keyName: 'a', type: MacroStepType.KeyDown },
     ]
     expect(findStepIndexToTop(steps, 'b', 1)).toEqual(-1)
   })
@@ -60,15 +64,13 @@ describe('findStepIndexToBottom', () => {
     const steps: MacroStep[] = [
       { id: '1', keyName: 'a', type: MacroStepType.KeyDown },
       { id: '2', keyName: 'b', type: MacroStepType.KeyDown },
-      { id: '3', keyName: 'a', type: MacroStepType.KeyUp }
+      { id: '3', keyName: 'a', type: MacroStepType.KeyUp },
     ]
     expect(findStepIndexToBottom(steps, 'b', 0)).toEqual(1)
   })
 
   it('should return -1 if no matching step is found below the start index', () => {
-    const steps: MacroStep[] = [
-      { id: '1', keyName: 'b', type: MacroStepType.KeyUp }
-    ]
+    const steps: MacroStep[] = [{ id: '1', keyName: 'b', type: MacroStepType.KeyUp }]
     expect(findStepIndexToBottom(steps, 'b', 0)).toEqual(-1)
   })
 })
@@ -77,7 +79,7 @@ describe('checkMacroStepsOrder', () => {
   it('correctly handles order of KeyDown and KeyUp steps', () => {
     const steps: MacroStep[] = [
       { id: '1', type: MacroStepType.KeyDown, keyName: 'a' },
-      { id: '2', type: MacroStepType.KeyUp, keyName: 'a' }
+      { id: '2', type: MacroStepType.KeyUp, keyName: 'a' },
     ]
     expect(checkMacroStepsOrder(steps)).toBe(true)
   })
@@ -86,7 +88,7 @@ describe('checkMacroStepsOrder', () => {
     const steps: MacroStep[] = [
       { id: '1', type: MacroStepType.Wait, delay: 100 },
       { id: '2', type: MacroStepType.KeyDown, keyName: 'a' },
-      { id: '3', type: MacroStepType.KeyUp, keyName: 'a' }
+      { id: '3', type: MacroStepType.KeyUp, keyName: 'a' },
     ]
     expect(checkMacroStepsOrder(steps)).toBe(false)
   })
@@ -95,7 +97,7 @@ describe('checkMacroStepsOrder', () => {
     const steps: MacroStep[] = [
       { id: '1', type: MacroStepType.KeyDown, keyName: 'a' },
       { id: '2', type: MacroStepType.KeyUp, keyName: 'a' },
-      { id: '3', type: MacroStepType.KeyDown, keyName: 'b' }
+      { id: '3', type: MacroStepType.KeyDown, keyName: 'b' },
     ]
     expect(checkMacroStepsOrder(steps)).toBe(false)
   })
@@ -105,7 +107,7 @@ describe('checkMacroStepsOrder', () => {
       { id: '1', type: MacroStepType.KeyDown, keyName: 'a' },
       { id: '2', type: MacroStepType.KeyDown, keyName: 'b' },
       { id: '3', type: MacroStepType.KeyUp, keyName: 'a' },
-      { id: '4', type: MacroStepType.KeyUp, keyName: 'b' }
+      { id: '4', type: MacroStepType.KeyUp, keyName: 'b' },
     ]
     expect(checkMacroStepsOrder(steps)).toBe(true)
   })
@@ -115,7 +117,7 @@ describe('checkMacroStepsOrder', () => {
       { id: '1', type: MacroStepType.KeyDown, keyName: 'a' },
       { id: '2', type: MacroStepType.KeyDown, keyName: 'b' },
       { id: '3', type: MacroStepType.KeyUp, keyName: 'b' },
-      { id: '4', type: MacroStepType.KeyUp, keyName: 'a' }
+      { id: '4', type: MacroStepType.KeyUp, keyName: 'a' },
     ]
     expect(checkMacroStepsOrder(steps)).toBe(true)
   })
@@ -127,7 +129,7 @@ describe('checkMacroStepsOrder', () => {
       { id: '3', type: MacroStepType.KeyUp, keyName: 'a' },
       { id: '4', type: MacroStepType.Wait, delay: 200 },
       { id: '5', type: MacroStepType.KeyDown, keyName: 'b' },
-      { id: '6', type: MacroStepType.KeyUp, keyName: 'b' }
+      { id: '6', type: MacroStepType.KeyUp, keyName: 'b' },
     ]
     expect(checkMacroStepsOrder(steps)).toBe(true)
   })
@@ -135,7 +137,7 @@ describe('checkMacroStepsOrder', () => {
   it('detects KeyDown without a corresponding KeyUp', () => {
     const steps: MacroStep[] = [
       { id: '1', type: MacroStepType.KeyDown, keyName: 'a' },
-      { id: '2', type: MacroStepType.KeyDown, keyName: 'b' }
+      { id: '2', type: MacroStepType.KeyDown, keyName: 'b' },
     ]
     expect(checkMacroStepsOrder(steps)).toBe(false)
   })
@@ -143,7 +145,7 @@ describe('checkMacroStepsOrder', () => {
   it('detects repeated KeyDown steps for the same key without an intervening KeyUp', () => {
     const steps: MacroStep[] = [
       { id: '1', type: MacroStepType.KeyDown, keyName: 'a' },
-      { id: '2', type: MacroStepType.KeyDown, keyName: 'a' }
+      { id: '2', type: MacroStepType.KeyDown, keyName: 'a' },
     ]
     expect(checkMacroStepsOrder(steps)).toBe(false)
   })

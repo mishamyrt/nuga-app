@@ -1,12 +1,9 @@
 <script lang="ts">
-  import {
-    BodyThemeProvider,
-    SidebarLayout
-  } from '@naco-ui/svelte'
+  import { BodyThemeProvider, SidebarLayout } from '@naco-ui/svelte'
   import { FeatureSlicedDebug } from 'feature-sliced-svelte'
   import { onDestroy } from 'svelte'
 
-  import { settingsStore, themeContextFromSettings } from '$entities/app'
+  import { settingsStore, themeContextFromSettings } from '$entities/nuga'
   import { KeyboardThemeProvider } from '$features/keys'
   import { pages } from '$pages'
   import { activePage } from '$shared/model'
@@ -28,16 +25,16 @@
 </script>
 
 <FeatureSlicedDebug />
-  <KeyboardThemeProvider>
+<KeyboardThemeProvider>
   <BodyThemeProvider {context}>
     <SidebarLayout
       {sidebarWidth}
       macInset={{
-        enable: true
+        enable: true,
       }}
       toolbar={{
         transparent: true,
-        border: 'scroll'
+        border: 'scroll',
       }}
       transparent
       {...props}

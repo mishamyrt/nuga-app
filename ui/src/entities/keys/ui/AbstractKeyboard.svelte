@@ -1,4 +1,5 @@
-<svelte:options immutable={true}/>
+<svelte:options immutable={true} />
+
 <script lang="ts">
   import { fsd } from 'feature-sliced-svelte'
 
@@ -9,7 +10,7 @@
   export let width: number
   export let reduceColors = false
 
-  $: columnWidth = (width / template.columns)
+  $: columnWidth = width / template.columns
   $: rowHeight = columnWidth * 3.4
   $: borderRadius = columnWidth / 2.2
   $: rows = template.keys.length
@@ -22,27 +23,26 @@
     class:reduce-colors={reduceColors}
     style:--keyboard-width="{width}px"
     style:--keyboard-row-height="{rowHeight}px"
-    style:--keyboard-columns="{template.columns}"
-    style:--keyboard-rows="{rows}"
+    style:--keyboard-columns={template.columns}
+    style:--keyboard-rows={rows}
     style:--keyboard-gap="{borderRadius}px"
     style:--key-border-radius="{borderRadius}px"
   >
-    {#each template.keys as row, y }
-      {#each row as key, x }
+    {#each template.keys as row, y}
+      {#each row as key, x}
         {#if key.code === 'spacer'}
-          <div class="spacer"
-            style:--key-width="{key.width}" />
+          <div class="spacer" style:--key-width={key.width} />
         {:else}
           <div
             class="key"
-            style:--key-width="{key.width}"
-            style:--key-height="{key.height}"
+            style:--key-width={key.width}
+            style:--key-height={key.height}
             style:--key-font-size="{fontSize}px"
-            style:--key-text-color={key.color === 'dark' ? 'var(--key-text-color-light)' : 'var(--key-text-color-dark)'}
-            >
-            <div
-              class="base"
-              style:--key-color="var(--key-color-{key.color})" />
+            style:--key-text-color={key.color === 'dark'
+              ? 'var(--key-text-color-light)'
+              : 'var(--key-text-color-dark)'}
+          >
+            <div class="base" style:--key-color="var(--key-color-{key.color})" />
             <svelte:component this={keyComponent} {key} location={[x, y]} />
           </div>
         {/if}

@@ -9,5 +9,5 @@ export {
   KeyboardKeys,
   KeyShortcut,
   StepDelayInput,
-  StepKeystrokeInput
+  StepKeystrokeInput,
 }

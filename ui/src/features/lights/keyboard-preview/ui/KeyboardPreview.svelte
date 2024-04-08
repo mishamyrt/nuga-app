@@ -18,11 +18,9 @@
     <div
       class="sidelight"
       class:random={isSidelightRandom}
-      style:--light-color="{sidelightColor}"/>
-    <div
-      class="halo"
-      class:random={isHaloRandom}
-      style:--light-color="{haloColor}" />
+      style:--light-color={sidelightColor}
+    />
+    <div class="halo" class:random={isHaloRandom} style:--light-color={haloColor} />
     <AbstractKeyboard
       width={300}
       keyComponent={BacklightKey}
@@ -34,7 +32,7 @@
 
 <style lang="scss">
   .lights-container {
-    --lights-transition: .25s ease-out;
+    --lights-transition: 0.25s ease-out;
     --light-color-background: rgb(134 134 134 / 38%);
     --key-color-dark: #757575;
     --key-color-light: rgb(196 196 196);
@@ -82,10 +80,22 @@
     outline: none;
     border-radius: 9px;
     border: 3px solid transparent;
-    background: conic-gradient(from 125deg at 50% 50%, #f75b60, #ff9e0c, #ade403, #27c4ff, #7f83ff, #913ed3, #e54895, #e73a46) border-box;
+    background:
+      conic-gradient(
+        from 125deg at 50% 50%,
+        #F75B60,
+        #FF9E0C,
+        #ADE403,
+        #27C4FF,
+        #7F83FF,
+        #913ED3,
+        #E54895,
+        #E73A46
+      )
+      border-box;
     mask:
-      linear-gradient(#fff 0 0) padding-box,
-      linear-gradient(#fff 0 0);
+      linear-gradient(#FFF 0 0) padding-box,
+      linear-gradient(#FFF 0 0);
     mask-composite: xor;
     mask-composite: exclude;
     position: relative;
@@ -118,7 +128,9 @@
       height: 100%;
       border-radius: 10px;
       top: 0;
-      transition: background-color var(--lights-transitions), opacity var(--lights-transitions);
+      transition:
+        background-color var(--lights-transitions),
+        opacity var(--lights-transitions);
       left: 0;
       background-color: var(--light-color);
       opacity: 1;

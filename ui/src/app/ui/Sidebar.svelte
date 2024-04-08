@@ -1,8 +1,8 @@
 <script lang="ts">
   import { fsd } from 'feature-sliced-svelte'
 
-  import { AppLogo, AppSidebarMenu } from '$entities/app'
-  import AppVersion from '$features/app/app-updates/ui/AppUpdates.svelte'
+  import { AppLogo, AppSidebarMenu } from '$entities/nuga'
+  import { AppVersion } from '$features/nuga'
   import { type AppPage, pageChanged } from '$shared/model'
 
   function handleNavigation (e: CustomEvent<AppPage>) {

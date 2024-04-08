@@ -4,6 +4,6 @@ export function paramsToMacro (params: MacroChangedParams): Macro {
   return {
     title: params.title,
     repeats: params.repeats,
-    actions: params.actions
+    actions: params.actions,
   }
 }

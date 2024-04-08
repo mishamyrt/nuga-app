@@ -10,7 +10,7 @@
     type LightDomain,
     modesStore,
     rgbToCSSProperty,
-    stateStore
+    stateStore,
   } from '$entities/lights'
 
   import { colorChanged } from '../model/store'
@@ -22,10 +22,11 @@
   }
 
   $: modeCode = $stateStore[domain].mode
-  $: mode = $modesStore[domain].find(m => m.code === modeCode)
-  $: modeColors = domain === 'backlight'
-    ? $backlightColorsStore[modeCode].map(reduceOpacity)
-    : defaultColors.map(reduceOpacity)
+  $: mode = $modesStore[domain].find((m) => m.code === modeCode)
+  $: modeColors =
+    domain === 'backlight'
+      ? $backlightColorsStore[modeCode].map(reduceOpacity)
+      : defaultColors.map(reduceOpacity)
   $: supportsRandom = mode?.supports.randomColor ?? false
   $: supportsColor = mode?.supports.specificColor
 
@@ -41,15 +42,13 @@
     }
     colorChanged({
       domain,
-      color: color as LightColorIndex
+      color: color as LightColorIndex,
     })
   }
 
   $: colors = supportsRandom ? ['random', ...modeColors] : modeColors
   $: colorIndex = $stateStore[domain].color
-  $: index = colorIndex === 7
-    ? 0
-    : supportsRandom ? colorIndex + 1 : colorIndex
+  $: index = colorIndex === 7 ? 0 : supportsRandom ? colorIndex + 1 : colorIndex
 </script>
 
 <div use:fsd={'features/LightsColorSelector'}>

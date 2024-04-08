@@ -6,14 +6,14 @@ import type { KeyChangesMap, KeyMap } from '../types'
 import { actionChanged, keyMapStore, keysInitiated } from './keymap'
 import { defaultKeyMapStore } from './static'
 
-export const changesMapStore = createStore<KeyChangesMap>(
-  defaultChangesMap,
-  { name: 'changesMap' }
-)
+export const changesMapStore = createStore<KeyChangesMap>(defaultChangesMap, {
+  name: 'changesMap',
+})
 
 const mapsStore = combine(
-  keyMapStore, defaultKeyMapStore,
-  (keyMap, defaultKeyMap) => ({ keyMap, defaultKeyMap })
+  keyMapStore,
+  defaultKeyMapStore,
+  (keyMap, defaultKeyMap) => ({ keyMap, defaultKeyMap }),
 )
 
 const keysFilled = createEvent('keysFilled')
@@ -22,12 +22,12 @@ sample({
   filter: ({ keyMap, defaultKeyMap }) => {
     return Object.keys(keyMap).length > 1 && Object.keys(defaultKeyMap).length > 1
   },
-  target: keysFilled
+  target: keysFilled,
 })
 
 const keysLoaded = once({
   source: keysFilled,
-  reset: keysInitiated
+  reset: keysInitiated,
 })
 
 sample({
@@ -41,7 +41,7 @@ sample({
     }
     return changes
   },
-  target: changesMapStore
+  target: changesMapStore,
 })
 
 sample({
@@ -51,8 +51,8 @@ sample({
     const [defaultKeyMap, changesMap] = sources as [KeyMap, KeyChangesMap]
     return {
       ...changesMap,
-      [key]: !isSameAction(defaultKeyMap[key], action)
+      [key]: !isSameAction(defaultKeyMap[key], action),
     }
   },
-  target: changesMapStore
+  target: changesMapStore,
 })

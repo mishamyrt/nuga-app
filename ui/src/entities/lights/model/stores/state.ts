@@ -9,47 +9,52 @@ import {
   getBacklightColors,
   getLightState,
   setBacklightColor,
-  setLightState
+  setLightState,
 } from '../../api'
 import {
   backlightDefaultColors,
   defaultLightState,
   parseEffectParamsState,
   rgbToHex,
-  stateUpdateInterval
+  stateUpdateInterval,
 } from '../../lib'
-import type { LightBacklightColors, LightState, SetBacklightColorParams } from '../types'
+import type {
+  LightBacklightColors,
+  LightState,
+  SetBacklightColorParams,
+} from '../types'
 
 export const stateSet = createEvent<LightState>('stateSet')
 export const stateLoaded = createEvent<LightState>('stateLoaded')
-export const backlightColorChanged = createEvent<SetBacklightColorParams>('backlightColorChanged')
-
-export const stateStore = createStore<LightState>(
-  defaultLightState,
-  { name: 'stateStore' }
+export const backlightColorChanged = createEvent<SetBacklightColorParams>(
+  'backlightColorChanged',
 )
+
+export const stateStore = createStore<LightState>(defaultLightState, {
+  name: 'stateStore',
+})
 export const backlightColorsStore = createStore<LightBacklightColors>(
   backlightDefaultColors,
-  { name: 'backlightColorsStore' }
+  { name: 'backlightColorsStore' },
 )
 
 // HID effects
 // getStateFx is also using for connection check (ping)
 export const getStateFx = createHIDEffect({
   name: 'getStateFx',
-  handler: getLightState
+  handler: getLightState,
 })
 export const setStateFx = createHIDEffect({
   name: 'setStateFx',
-  handler: setLightState
+  handler: setLightState,
 })
 export const setBacklightColorFx = createHIDEffect({
   name: 'setBacklightColorFx',
-  handler: setBacklightColor
+  handler: setBacklightColor,
 })
 export const getBacklightColorsFx = createHIDEffect({
   name: 'getBacklightColorsFx',
-  handler: getBacklightColors
+  handler: getBacklightColors,
 })
 
 // State update interval
@@ -57,32 +62,32 @@ const { tick } = interval({
   timeout: stateUpdateInterval,
   start: connected,
   stop: disconnected,
-  leading: true
+  leading: true,
 })
 
 sample({
   clock: tick,
-  target: getStateFx
+  target: getStateFx,
 })
 
 sample({
   clock: stateSet,
-  target: [setStateFx, stateStore]
+  target: [setStateFx, stateStore],
 })
 sample({
   clock: [connected, modeChanged, anyStateRestored],
-  target: getBacklightColorsFx
+  target: getBacklightColorsFx,
 })
 sample({
   clock: getStateFx.fail,
-  target: disconnected
+  target: disconnected,
 })
 sample({
   clock: getStateFx.doneData,
   source: stateStore,
   filter: (state, nextState) => !deepEqual(state, nextState),
   fn: (_, nextState) => parseEffectParamsState(nextState),
-  target: stateLoaded
+  target: stateLoaded,
 })
 
 sample({
@@ -94,28 +99,31 @@ sample({
       ? nextState.backlight
       : {
           ...state.backlight,
-          enabled: false
+          enabled: false,
         }
     return {
       backlight,
       halo: nextState.halo,
-      sidelight: nextState.sidelight
+      sidelight: nextState.sidelight,
     }
   },
-  target: stateStore
+  target: stateStore,
 })
 
 sample({
   clock: backlightColorChanged,
-  target: setBacklightColorFx
+  target: setBacklightColorFx,
 })
-backlightColorsStore.on(backlightColorChanged, (modes, { mode, colorIndex, color }) => {
-  return modes.map((colors, i) => {
-    if (i !== mode) {
-      return colors
-    }
-    const modeColors = [...colors]
-    modeColors[colorIndex] = rgbToHex(color)
-    return modeColors
-  })
-})
+backlightColorsStore.on(
+  backlightColorChanged,
+  (modes, { mode, colorIndex, color }) => {
+    return modes.map((colors, i) => {
+      if (i !== mode) {
+        return colors
+      }
+      const modeColors = [...colors]
+      modeColors[colorIndex] = rgbToHex(color)
+      return modeColors
+    })
+  },
+)

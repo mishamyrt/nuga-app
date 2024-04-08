@@ -35,9 +35,9 @@ describe('keystrokeFromEvent', () => {
           ctrl: false,
           shift: false,
           alt: false,
-          meta: false
-        }
-      }
+          meta: false,
+        },
+      },
     })
   })
 
@@ -47,7 +47,7 @@ describe('keystrokeFromEvent', () => {
       ctrlKey: true,
       shiftKey: true,
       altKey: true,
-      metaKey: true
+      metaKey: true,
     })
     expect(keystrokeFromEvent(mockEvent)).toEqual({
       type: 'keystroke',
@@ -57,9 +57,9 @@ describe('keystrokeFromEvent', () => {
           ctrl: true,
           shift: true,
           alt: true,
-          meta: true
-        }
-      }
+          meta: true,
+        },
+      },
     })
   })
 })

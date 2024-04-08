@@ -6,7 +6,7 @@ export function mockKeyDown (keyName: string): MacroStep {
   return {
     id: getUniqueId(),
     type: MacroStepType.KeyDown,
-    keyName
+    keyName,
   }
 }
 
@@ -14,7 +14,7 @@ export function mockKeyUp (keyName: string): MacroStep {
   return {
     id: getUniqueId(),
     type: MacroStepType.KeyUp,
-    keyName
+    keyName,
   }
 }
 
@@ -22,7 +22,7 @@ export function mockWait (delay: number): MacroStep {
   return {
     id: getUniqueId(),
     type: MacroStepType.Wait,
-    delay
+    delay,
   }
 }
 
@@ -30,12 +30,12 @@ export function mockPatchStep (step: MacroStep, value: string | number): MacroSt
   if (step.type === MacroStepType.Wait) {
     return {
       ...step,
-      delay: value as number
+      delay: value as number,
     }
   } else {
     return {
       ...step,
-      keyName: value as string
+      keyName: value as string,
     }
   }
 }

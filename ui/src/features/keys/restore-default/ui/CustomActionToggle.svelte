@@ -3,7 +3,11 @@
   import { fsd } from 'feature-sliced-svelte'
   import { createEventDispatcher } from 'svelte'
 
-  import { changesMapStore, defaultKeyMapStore, selectedKeyStore } from '$entities/keys'
+  import {
+    changesMapStore,
+    defaultKeyMapStore,
+    selectedKeyStore,
+  } from '$entities/keys'
 
   export let keyCode: string
 

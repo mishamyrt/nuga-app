@@ -19,7 +19,7 @@ export function normalizeDelaySteps (steps: MacroStep[]): MacroStep[] {
         result.push({
           id: lastDelayId,
           type: MacroStepType.Wait,
-          delay: sumDelay
+          delay: sumDelay,
         })
         sumDelay = 0
       }
@@ -30,7 +30,7 @@ export function normalizeDelaySteps (steps: MacroStep[]): MacroStep[] {
     result.push({
       id: lastDelayId,
       type: MacroStepType.Wait,
-      delay: sumDelay
+      delay: sumDelay,
     })
   }
   return result

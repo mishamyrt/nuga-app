@@ -1,4 +1,5 @@
-<svelte:options immutable={true}/>
+<svelte:options immutable={true} />
+
 <script lang="ts">
   import { fsd } from 'feature-sliced-svelte'
   import { createEventDispatcher } from 'svelte'
@@ -17,16 +18,11 @@
 </script>
 
 <div class="keyboard-container" use:fsd={'entities/KeyboardKeys'}>
-  <div
-    class="keys"
-    class:colorless
-    style:--keyboard-columns="{template.columns}"
-  >
-    {#each template.keys as row, i }
-      {#each row as key, j }
+  <div class="keys" class:colorless style:--keyboard-columns={template.columns}>
+    {#each template.keys as row, i}
+      {#each row as key, j}
         {#if key.code === 'spacer'}
-          <div class="spacer"
-            style:--key-width="{key.width}" />
+          <div class="spacer" style:--key-width={key.width} />
         {:else}
           <div
             role="button"
@@ -34,13 +30,17 @@
             on:keydown={() => dispatch('keyClick', key.code)}
             on:click={() => dispatch('keyClick', key.code)}
             class="key"
-            style:--key-delay="{(i * 20) + (j * 10)}ms"
-            style:--key-width="{key.width}"
-            style:--key-row-height="{key.height}">
-            <div class="key-light"
-              style:--key-light-color="{hasHighlights ? highlights[i][j] : 'transparent'}" />
-            <div class="key-fill"
-              style:--key-color="var(--key-color-{key.color})" />
+            style:--key-delay="{i * 20 + j * 10}ms"
+            style:--key-width={key.width}
+            style:--key-row-height={key.height}
+          >
+            <div
+              class="key-light"
+              style:--key-light-color={hasHighlights
+                ? highlights[i][j]
+                : 'transparent'}
+            />
+            <div class="key-fill" style:--key-color="var(--key-color-{key.color})" />
           </div>
         {/if}
       {/each}
@@ -90,7 +90,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: background-color .3s linear;
+    transition: background-color 0.3s linear;
     transition-delay: var(--key-delay);
     background-color: var(--key-color);
     border-radius: var(--key-radius);
@@ -103,7 +103,7 @@
     opacity: 0.4;
   }
 
-  .key-light+.key-fill {
+  .key-light + .key-fill {
     opacity: 1;
   }
 

@@ -1,8 +1,9 @@
-<svelte:options immutable={true}/>
+<svelte:options immutable={true} />
+
 <script lang="ts">
   import { onHotkey } from '@naco-ui/svelte'
 
-  import { AppConnectionDialog } from '$entities/app'
+  import { AppConnectionDialog } from '$entities/nuga'
   import { isConnected, simulating } from '$shared/model'
 
   export let sidebarWidth: number
@@ -38,13 +39,13 @@
 </script>
 
 {#if isMounted}
-<div
-  class="dialog"
-  class:hidden={isHidden}
-  style:--connection-dialog-sidebar-width="{sidebarWidth}px"
->
-  <AppConnectionDialog showHelp={isShowHelp} />
-</div>
+  <div
+    class="dialog"
+    class:hidden={isHidden}
+    style:--connection-dialog-sidebar-width="{sidebarWidth}px"
+  >
+    <AppConnectionDialog showHelp={isShowHelp} />
+  </div>
 {/if}
 
 <style>

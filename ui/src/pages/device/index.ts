@@ -9,10 +9,10 @@ export const device: Page = {
     toolbar: {
       draggable: true,
       transparent: true,
-      padding: 'default'
+      padding: 'default',
     },
     macInset: {
-      enable: true
-    }
-  }
+      enable: true,
+    },
+  },
 } as const

@@ -2,7 +2,11 @@
   import { fillMarks, Slider, type SliderChangeEvent } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { type LightDomain, type LightStateValue, stateStore } from '$entities/lights'
+  import {
+    type LightDomain,
+    type LightStateValue,
+    stateStore,
+  } from '$entities/lights'
 
   import { brightnessChanged } from '../model/store'
 
@@ -11,7 +15,7 @@
   function handleChange (e: SliderChangeEvent) {
     brightnessChanged({
       domain,
-      brightness: e.detail as LightStateValue
+      brightness: e.detail as LightStateValue,
     })
   }
 </script>
@@ -26,7 +30,7 @@
     marks={fillMarks(5, {
       1: 'Off',
       2: 'Dark',
-      5: 'Light'
+      5: 'Light',
     })}
   />
 </div>

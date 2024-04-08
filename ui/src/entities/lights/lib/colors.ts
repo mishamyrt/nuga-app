@@ -25,7 +25,7 @@ export function rgbToHex ({ R, G, B }: RGBColor): HexColor {
  * Example: [[255, 255, 255], [255, 255, 255]] -> [['#ffffff', '#ffffff']]
  */
 export function rgbMatrixToHex (matrix: RGBColor[][]): HexColor[][] {
-  return matrix.map(modeColors => modeColors.map(rgbToHex))
+  return matrix.map((modeColors) => modeColors.map(rgbToHex))
 }
 
 /**
@@ -40,7 +40,7 @@ export function hexToRgb (hex: HexColor): RGBColor {
   return {
     R: parseInt(result[1], 16),
     G: parseInt(result[2], 16),
-    B: parseInt(result[3], 16)
+    B: parseInt(result[3], 16),
   }
 }
 

@@ -6,16 +6,18 @@ import { getModesDomains } from '../../api'
 import { defaultLightModes, parseRawDomains } from '../../lib'
 import type { LightModes } from '../types'
 
-export const modesStore = createStore<LightModes>(defaultLightModes, { name: 'modesStore' })
+export const modesStore = createStore<LightModes>(defaultLightModes, {
+  name: 'modesStore',
+})
 
 export const getModesDomainsFx = createEffect(getModesDomains)
 
 sample({
   clock: getModesDomainsFx.doneData,
   fn: parseRawDomains,
-  target: modesStore
+  target: modesStore,
 })
 sample({
   clock: connected,
-  target: [getModesDomainsFx]
+  target: [getModesDomainsFx],
 })

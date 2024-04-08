@@ -6,6 +6,7 @@
   export let path: string
   export let firmware: string
 </script>
+
 <div use:fsd={'entities/DeviceInfoGroup'}>
   <FormGroup>
     <FormRow title="Name">

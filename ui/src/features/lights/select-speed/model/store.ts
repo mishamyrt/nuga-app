@@ -14,9 +14,9 @@ sample({
       ...state,
       [params.domain]: {
         ...state[params.domain],
-        speed: params.speed
-      }
+        speed: params.speed,
+      },
     }
   },
-  target: stateSet
+  target: stateSet,
 })

@@ -8,33 +8,40 @@ import type { DisplayedKeyGroup, KeyMap, KeyNames } from '../types'
 import { keysInitiated } from './keymap'
 
 // This stores is mostly static. Data should be loaded only once after connection
-export const defaultKeyMapStore = createStore<KeyMap>(defaultKeyMap, { name: 'defaultKeyMap' })
-export const keyGroupsStore = createStore<DisplayedKeyGroup[]>([], { name: 'keyGroups' })
+export const defaultKeyMapStore = createStore<KeyMap>(defaultKeyMap, {
+  name: 'defaultKeyMap',
+})
+export const keyGroupsStore = createStore<DisplayedKeyGroup[]>([], {
+  name: 'keyGroups',
+})
 export const keyNamesStore = createStore<KeyNames>({}, { name: 'keyNames' })
 
 const getGroupsFx = createEffect('getGroupsFx', { handler: getGroups })
 const getDefaultKeysFx = createHIDEffect({
   name: 'getDefaultKeysFx',
-  handler: getDefaultKeys
+  handler: getDefaultKeys,
 })
 
 sample({
   clock: keysInitiated,
-  target: [getGroupsFx, getDefaultKeysFx]
+  target: [getGroupsFx, getDefaultKeysFx],
 })
 
 defaultKeyMapStore.on(getDefaultKeysFx.doneData, (_, keys) => keys)
 keyGroupsStore.on(getGroupsFx.doneData, (_, groups) => {
   return groups.map((group) => ({
     ...group,
-    visible: !hiddenGroups.has(group.title)
+    visible: !hiddenGroups.has(group.title),
   }))
 })
 keyNamesStore.on(keyGroupsStore, (_, groups) => {
   return groups
     .flatMap((g) => g.keys)
-    .reduce((all, group) => ({
-      ...all,
-      [group.value]: group.title
-    }), codelessKeyNames)
+    .reduce(
+      (all, group) => ({
+        ...all,
+        [group.value]: group.title,
+      }),
+      codelessKeyNames,
+    )
 })

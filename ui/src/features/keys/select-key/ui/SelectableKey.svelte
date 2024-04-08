@@ -4,7 +4,7 @@
     getShortName,
     type Key,
     keySelected,
-    selectedKeyStore
+    selectedKeyStore,
   } from '$entities/keys'
 
   export let key: Key
@@ -42,9 +42,7 @@
     transition: var(--transition-default);
     transition-property: background-color, color;
     border-radius: var(--key-border-radius);
-    font-family:
-      var(--typography-glyphs-font-family),
-      var(--typography-font-family);
+    font-family: var(--typography-glyphs-font-family), var(--typography-font-family);
     font-weight: 500;
     font-size: var(--key-font-size);
     text-align: center;

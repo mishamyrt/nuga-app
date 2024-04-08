@@ -12,5 +12,5 @@ export {
   DeviceSettings,
   KeySettings,
   KeysNotSupported,
-  LightsDomainSettings
+  LightsDomainSettings,
 }

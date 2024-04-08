@@ -11,7 +11,7 @@
   function handleChange (e: CustomEvent<boolean>) {
     powerStateChanged({
       domain,
-      enabled: e.detail
+      enabled: e.detail,
     })
   }
 </script>

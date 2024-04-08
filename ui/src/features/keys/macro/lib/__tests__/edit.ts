@@ -5,61 +5,42 @@ import { mockKeyDown, mockKeyUp, mockPatchStep, mockWait } from './__utils__'
 
 describe('updateDelay', () => {
   it('should update delay of correct step', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('a'),
-      mockWait(200)
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('a'), mockWait(200)]
     const result = updateDelay(steps, steps[1].id, 200)
     expect(result).toEqual([
       steps[0],
       mockPatchStep(steps[1], 200),
       steps[2],
-      steps[3]
+      steps[3],
     ])
   })
 
   it('should throw error if step not found', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('a')
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('a')]
     expect(() => updateDelay(steps, 'unknown', 200)).toThrow()
   })
 })
 
 describe('updateKeystroke', () => {
   it('should update keystroke of corresponding key up if key down is updated', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('a'),
-      mockWait(200)
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('a'), mockWait(200)]
     const result = updateKeystroke(steps, steps[0].id, 'b')
     expect(result).toEqual([
       mockPatchStep(steps[0], 'b'),
       steps[1],
       mockPatchStep(steps[2], 'b'),
-      steps[3]
+      steps[3],
     ])
   })
 
   it('should update keystroke of corresponding key down if key up is updated', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('a'),
-      mockWait(200)
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('a'), mockWait(200)]
     const result = updateKeystroke(steps, steps[2].id, 'b')
     expect(result).toEqual([
       mockPatchStep(steps[0], 'b'),
       steps[1],
       mockPatchStep(steps[2], 'b'),
-      steps[3]
+      steps[3],
     ])
   })
 
@@ -70,7 +51,7 @@ describe('updateKeystroke', () => {
       mockKeyUp('b'),
       mockKeyDown('c'),
       mockKeyUp('c'),
-      mockKeyUp('a')
+      mockKeyUp('a'),
     ]
     const result = updateKeystroke(steps, steps[5].id, 'x')
     expect(result).toEqual([
@@ -79,7 +60,7 @@ describe('updateKeystroke', () => {
       steps[2],
       steps[3],
       steps[4],
-      mockPatchStep(steps[5], 'x')
+      mockPatchStep(steps[5], 'x'),
     ])
   })
 
@@ -90,7 +71,7 @@ describe('updateKeystroke', () => {
       mockKeyUp('b'),
       mockKeyDown('c'),
       mockKeyUp('c'),
-      mockKeyUp('a')
+      mockKeyUp('a'),
     ]
     const result = updateKeystroke(steps, steps[0].id, 'x')
     expect(result).toEqual([
@@ -99,63 +80,40 @@ describe('updateKeystroke', () => {
       steps[2],
       steps[3],
       steps[4],
-      mockPatchStep(steps[5], 'x')
+      mockPatchStep(steps[5], 'x'),
     ])
   })
 
   it('should throw error if step not found', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('a')
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('a')]
     expect(() => updateKeystroke(steps, 'unknown', 'b')).toThrow()
   })
 
   it('should throw error if pair not found', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('b')
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('b')]
     expect(() => updateKeystroke(steps, steps[0].id, 'x')).toThrow()
   })
 })
 
 describe('removeStep', () => {
   it('should remove correct step', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('a'),
-      mockWait(200)
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('a'), mockWait(200)]
     const result = removeStep(steps, steps[1].id)
     expect(result).toEqual([steps[0], steps[2], steps[3]])
   })
 
   it('should throw error if step not found', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('a')
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('a')]
     expect(() => removeStep(steps, 'unknown')).toThrow()
   })
 
   it('should throw error if pair not found', () => {
-    const steps = [
-      mockKeyDown('a'),
-      mockWait(100),
-      mockKeyUp('b')
-    ]
+    const steps = [mockKeyDown('a'), mockWait(100), mockKeyUp('b')]
     expect(() => removeStep(steps, steps[0].id)).toThrow()
   })
 
   it('should throw error if step is the only step', () => {
-    const steps = [
-      mockKeyDown('a')
-    ]
+    const steps = [mockKeyDown('a')]
     expect(() => removeStep(steps, steps[0].id)).toThrow()
   })
 
@@ -164,13 +122,10 @@ describe('removeStep', () => {
       mockKeyDown('a'),
       mockKeyDown('b'),
       mockKeyUp('b'),
-      mockKeyUp('a')
+      mockKeyUp('a'),
     ]
     const result = removeStep(steps, steps[3].id)
-    expect(result).toEqual([
-      steps[1],
-      steps[2]
-    ])
+    expect(result).toEqual([steps[1], steps[2]])
   })
 
   it('should correctly find and remove pair for key down', () => {
@@ -178,13 +133,10 @@ describe('removeStep', () => {
       mockKeyDown('a'),
       mockKeyDown('b'),
       mockKeyUp('b'),
-      mockKeyUp('a')
+      mockKeyUp('a'),
     ]
     const result = removeStep(steps, steps[0].id)
-    expect(result).toEqual([
-      steps[1],
-      steps[2]
-    ])
+    expect(result).toEqual([steps[1], steps[2]])
   })
 
   it('should correctly skip waits after first key', () => {
@@ -194,13 +146,10 @@ describe('removeStep', () => {
       mockWait(200),
       mockKeyDown('b'),
       mockKeyUp('b'),
-      mockKeyUp('a')
+      mockKeyUp('a'),
     ]
     const result = removeStep(steps, steps[5].id)
-    expect(result).toEqual([
-      steps[3],
-      steps[4]
-    ])
+    expect(result).toEqual([steps[3], steps[4]])
   })
 
   const sameNameSteps = [
@@ -209,7 +158,7 @@ describe('removeStep', () => {
     mockKeyDown('a'),
     mockKeyUp('a'),
     mockKeyDown('a'),
-    mockKeyUp('a')
+    mockKeyUp('a'),
   ]
 
   it('should correctly remove first steps with same keyName', () => {
@@ -218,7 +167,7 @@ describe('removeStep', () => {
       sameNameSteps[2],
       sameNameSteps[3],
       sameNameSteps[4],
-      sameNameSteps[5]
+      sameNameSteps[5],
     ])
   })
 
@@ -228,7 +177,7 @@ describe('removeStep', () => {
       sameNameSteps[0],
       sameNameSteps[1],
       sameNameSteps[4],
-      sameNameSteps[5]
+      sameNameSteps[5],
     ])
   })
 
@@ -238,7 +187,7 @@ describe('removeStep', () => {
       sameNameSteps[0],
       sameNameSteps[1],
       sameNameSteps[2],
-      sameNameSteps[3]
+      sameNameSteps[3],
     ])
   })
 
@@ -249,7 +198,7 @@ describe('removeStep', () => {
       mockWait(200),
       mockKeyUp('a'),
       mockWait(300),
-      mockWait(400)
+      mockWait(400),
     ]
 
     const result = removeStep(steps, steps[0].id)

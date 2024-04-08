@@ -1,4 +1,8 @@
-import { type KeyAction, KeyActionType, type StrictKeystrokeAction } from '../model/types'
+import {
+  type KeyAction,
+  KeyActionType,
+  type StrictKeystrokeAction,
+} from '../model/types'
 import { modifierKeys } from './constants'
 
 export function isSameAction (a: KeyAction, b: KeyAction): boolean {
@@ -15,9 +19,9 @@ export function isSameAction (a: KeyAction, b: KeyAction): boolean {
     if (aModifiers && bModifiers) {
       isModifiersDiffers = !(
         aModifiers.ctrl === bModifiers.ctrl &&
-          aModifiers.shift === bModifiers.shift &&
-          aModifiers.alt === bModifiers.alt &&
-          aModifiers.meta === bModifiers.meta
+        aModifiers.shift === bModifiers.shift &&
+        aModifiers.alt === bModifiers.alt &&
+        aModifiers.meta === bModifiers.meta
       )
     }
     return a.keystroke.key === b.keystroke.key && !isModifiersDiffers
@@ -50,23 +54,23 @@ export function safeKeystrokeAction (action: KeyAction): StrictKeystrokeAction {
     ctrl: false,
     shift: false,
     alt: false,
-    meta: false
+    meta: false,
   }
   if (action.type !== KeyActionType.Keystroke) {
     return {
       type: KeyActionType.Keystroke,
       keystroke: {
         key: 'none',
-        modifiers: defaultModifiers
-      }
+        modifiers: defaultModifiers,
+      },
     }
   } else if (!isStrictKeystroke(action)) {
     return {
       type: KeyActionType.Keystroke,
       keystroke: {
         key: action.keystroke.key,
-        modifiers: defaultModifiers
-      }
+        modifiers: defaultModifiers,
+      },
     }
   }
   return action

@@ -4,7 +4,13 @@ import { createHIDEffect, disconnected } from '$shared/model'
 
 import { getMacros, setMacros } from '../../api'
 import { paramsToMacro } from '../../lib'
-import { type KeyAction, KeyActionType, type KeyMap, type Macro, type MacroChangedParams } from '../types'
+import {
+  type KeyAction,
+  KeyActionType,
+  type KeyMap,
+  type Macro,
+  type MacroChangedParams,
+} from '../types'
 import { keyMapChanged, keyMapStore, keysInitiated } from './keymap'
 
 export const macroChanged = createEvent<MacroChangedParams>('macrosUpdated')
@@ -12,16 +18,16 @@ export const macroRemoved = createEvent<number>('macroRemoved')
 export const macrosChanged = createEvent<Macro[]>('macrosChanged')
 
 export const macrosStore = createStore<Macro[]>([], {
-  name: 'macros'
+  name: 'macros',
 })
 
 const getMacrosFx = createHIDEffect({
   name: 'getMacrosFx',
-  handler: getMacros
+  handler: getMacros,
 })
 const setMacrosFx = createHIDEffect({
   name: 'setMacrosFx',
-  handler: setMacros
+  handler: setMacros,
 })
 
 macrosStore.on(macrosChanged, (_, macros) => macros)
@@ -42,14 +48,14 @@ sample({
       })
     }
   },
-  target: macrosChanged
+  target: macrosChanged,
 })
 
 sample({
   clock: macroRemoved,
   source: macrosStore,
   fn: (all, index) => all.filter((_, i) => i !== index),
-  target: macrosChanged
+  target: macrosChanged,
 })
 
 sample({
@@ -68,29 +74,29 @@ sample({
         }
         return {
           ...acc,
-          [key]: nextAction
+          [key]: nextAction,
         }
       }
       return {
         ...acc,
-        [key]: action
+        [key]: action,
       }
     }, {})
   },
-  target: keyMapChanged
+  target: keyMapChanged,
 })
 
 sample({
   clock: keysInitiated,
-  target: getMacrosFx
+  target: getMacrosFx,
 })
 
 sample({
   clock: getMacrosFx.doneData,
-  target: macrosStore
+  target: macrosStore,
 })
 
 sample({
   clock: macrosChanged,
-  target: setMacrosFx
+  target: setMacrosFx,
 })

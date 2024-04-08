@@ -19,7 +19,5 @@ export async function setLightState (s: LightState): Promise<void> {
   if (!state.halo.enabled) {
     state.halo.mode = 0
   }
-  await SetLightState(
-    dto.LightStateRequest.createFrom(state)
-  )
+  await SetLightState(dto.LightStateRequest.createFrom(state))
 }

@@ -1,4 +1,8 @@
-import { RestoreDefaultState, RestoreState, SaveState } from '$wails/go/usecase/DeviceUsecase'
+import {
+  RestoreDefaultState,
+  RestoreState,
+  SaveState,
+} from '$wails/go/usecase/DeviceUsecase'
 
 export async function saveState (): Promise<void> {
   return await SaveState()

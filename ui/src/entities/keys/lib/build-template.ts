@@ -1,4 +1,9 @@
-import type { Key, KeyboardLayout, KeyboardTemplate, KeyDescription } from '../model/types'
+import type {
+  Key,
+  KeyboardLayout,
+  KeyboardTemplate,
+  KeyDescription,
+} from '../model/types'
 
 function toKey (k: KeyDescription): Key {
   return {
@@ -7,7 +12,7 @@ function toKey (k: KeyDescription): Key {
     color: k.color ?? 'light',
     code: k.code ?? 'spacer',
     secondaryCode: k.secondaryCode,
-    readonly: k.readonly ?? false
+    readonly: k.readonly ?? false,
   }
 }
 
@@ -24,17 +29,20 @@ function countColumns (keyMatrix: Key[][], validate: boolean): number {
     }
     if (columns !== previousColumns) {
       throw new Error(
-        `Columns count mismatch: expected ${previousColumns}, got ${columns} `
+        `Columns count mismatch: expected ${previousColumns}, got ${columns} `,
       )
     }
   }
   return previousColumns
 }
 
-export function buildTemplate (layout: KeyboardLayout, validate = false): KeyboardTemplate {
-  const keys = layout.map(row => row.map(toKey))
+export function buildTemplate (
+  layout: KeyboardLayout,
+  validate = false,
+): KeyboardTemplate {
+  const keys = layout.map((row) => row.map(toKey))
   return {
     columns: countColumns(keys, validate),
-    keys
+    keys,
   }
 }

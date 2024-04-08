@@ -10,10 +10,10 @@ export const lights: Page = {
     toolbar: {
       draggable: true,
       height: 150,
-      padding: 'none'
+      padding: 'none',
     },
     macInset: {
-      enable: true
-    }
-  }
+      enable: true,
+    },
+  },
 } as const

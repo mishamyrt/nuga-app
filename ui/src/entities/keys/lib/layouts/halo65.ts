@@ -16,7 +16,7 @@ export const Halo65: KeyboardLayout = [
     { code: 'minus', secondaryCode: 'fn_minus' },
     { code: 'equal', secondaryCode: 'fn_equal' },
     { code: 'backspace', color: 'dark', width: 2 },
-    { code: 'del', color: 'dark' }
+    { code: 'del', color: 'dark' },
   ],
   [
     { code: 'tab', color: 'dark', width: 1.5 },
@@ -33,7 +33,7 @@ export const Halo65: KeyboardLayout = [
     { code: 'lbracket' },
     { code: 'rbracket' },
     { code: 'backslash', width: 1.5 },
-    { code: 'pgup', color: 'dark' }
+    { code: 'pgup', color: 'dark' },
   ],
   [
     { code: 'capslock', color: 'dark', width: 1.75 },
@@ -47,9 +47,9 @@ export const Halo65: KeyboardLayout = [
     { code: 'k' },
     { code: 'l' },
     { code: ';' },
-    { code: '\'' },
+    { code: "'" },
     { code: 'enter', width: 2.25, color: 'orange' },
-    { code: 'pgdn', color: 'dark' }
+    { code: 'pgdn', color: 'dark' },
   ],
   [
     { code: 'lshift', color: 'dark', width: 2.25 },
@@ -65,7 +65,7 @@ export const Halo65: KeyboardLayout = [
     { code: 'fwdslash' },
     { code: 'rshift', color: 'dark', width: 1.75 },
     { code: 'up', color: 'dark' },
-    { code: 'end', color: 'dark' }
+    { code: 'end', color: 'dark' },
   ],
   [
     { code: 'lctrl', color: 'dark', width: 1.25 },
@@ -77,6 +77,6 @@ export const Halo65: KeyboardLayout = [
     { width: 0.5 },
     { code: 'left', color: 'dark' },
     { code: 'down', color: 'dark' },
-    { code: 'right', color: 'dark' }
-  ]
+    { code: 'right', color: 'dark' },
+  ],
 ]

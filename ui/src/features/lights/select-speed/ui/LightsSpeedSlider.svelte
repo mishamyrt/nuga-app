@@ -2,7 +2,12 @@
   import { fillMarks, Slider, type SliderChangeEvent } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { type LightDomain, type LightStateValue, modesStore, stateStore } from '$entities/lights'
+  import {
+    type LightDomain,
+    type LightStateValue,
+    modesStore,
+    stateStore,
+  } from '$entities/lights'
 
   import { speedChanged } from '../model/store'
 
@@ -11,12 +16,12 @@
   function handleChange (e: SliderChangeEvent) {
     speedChanged({
       domain,
-      speed: e.detail as LightStateValue
+      speed: e.detail as LightStateValue,
     })
   }
 
   $: modeCode = $stateStore[domain].mode
-  $: mode = $modesStore[domain].find(m => m.code === modeCode)
+  $: mode = $modesStore[domain].find((m) => m.code === modeCode)
   $: supportsSpeed = mode?.supports.speed ?? false
 </script>
 
@@ -30,7 +35,7 @@
     on:change={handleChange}
     marks={fillMarks(5, {
       1: 'Slow',
-      5: 'Fast'
+      5: 'Fast',
     })}
   />
 </div>

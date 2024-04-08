@@ -1,7 +1,7 @@
 <script lang="ts">
   import { SelectableKeyboard } from '$features/keys'
-
 </script>
+
 <div class="keys-toolbar">
   <SelectableKeyboard />
 </div>

@@ -1,6 +1,10 @@
 import { KeyActionType, type KeystrokeAction } from '$entities/keys'
 
-import { keyNameReplacements, keyPrefixReplacements, keysWithSameName } from './constants'
+import {
+  keyNameReplacements,
+  keyPrefixReplacements,
+  keysWithSameName,
+} from './constants'
 
 export function keyNameFromEvent (e: KeyboardEvent): string {
   for (const [prefix, replacement] of Object.entries(keyPrefixReplacements)) {
@@ -27,8 +31,8 @@ export function keystrokeFromEvent (e: KeyboardEvent): KeystrokeAction {
         ctrl: e.ctrlKey,
         shift: e.shiftKey,
         alt: e.altKey,
-        meta: e.metaKey
-      }
-    }
+        meta: e.metaKey,
+      },
+    },
   }
 }

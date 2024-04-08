@@ -7,7 +7,7 @@ import {
   actionToStepType,
   macroToSteps,
   stepsToActions,
-  stepToActionType
+  stepToActionType,
 } from '../convert'
 
 describe('actionToStepType', () => {
@@ -20,8 +20,8 @@ describe('actionToStepType', () => {
   })
 
   it('should throw an error for an unknown action type', () => {
-    expect(
-      () => actionToStepType('UnknownActionType' as MacroActionType)
+    expect(() =>
+      actionToStepType('UnknownActionType' as MacroActionType),
     ).toThrowError('Unknown action type')
   })
 })
@@ -46,7 +46,7 @@ describe('macroToSteps', () => {
     const macro: Macro = {
       title: 'Empty',
       repeats: 0,
-      actions: []
+      actions: [],
     }
     expect(macroToSteps(macro)).toEqual([])
   })
@@ -55,12 +55,10 @@ describe('macroToSteps', () => {
     const macro: Macro = {
       title: 'Single',
       repeats: 1,
-      actions: [
-        { type: MacroActionType.KeyDown, key: 'm' }
-      ]
+      actions: [{ type: MacroActionType.KeyDown, key: 'm' }],
     }
     expect(macroToSteps(macro)).toEqual([
-      { id: expect.any(String), type: MacroStepType.KeyDown, keyName: 'm' }
+      { id: expect.any(String), type: MacroStepType.KeyDown, keyName: 'm' },
     ])
   })
 
@@ -68,13 +66,11 @@ describe('macroToSteps', () => {
     const macro: Macro = {
       title: 'Delay',
       repeats: 1,
-      actions: [
-        { type: MacroActionType.KeyDown, key: 'm', delay: 100 }
-      ]
+      actions: [{ type: MacroActionType.KeyDown, key: 'm', delay: 100 }],
     }
     expect(macroToSteps(macro)).toEqual([
       { id: expect.any(String), type: MacroStepType.KeyDown, keyName: 'm' },
-      { id: expect.any(String), type: MacroStepType.Wait, delay: 100 }
+      { id: expect.any(String), type: MacroStepType.Wait, delay: 100 },
     ])
   })
 
@@ -84,12 +80,12 @@ describe('macroToSteps', () => {
       repeats: 1,
       actions: [
         { type: MacroActionType.KeyDown, key: 'm' },
-        { type: MacroActionType.KeyUp, key: 'm' }
-      ]
+        { type: MacroActionType.KeyUp, key: 'm' },
+      ],
     }
     expect(macroToSteps(macro)).toEqual([
       { id: expect.any(String), type: MacroStepType.KeyDown, keyName: 'm' },
-      { id: expect.any(String), type: MacroStepType.KeyUp, keyName: 'm' }
+      { id: expect.any(String), type: MacroStepType.KeyUp, keyName: 'm' },
     ])
   })
 
@@ -99,14 +95,14 @@ describe('macroToSteps', () => {
       repeats: 1,
       actions: [
         { type: MacroActionType.KeyDown, key: 'm', delay: 100 },
-        { type: MacroActionType.KeyUp, key: 'm', delay: 200 }
-      ]
+        { type: MacroActionType.KeyUp, key: 'm', delay: 200 },
+      ],
     }
     expect(macroToSteps(macro)).toEqual([
       { id: expect.any(String), type: MacroStepType.KeyDown, keyName: 'm' },
       { id: expect.any(String), type: MacroStepType.Wait, delay: 100 },
       { id: expect.any(String), type: MacroStepType.KeyUp, keyName: 'm' },
-      { id: expect.any(String), type: MacroStepType.Wait, delay: 200 }
+      { id: expect.any(String), type: MacroStepType.Wait, delay: 200 },
     ])
   })
 })
@@ -119,7 +115,7 @@ describe('stepsToActions', () => {
 
   it('should return a single MacroAction with type KeyDown', () => {
     const steps: MacroStep[] = [
-      { id: '1', type: MacroStepType.KeyDown, keyName: 'a' }
+      { id: '1', type: MacroStepType.KeyDown, keyName: 'a' },
     ]
     const result = stepsToActions(steps)
     expect(result).toEqual([{ key: 'a', type: MacroActionType.KeyDown, delay: 0 }])
@@ -134,7 +130,7 @@ describe('stepsToActions', () => {
   it('should return MacroActions for KeyDown and Wait steps', () => {
     const steps: MacroStep[] = [
       { id: '1', type: MacroStepType.KeyDown, keyName: 'a' },
-      { id: '2', type: MacroStepType.Wait, delay: 100 }
+      { id: '2', type: MacroStepType.Wait, delay: 100 },
     ]
     const result = stepsToActions(steps)
     expect(result).toEqual([{ key: 'a', type: MacroActionType.KeyDown, delay: 100 }])
@@ -143,7 +139,7 @@ describe('stepsToActions', () => {
   it('should return MacroActions for KeyUp and Wait steps', () => {
     const steps: MacroStep[] = [
       { id: '1', type: MacroStepType.KeyUp, keyName: 'b' },
-      { id: '2', type: MacroStepType.Wait, delay: 200 }
+      { id: '2', type: MacroStepType.Wait, delay: 200 },
     ]
     const result = stepsToActions(steps)
     expect(result).toEqual([{ key: 'b', type: MacroActionType.KeyUp, delay: 200 }])
@@ -154,7 +150,7 @@ describe('stepsToActions', () => {
       { id: '1', type: MacroStepType.KeyDown, keyName: 'b' },
       { id: '2', type: MacroStepType.Wait, delay: 200 },
       { id: '3', type: MacroStepType.Wait, delay: 200 },
-      { id: '4', type: MacroStepType.KeyUp, keyName: 'b' }
+      { id: '4', type: MacroStepType.KeyUp, keyName: 'b' },
     ]
     expect(() => stepsToActions(steps)).toThrow('Incorrect step order')
   })

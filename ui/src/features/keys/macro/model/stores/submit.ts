@@ -12,15 +12,18 @@ sample({
   clock: editedMacroSubmitted,
   source: [macroTitleStore, macroRepeatsStore, stepsStore, editedIndexStore],
   fn: (source) => {
-    const [title, repeats, steps, index] = source as [string, number, MacroStep[], number]
+    const [title, repeats, steps, index] = source as [
+      string,
+      number,
+      MacroStep[],
+      number,
+    ]
     return {
       title,
       repeats,
-      actions: stepsToActions(
-        normalizeDelaySteps(steps)
-      ),
-      index
+      actions: stepsToActions(normalizeDelaySteps(steps)),
+      index,
     }
   },
-  target: macroChanged
+  target: macroChanged,
 })

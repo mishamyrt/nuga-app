@@ -13,7 +13,7 @@ type ObserveStepsOnParams = {
 
 export function createStepObserver<T extends Element> (
   parent: Element,
-  params: StepObserverParams
+  params: StepObserverParams,
 ): Observer<void> {
   const { actionSelector, offset = 0, fn } = params
   return {
@@ -28,7 +28,7 @@ export function createStepObserver<T extends Element> (
         throw new Error('Unexpected layout')
       }
       fn(actionNode)
-    }
+    },
   }
 }
 
@@ -43,9 +43,9 @@ export function observeStepsOn (
         createStepObserver(parent, {
           actionSelector,
           offset,
-          fn
-        })
-      )
+          fn,
+        }),
+      ),
     )
   }
   return subscriptions

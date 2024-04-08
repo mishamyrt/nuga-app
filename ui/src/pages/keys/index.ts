@@ -10,10 +10,10 @@ export const keys: Page = {
     toolbar: {
       draggable: false,
       height: 200,
-      padding: 'none'
+      padding: 'none',
     },
     macInset: {
-      enable: true
-    }
-  }
+      enable: true,
+    },
+  },
 } as const

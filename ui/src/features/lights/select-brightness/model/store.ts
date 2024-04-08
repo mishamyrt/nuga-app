@@ -4,7 +4,8 @@ import { stateSet, stateStore } from '$entities/lights'
 
 import type { LightBrightnessParams } from './types'
 
-export const brightnessChanged = createEvent<LightBrightnessParams>('brightnessChanged')
+export const brightnessChanged =
+  createEvent<LightBrightnessParams>('brightnessChanged')
 
 sample({
   clock: brightnessChanged,
@@ -14,9 +15,9 @@ sample({
       ...state,
       [params.domain]: {
         ...state[params.domain],
-        brightness: params.brightness
-      }
+        brightness: params.brightness,
+      },
     }
   },
-  target: stateSet
+  target: stateSet,
 })

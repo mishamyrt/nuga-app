@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "Nuga Glyphs";
-  src: url("./assets/fonts/Nuga-glyphs.otf");
+  font-family: 'Nuga Glyphs';
+  src: url('./assets/fonts/Nuga-glyphs.otf');
   font-weight: 500;
 }
 
 body {
-  --typography-glyphs-font-family: "Nuga Glyphs";
+  --typography-glyphs-font-family: 'Nuga Glyphs';
 
   margin: 0;
   overflow: hidden;

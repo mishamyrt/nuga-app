@@ -1,12 +1,20 @@
 <script lang="ts">
-  import { Button, FormGroup, FormRow, Modal, ModalActions, Select, Stack } from '@naco-ui/svelte'
+  import {
+    Button,
+    FormGroup,
+    FormRow,
+    Modal,
+    ModalActions,
+    Select,
+    Stack,
+  } from '@naco-ui/svelte'
   import { createEventDispatcher } from 'svelte'
 
   import {
     keyGroupsStore,
     keyMapStore,
     keyNamesStore,
-    selectedKeyStore
+    selectedKeyStore,
   } from '$entities/keys'
 
   const dispatcher = createEventDispatcher()
@@ -31,19 +39,27 @@
         ctrl: false,
         shift: false,
         alt: false,
-        meta: false
-      }
+        meta: false,
+      },
     })
     handleClose()
   }
 
   $: activeKey = $keyMapStore[keyCode]
-  $: title = $keyNamesStore[activeKey?.type === 'keystroke' ? activeKey.keystroke.key : 'None'] ?? 'None'
+  $: title =
+    $keyNamesStore[
+      activeKey?.type === 'keystroke' ? activeKey.keystroke.key : 'None'
+    ] ?? 'None'
   $: disabled = $selectedKeyStore.readonly
 </script>
 
 <div>
-  <Select {disabled} on:mousedown={handleOpen} value={title} options={[{ value: title, title }]} />
+  <Select
+    {disabled}
+    on:mousedown={handleOpen}
+    value={title}
+    options={[{ value: title, title }]}
+  />
   <Modal open={showModal} width={400}>
     <Stack gap="m">
       {#each $keyGroupsStore as group}

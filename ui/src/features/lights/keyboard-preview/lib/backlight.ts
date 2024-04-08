@@ -4,7 +4,7 @@ import type { KeyboardTemplate } from '$entities/keys'
 import type {
   KeyHighlightMatrix,
   LightBacklightColors,
-  LightDomainState
+  LightDomainState,
 } from '$entities/lights'
 
 import { RANDOM_GRADIENT_BOTTOM, RANDOM_GRADIENT_TOP } from './constants'
@@ -12,7 +12,7 @@ import { RANDOM_GRADIENT_BOTTOM, RANDOM_GRADIENT_TOP } from './constants'
 export function renderBacklightColors (
   state: LightDomainState,
   colors: LightBacklightColors,
-  template: KeyboardTemplate
+  template: KeyboardTemplate,
 ): KeyHighlightMatrix {
   const { enabled, mode, color } = state
 
@@ -24,7 +24,10 @@ export function renderBacklightColors (
   return renderColorMatrix(template, colors[mode][color])
 }
 
-export function renderColorMatrix (template: KeyboardTemplate, color: string): KeyHighlightMatrix {
+export function renderColorMatrix (
+  template: KeyboardTemplate,
+  color: string,
+): KeyHighlightMatrix {
   const map: string[][] = []
   for (const templateRow of template.keys) {
     const row = Array(templateRow.length)
@@ -36,11 +39,13 @@ export function renderColorMatrix (template: KeyboardTemplate, color: string): K
   return map
 }
 
-export function renderGradientMatrix (template: KeyboardTemplate): KeyHighlightMatrix {
+export function renderGradientMatrix (
+  template: KeyboardTemplate,
+): KeyHighlightMatrix {
   const color = new ColorJS(RANDOM_GRADIENT_TOP)
   const gradient = color.range(RANDOM_GRADIENT_BOTTOM, {
     space: 'lch',
-    outputSpace: 'srgb'
+    outputSpace: 'srgb',
   })
   const rows: string[][] = []
   for (let i = 0; i < template.keys.length; i++) {

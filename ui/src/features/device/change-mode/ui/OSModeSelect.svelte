@@ -7,7 +7,6 @@
   function handleChange (e: CustomEvent<string>) {
     modeChanged(e.detail as OSMode)
   }
-
 </script>
 
 <div use:fsd={'features/OSModeSelect'}>

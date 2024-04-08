@@ -1,10 +1,7 @@
 import type { SidebarLayoutProps } from '@naco-ui/svelte'
 import type { ComponentType, SvelteComponent } from 'svelte'
 
-export type SupportedKeyboards =
-  | 'Halo65'
-  | 'Halo75'
-  | 'Halo96'
+export type SupportedKeyboards = 'Halo65' | 'Halo75' | 'Halo96'
 
 export type ConnectionDescription = {
   name: string
@@ -23,7 +20,7 @@ export type Page = {
 
 export enum OSMode {
   Windows = 'win',
-  MacOS = 'mac'
+  MacOS = 'mac',
 }
 
 export type CheatFeatures = 'keyboardThemes'

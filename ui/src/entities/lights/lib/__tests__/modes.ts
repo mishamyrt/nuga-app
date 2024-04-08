@@ -1,8 +1,17 @@
 import { describe, expect, it } from 'vitest'
 
-import type { LightDomainMode, RawLightDomain, RawLightMode } from '../../model/types'
+import type {
+  LightDomainMode,
+  RawLightDomain,
+  RawLightMode,
+} from '../../model/types'
 import { LightSupportsCode } from '../constants'
-import { byModeCode, featuresToSupports, parseRawDomains, parseRawMode } from '../modes'
+import {
+  byModeCode,
+  featuresToSupports,
+  parseRawDomains,
+  parseRawMode,
+} from '../modes'
 
 describe('featuresToSupports', () => {
   it('returns supported specific color feature', () => {
@@ -10,7 +19,7 @@ describe('featuresToSupports', () => {
     expect(featuresToSupports(features)).toStrictEqual({
       specificColor: true,
       randomColor: false,
-      speed: false
+      speed: false,
     })
   })
 
@@ -19,7 +28,7 @@ describe('featuresToSupports', () => {
     expect(featuresToSupports(features)).toStrictEqual({
       specificColor: false,
       randomColor: true,
-      speed: false
+      speed: false,
     })
   })
 
@@ -28,7 +37,7 @@ describe('featuresToSupports', () => {
     expect(featuresToSupports(features)).toStrictEqual({
       specificColor: false,
       randomColor: false,
-      speed: true
+      speed: true,
     })
   })
 
@@ -37,7 +46,7 @@ describe('featuresToSupports', () => {
     expect(featuresToSupports(features)).toStrictEqual({
       specificColor: true,
       randomColor: true,
-      speed: false
+      speed: false,
     })
   })
 
@@ -46,7 +55,7 @@ describe('featuresToSupports', () => {
     expect(featuresToSupports(features)).toStrictEqual({
       specificColor: false,
       randomColor: false,
-      speed: false
+      speed: false,
     })
   })
 })
@@ -56,16 +65,16 @@ describe('parseRawMode', () => {
     const mode: RawLightMode = {
       name: 'rainbow dash',
       code: 1,
-      features: LightSupportsCode.SpecificColor
+      features: LightSupportsCode.SpecificColor,
     }
     expect(parseRawMode(mode)).toStrictEqual({
       name: 'Rainbow Dash',
       supports: {
         specificColor: true,
         randomColor: false,
-        speed: false
+        speed: false,
       },
-      code: 1
+      code: 1,
     })
   })
 })
@@ -79,9 +88,9 @@ describe('parseRawDomains', () => {
           {
             name: 'rainbow dash',
             code: 1,
-            features: LightSupportsCode.SpecificColor
-          }
-        ]
+            features: LightSupportsCode.SpecificColor,
+          },
+        ],
       },
       {
         name: 'sidelight',
@@ -89,10 +98,10 @@ describe('parseRawDomains', () => {
           {
             name: 'Aunt and Uncle Orange',
             code: 2,
-            features: LightSupportsCode.RandomColor
-          }
-        ]
-      }
+            features: LightSupportsCode.RandomColor,
+          },
+        ],
+      },
     ]
     expect(parseRawDomains(modes)).toStrictEqual({
       backlight: [
@@ -101,10 +110,10 @@ describe('parseRawDomains', () => {
           supports: {
             specificColor: true,
             randomColor: false,
-            speed: false
+            speed: false,
           },
-          code: 1
-        }
+          code: 1,
+        },
       ],
       sidelight: [
         {
@@ -112,11 +121,11 @@ describe('parseRawDomains', () => {
           supports: {
             specificColor: false,
             randomColor: true,
-            speed: false
+            speed: false,
           },
-          code: 2
-        }
-      ]
+          code: 2,
+        },
+      ],
     })
   })
 })
@@ -129,28 +138,28 @@ describe('byModeCode', () => {
         supports: {
           specificColor: true,
           randomColor: false,
-          speed: false
+          speed: false,
         },
-        code: 1
+        code: 1,
       },
       {
         name: 'Aunt And Uncle Orange',
         supports: {
           specificColor: false,
           randomColor: true,
-          speed: false
+          speed: false,
         },
-        code: 2
+        code: 2,
       },
       {
         name: 'Granny Smith',
         supports: {
           specificColor: false,
           randomColor: true,
-          speed: false
+          speed: false,
         },
-        code: 3
-      }
+        code: 3,
+      },
     ]
 
     expect(modes.find(byModeCode(1))).toStrictEqual(modes[0])
@@ -163,10 +172,10 @@ describe('byModeCode', () => {
         supports: {
           specificColor: true,
           randomColor: false,
-          speed: false
+          speed: false,
         },
-        code: 1
-      }
+        code: 1,
+      },
     ]
 
     expect(modes.find(byModeCode(2))).toBeUndefined()

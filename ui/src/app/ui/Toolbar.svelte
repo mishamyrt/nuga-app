@@ -31,11 +31,21 @@
   }
 
   :global(.os-mac.dark) .toolbar {
-    --toolbar-background-gradient: linear-gradient(0deg, #323232, var(--color-background-secondary));
+    --toolbar-background-gradient:
+      linear-gradient(
+        0deg,
+        #323232,
+        var(--color-background-secondary)
+      );
   }
 
   :global(.os-mac.light) .toolbar {
-    --toolbar-background-gradient: linear-gradient(0deg, #EBEBEB, var(--color-background-secondary));
+    --toolbar-background-gradient:
+      linear-gradient(
+        0deg,
+        #EBEBEB,
+        var(--color-background-secondary)
+      );
   }
 
   .titlebar {

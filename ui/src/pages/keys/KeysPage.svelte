@@ -15,14 +15,10 @@
     <DeviceSupports capability="keys">
       <KeySettings keyCode={selectedKey.code} />
       {#if selectedKey?.secondaryCode}
-      <KeySettings keyCode={selectedKey.secondaryCode} secondary />
+        <KeySettings keyCode={selectedKey.secondaryCode} secondary />
       {/if}
       {#if selectedKey.readonly && selectedKey.code !== 'none'}
-        <Typography
-          align="center"
-          color="tertiary"
-          variant="caption-m"
-        >
+        <Typography align="center" color="tertiary" variant="caption-m">
           This button is read-only. Its actions cannot be changed
         </Typography>
       {/if}

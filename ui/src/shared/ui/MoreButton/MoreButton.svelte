@@ -1,6 +1,5 @@
 <script lang="ts">
   import MoreIcon from './MoreIcon.svelte'
-
 </script>
 
 <div>

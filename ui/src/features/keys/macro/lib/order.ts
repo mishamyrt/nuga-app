@@ -4,7 +4,7 @@ import { MacroStepType } from '../model/types'
 export function findStepIndexToTop (
   steps: MacroStep[],
   keyName: string,
-  startIndex: number
+  startIndex: number,
 ): number {
   for (let i = startIndex - 1; i >= 0; i--) {
     if (steps[i].keyName === keyName) {
@@ -17,7 +17,7 @@ export function findStepIndexToTop (
 export function findStepIndexToBottom (
   steps: MacroStep[],
   keyName: string,
-  startIndex: number
+  startIndex: number,
 ): number {
   for (let i = startIndex + 1; i < steps.length; i++) {
     if (steps[i].keyName === keyName) {

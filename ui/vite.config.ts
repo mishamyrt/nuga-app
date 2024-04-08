@@ -15,7 +15,7 @@ const testExclude = [
   '**/index.ts',
   '**/.svelte-kit/**',
   '**/.pnpm/**',
-  'src/**/__tests__/__*__.ts'
+  'src/**/__tests__/__*__.ts',
 ]
 
 // https://vitejs.dev/config/
@@ -28,8 +28,8 @@ export default defineConfig({
       exclude: [...testExclude],
       enabled: true,
       provider: 'v8',
-      reporter: ['html']
-    }
+      reporter: ['html'],
+    },
   },
   resolve: {
     alias: {
@@ -39,8 +39,8 @@ export default defineConfig({
       $widgets: resolve(__dirname, './src/widgets'),
       $pages: resolve(__dirname, './src/pages'),
       '$wails/runtime': resolve(__dirname, './src/wailsjs/runtime/runtime'),
-      '$wails/go': resolve(__dirname, './src/wailsjs/go')
-    }
+      '$wails/go': resolve(__dirname, './src/wailsjs/go'),
+    },
   },
-  plugins: [svelte()]
+  plugins: [svelte()],
 })

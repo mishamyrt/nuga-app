@@ -5,7 +5,7 @@ import {
   hexToRgb,
   rgbMatrixToHex,
   rgbToCSSProperty,
-  rgbToHex
+  rgbToHex,
 } from '../colors'
 
 describe('formatHex', () => {
@@ -38,14 +38,23 @@ describe('rgbToHex', () => {
 describe('rgbMatrixToHex', () => {
   it('converts RGB matrix to hex matrix', () => {
     const input: RGBColor[][] = [
-      [{ R: 255, G: 255, B: 255 }, { R: 255, G: 255, B: 255 }],
-      [{ R: 0, G: 0, B: 0 }, { R: 0, G: 0, B: 0 }],
-      [{ R: 255, G: 0, B: 0 }, { R: 0, G: 255, B: 0 }]
+      [
+        { R: 255, G: 255, B: 255 },
+        { R: 255, G: 255, B: 255 },
+      ],
+      [
+        { R: 0, G: 0, B: 0 },
+        { R: 0, G: 0, B: 0 },
+      ],
+      [
+        { R: 255, G: 0, B: 0 },
+        { R: 0, G: 255, B: 0 },
+      ],
     ]
     expect(rgbMatrixToHex(input)).toStrictEqual([
       ['#ffffff', '#ffffff'],
       ['#000000', '#000000'],
-      ['#ff0000', '#00ff00']
+      ['#ff0000', '#00ff00'],
     ])
   })
 
@@ -69,28 +78,42 @@ describe('hexToRgb', () => {
 
 describe('rgbToCSSProperty', () => {
   it('converts RGB object to CSS color value with alpha', () => {
-    expect(rgbToCSSProperty({
-      R: 255,
-      G: 255,
-      B: 255
-    }, 0.5)).toBe('rgba(255, 255, 255, 0.5)')
-    expect(rgbToCSSProperty({
-      R: 0,
-      G: 0,
-      B: 0
-    }, 1)).toBe('rgba(0, 0, 0, 1)')
+    expect(
+      rgbToCSSProperty(
+        {
+          R: 255,
+          G: 255,
+          B: 255,
+        },
+        0.5,
+      ),
+    ).toBe('rgba(255, 255, 255, 0.5)')
+    expect(
+      rgbToCSSProperty(
+        {
+          R: 0,
+          G: 0,
+          B: 0,
+        },
+        1,
+      ),
+    ).toBe('rgba(0, 0, 0, 1)')
   })
 
   it('converts RGB object to CSS color value without alpha', () => {
-    expect(rgbToCSSProperty({
-      R: 255,
-      G: 255,
-      B: 255
-    })).toBe('rgba(255, 255, 255, 1)')
-    expect(rgbToCSSProperty({
-      R: 0,
-      G: 0,
-      B: 0
-    })).toBe('rgba(0, 0, 0, 1)')
+    expect(
+      rgbToCSSProperty({
+        R: 255,
+        G: 255,
+        B: 255,
+      }),
+    ).toBe('rgba(255, 255, 255, 1)')
+    expect(
+      rgbToCSSProperty({
+        R: 0,
+        G: 0,
+        B: 0,
+      }),
+    ).toBe('rgba(0, 0, 0, 1)')
   })
 })

@@ -1,14 +1,18 @@
 import { type MacroStep, MacroStepType } from '../model'
 import { findStepIndexToBottom, findStepIndexToTop } from './order'
 
-export function updateDelay (steps: MacroStep[], id: string, delay: number): MacroStep[] {
+export function updateDelay (
+  steps: MacroStep[],
+  id: string,
+  delay: number,
+): MacroStep[] {
   let isStepFound = false
-  const result = steps.map(step => {
+  const result = steps.map((step) => {
     if (step.id === id) {
       isStepFound = true
       return {
         ...step,
-        delay
+        delay,
       }
     }
     return step
@@ -22,9 +26,9 @@ export function updateDelay (steps: MacroStep[], id: string, delay: number): Mac
 export function updateKeystroke (
   steps: MacroStep[],
   id: string,
-  keyName: string
+  keyName: string,
 ): MacroStep[] {
-  const itemIndex = steps.findIndex(step => step.id === id)
+  const itemIndex = steps.findIndex((step) => step.id === id)
   if (itemIndex === -1) {
     throw new Error(`Step ${id} not found`)
   }
@@ -47,7 +51,7 @@ export function updateKeystroke (
     if (i === itemIndex || i === pairIndex) {
       return {
         ...step,
-        keyName
+        keyName,
       }
     }
     return step
@@ -55,7 +59,7 @@ export function updateKeystroke (
 }
 
 export function removeStep (steps: MacroStep[], id: string): MacroStep[] {
-  const index = steps.findIndex(step => step.id === id)
+  const index = steps.findIndex((step) => step.id === id)
   if (index === -1) {
     throw new Error(`Step ${id} not found`)
   }
@@ -74,7 +78,9 @@ export function removeStep (steps: MacroStep[], id: string): MacroStep[] {
   }
   if (index === 0 || pairIndex === 0) {
     const filtered = steps.filter((_, i) => i !== index && i !== pairIndex)
-    const startOffset = filtered.findIndex(step => step.type !== MacroStepType.Wait)
+    const startOffset = filtered.findIndex(
+      (step) => step.type !== MacroStepType.Wait,
+    )
     if (startOffset === -1) {
       return []
     }

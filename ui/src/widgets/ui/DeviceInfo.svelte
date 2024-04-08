@@ -1,4 +1,5 @@
-<svelte:options immutable={true}/>
+<svelte:options immutable={true} />
+
 <script>
   import { fsd } from 'feature-sliced-svelte'
 
@@ -8,6 +9,7 @@
   $: connection = $connectionStore
   $: firmwareVersion = $firmwareVersionStore
 </script>
+
 <div use:fsd={'widgets/SettingsInfo'}>
   <DeviceInfoGroup
     name={connection.name}

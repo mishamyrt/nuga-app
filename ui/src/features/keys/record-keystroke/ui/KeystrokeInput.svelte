@@ -9,7 +9,7 @@
     type KeystrokeAction,
     keystrokeFromEvent,
     safeKeystrokeAction,
-    selectedKeyStore
+    selectedKeyStore,
   } from '$entities/keys'
 
   import { defaultKeystroke } from '../lib'
@@ -77,8 +77,8 @@
 </script>
 
 <div use:fsd={'features/KeystrokeInput'}>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div
     on:click={startRecording}
     class="preview"
     class:disabled

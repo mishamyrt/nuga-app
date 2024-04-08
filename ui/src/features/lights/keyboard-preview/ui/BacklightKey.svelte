@@ -14,7 +14,8 @@
 
 <div
   class="light"
-  style:--key-light-color="{hasBacklight ? backlight[y][x] : 'transparent'}" />
+  style:--key-light-color={hasBacklight ? backlight[y][x] : 'transparent'}
+/>
 
 <style lang="scss">
   .light {
@@ -22,7 +23,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: background-color .3s linear;
+    transition: background-color 0.3s linear;
     // transition-delay: var(--key-delay);
     background-color: var(--key-light-color);
     border-radius: var(--key-radius);

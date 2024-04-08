@@ -1,7 +1,18 @@
 <script lang="ts">
-  import { Button, FormGroup, FormRow, getTheme, Modal, ModalActions, Stack } from '@naco-ui/svelte'
+  import {
+    Button,
+    FormGroup,
+    FormRow,
+    getTheme,
+    Modal,
+    ModalActions,
+    Stack,
+  } from '@naco-ui/svelte'
 
-  import { TransparentInput, TransparentInputNumber } from '$shared/ui/TransparentInput'
+  import {
+    TransparentInput,
+    TransparentInputNumber,
+  } from '$shared/ui/TransparentInput'
 
   import {
     editedMacroRemoved,
@@ -14,7 +25,7 @@
     showMacroModalStore,
     stepDelayAdded,
     stepKeystrokeAdded,
-    stepsStore
+    stepsStore,
   } from '../model'
   import MacroSteps from './MacroSteps.svelte'
 
@@ -43,7 +54,8 @@
   }
 
   $: open = $showMacroModalStore
-  $: canSave = $macroTitleStore !== '' && $macroRepeatsStore > 0 && $stepsStore.length > 0
+  $: canSave =
+    $macroTitleStore !== '' && $macroRepeatsStore > 0 && $stepsStore.length > 0
 </script>
 
 <Modal fixed {open} width={$os === 'linux' ? 800 : 600}>
@@ -51,9 +63,7 @@
     <MacroSteps />
     <Stack gap="m" justify="start" direction="horizontal">
       <Button on:click={() => stepKeystrokeAdded()}>Add keystroke</Button>
-      <Button
-        disabled={$stepsStore.length === 0}
-        on:click={() => stepDelayAdded()}>
+      <Button disabled={$stepsStore.length === 0} on:click={() => stepDelayAdded()}>
         Add wait
       </Button>
       <Button disabled>Record</Button>

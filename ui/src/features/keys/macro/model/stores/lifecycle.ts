@@ -9,7 +9,9 @@ export const macroEdited = createEvent<number>('macroEdited')
 export const editedMacroSubmitted = createEvent('editedMacroSubmitted')
 export const editedMacroRemoved = createEvent('editedMacroRemoved')
 
-export const editedIndexStore = createStore(newStepIndex, { name: 'macroIndex' })
+export const editedIndexStore = createStore(newStepIndex, {
+  name: 'macroIndex',
+})
 
 editedIndexStore.on(macroEdited, (_, index) => index)
 editedIndexStore.reset(macroCreated)
@@ -17,5 +19,5 @@ editedIndexStore.reset(macroCreated)
 sample({
   clock: editedMacroRemoved,
   source: editedIndexStore,
-  target: macroRemoved
+  target: macroRemoved,
 })

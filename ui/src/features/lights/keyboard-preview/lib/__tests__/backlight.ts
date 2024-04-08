@@ -4,19 +4,25 @@ import { buildTemplate } from '$entities/keys'
 import { Halo65 } from '$entities/keys/lib/layouts'
 import { backlightDefaultColors, type LightDomainState } from '$entities/lights'
 
-import { renderBacklightColors, renderColorMatrix, renderGradientMatrix } from '../backlight'
+import {
+  renderBacklightColors,
+  renderColorMatrix,
+  renderGradientMatrix,
+} from '../backlight'
 import { RANDOM_GRADIENT_BOTTOM, RANDOM_GRADIENT_TOP } from '../constants'
 
 describe('renderColorMatrix', () => {
   const template = buildTemplate(Halo65)
   it('should return correct matrix for color', () => {
     const result = renderColorMatrix(template, '#ff0000')
-    result.forEach(row => row.forEach(color => expect(color).toBe('#ff0000')))
+    result.forEach((row) => row.forEach((color) => expect(color).toBe('#ff0000')))
   })
 
   it('should return correct matrix for transparent', () => {
     const result = renderColorMatrix(template, 'transparent')
-    result.forEach(row => row.forEach(color => expect(color).toBe('transparent')))
+    result.forEach((row) =>
+      row.forEach((color) => expect(color).toBe('transparent')),
+    )
   })
 })
 
@@ -40,7 +46,7 @@ describe('renderBacklightColors', () => {
       color: 7,
       mode: 0,
       speed: 0,
-      brightness: 1
+      brightness: 1,
     }
     const result = renderBacklightColors(state, backlightDefaultColors, template)
     const firstColor = result[0][0]
@@ -55,13 +61,11 @@ describe('renderBacklightColors', () => {
       color: 0,
       mode: 0,
       speed: 0,
-      brightness: 1
+      brightness: 1,
     }
     const result = renderBacklightColors(state, backlightDefaultColors, template)
-    result.forEach(row => row.forEach(color => expect(color).toBe('#FF0000')))
+    result.forEach((row) => row.forEach((color) => expect(color).toBe('#FF0000')))
   })
 
-  it('should return correct transparent matrix if disabled', () => {
-
-  })
+  it('should return correct transparent matrix if disabled', () => {})
 })

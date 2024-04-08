@@ -2,12 +2,12 @@ import {
   byModeCode,
   defaultColors,
   type LightDomainMode,
-  type LightDomainState
+  type LightDomainState,
 } from '$entities/lights'
 
 export function getAuxiliaryColor (
   state: LightDomainState,
-  modes: LightDomainMode[]
+  modes: LightDomainMode[],
 ): string {
   const { enabled, color, mode: code } = state
   const mode = modes.find(byModeCode(code))

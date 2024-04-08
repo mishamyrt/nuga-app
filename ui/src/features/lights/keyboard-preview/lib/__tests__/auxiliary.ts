@@ -11,14 +11,14 @@ describe('getAuxiliaryColor', () => {
       color: 0,
       mode: 0,
       speed: 0,
-      brightness: 1
+      brightness: 1,
     }
     const modes = [
       {
         name: 'mode1',
         code: 0,
-        supports: { specificColor: true, randomColor: true, speed: true }
-      }
+        supports: { specificColor: true, randomColor: true, speed: true },
+      },
     ]
     const color = getAuxiliaryColor(state, modes)
     expect(color).toBe('#FF0000')
@@ -30,14 +30,15 @@ describe('getAuxiliaryColor', () => {
       color: 7,
       mode: 0,
       speed: 0,
-      brightness: 1
+      brightness: 1,
     }
     const modes = [
       {
         name: 'mode1',
         code: 0,
-        supports: { specificColor: true, randomColor: true, speed: true }
-      }]
+        supports: { specificColor: true, randomColor: true, speed: true },
+      },
+    ]
     const color = getAuxiliaryColor(state, modes)
     expect(color).toBe('random')
   })
@@ -48,14 +49,15 @@ describe('getAuxiliaryColor', () => {
       color: 0,
       mode: 0,
       speed: 0,
-      brightness: 1
+      brightness: 1,
     }
     const modes = [
       {
         name: 'mode1',
         code: 0,
-        supports: { specificColor: true, randomColor: true, speed: true }
-      }]
+        supports: { specificColor: true, randomColor: true, speed: true },
+      },
+    ]
     const color = getAuxiliaryColor(state, modes)
     expect(color).toBe('transparent')
   })
@@ -66,14 +68,15 @@ describe('getAuxiliaryColor', () => {
       color: 0,
       mode: 0,
       speed: 0,
-      brightness: 1
+      brightness: 1,
     }
     const modes = [
       {
         name: 'mode1',
         code: 0,
-        supports: { specificColor: false, randomColor: true, speed: true }
-      }]
+        supports: { specificColor: false, randomColor: true, speed: true },
+      },
+    ]
     const color = getAuxiliaryColor(state, modes)
     expect(color).toBe('random')
   })
@@ -84,14 +87,15 @@ describe('getAuxiliaryColor', () => {
       color: 0,
       mode: 1,
       speed: 0,
-      brightness: 1
+      brightness: 1,
     }
     const modes = [
       {
         name: 'mode1',
         code: 0,
-        supports: { specificColor: true, randomColor: true, speed: true }
-      }]
+        supports: { specificColor: true, randomColor: true, speed: true },
+      },
+    ]
     expect(() => getAuxiliaryColor(state, modes)).toThrow()
   })
 })

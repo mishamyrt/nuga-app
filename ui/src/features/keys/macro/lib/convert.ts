@@ -32,13 +32,13 @@ export function macroToSteps (macro: Macro): MacroStep[] {
     steps.push({
       id: getUniqueId(),
       type: actionToStepType(action.type),
-      keyName: action.key
+      keyName: action.key,
     })
     if (action.delay) {
       steps.push({
         id: getUniqueId(),
         type: MacroStepType.Wait,
-        delay: action.delay
+        delay: action.delay,
       })
     }
   }
@@ -58,11 +58,11 @@ export function stepsToActions (steps: MacroStep[]): MacroAction[] {
       macro.push({
         key: step.keyName,
         type: stepToActionType(step.type),
-        delay
+        delay,
       })
     } else {
       throw new Error(
-        'Incorrect step order: A Wait step cannot directly follow another Wait step without an intervening KeyUp or KeyDown step.'
+        'Incorrect step order: A Wait step cannot directly follow another Wait step without an intervening KeyUp or KeyDown step.',
       )
     }
   }

@@ -1,5 +1,3 @@
 import KeystrokeInput from './ui/KeystrokeInput.svelte'
 
-export {
-  KeystrokeInput
-}
+export { KeystrokeInput }

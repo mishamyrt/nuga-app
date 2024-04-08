@@ -1,9 +1,22 @@
 <script lang="ts">
-  import { Button, getTheme, Input, Modal, ModalActions, Stack, Typography } from '@naco-ui/svelte'
+  import {
+    Button,
+    getTheme,
+    Input,
+    Modal,
+    ModalActions,
+    Stack,
+    Typography,
+  } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
   import ColorPicker from 'svelte-awesome-color-picker'
 
-  import { backlightColorChanged, backlightColorsStore, hexToRgb, stateStore } from '$entities/lights'
+  import {
+    backlightColorChanged,
+    backlightColorsStore,
+    hexToRgb,
+    stateStore,
+  } from '$entities/lights'
 
   import { canEditColorStore } from '../model/store'
 
@@ -26,7 +39,7 @@
       r: rgb.R,
       g: rgb.G,
       b: rgb.B,
-      a: 1
+      a: 1,
     }
     visible = true
   }
@@ -39,8 +52,8 @@
       color: {
         R: rgba.r,
         G: rgba.g,
-        B: rgba.b
-      }
+        B: rgba.b,
+      },
     })
     visible = false
   }
@@ -49,9 +62,7 @@
 </script>
 
 <div use:fsd={'features/LightsColorEditor'}>
-  <Button disabled={!canEdit} on:click={handleOpen}>
-    Edit
-  </Button>
+  <Button disabled={!canEdit} on:click={handleOpen}>Edit</Button>
   <Modal fixed open={visible} width={$os === 'mac' ? 264 : 370}>
     <div class="color-editor">
       <Stack>
@@ -67,32 +78,28 @@
         </div>
         <div class="inputs">
           <Stack gap="xs">
-              <Input fullWidth bind:value={hex} />
-              <Typography variant="caption-s" color="tertiary">HEX</Typography>
+            <Input fullWidth bind:value={hex} />
+            <Typography variant="caption-s" color="tertiary">HEX</Typography>
           </Stack>
           <Stack gap="xs">
-              <Input fullWidth value="{rgba?.r.toString()}" />
-              <Typography variant="caption-s" color="tertiary">R</Typography>
+            <Input fullWidth value={rgba?.r.toString()} />
+            <Typography variant="caption-s" color="tertiary">R</Typography>
           </Stack>
           <Stack gap="xs">
-              <Input fullWidth value="{rgba?.g.toString()}" />
-              <Typography variant="caption-s" color="tertiary">G</Typography>
+            <Input fullWidth value={rgba?.g.toString()} />
+            <Typography variant="caption-s" color="tertiary">G</Typography>
           </Stack>
           <Stack gap="xs">
-              <Input fullWidth value="{rgba?.b.toString()}" />
-              <Typography variant="caption-s" color="tertiary">B</Typography>
+            <Input fullWidth value={rgba?.b.toString()} />
+            <Typography variant="caption-s" color="tertiary">B</Typography>
           </Stack>
         </div>
       </Stack>
     </div>
     <ModalActions slot="actions">
       <Stack justify="end" direction="horizontal">
-        <Button on:click={handleClose}>
-          Cancel
-        </Button>
-        <Button primary on:click={applyColor}>
-          Apply
-        </Button>
+        <Button on:click={handleClose}>Cancel</Button>
+        <Button primary on:click={applyColor}>Apply</Button>
       </Stack>
     </ModalActions>
   </Modal>

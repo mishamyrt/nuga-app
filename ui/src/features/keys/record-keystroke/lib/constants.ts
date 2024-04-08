@@ -1,7 +1,7 @@
 import { type KeyAction, KeyActionType, type KeystrokeAction } from '$entities/keys'
 
 export const defaultAction: KeyAction = {
-  type: KeyActionType.None
+  type: KeyActionType.None,
 }
 
 export const defaultKeystroke: KeystrokeAction = {
@@ -12,7 +12,7 @@ export const defaultKeystroke: KeystrokeAction = {
       ctrl: false,
       shift: false,
       alt: false,
-      meta: false
-    }
-  }
+      meta: false,
+    },
+  },
 }

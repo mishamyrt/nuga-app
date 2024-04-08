@@ -22,10 +22,7 @@
     active = true
   }
 
-  const allowedKeys = [
-    'Backspace',
-    'Delete'
-  ]
+  const allowedKeys = ['Backspace', 'Delete']
 
   function handleInputKeyDown (e: KeyboardEvent) {
     if (e.code === 'Escape' || e.code === 'Enter') {
@@ -55,7 +52,6 @@
     dispatch('input', value)
     active = false
   }
-
 </script>
 
 <StepInput {active} on:click={handleClick}>

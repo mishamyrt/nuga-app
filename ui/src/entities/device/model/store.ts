@@ -16,27 +16,31 @@ export const anyStateRestored = createEvent('anyStateRestored')
 
 export const supportsStore = createStore(defaultSupports, { name: 'supports' })
 export const firmwareVersionStore = createStore('dev', {
-  name: 'firmwareVersion'
+  name: 'firmwareVersion',
 })
 
-export const getFirmwareFx = createEffect('getFirmware', { handler: getFirmware })
-export const getSupportsFx = createEffect('getSupports', { handler: getSupports })
+export const getFirmwareFx = createEffect('getFirmware', {
+  handler: getFirmware,
+})
+export const getSupportsFx = createEffect('getSupports', {
+  handler: getSupports,
+})
 export const saveStateFx = createHIDEffect({
   name: 'saveStateFx',
-  handler: saveState
+  handler: saveState,
 })
 export const restoreUserStateFx = createHIDEffect({
   name: 'restoreUserStateFx',
-  handler: restoreState
+  handler: restoreState,
 })
 export const restoreDefaultStateFx = createHIDEffect({
   name: 'restoreDefaultStateFx',
-  handler: restoreDefaultState
+  handler: restoreDefaultState,
 })
 
 sample({
   clock: getFirmwareFx.doneData,
-  target: firmwareVersionUpdated
+  target: firmwareVersionUpdated,
 })
 
 firmwareVersionStore.on(firmwareVersionUpdated, (_, value) => value)
@@ -44,24 +48,27 @@ supportsStore.on(getSupportsFx.doneData, (_, value) => value)
 
 sample({
   clock: connected,
-  target: [getFirmwareFx, getSupportsFx]
+  target: [getFirmwareFx, getSupportsFx],
 })
 
 sample({
   clock: userStateSaved,
-  target: saveStateFx
+  target: saveStateFx,
 })
 sample({
   clock: userStateRestored,
-  target: restoreUserStateFx
+  target: restoreUserStateFx,
 })
 sample({
   clock: defaultStateRestored,
-  target: restoreDefaultStateFx
+  target: restoreDefaultStateFx,
 })
 sample({
   clock: [restoreUserStateFx.done, restoreDefaultStateFx.done],
-  target: anyStateRestored
+  target: anyStateRestored,
 })
 
-export const restoringStateStore = or(restoreUserStateFx.pending, restoreDefaultStateFx.pending)
+export const restoringStateStore = or(
+  restoreUserStateFx.pending,
+  restoreDefaultStateFx.pending,
+)

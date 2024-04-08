@@ -7,49 +7,52 @@ import { appStarted } from './app'
 
 const defaultConnection: ConnectionDescription = {
   path: '',
-  name: ''
+  name: '',
 }
 
 export const disconnected = createEvent('disconnected')
 export const connecting = createEvent('connecting')
 export const connected = createEvent<ConnectionDescription>('connected')
-export const connectionStore = createStore<ConnectionDescription>(defaultConnection, {
-  name: 'connectionStore'
-})
-export const isConnected = combine(connectionStore, c => c.name.length > 0)
+export const connectionStore = createStore<ConnectionDescription>(
+  defaultConnection,
+  {
+    name: 'connectionStore',
+  },
+)
+export const isConnected = combine(connectionStore, (c) => c.name.length > 0)
 
 sample({
   clock: [appStarted],
-  target: connecting
+  target: connecting,
 })
 
 const { tick } = interval({
   timeout: 1000,
   start: connecting,
   stop: connected,
-  leading: true
+  leading: true,
 })
 
 export const connectFx = createEffect('connectFx', {
-  handler: connect
+  handler: connect,
 })
 export const disconnectFx = createEffect('disconnectFx', {
-  handler: disconnect
+  handler: disconnect,
 })
 
 sample({
   clock: tick,
-  target: connectFx
+  target: connectFx,
 })
 
 sample({
   clock: connectFx.doneData,
-  target: connected
+  target: connected,
 })
 
 sample({
   clock: disconnected,
-  target: disconnectFx
+  target: disconnectFx,
 })
 
 export const simulating = createEvent('simulating')
@@ -57,7 +60,7 @@ export const simulateFx = createEffect(simulate)
 
 sample({
   clock: simulating,
-  target: simulateFx
+  target: simulateFx,
 })
 
 connectionStore.on([connected, simulateFx.doneData], (_, data) => data)
@@ -65,5 +68,5 @@ connectionStore.on([connected, simulateFx.doneData], (_, data) => data)
 sample({
   clock: disconnectFx.done,
   fn: () => defaultConnection,
-  target: [connectionStore, connecting]
+  target: [connectionStore, connecting],
 })

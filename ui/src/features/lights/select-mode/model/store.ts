@@ -14,9 +14,9 @@ sample({
       ...state,
       [params.domain]: {
         ...state[params.domain],
-        mode: params.mode
-      }
+        mode: params.mode,
+      },
     }
   },
-  target: stateSet
+  target: stateSet,
 })

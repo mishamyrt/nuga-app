@@ -6,7 +6,7 @@ import { buildTemplate } from '../../lib/build-template'
 import { defaultTemplate, supportedKeyboards } from '../../lib/constants'
 
 export const keyboardTemplateStore = createStore(defaultTemplate, {
-  name: 'keyboardTemplate'
+  name: 'keyboardTemplate',
 })
 
 keyboardTemplateStore.on(connected, (_, connection) => {
@@ -17,5 +17,5 @@ keyboardTemplateStore.on(connected, (_, connection) => {
 sample({
   clock: disconnected,
   fn: () => defaultTemplate,
-  target: keyboardTemplateStore
+  target: keyboardTemplateStore,
 })

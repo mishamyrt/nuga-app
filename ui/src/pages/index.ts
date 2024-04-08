@@ -7,5 +7,5 @@ import { lights } from './lights'
 export const pages: Record<AppPage, Page> = {
   device,
   keys,
-  lights
+  lights,
 } as const

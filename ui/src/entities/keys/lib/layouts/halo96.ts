@@ -20,7 +20,7 @@ export const Halo96: KeyboardLayout = [
     { code: 'home', color: 'dark' },
     { code: 'end', color: 'dark' },
     { code: 'pgup', color: 'dark' },
-    { code: 'pgdn', color: 'dark' }
+    { code: 'pgdn', color: 'dark' },
   ],
   [
     { code: 'grave' },
@@ -40,7 +40,7 @@ export const Halo96: KeyboardLayout = [
     { code: 'numlock', color: 'dark' },
     { code: 'numpad_div', color: 'dark' },
     { code: 'numpad_mul', color: 'dark' },
-    { code: 'numpad_sub', color: 'dark' }
+    { code: 'numpad_sub', color: 'dark' },
   ],
   [
     { code: 'tab', color: 'dark', width: 1.5 },
@@ -60,7 +60,7 @@ export const Halo96: KeyboardLayout = [
     { code: 'num7' },
     { code: 'num8' },
     { code: 'num9' },
-    { code: 'numpad_add', height: 2, color: 'dark' }
+    { code: 'numpad_add', height: 2, color: 'dark' },
   ],
   [
     { code: 'caps', color: 'dark', width: 1.75 },
@@ -78,7 +78,7 @@ export const Halo96: KeyboardLayout = [
     { code: 'enter', width: 2.25, color: 'orange' },
     { code: 'num4' },
     { code: 'num5' },
-    { code: 'num6' }
+    { code: 'num6' },
   ],
   [
     { code: 'lshift', color: 'dark', width: 2.25 },
@@ -97,7 +97,7 @@ export const Halo96: KeyboardLayout = [
     { code: 'numpad1' },
     { code: 'numpad2' },
     { code: 'numpad3' },
-    { code: 'numpad_enter', height: 2, color: 'mint' }
+    { code: 'numpad_enter', height: 2, color: 'mint' },
   ],
   [
     { code: 'lctrl', color: 'dark', width: 1.25 },
@@ -111,6 +111,6 @@ export const Halo96: KeyboardLayout = [
     { code: 'down', color: 'dark' },
     { code: 'right', color: 'dark' },
     { code: 'numpad0' },
-    { code: 'numpad_dot' }
-  ]
+    { code: 'numpad_dot' },
+  ],
 ]

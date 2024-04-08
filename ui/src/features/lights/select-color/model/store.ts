@@ -14,9 +14,9 @@ sample({
       ...state,
       [params.domain]: {
         ...state[params.domain],
-        color: params.color
-      }
+        color: params.color,
+      },
     }
   },
-  target: stateSet
+  target: stateSet,
 })

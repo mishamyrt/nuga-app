@@ -5,7 +5,7 @@ const FS_LAYERS = [
   'widgets',
   'features',
   'entities',
-  'shared'
+  'shared',
 ]
 
 const FS_SEGMENTS = ['ui', 'model', 'lib', 'api', 'config', 'assets']
@@ -26,5 +26,5 @@ module.exports = {
   FS_LAYERS,
   FS_SEGMENTS,
   getLowerLayers,
-  getUpperLayers
+  getUpperLayers,
 }

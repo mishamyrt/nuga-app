@@ -3,8 +3,8 @@
   import { fsd } from 'feature-sliced-svelte'
 
   import { DeviceInfo, DeviceSettings } from '$widgets'
-
 </script>
+
 <div use:fsd={'pages/DevicePage'}>
   <Stack direction="vertical" gap="m">
     <DeviceInfo />

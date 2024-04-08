@@ -12,7 +12,7 @@
 
   const modifierStrings = ['ctrl', 'shift', 'alt', 'meta']
 
-  $: isModifiersVisible = !modifierStrings.some(m => key.includes(m))
+  $: isModifiersVisible = !modifierStrings.some((m) => key.includes(m))
   $: symbol = key === 'none' ? '' : getShortName(key)
 </script>
 

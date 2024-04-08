@@ -15,15 +15,13 @@ type FromWailsEventConfig<T> = {
  */
 export function fromWailsEvent<T> (
   wailsEventName: string,
-  config?: FromWailsEventConfig<T>
+  config?: FromWailsEventConfig<T>,
 ): Event<T> {
   const mapFn = config?.fn
   const eventName = config?.name
   const event = createEvent<T>(eventName)
   EventsOn(wailsEventName, (...data: any) => {
-    const params = mapFn
-      ? mapFn(...data)
-      : data
+    const params = mapFn ? mapFn(...data) : data
     event(params)
   })
   return event

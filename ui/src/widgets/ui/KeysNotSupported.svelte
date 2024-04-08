@@ -1,8 +1,7 @@
 <script lang="ts">
-import { FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
+  import { FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
 
   import { StateBackupButton } from '$features/device'
-
 </script>
 
 <FormGroup>
@@ -26,7 +25,9 @@ import { FormGroup, FormRow, Stack, Typography } from '@naco-ui/svelte'
   <FormRow
     align="top"
     title="Keyboard dump"
-    subtitle="The dump must be written with the default keyboard settings. Be sure to reset them before saving">
+    subtitle="The dump must be written with the default keyboard settings.
+    Be sure to reset them before saving"
+  >
     <Stack justify="start" align="end" fullHeight>
       <StateBackupButton>Save...</StateBackupButton>
     </Stack>

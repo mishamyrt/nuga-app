@@ -9,14 +9,14 @@ describe('effectParamsToState', () => {
     const params = {
       color: 2,
       speed: 3,
-      brightness: 4
+      brightness: 4,
     }
     expect(effectParamsToState(mode, params)).toStrictEqual({
       enabled: true,
       mode,
       color: 2,
       speed: 3,
-      brightness: 4
+      brightness: 4,
     })
   })
 
@@ -25,14 +25,14 @@ describe('effectParamsToState', () => {
     const params = {
       color: 1,
       speed: 2,
-      brightness: 4
+      brightness: 4,
     }
     expect(effectParamsToState(mode, params)).toStrictEqual({
       enabled: false,
       mode: 1, // If mode is 0, then set disabled flag and set mode to 1
       color: 1,
       speed: 2,
-      brightness: 4
+      brightness: 4,
     })
   })
 })
@@ -44,37 +44,37 @@ describe('parseEffectParamsState', () => {
         mode: {
           code: 1,
           name: 'rainbow dash',
-          features: 1
+          features: 1,
         },
         color: 2,
         speed: 3,
-        brightness: 4
+        brightness: 4,
       },
       halo: {
         mode: {
           code: 1,
           name: 'rainbow dash',
-          features: 1
+          features: 1,
         },
         color: 2,
         speed: 3,
-        brightness: 4
+        brightness: 4,
       },
       sidelight: {
         mode: {
           code: 1,
           name: 'rainbow dash',
-          features: 1
+          features: 1,
         },
         color: 2,
         speed: 3,
-        brightness: 4
+        brightness: 4,
       },
       backlightParams: {
         color: 2,
         speed: 3,
-        brightness: 4
-      }
+        brightness: 4,
+      },
     }
     expect(parseEffectParamsState(state)).toStrictEqual({
       backlight: {
@@ -82,22 +82,22 @@ describe('parseEffectParamsState', () => {
         mode: 1,
         color: 2,
         speed: 3,
-        brightness: 4
+        brightness: 4,
       },
       halo: {
         enabled: true,
         mode: 1,
         color: 2,
         speed: 3,
-        brightness: 4
+        brightness: 4,
       },
       sidelight: {
         enabled: true,
         mode: 1,
         color: 2,
         speed: 3,
-        brightness: 4
-      }
+        brightness: 4,
+      },
     })
   })
 })

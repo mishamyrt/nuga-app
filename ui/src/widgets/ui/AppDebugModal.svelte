@@ -1,8 +1,23 @@
 <script lang="ts">
-  import { Button, FormGroup, FormRow, getTheme, Modal, ModalActions, onHotkey, Stack, Typography } from '@naco-ui/svelte'
+  import {
+    Button,
+    FormGroup,
+    FormRow,
+    getTheme,
+    Modal,
+    ModalActions,
+    onHotkey,
+    Stack,
+    Typography,
+  } from '@naco-ui/svelte'
   import { fsd } from 'feature-sliced-svelte'
 
-  import { AppThemeSelect, AppUISwitchSegment, LoggingSwitch, RestartButton } from '$features/app'
+  import {
+    AppThemeSelect,
+    AppUISwitchSegment,
+    LoggingSwitch,
+    RestartButton,
+  } from '$features/nuga'
   import { disconnected } from '$shared/model'
 
   const { os } = getTheme()
@@ -26,11 +41,15 @@
 <Modal width={$os === 'mac' ? 500 : 600} open={show}>
   <div use:fsd={'widgets/AppDebugModal'}>
     <FormGroup>
-      <FormRow><Typography align="center" variant="heading-l">Debugging</Typography></FormRow>
+      <FormRow
+        ><Typography align="center" variant="heading-l">Debugging</Typography
+        ></FormRow
+      >
       <FormRow
         title="User interface"
         align="top"
-        subtitle="To fully switch the interface, you need to restart the application">
+        subtitle="To fully switch the interface, you need to restart the application"
+      >
         <Stack justify="end">
           <AppUISwitchSegment />
         </Stack>
@@ -40,14 +59,14 @@
       </FormRow>
       <FormRow
         title="Reset connection"
-        subtitle="Reset the current connection, to test the ability to recover or change the simulation template.">
+        subtitle="Reset the current connection, to test the ability to recover or change the simulation template."
+      >
         <Stack align="end">
           <Button on:click={handleDisconnect}>Disconnect</Button>
           <RestartButton />
         </Stack>
       </FormRow>
-      <FormRow
-        title="Logging">
+      <FormRow title="Logging">
         <LoggingSwitch />
       </FormRow>
     </FormGroup>

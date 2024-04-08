@@ -2,7 +2,11 @@
   import { fsd } from 'feature-sliced-svelte'
   import { not } from 'patronum'
 
-  import { AbstractKeyboard, keyboardTemplateStore, supportsKeyStore } from '$entities/keys'
+  import {
+    AbstractKeyboard,
+    keyboardTemplateStore,
+    supportsKeyStore,
+  } from '$entities/keys'
 
   import SelectableKey from './SelectableKey.svelte'
 
@@ -12,7 +16,11 @@
   $: template = $keyboardTemplateStore
 </script>
 
-<div class="selectable-keyboard" class:disabled use:fsd={'features/SelectableKeyboard'}>
+<div
+  class="selectable-keyboard"
+  class:disabled
+  use:fsd={'features/SelectableKeyboard'}
+>
   <AbstractKeyboard width={500} {template} keyComponent={SelectableKey} />
 </div>
 

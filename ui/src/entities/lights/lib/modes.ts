@@ -5,7 +5,7 @@ import type {
   LightModes,
   LightSupports,
   RawLightDomain,
-  RawLightMode
+  RawLightMode,
 } from '../model/types'
 import { LightSupportsCode } from './constants'
 
@@ -17,7 +17,7 @@ export function featuresToSupports (features: number): LightSupports {
   return {
     specificColor: (features & LightSupportsCode.SpecificColor) !== 0,
     randomColor: (features & LightSupportsCode.RandomColor) !== 0,
-    speed: (features & LightSupportsCode.Speed) !== 0
+    speed: (features & LightSupportsCode.Speed) !== 0,
   }
 }
 
@@ -28,7 +28,7 @@ export function parseRawMode (m: RawLightMode): LightDomainMode {
   return {
     name: capitalize(m.name),
     supports: featuresToSupports(m.features),
-    code: m.code
+    code: m.code,
   }
 }
 
@@ -39,7 +39,7 @@ export function parseRawDomains (modes: RawLightDomain[]): LightModes {
   return modes.reduce<Record<string, any>>((acc, domain) => {
     return {
       ...acc,
-      [domain.name.toLowerCase()]: domain.modes.map(parseRawMode)
+      [domain.name.toLowerCase()]: domain.modes.map(parseRawMode),
     }
   }, {}) as LightModes
 }
