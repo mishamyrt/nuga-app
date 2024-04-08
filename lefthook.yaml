@@ -1,0 +1,18 @@
+pre-commit:
+  commands:
+    format:
+      priority: 1
+      stage_fixed: true
+      root: "ui/"
+      glob: "*.{svelte,js,cjs,mjs,ts,md,json}"
+      run: >
+        pnpm prettier-eslint
+        --write
+        --config ./.prettierrc
+        {staged_files}
+    format-styles:
+      priority: 2
+      stage_fixed: true
+      root: "ui/"
+      glob: "*.{css,svelte,scss}"
+      run: stylelint --fix {staged_files}

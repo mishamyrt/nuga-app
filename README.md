@@ -95,6 +95,15 @@ To build a Linux AppImage using the resulting image, run the command:
 make linux-builder/release
 ```
 
+### Hooks
+
+It is highly recommended to install git hooks in the project repository. They make it easier to follow code Style. To install them, run the command:
+
+```sh
+make setup-qa
+make hook
+```
+
 ## Trademarks
 
 NuPhy® is a registered trademark of NuPhy Studio. Nuga is an unofficial product and is not affiliated with NuPhy Studio.
