@@ -1,5 +1,3 @@
-import type ColorJS from 'colorjs.io'
-
 /**
  * Formats number to 2-digit hex string
  * Example: 255 -> 'ff'
@@ -52,17 +50,4 @@ export function hexToRgb (hex: HexColor): RGBColor {
  */
 export function rgbToCSSProperty ({ R, G, B }: RGBColor, alpha = 1): string {
   return `rgba(${R}, ${G}, ${B}, ${alpha})`
-}
-
-/**
- * Converts ColorJS instance to RGB object
- * Example: new ColorJS('#ffffff') -> { R: 255, G: 255, B: 255 }
- */
-export function colorJStoRGB (color: ColorJS): RGBColor {
-  const { R, G, B } = color.srgb
-  return {
-    R: 255 * R,
-    G: 255 * G,
-    B: 255 * B
-  }
 }

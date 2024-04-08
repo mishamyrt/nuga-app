@@ -3,8 +3,9 @@ import { combine } from 'effector'
 import { keyboardTemplateStore } from '$entities/keys'
 import { backlightColorsStore, modesStore, stateStore } from '$entities/lights'
 
+import { getAuxiliaryColor } from '../lib/auxiliary'
+import { renderBacklightColors } from '../lib/backlight'
 import { defaultLightsColors } from './const'
-import { getAuxiliaryColor, getBacklightColors } from './utils/colors'
 
 export const keyboardLightsColorStore = combine([
   stateStore,
@@ -15,7 +16,7 @@ export const keyboardLightsColorStore = combine([
   if (backlightColors.length === 0 || keyboardTemplate.columns === 0) {
     return defaultLightsColors
   }
-  const backlightMatrix = getBacklightColors(state.backlight, backlightColors, keyboardTemplate)
+  const backlightMatrix = renderBacklightColors(state.backlight, backlightColors, keyboardTemplate)
   const haloColor = getAuxiliaryColor(state.halo, modes.halo)
   const sidelightColor = getAuxiliaryColor(state.sidelight, modes.sidelight)
 

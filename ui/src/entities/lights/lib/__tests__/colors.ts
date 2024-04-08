@@ -1,8 +1,6 @@
-import ColorJS from 'colorjs.io'
 import { describe, expect, it } from 'vitest'
 
 import {
-  colorJStoRGB,
   formatHex,
   hexToRgb,
   rgbMatrixToHex,
@@ -94,16 +92,5 @@ describe('rgbToCSSProperty', () => {
       G: 0,
       B: 0
     })).toBe('rgba(0, 0, 0, 1)')
-  })
-})
-
-describe('colorJStoRGB', () => {
-  it('converts ColorJS instance to RGB object', () => {
-    const color = new ColorJS('#ff00ff')
-    expect(colorJStoRGB(color)).toStrictEqual({ R: 255, G: 0, B: 255 })
-  })
-
-  it('throws on invalid ColorJS instance', () => {
-    expect(() => colorJStoRGB({} as unknown as ColorJS)).toThrow()
   })
 })
