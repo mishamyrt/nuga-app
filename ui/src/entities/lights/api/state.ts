@@ -1,9 +1,9 @@
 import { dto } from '$wails/go/models'
 import { GetLightState, SetLightState } from '$wails/go/usecase/LightsUsecase'
 
-import type { LightState } from '../model/types'
+import type { LightState, RawLightState } from '../model/types'
 
-export async function getLightState (): Promise<dto.LightState> {
+export async function getLightState (): Promise<RawLightState> {
   const state = await GetLightState()
   return state
 }

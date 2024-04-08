@@ -1,11 +1,10 @@
-import type { dto } from '$wails/go/models'
-
 import type {
   LightColorIndex,
   LightDomainState,
   LightEffectParams,
   LightState,
-  LightStateValue
+  LightStateValue,
+  RawLightState
 } from '../model/types'
 import { defaultDomainState } from './constants'
 
@@ -29,7 +28,7 @@ export function effectParamsToState (
 /**
  * Convert backend light state to frontend
  */
-export function parseEffectParamsState (state: dto.LightState): LightState {
+export function parseEffectParamsState (state: RawLightState): LightState {
   return {
     backlight: state.backlightParams
       ? effectParamsToState(

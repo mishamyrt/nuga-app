@@ -3,7 +3,7 @@ import { createEffect, createStore, sample } from 'effector'
 import { connected } from '$shared/model'
 
 import { getModesDomains } from '../../api'
-import { defaultLightModes, domainsToModes } from '../../lib'
+import { defaultLightModes, parseRawDomains } from '../../lib'
 import type { LightModes } from '../types'
 
 export const modesStore = createStore<LightModes>(defaultLightModes, { name: 'modesStore' })
@@ -12,7 +12,7 @@ export const getModesDomainsFx = createEffect(getModesDomains)
 
 sample({
   clock: getModesDomainsFx.doneData,
-  fn: domainsToModes,
+  fn: parseRawDomains,
   target: modesStore
 })
 sample({

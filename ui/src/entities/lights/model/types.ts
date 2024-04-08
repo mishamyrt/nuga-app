@@ -15,20 +15,42 @@ export type LightDomainState = {
 export type LightDomainColors = HexColor[]
 export type LightBacklightColors = HexColor[][]
 
-export type LightDomainMode = {
-  code: number
-  supports: {
-    specificColor: boolean
-    randomColor: boolean
-    speed: boolean
-  }
-  name: string
+export type LightSupports = {
+  specificColor: boolean
+  randomColor: boolean
+  speed: boolean
 }
+
+export type RawLightMode = {
+  code: number
+  name: string
+  features: number
+}
+
+export type LightDomainMode = {
+  supports: LightSupports
+} & Omit<RawLightMode, 'features'>
 
 export type LightEffectParams = {
   color: number
   speed: number
   brightness: number
+}
+
+export type RawLightDomain = {
+  name: string
+  modes: RawLightMode[]
+}
+
+export type RawEffect = {
+  mode: RawLightMode
+} & LightEffectParams
+
+export type RawLightState = {
+  backlight: RawEffect
+  sidelight: RawEffect
+  halo: RawEffect
+  backlightParams?: LightEffectParams
 }
 
 export type LightState = Record<LightDomain, LightDomainState>

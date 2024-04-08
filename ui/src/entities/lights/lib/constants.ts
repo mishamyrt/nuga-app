@@ -79,3 +79,9 @@ export const defaultLightModes: LightModes = {
 
 // Update every 2 seconds
 export const stateUpdateInterval = 2000
+
+export const enum LightSupportsCode {
+  SpecificColor = 1,
+  RandomColor = 4,
+  Speed = 16
+}

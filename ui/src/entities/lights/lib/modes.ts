@@ -1,23 +1,33 @@
 import { capitalize } from '$shared/lib'
-import type { light } from '$wails/go/models'
 
 import type {
   LightDomainMode,
-  LightModes
+  LightModes,
+  LightSupports,
+  RawLightDomain,
+  RawLightMode
 } from '../model/types'
+import { LightSupportsCode } from './constants'
+
+/**
+ * Converts light features to light supports.
+ * Feature codes are defined in `lib/pkg/light/effect/feature.go`
+ */
+export function featuresToSupports (features: number): LightSupports {
+  return {
+    specificColor: (features & LightSupportsCode.SpecificColor) !== 0,
+    randomColor: (features & LightSupportsCode.RandomColor) !== 0,
+    speed: (features & LightSupportsCode.Speed) !== 0
+  }
+}
 
 /**
  * Converts light mode to domain mode
  */
-export function modeToDomainMode (m: light.Mode): LightDomainMode {
+export function parseRawMode (m: RawLightMode): LightDomainMode {
   return {
     name: capitalize(m.name),
-    supports: {
-      // Features from lib/pkg/light/effect/feature.go
-      specificColor: (m.features & 1) !== 0,
-      randomColor: (m.features & 4) !== 0,
-      speed: (m.features & 16) !== 0
-    },
+    supports: featuresToSupports(m.features),
     code: m.code
   }
 }
@@ -25,11 +35,11 @@ export function modeToDomainMode (m: light.Mode): LightDomainMode {
 /**
  * Converts light domains array to light modes map
  */
-export function domainsToModes (modes: light.Domain[]): LightModes {
+export function parseRawDomains (modes: RawLightDomain[]): LightModes {
   return modes.reduce<Record<string, any>>((acc, domain) => {
     return {
       ...acc,
-      [domain.name.toLowerCase()]: domain.modes.map(modeToDomainMode)
+      [domain.name.toLowerCase()]: domain.modes.map(parseRawMode)
     }
   }, {}) as LightModes
 }

@@ -104,9 +104,6 @@ sample({
   },
   target: stateStore
 })
-stateStore.on(stateLoaded, (current, loaded) => {
-
-})
 
 sample({
   clock: backlightColorChanged,

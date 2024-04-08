@@ -4,7 +4,10 @@ import type ColorJS from 'colorjs.io'
  * Formats number to 2-digit hex string
  * Example: 255 -> 'ff'
  */
-function formatHex (n: number): string {
+export function formatHex (n: number): string {
+  if (n < 0) {
+    throw new Error(`Unexpected negative number ${n}`)
+  }
   return n.toString(16).padStart(2, '0')
 }
 
@@ -13,6 +16,9 @@ function formatHex (n: number): string {
  * Example: { R: 255, G: 255, B: 255 } -> '#ffffff'
  */
 export function rgbToHex ({ R, G, B }: RGBColor): HexColor {
+  if (R === undefined || G === undefined || B === undefined) {
+    throw new Error(`Invalid RGB color: ${R}, ${G}, ${B}`)
+  }
   return `#${formatHex(R)}${formatHex(G)}${formatHex(B)}`
 }
 
@@ -25,7 +31,7 @@ export function rgbMatrixToHex (matrix: RGBColor[][]): HexColor[][] {
 }
 
 /**
- * Converts hex color string to RGB object
+ * Converts 6 digit hex color string to RGB object
  * Example: '#ffffff' -> { R: 255, G: 255, B: 255 }
  */
 export function hexToRgb (hex: HexColor): RGBColor {
