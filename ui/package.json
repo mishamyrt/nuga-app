@@ -13,12 +13,14 @@
     "format:scripts": "prettier-eslint --write 'src/**/*.{svelte,ts,scss,css}' 'eslint/*.cjs' '../scripts/**/*.mjs'",
     "format:styles": "stylelint --fix 'src/**/*.{svelte,ts}'",
     "format:misc": "prettier-eslint --write './*.{md,json,ts,js,cjs}' '../*.{md,json}'",
-    "format": "pnpm format:styles && pnpm format:scripts",
+    "format": "pnpm format:styles && pnpm format:misc && pnpm format:scripts",
     "lint:scripts": "pnpm eslint 'src/**/*.{svelte,ts}'",
     "lint:styles": "pnpm stylelint 'src/**/*.{svelte,css,scss}'",
     "lint": "pnpm run '/^lint:.*/'"
   },
   "devDependencies": {
+    "@stylistic/stylelint-config": "^1.0.1",
+    "@stylistic/stylelint-plugin": "^2.1.1",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tsconfig/svelte": "^5.0.2",
     "@types/deep-equal": "^1.0.4",
