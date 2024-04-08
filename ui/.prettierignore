@@ -1,0 +1,6 @@
+*.d.ts
+package.json.md5
+pnpm-lock.yaml
+package.json
+dist
+coverage

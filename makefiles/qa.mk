@@ -26,3 +26,7 @@ lint-ui:
 .PHONY: test
 test:
 	cd ui; pnpm test
+
+.PHONY: format
+format:
+	cd ui; pnpm format

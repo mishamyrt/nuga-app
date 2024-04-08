@@ -1,11 +1,10 @@
 // @ts-check
-
 const { FS_LAYERS, getLowerLayers, getUpperLayers } = require('./utils.cjs')
 
 const getNotSharedLayersRules = () => {
   const base = getUpperLayers('shared').map((layer) => ({
     from: layer,
-    allow: getLowerLayers(layer)
+    allow: getLowerLayers(layer),
   }))
 
   const entitiesCrossImports = {
@@ -13,24 +12,24 @@ const getNotSharedLayersRules = () => {
     allow: [
       'shared',
       [
-        'entities/@x',
+        '$entities/@x',
         {
-          relatedSlices: '${from.slices}'
-        }
-      ]
-    ]
+          relatedSlices: '${from.slices}',
+        },
+      ],
+    ],
   }
 
   const widgetsCrossImports = {
     from: 'widgets',
-    allow: 'widgets'
+    allow: 'widgets',
   }
 
   return [entitiesCrossImports, widgetsCrossImports, ...base]
 }
 const sharedLayerRule = {
   from: 'shared',
-  allow: 'shared'
+  allow: 'shared',
 }
 
 const getLayersBoundariesElements = () => {
@@ -38,14 +37,14 @@ const getLayersBoundariesElements = () => {
     type: layer,
     pattern: `${layer}/!(_*){,/*}`,
     mode: 'folder',
-    capture: ['slices']
+    capture: ['slices'],
   }))
 
   const entitiesCrossImports = {
     type: 'entities/@x',
-    pattern: 'entities/*/@x/*.ts',
+    pattern: '$entities/*/@x/*.ts',
     mode: 'file',
-    capture: ['slices', 'relatedSlices']
+    capture: ['slices', 'relatedSlices'],
   }
 
   return [entitiesCrossImports, ...base]
@@ -54,7 +53,7 @@ const getLayersBoundariesElements = () => {
 const getGodModeRules = () =>
   FS_LAYERS.map((layer) => ({
     from: `gm_${layer}`,
-    allow: [layer, ...getLowerLayers(layer)]
+    allow: [layer, ...getLowerLayers(layer)],
   }))
 
 const getGodModeElements = () =>
@@ -62,18 +61,18 @@ const getGodModeElements = () =>
     type: `gm_${layer}`,
     pattern: `${layer}/_*`,
     mode: 'folder',
-    capture: ['slices']
+    capture: ['slices'],
   }))
 
 module.exports = {
   plugins: ['boundaries'],
   extends: ['plugin:boundaries/recommended'],
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.cjs'],
   settings: {
     'boundaries/elements': [
       ...getLayersBoundariesElements(),
-      ...getGodModeElements()
-    ]
+      ...getGodModeElements(),
+    ],
   },
   rules: {
     'boundaries/element-types': [
@@ -85,9 +84,9 @@ module.exports = {
         rules: [
           ...getNotSharedLayersRules(),
           sharedLayerRule,
-          ...getGodModeRules()
-        ]
-      }
-    ]
-  }
+          ...getGodModeRules(),
+        ],
+      },
+    ],
+  },
 }

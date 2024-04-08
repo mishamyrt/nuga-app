@@ -1,57 +1,61 @@
 const { FS_LAYERS } = require('./eslint/utils.cjs')
-const { resolve } = require('path')
+const path = require('path')
 
-/** Для запрета приватных путей */
 const DENIED_PATH_GROUPS = [
   // Private imports are prohibited, use public imports instead
-  'app/**',
-  'pages/*/**',
-  'widgets/*/**',
-  'features/*/**',
-  'entities/*/(?!@x)/**',
-  'entities/*/!(@x)',
-  'shared/*/*/**',
-  ...FS_LAYERS.map((layer) => `../**/${layer}`)
+  '$app/**',
+  '$pages/*/**',
+  '$widgets/*/**',
+  '$features/*/**',
+  '$entities/*/(?!@x)/**',
+  '$entities/*/!(@x)',
+  '$shared/*/*/**',
+  ...FS_LAYERS.map((layer) => `../**/${layer}`),
 ]
 
 module.exports = {
-  plugins: [
-    'eslint-plugin-simple-import-sort',
-    'effector'
-  ],
+  plugins: ['eslint-plugin-simple-import-sort', 'effector', '@stylistic/ts', 'import'],
   extends: [
-    'love',
     'plugin:svelte/recommended',
+    'plugin:import/typescript',
+    'love',
     'plugin:effector/recommended',
     'plugin:effector/patronum',
-    resolve(__dirname, './eslint/layers-slices.cjs'),
+    path.resolve(__dirname, './eslint/layers-slices.cjs'),
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
-    extraFileExtensions: ['.svelte']
+    extraFileExtensions: ['.svelte'],
   },
   overrides: [
     {
       files: ['*.svelte'],
       parser: 'svelte-eslint-parser',
       parserOptions: {
-        parser: '@typescript-eslint/parser'
-      }
+        parser: '@typescript-eslint/parser',
+      },
     },
     {
       files: ['**/__tests__/*.ts'],
       rules: {
-        'effector/no-getState': 'off'
-      }
-    }
+        'effector/no-getState': 'off',
+      },
+    },
+    {
+      files: ['*.cjs'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        'no-template-curly-in-string': 'off',
+      },
+    },
   ],
   rules: {
     'svelte/valid-compile': [
       'error',
       {
-        ignoreWarnings: true
-      }
+        ignoreWarnings: true,
+      },
     ],
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/strict-boolean-expressions': 'off',
@@ -65,12 +69,9 @@ module.exports = {
     '@typescript-eslint/no-unsafe-argument': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
-    'import/no-internal-modules': [
-      'error',
-      {
-        forbid: DENIED_PATH_GROUPS,
-      },
-    ],
-    'effector/enforce-store-naming-convention': 'off'
-  }
+    '@typescript-eslint/naming-convention': 'error',
+    'no-restricted-imports': ["error", { "patterns": DENIED_PATH_GROUPS }],
+    'effector/enforce-store-naming-convention': 'off',
+    '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
+  },
 }
