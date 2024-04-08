@@ -27,8 +27,6 @@ export const activeFeaturesStore = createStore(defaultFeatures, {
   name: 'activeFeatures'
 })
 
-cheatInputStarted.watch(start)
-cheatInputEnded.watch(stop)
 cheatListeningStore.on(cheatInputStarted, () => true)
 cheatListeningStore.on(cheatInputEnded, () => false)
 
