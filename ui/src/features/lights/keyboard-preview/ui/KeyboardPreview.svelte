@@ -80,22 +80,21 @@
     outline: none;
     border-radius: 9px;
     border: 3px solid transparent;
-    background:
-      conic-gradient(
+    background: conic-gradient(
         from 125deg at 50% 50%,
-        #F75B60,
-        #FF9E0C,
-        #ADE403,
-        #27C4FF,
-        #7F83FF,
-        #913ED3,
-        #E54895,
-        #E73A46
+        #f75b60,
+        #ff9e0c,
+        #ade403,
+        #27c4ff,
+        #7f83ff,
+        #913ed3,
+        #e54895,
+        #e73a46
       )
       border-box;
     mask:
-      linear-gradient(#FFF 0 0) padding-box,
-      linear-gradient(#FFF 0 0);
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
     mask-composite: xor;
     mask-composite: exclude;
     position: relative;
@@ -137,7 +136,7 @@
     }
 
     &::after {
-      background: linear-gradient(90deg, #63ECFF 0%, #E960FF 100%);
+      background: linear-gradient(90deg, #63ecff 0%, #e960ff 100%);
       opacity: 0;
     }
 

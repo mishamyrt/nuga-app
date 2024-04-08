@@ -17,14 +17,8 @@
 
 <style lang="scss">
   .store-description {
-    font-family:
-      ui-monospace,
- SFMono-Regular,
- 'SF Mono',
- Menlo,
- Consolas,
-      'Liberation Mono',
- monospace;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+      'Liberation Mono', monospace;
     color: var(--color-content-primary);
     font-size: 12px;
   }

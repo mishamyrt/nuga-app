@@ -30,7 +30,6 @@
     "vite.config.ts",
     "svelte.config.js",
     ".stylelintrc.cjs",
-    ".eslintrc.cjs",
     "src/wailsjs/**/*.d.ts"
   ],
   "exclude": ["src/wailsjs/**/*.js"],
