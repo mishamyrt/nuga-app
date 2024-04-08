@@ -1,7 +1,7 @@
 /// <reference types="svelte" />
 /// <reference types="vite/client" />
 
-declare type RGBHexColor = string
+declare type HexColor = string
 
 declare type RGBColor = {
   R: number

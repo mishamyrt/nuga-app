@@ -1,11 +1,10 @@
 import { GetBacklightColors, SetBacklightColor } from '$wails/go/usecase/LightsUsecase'
 
-import type { LightBacklightColors, SetBacklightColorParams } from '../model/types'
-import { rgbToHex } from '../utils/hex'
+import type { SetBacklightColorParams } from '../model/types'
 
-export async function getBacklightColors (): Promise<LightBacklightColors> {
+export async function getBacklightColors (): Promise<RGBColor[][]> {
   const colors: RGBColor[][] = await GetBacklightColors()
-  return colors.map(modeColors => modeColors.map(({ R, G, B }) => rgbToHex(R, G, B)))
+  return colors
 }
 
 export async function setBacklightColor (

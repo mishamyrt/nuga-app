@@ -12,8 +12,8 @@ export type LightDomainState = {
   enabled: boolean
 }
 
-export type LightDomainColors = RGBHexColor[]
-export type LightBacklightColors = RGBHexColor[][]
+export type LightDomainColors = HexColor[]
+export type LightBacklightColors = HexColor[][]
 
 export type LightDomainMode = {
   code: number
@@ -35,7 +35,7 @@ export type LightState = Record<LightDomain, LightDomainState>
 
 export type LightModes = Record<LightDomain, LightDomainMode[]>
 
-export type KeyHighlightMatrix = RGBHexColor[][]
+export type KeyHighlightMatrix = HexColor[][]
 
 export type LightDomainStateValue<T extends keyof LightDomainState> = {
   domain: LightDomain
@@ -48,8 +48,8 @@ export type KeyboardLightSupports = {
 }
 
 export type KeyboardLightsColor = {
-  sidelight: RGBHexColor
-  halolight: RGBHexColor
+  sidelight: HexColor
+  halolight: HexColor
   backlight: KeyHighlightMatrix
 }
 

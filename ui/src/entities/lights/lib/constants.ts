@@ -7,7 +7,7 @@ import type {
   LightDomainState,
   LightModes,
   LightState
-} from './types'
+} from '../model/types'
 
 export const defaultDomainState: LightDomainState = {
   enabled: false,
@@ -76,3 +76,6 @@ export const defaultLightModes: LightModes = {
   halo: defaultModes,
   sidelight: defaultModes
 }
+
+// Update every 2 seconds
+export const stateUpdateInterval = 2000

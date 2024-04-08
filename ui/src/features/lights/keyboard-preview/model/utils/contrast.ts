@@ -2,7 +2,7 @@ import ColorJS from 'colorjs.io'
 
 import { colorJStoRGB, rgbToCSSProperty } from '$entities/lights'
 
-export function normalizeContrast (color: RGBColor, backgroundColor: RGBHexColor): RGBColor {
+export function normalizeContrast (color: RGBColor, backgroundColor: HexColor): RGBColor {
   const rgbString = rgbToCSSProperty(color)
   const instance = new ColorJS(rgbString)
   const backgroundInstance = new ColorJS(backgroundColor)

@@ -3,7 +3,7 @@
   import { fsd } from 'feature-sliced-svelte'
   import ColorPicker from 'svelte-awesome-color-picker'
 
-  import { backlightColorChanged, backlightColorsStore, hexToRGB, stateStore } from '$entities/lights'
+  import { backlightColorChanged, backlightColorsStore, hexToRgb, stateStore } from '$entities/lights'
 
   import { canEditColorStore } from '../model/store'
 
@@ -21,7 +21,7 @@
   function handleOpen (): void {
     const { mode, color } = $stateStore.backlight
     hex = $backlightColorsStore[mode][color]
-    const rgb = hexToRGB(hex)
+    const rgb = hexToRgb(hex)
     rgba = {
       r: rgb.R,
       g: rgb.G,
