@@ -10,19 +10,21 @@ const DENIED_PATH_GROUPS = [
   'features/*/**',
   'entities/*/(?!@x)/**',
   'entities/*/!(@x)',
-  'shared/*/*/**', // Для shared +1 уровень, т.к. там чаще мы обращаемся к конкретной библиотеке/компоненты
-  // Prefer absolute imports instead of relatives (for root modules)
+  'shared/*/*/**',
   ...FS_LAYERS.map((layer) => `../**/${layer}`)
 ]
 
 module.exports = {
+  plugins: [
+    'eslint-plugin-simple-import-sort',
+    'effector'
+  ],
   extends: [
     'love',
     'plugin:svelte/recommended',
+    'plugin:effector/recommended',
+    'plugin:effector/patronum',
     resolve(__dirname, './eslint/layers-slices.cjs'),
-  ],
-  plugins: [
-    'eslint-plugin-simple-import-sort'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -35,6 +37,12 @@ module.exports = {
       parser: 'svelte-eslint-parser',
       parserOptions: {
         parser: '@typescript-eslint/parser'
+      }
+    },
+    {
+      files: ['**/__tests__/*.ts'],
+      rules: {
+        'effector/no-getState': 'off'
       }
     }
   ],
@@ -63,5 +71,6 @@ module.exports = {
         forbid: DENIED_PATH_GROUPS,
       },
     ],
+    'effector/enforce-store-naming-convention': 'off'
   }
 }

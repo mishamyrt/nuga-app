@@ -73,6 +73,9 @@ devDependencies:
   eslint-plugin-boundaries:
     specifier: ^4.2.0
     version: 4.2.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.0)
+  eslint-plugin-effector:
+    specifier: ^0.14.0
+    version: 0.14.0(effector@23.2.0)(eslint@8.57.0)
   eslint-plugin-import:
     specifier: ^2.29.1
     version: 2.29.1(@typescript-eslint/parser@6.21.0)(eslint@8.57.0)
@@ -2092,6 +2095,18 @@ packages:
       - supports-color
     dev: true
 
+  /eslint-plugin-effector@0.14.0(effector@23.2.0)(eslint@8.57.0):
+    resolution: {integrity: sha512-nMOg7yEDsRVNfXgstDrde/l0lTXzL0fbK5Y/EcTzNVN/F753bIbemJvRoedZgKaH0OrWM3HaK1OrDTphBJyN7w==}
+    engines: {node: ^16 || ^17 || ^18 || ^19 || ^20 || ^21}
+    peerDependencies:
+      effector: ^23
+      eslint: 7 || 8
+    dependencies:
+      effector: 23.2.0
+      eslint: 8.57.0
+      prettier: 2.8.8
+    dev: true
+
   /eslint-plugin-es-x@7.6.0(eslint@8.57.0):
     resolution: {integrity: sha512-I0AmeNgevgaTR7y2lrVCJmGYF0rjoznpDvqV/kIkZSZbZ8Rw3eu4cGlvBBULScfkSOCzqKbff5LR4CNrV7mZHA==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -3551,6 +3566,12 @@ packages:
   /prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier@2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /pretty-format@27.5.1:

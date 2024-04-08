@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { buildTemplate } from '$entities/keys'
 import { Halo65 } from '$entities/keys/lib/layouts'
-import { backlightDefaultColors, defaultColors, type LightDomainState } from '$entities/lights'
+import { backlightDefaultColors, type LightDomainState } from '$entities/lights'
 
 import { renderBacklightColors, renderColorMatrix, renderGradientMatrix } from '../backlight'
 import { RANDOM_GRADIENT_BOTTOM, RANDOM_GRADIENT_TOP } from '../constants'
