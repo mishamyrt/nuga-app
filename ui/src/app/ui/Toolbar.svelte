@@ -26,12 +26,12 @@
     height: 100%;
 
     &.gradient {
-      background: var(--toolbar-background-gradient);
+      background: var(--app-toolbar-background);
     }
   }
 
   :global(.os-mac.dark) .toolbar {
-    --toolbar-background-gradient: linear-gradient(
+    --app-toolbar-background: linear-gradient(
       0deg,
       #323232,
       var(--color-background-secondary)
@@ -39,11 +39,15 @@
   }
 
   :global(.os-mac.light) .toolbar {
-    --toolbar-background-gradient: linear-gradient(
+    --app-toolbar-background: linear-gradient(
       0deg,
       #ebebeb,
       var(--color-background-secondary)
     );
+  }
+
+  :global(.os-linux.light) .toolbar {
+    --app-toolbar-background: #ebebeb;
   }
 
   .titlebar {

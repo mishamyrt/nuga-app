@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning][].
 ### Fixed
 
 - Small bugs. Improved stability.
+- Linux toolbar appearance.
 
 ## [2.3.0]
 
