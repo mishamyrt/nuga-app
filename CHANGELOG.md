@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning][].
 
 - Small bugs. Improved stability.
 - Linux toolbar appearance.
+- Light/dark UI switch.
 
 ## [2.3.0]
 
