@@ -1,8 +1,6 @@
 module nuga_ui
 
-go 1.21
-
-toolchain go1.21.4
+go 1.22.2
 
 require (
 	github.com/jpillora/overseer v1.1.6
