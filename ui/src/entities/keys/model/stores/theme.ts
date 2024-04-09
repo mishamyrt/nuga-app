@@ -9,7 +9,7 @@ export const keyboardThemeUpdated = createEvent<KeyboardThemeName>(
 )
 
 export const keyboardThemeNameStore = createStore<KeyboardThemeName>(
-  'defaultDarkTheme',
+  'defaultTheme',
   {
     name: 'keyboardThemeName',
   },

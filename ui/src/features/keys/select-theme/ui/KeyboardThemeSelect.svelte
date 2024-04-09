@@ -7,6 +7,8 @@
     keyboardThemeUpdated,
   } from '$entities/keys'
 
+  import { themeOptions } from '../lib'
+
   function handleChange (e: CustomEvent<string>) {
     keyboardThemeUpdated(e.detail as KeyboardThemeName)
   }
@@ -15,10 +17,5 @@
 <Select
   value={$keyboardThemeNameStore}
   on:change={handleChange}
-  options={[
-    { title: 'Default', value: 'defaultDarkTheme' },
-    { title: 'Default (light)', value: 'defaultLightTheme' },
-    { title: 'Adaptive', value: 'adaptiveTheme' },
-    { title: 'Light Gray And White', value: 'lightGrayAndWhiteTheme' },
-  ]}
+  options={themeOptions}
 />
