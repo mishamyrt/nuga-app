@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning][].
 
 ## 2.3.1
 
+### Added
+
+- Adaptive keyboard theme.
+
 ### Fixed
 
 - Small bugs. Improved stability.

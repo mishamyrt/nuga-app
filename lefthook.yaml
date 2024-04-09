@@ -15,4 +15,4 @@ pre-commit:
       stage_fixed: true
       root: "ui/"
       glob: "*.{css,svelte,scss}"
-      run: stylelint --fix {staged_files}
+      run: pnpm stylelint --fix {staged_files}

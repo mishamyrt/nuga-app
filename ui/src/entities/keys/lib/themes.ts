@@ -55,10 +55,32 @@ export const lightGrayAndWhiteTheme: KeyboardTheme = {
   },
 }
 
+export const adaptiveTheme: KeyboardTheme = {
+  dark: {
+    dark: '#525252',
+    light: '#6a6a6a',
+    mint: '#d57700',
+    orange: '#d57700',
+    yellow: '#525252',
+    textDark: '#ededed',
+    textLight: '#ededed',
+  },
+  light: {
+    dark: '#dbdbdb',
+    light: '#ffffff',
+    mint: '#fecd3d',
+    orange: '#fecd3d',
+    yellow: '#dbdbdb',
+    textDark: '#131313',
+    textLight: '#131313',
+  },
+}
+
 export const keyboardThemes = {
   defaultDarkTheme,
   defaultLightTheme,
   lightGrayAndWhiteTheme,
+  adaptiveTheme,
 }
 
 export type KeyboardThemeName = keyof typeof keyboardThemes

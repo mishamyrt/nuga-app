@@ -18,6 +18,7 @@
   options={[
     { title: 'Default', value: 'defaultDarkTheme' },
     { title: 'Default (light)', value: 'defaultLightTheme' },
+    { title: 'Adaptive', value: 'adaptiveTheme' },
     { title: 'Light Gray And White', value: 'lightGrayAndWhiteTheme' },
   ]}
 />
