@@ -1,6 +1,6 @@
 import type { KeyboardTheme } from '../model/types'
 
-export const defaultTheme: KeyboardTheme = {
+const defaultTheme: KeyboardTheme = {
   dark: {
     dark: '#4b4b4b',
     light: '#5b5b5b',
@@ -21,7 +21,7 @@ export const defaultTheme: KeyboardTheme = {
   },
 }
 
-export const lightGrayAndWhiteTheme: KeyboardTheme = {
+const lightGrayAndWhiteTheme: KeyboardTheme = {
   dark: {
     dark: '#adadad',
     light: '#cfcfcf',
@@ -42,9 +42,31 @@ export const lightGrayAndWhiteTheme: KeyboardTheme = {
   },
 }
 
+const matchaTheme: KeyboardTheme = {
+  dark: {
+    dark: '#454b42',
+    light: '#5b6258',
+    mint: '#454b42',
+    orange: '#454b42',
+    yellow: '#5b6258',
+    textDark: '#dcffcd',
+    textLight: '#dcffcd',
+  },
+  light: {
+    dark: '#cce3b2',
+    light: '#fcfff1',
+    mint: '#cce3b2',
+    orange: '#cce3b2',
+    yellow: '#fcfff1',
+    textDark: '#3d5423',
+    textLight: '#3d5423',
+  },
+}
+
 export const keyboardThemes = {
   defaultTheme,
   lightGrayAndWhiteTheme,
+  matchaTheme,
 }
 
 export type KeyboardThemeName = keyof typeof keyboardThemes

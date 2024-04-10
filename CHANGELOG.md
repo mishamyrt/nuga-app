@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning][].
 ### Added
 
 - Adaptive keyboard theme.
+- Matcha keyboard theme.
 
 ### Fixed
 
