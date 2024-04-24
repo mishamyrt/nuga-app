@@ -12,7 +12,7 @@ on:
 
 env:
   GO_VERSION: '1.22.2'
-  WAILS_VERSION: '2.8.0'
+  WAILS_VERSION: '2.8.1'
   PNPM_VERSION: '9.0.4'
 
 jobs:
