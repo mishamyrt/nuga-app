@@ -20,7 +20,7 @@ jobs:
     name: App
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-20.04]
     env:
       KEYCHAIN_NAME: macos-build
       KEYCHAIN_PROFILE: nuga-notary
