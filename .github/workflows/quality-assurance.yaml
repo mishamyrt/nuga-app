@@ -6,8 +6,8 @@ on:
 
 env:
   GO_VERSION: '1.22.2'
-  PNPM_VERSION: '8.13.1'
-  WAILS_VERSION: '2.8.0'
+  PNPM_VERSION: '9.0.4'
+  WAILS_VERSION: '2.8.1'
 
 jobs:
   lint:
