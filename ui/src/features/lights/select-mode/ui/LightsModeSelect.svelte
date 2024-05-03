@@ -22,11 +22,14 @@
     title: m.name,
     disabled: m.code === 18, // Disable custom mode
   }))
+
+  $: disabled = !$stateStore[domain].enabled
 </script>
 
 <div use:fsd={'features/LightsModeSelect'}>
   <Select
     {options}
+    {disabled}
     value={$stateStore[domain].mode.toString()}
     on:change={handleChange}
   />

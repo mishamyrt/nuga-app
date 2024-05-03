@@ -49,12 +49,13 @@
   $: colors = supportsRandom ? ['random', ...modeColors] : modeColors
   $: colorIndex = $stateStore[domain].color
   $: index = colorIndex === 7 ? 0 : supportsRandom ? colorIndex + 1 : colorIndex
+  $: disabled = !$stateStore[domain].enabled
 </script>
 
 <div use:fsd={'features/LightsColorSelector'}>
   <ColorSelector
     {index}
-    disabled={!supportsColor}
+    disabled={disabled || !supportsColor}
     options={colors}
     primaryProp="index"
     on:change={handleChange}

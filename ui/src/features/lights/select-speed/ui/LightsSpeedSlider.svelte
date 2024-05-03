@@ -23,11 +23,12 @@
   $: modeCode = $stateStore[domain].mode
   $: mode = $modesStore[domain].find((m) => m.code === modeCode)
   $: supportsSpeed = mode?.supports.speed ?? false
+  $: disabled = !$stateStore[domain].enabled
 </script>
 
 <div use:fsd={'features/LightsSpeedSlider'}>
   <Slider
-    disabled={!supportsSpeed}
+    disabled={disabled || !supportsSpeed}
     min={0}
     max={4}
     step={1}

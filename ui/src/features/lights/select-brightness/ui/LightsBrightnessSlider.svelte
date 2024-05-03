@@ -18,10 +18,13 @@
       brightness: e.detail as LightStateValue,
     })
   }
+
+  $: disabled = !$stateStore[domain].enabled
 </script>
 
 <div use:fsd={'features/LightsBrightnessSlider'}>
   <Slider
+    {disabled}
     min={0}
     max={4}
     step={1}
