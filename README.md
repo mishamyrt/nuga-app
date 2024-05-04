@@ -26,9 +26,9 @@ Application for controlling NuPhy® keyboards.
 
 For local development, you need to set up environments. For this purpose you will need:
 
-- [golang](https://go.dev/doc/install) 1.20+
-- [Wails](https://wails.io/docs/gettingstarted/installation) 2.5+
-- [pnpm](https://pnpm.io/installation) 8+
+- [golang](https://go.dev/doc/install)
+- [Wails](https://wails.io/docs/gettingstarted/installation)
+- [pnpm](https://pnpm.io/installation)
 
 ### Libraries
 
